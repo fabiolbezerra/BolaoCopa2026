@@ -1,5 +1,8 @@
 package br.edu.ufra.util;
 
+import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.rn.UsuarioRN;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -105,43 +108,38 @@ public class UtilBean {
         }
     }
 
-//    public static Pessoa obterUsuarioLogado() {
-//        final String CHAVE_PESSOA = "pessoa";
-//        Object objUsuario = UtilBean.daSessao(CHAVE_PESSOA);
-//        if (objUsuario == null) {
-//            String email = UtilBean.obterLoginDaSessao();
-//            PessoaRN usuarioRN = new PessoaRN();
-//            Pessoa pessoa = usuarioRN.obterPorEmail(email);
-//            Pessoa pessoaTemp = null;
-//            //Clonando o usuário logado (sem a senha)
-//            if (pessoa != null) {
-//                pessoaTemp = new Pessoa();
-//                pessoaTemp.setId(pessoa.getId());
-//                pessoaTemp.setNomeCompleto(pessoa.getNomeCompleto());
-//                pessoaTemp.setTelefone(pessoa.getTelefone());
-//                pessoaTemp.setEmail(pessoa.getEmail());
-//                pessoaTemp.setNascimento(pessoa.getNascimento());
-//                pessoaTemp.setPessoaPapels(pessoa.getPessoaPapels());;
-//            }
-//            UtilBean.naSessao(CHAVE_PESSOA, pessoaTemp);
-//
-//            return pessoaTemp;
-//        } else {
-//            return (Pessoa) objUsuario;
-//        }
-//    }
-//
-//    public static boolean possuiPapel(Pessoa usuario, char codigo){
-//        if (usuario == null || usuario.getPessoaPapels() == null)
-//            return false;
-//        for (PessoaPapel pp : usuario.getPessoaPapels()){
-//            if (pp.getPapel().getCodigo() == codigo){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
+    public static Usuario obterUsuarioLogado() {
+        final String CHAVE_USUARIO = "usuario";
+        Object objUsuario = UtilBean.daSessao(CHAVE_USUARIO);
+        if (objUsuario == null) {
+            String email = UtilBean.obterLoginDaSessao();
+            UsuarioRN usuarioRN = new UsuarioRN();
+            Usuario usuario = usuarioRN.obter(email);
+            Usuario usuarioTemp = null;
+            //Clonando o usuário logado (sem a senha)
+            if (usuario != null) {
+                usuarioTemp = new Usuario();
+                usuarioTemp.setId(usuario.getId());
+                usuarioTemp.setNome(usuario.getNome());
+                usuarioTemp.setSobrenome(usuario.getSobrenome());
+                usuarioTemp.setEmail(usuario.getEmail());
+                usuarioTemp.setPerfil(usuario.getPerfil());
+            }
+            UtilBean.naSessao(CHAVE_USUARIO, usuarioTemp);
+
+            return usuarioTemp;
+        } else {
+            return (Usuario) objUsuario;
+        }
+    }
+
+    public static void atualizarUsuarioLogado(Usuario usuario) {
+        final String CHAVE_PESSOA = "usuario";
+        if (usuario != null) {
+            naSessao(CHAVE_PESSOA, usuario);
+        }
+    }
+
 //    public static String irParaPaginaPrincipal(Pessoa usuario ){
 //        if (usuario != null){
 //            if (possuiPapel(usuario, 'A')) return "/administrador/principal.xhtml?faces-redirect=true";
@@ -150,14 +148,8 @@ public class UtilBean {
 //            if (possuiPapel(usuario, 'P')) return "/pesquisador/principal.xhtml?faces-redirect=true";
 //            if (possuiPapel(usuario, 'B')) return "/bolsista/principal.xhtml?faces-redirect=true";
 //        }
-//        return "/index.xhtml?faces-redirect=true";
+//        return "/login.xhtml?faces-redirect=true";
 //    }
 //
-//    public static void atualizarUsuarioLogado(Pessoa pessoa) {
-//        final String CHAVE_PESSOA = "pessoa";
-//        if (pessoa != null) {
-//            naSessao(CHAVE_PESSOA, pessoa);
-//        }
-//    }
 
 }

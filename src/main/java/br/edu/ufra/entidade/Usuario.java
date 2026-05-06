@@ -1,11 +1,17 @@
 package br.edu.ufra.entidade;
 
+import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "usuario")
+@NamedQueries({
+        @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+        , @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")})
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +31,8 @@ public class Usuario {
     private String senha;
 
     @Column(name = "perfil", nullable = false, length = 15)
-    private String perfil;
+    @Enumerated(EnumType.STRING)
+    private EnumPerfilUsuario perfil;
 
     @Column(name = "tipo", nullable = false, length = 10)
     private String tipo;
@@ -90,11 +97,11 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getPerfil() {
+    public EnumPerfilUsuario getPerfil() {
         return perfil;
     }
 
-    public void setPerfil(String perfil) {
+    public void setPerfil(EnumPerfilUsuario perfil) {
         this.perfil = perfil;
     }
 
@@ -154,4 +161,16 @@ public class Usuario {
         this.participantes = participantes;
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Usuario)) return false;
+        Usuario usuario = (Usuario) o;
+
+        return Objects.equals(id, usuario.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }

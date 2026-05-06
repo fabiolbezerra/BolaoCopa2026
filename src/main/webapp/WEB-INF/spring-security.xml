@@ -7,22 +7,21 @@
 	http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/usuario/**"     access="ROLE_A,ROLE_V,ROLE_U" />
-        <intercept-url pattern="/veterinario/**" access="ROLE_A,ROLE_V" />
-        <intercept-url pattern="/admin/**"       access="ROLE_A" />
-<!--        <form-login -->
-<!--            login-page="/index.xhtml"-->
-<!--            authentication-success-handler-ref="myLoginHandler"-->
-<!--            authentication-failure-url = "/index.xhtml?e=-1"/>-->
+        <intercept-url pattern="/palpiteiro/**"     access="ROLE_ADMINISTRADOR,ROLE_PALPITEIRO" />
+        <intercept-url pattern="/administrador/**"  access="ROLE_ADMINISTRADOR" />
+        <form-login
+            login-page="/login.xhtml"
+            authentication-success-handler-ref="myLoginHandler"
+            authentication-failure-url = "/login.xhtml?e=-1"/>
         <access-denied-handler error-page="/acessoNegado.xhtml"/>
     </http>
     
-<!--    <beans:bean id="myLoginHandler"          class="br.edu.ufra.spring.LoginHandler" />-->
+    <beans:bean id="myLoginHandler"          class="br.edu.ufra.seguranca.LoginHandler" />
     
-<!--    <beans:bean id="myAuthenticationHandler" class="br.edu.ufra.spring.AuthenticationHandler" />-->
+    <beans:bean id="myAuthenticationHandler" class="br.edu.ufra.seguranca.AuthenticationHandler" />
     
     <authentication-manager>
-<!--        <authentication-provider ref="myAuthenticationHandler"/>-->
+        <authentication-provider ref="myAuthenticationHandler"/>
     </authentication-manager>
 
 </beans:beans>
