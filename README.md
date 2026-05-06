@@ -1,6 +1,6 @@
 # Projeto Bolão da Copa do Mundo 2026
 
-## Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026.
+## Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026
 
 A Copa do Mundo da FIFA historicamente causa uma grande comoção mundial devido ao espírito ufanista evocado nos jogos onde cada país (representado por sua seleção) se enfrentam em busca do primeiro lugar. No Brasil esse sentimento é potencializado pelo grande apreço da população pelo futebol, fazendo do esporte uma das marcas registradas do brasileiro e um verdadeiro fenômeno em todos os setores da sociedade, até nas pessoas que não acompanham a modalidade. 
 
