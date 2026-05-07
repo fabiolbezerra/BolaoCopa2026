@@ -20,9 +20,19 @@
 
         <div id="top" class="top">
             <ui:insert name="top">
-                Olá #{usuarioBean.usuarioLogado.nome} #{usuarioBean.usuarioLogado.sobrenome}! <p:link href="#{request.contextPath}/j_spring_security_logout" value="Sair"/>
+                Olá #{usuarioBean.usuarioLogado.nome} #{usuarioBean.usuarioLogado.sobrenome}!
+
+                <p:outputPanel style="float: right;">
+                    <p:link value="Início" outcome="#{usuarioBean.usuarioLogado.perfil.pagina}" />
+
+                    <h:outputText value=" | " />
+
+                    <p:link value="Sair" href="#{request.contextPath}/j_spring_security_logout" />
+                </p:outputPanel>
+
                 <br/>
-                #{usuarioBean.perfilDoUsuarioLogado}
+
+                #{usuarioBean.usuarioLogado.perfil.descricao}
             </ui:insert>
         </div>
 

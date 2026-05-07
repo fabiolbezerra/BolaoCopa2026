@@ -80,14 +80,6 @@ public class UsuarioBean {
         }
     }
 
-    public String getPerfilDoUsuarioLogado() {
-        Usuario u = getUsuarioLogado();
-        if (u != null) {
-            return u.getPerfil().getDescricao();
-        }
-        return null;
-    }
-
     public void excluir() {
         if (USUARIO_RN.excluir(usuario)) {
             UtilBean.criarMensagemDeInformacao("Usuario excluído");

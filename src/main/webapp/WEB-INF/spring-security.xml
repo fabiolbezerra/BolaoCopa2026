@@ -13,7 +13,7 @@
             login-page="/login.xhtml"
             authentication-success-handler-ref="myLoginHandler"
             authentication-failure-url = "/login.xhtml?e=-1"/>
-        <access-denied-handler error-page="/acessoNegado.xhtml"/>
+        <access-denied-handler error-page="/acesso-negado.xhtml"/>
     </http>
     
     <beans:bean id="myLoginHandler"          class="br.edu.ufra.seguranca.LoginHandler" />

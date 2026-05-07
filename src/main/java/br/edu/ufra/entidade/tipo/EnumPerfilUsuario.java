@@ -2,7 +2,7 @@ package br.edu.ufra.entidade.tipo;
 
 public enum EnumPerfilUsuario {
     ADMINISTRADOR('A', "Administrador da plataforma", "/administrador/principal.xhtml"),
-    PALPITEIRO('P', "Palpiteiro nas partidas", "/palpiteiro/principal.xhtml");
+    PALPITEIRO('P', "Palpiteiro(a) nas partidas", "/palpiteiro/principal.xhtml");
 
     private char codigo;
     private String descricao;
