@@ -2,10 +2,14 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "selecao")
+@NamedQueries({
+        @NamedQuery(name = "Selecao.findAll", query = "SELECT s FROM Selecao s")
+        , @NamedQuery(name = "Selecao.findById", query = "SELECT s FROM Selecao s WHERE s.id = :id")})
 public class Selecao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,4 +102,15 @@ public class Selecao {
         this.partidasVencedor = partidasVencedor;
     }
 
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Selecao selecao)) return false;
+
+        return Objects.equals(id, selecao.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
