@@ -6,6 +6,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "grupo")
+@NamedQueries({
+        @NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g")
+        , @NamedQuery(name = "Grupo.findById", query = "SELECT g FROM Grupo g WHERE g.id = :id")})
 public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,4 +45,14 @@ public class Grupo {
         this.selecoes = selecoes;
     }
 
+    public boolean equals(Object object) {
+        if (!(object instanceof Grupo)) return false;
+        Grupo grupo = (Grupo) object;
+
+        return java.util.Objects.equals(id, grupo.id);
+    }
+
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
+    }
 }
