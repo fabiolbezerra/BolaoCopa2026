@@ -7,6 +7,25 @@ import java.util.Set;
 
 @Entity
 @Table(name = "fase")
+@NamedQueries({@NamedQuery(
+        name = "Fase.findAll",
+        query = "SELECT f FROM Fase f"
+), @NamedQuery(
+        name = "Fase.findById",
+        query = "SELECT f FROM Fase f WHERE f.id = :id"
+), @NamedQuery(
+        name = "Fase.findByNome",
+        query = "SELECT f FROM Fase f WHERE f.nome = :nome"
+), @NamedQuery(
+        name = "Fase.findByEliminatoria",
+        query = "SELECT f FROM Fase f WHERE f.eliminatoria = :eliminatoria"
+), @NamedQuery(
+        name = "Fase.findByInicio",
+        query = "SELECT f FROM Fase f WHERE f.inicio = :inicio"
+), @NamedQuery(
+        name = "Fase.findByFim",
+        query = "SELECT f FROM Fase f WHERE f.fim = :fim"
+)})
 public class Fase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
