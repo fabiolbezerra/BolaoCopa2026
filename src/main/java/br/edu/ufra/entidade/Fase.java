@@ -26,7 +26,7 @@ import java.util.Set;
         name = "Fase.findByFim",
         query = "SELECT f FROM Fase f WHERE f.fim = :fim"
 )})
-public class Fase {
+public class Fase implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
