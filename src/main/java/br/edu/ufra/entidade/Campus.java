@@ -2,10 +2,15 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "campus")
+@NamedQueries({
+        @NamedQuery(name = "Campus.findAll", query = "SELECT c FROM Campus c"),
+        @NamedQuery(name = "Campus.findById", query = "SELECT c FROM Campus c WHERE c.id = :id")
+})
 public class Campus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,5 +57,15 @@ public class Campus {
     public void setUsuarios(Set<br.edu.ufra.entidade.Usuario> usuarios) {
         this.usuarios = usuarios;
     }
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Campus campus)) return false;
 
+        return Objects.equals(id, campus.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
