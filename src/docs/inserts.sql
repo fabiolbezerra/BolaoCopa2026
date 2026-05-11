@@ -114,3 +114,6 @@ VALUES (1, 'Henrique', 'Costa', 'antoniocavallero935@gmail.com',
 insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, curso, campus)
 VALUES (5, 'Fábio', 'Bezerra', 'fabio.bezerra@ufra.edu.br',
         'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, null, 1);
+insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, curso, campus)
+VALUES (6, 'Fulano', 'de Tal', 'fulano@email.com.br',
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, null, 1);
