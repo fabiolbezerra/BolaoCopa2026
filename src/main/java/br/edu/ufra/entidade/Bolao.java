@@ -3,10 +3,14 @@ package br.edu.ufra.entidade;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "bolao")
+@NamedQueries({
+        @NamedQuery(name = "Bolao.findAll", query = "SELECT b FROM Bolao b")
+        , @NamedQuery(name = "Bolao.findById", query = "SELECT b FROM Bolao b WHERE b.id = :id")})
 public class Bolao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,5 +69,15 @@ public class Bolao {
     public void setParticipantes(Set<br.edu.ufra.entidade.Participante> participantes) {
         this.participantes = participantes;
     }
+    @Override
+    public final boolean equals(Object o) {
+        if (!(o instanceof Bolao bolao)) return false;
 
+        return Objects.equals(id, bolao.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 }
