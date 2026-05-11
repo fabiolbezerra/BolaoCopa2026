@@ -3,6 +3,7 @@ package br.edu.ufra.entidade;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,17 +17,8 @@ import java.util.Set;
 ), @NamedQuery(
         name = "Fase.findByNome",
         query = "SELECT f FROM Fase f WHERE f.nome = :nome"
-), @NamedQuery(
-        name = "Fase.findByEliminatoria",
-        query = "SELECT f FROM Fase f WHERE f.eliminatoria = :eliminatoria"
-), @NamedQuery(
-        name = "Fase.findByInicio",
-        query = "SELECT f FROM Fase f WHERE f.inicio = :inicio"
-), @NamedQuery(
-        name = "Fase.findByFim",
-        query = "SELECT f FROM Fase f WHERE f.fim = :fim"
 )})
-public class Fase implements Serializable {
+public class Fase{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -93,6 +85,16 @@ public class Fase implements Serializable {
 
     public void setPartidas(Set<br.edu.ufra.entidade.Partida> partidas) {
         this.partidas = partidas;
+    }
+    public int hashCode(){
+        return Objects.hash(super.hashCode(),id);
+    }
+    public boolean equals(Object object){
+        if(!(object instanceof Curso))
+            return false;
+        Fase fase = (Fase) object;
+        return Objects.equals(id, fase.id);
+
     }
 
 }

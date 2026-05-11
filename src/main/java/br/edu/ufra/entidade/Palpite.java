@@ -2,6 +2,7 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "palpite")
@@ -115,7 +116,7 @@ public class Palpite {
         if (!(object instanceof Palpite)) return false;
         Palpite palpite = (Palpite) object;
 
-        return java.util.Objects.equals(id, palpite.id);
+        return Objects.equals(id, palpite.id);
     }
 
     public int hashCode() {

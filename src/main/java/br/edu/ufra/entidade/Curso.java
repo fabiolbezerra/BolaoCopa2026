@@ -2,10 +2,24 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "curso")
+@NamedQueries({@NamedQuery(
+        name = "Curso.findAll",
+        query = "SELECT c FROM Curso c"
+), @NamedQuery(
+        name = "Curso.findById",
+        query = "SELECT c FROM Curso c WHERE c.id = :id"
+), @NamedQuery(
+        name = "Curso.findByNome",
+        query = "SELECT c FROM Curso c WHERE c.nome = :nome"
+), @NamedQuery(
+        name = "Curso.findBySigla",
+        query = "SELECT c FROM Curso c WHERE c.sigla = :sigla"
+)})
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -63,6 +77,16 @@ public class Curso {
 
     public void setUsuarios(Set<br.edu.ufra.entidade.Usuario> usuarios) {
         this.usuarios = usuarios;
+    }
+    public int hashCode(){
+        return Objects.hash(super.hashCode(),id);
+    }
+    public boolean equals(Object object){
+        if(!(object instanceof Curso))
+            return false;
+        Curso curso = (Curso) object;
+        return Objects.equals(id, curso.id);
+
     }
 
 }

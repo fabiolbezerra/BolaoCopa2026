@@ -53,6 +53,6 @@ public class Grupo {
     }
 
     public int hashCode() {
-        return Objects.hash(super.hashCode(), id);
+        return java.util.Objects.hash(super.hashCode(), id);
     }
 }
