@@ -5,6 +5,9 @@ import java.time.Instant;
 
 @Entity
 @Table(name = "palpite")
+@NamedQueries({
+        @NamedQuery(name = "Palpite.findAll", query = "SELECT p FROM Palpite p")
+        , @NamedQuery(name = "Palpite.findById", query = "SELECT p FROM Palpite p WHERE p.id = :id")})
 public class Palpite {
     @Id
     @Column(name = "id", nullable = false)
@@ -108,4 +111,14 @@ public class Palpite {
         this.partida = partida;
     }
 
+    public boolean equals(Object object) {
+        if (!(object instanceof Palpite)) return false;
+        Palpite palpite = (Palpite) object;
+
+        return java.util.Objects.equals(id, palpite.id);
+    }
+
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
+    }
 }
