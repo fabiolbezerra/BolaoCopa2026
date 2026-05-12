@@ -6,7 +6,8 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         Meus Bolões
     </ui:define>
@@ -14,6 +15,32 @@
     <ui:define name="content">
         <h1>Meus Bolões</h1>
 
+        <p:dataTable value="#{bolaoBean.boloes}" var="bolao">
+            <p:column headerText="Nome">
+                <h:outputText value="#{bolao.nome}" />
+            </p:column>
 
+            <p:column headerText="Data de Criação">
+                <h:outputText value="#{bolao.criacao}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Dono">
+                <h:outputText value="#{bolao.dono.nome} #{bolao.dono.sobrenome}" />
+            </p:column>
+
+            <p:column headerText="Operações">
+                <h:outputText value="Excluir se dono" rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"/>
+                |
+                <h:outputText value="Editar se dono"/>
+                |
+                <h:outputText value="Membros se dono"/>
+                |
+                <h:outputText value="Sair se apenas participante"/>
+                |
+                <h:outputText value="Detalhes"/>
+            </p:column>
+        </p:dataTable>
     </ui:define>
 </ui:composition>

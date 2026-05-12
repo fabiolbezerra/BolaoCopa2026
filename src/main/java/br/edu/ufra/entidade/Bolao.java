@@ -1,7 +1,7 @@
 package br.edu.ufra.entidade;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -21,7 +21,8 @@ public class Bolao {
     private String nome;
 
     @Column(name = "criacao", nullable = false)
-    private Instant criacao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date criacao;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dono", nullable = false)
@@ -46,11 +47,11 @@ public class Bolao {
         this.nome = nome;
     }
 
-    public Instant getCriacao() {
+    public Date getCriacao() {
         return criacao;
     }
 
-    public void setCriacao(Instant criacao) {
+    public void setCriacao(Date criacao) {
         this.criacao = criacao;
     }
 
