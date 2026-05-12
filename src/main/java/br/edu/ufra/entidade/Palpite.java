@@ -112,14 +112,19 @@ public class Palpite {
         this.partida = partida;
     }
 
-    public boolean equals(Object object) {
-        if (!(object instanceof Palpite)) return false;
-        Palpite palpite = (Palpite) object;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-        return Objects.equals(id, palpite.id);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Palpite))
+			return false;
+		Palpite other = (Palpite) obj;
+		return Objects.equals(id, other.id);
+	}
 
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id);
-    }
 }
