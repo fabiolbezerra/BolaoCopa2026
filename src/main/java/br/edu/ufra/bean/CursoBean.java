@@ -21,15 +21,11 @@ public class CursoBean {
 
     @PostConstruct
     public void init() {
-        cursos = CURSO_RN.listar();
+        cursos = CURSO_RN.listarTodos();
     }
 
     public List<Curso> getCursos() {
         return cursos;
-    }
-
-    public void setCursos(List<Curso> cursos) {
-        this.cursos = cursos;
     }
 
     public Curso getCurso() {
@@ -40,8 +36,4 @@ public class CursoBean {
         this.curso = curso;
     }
 
-    public boolean isNovoCurso() {
-        return this.curso != null
-                && (this.curso.getId() == null || this.curso.getId() == 0);
-    }
 }

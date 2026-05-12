@@ -10,7 +10,7 @@ public class CursoRN {
     private final CursoDAO DAO = new CursoDAO();
 
 
-    public List<Curso> listar() {
+    public List<Curso> listarTodos() {
         return DAO.obterTodos(Curso.class);
     }
 
