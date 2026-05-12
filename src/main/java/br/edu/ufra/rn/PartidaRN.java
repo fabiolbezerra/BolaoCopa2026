@@ -22,7 +22,7 @@ public class PartidaRN {
         }
     }
 
-    private boolean definirVencedor(Integer partidaId, Integer golsA, Integer golsB){
+    private boolean determinarVencedor(Integer partidaId, Integer golsA, Integer golsB){
         Partida partida = obter(partidaId);
         if(Instant.now().isBefore(partida.getInicioDaPartida())){
             return false;
@@ -31,13 +31,13 @@ public class PartidaRN {
         partida.setGolsB(golsB);
         partida.setAtualizacaoDoResultado(Instant.now());
 
-        determinarVencedor(partida,golsA,golsB);
+        definirVencedor(partida,golsA,golsB);
 
         return PARTIDA_DAO.alterar(partida);
 
 
     }
-    private void determinarVencedor(Partida partida, Integer golsA, Integer golsB){
+    private void definirVencedor(Partida partida, Integer golsA, Integer golsB){
         if(golsA>golsB){
             partida.setTipoDeVitoria("NORMAL");
             partida.setVencedor(partida.getSelecaoA());
