@@ -8,17 +8,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "fase")
-@NamedQueries({@NamedQuery(
-        name = "Fase.findAll",
-        query = "SELECT f FROM Fase f"
-), @NamedQuery(
-        name = "Fase.findById",
-        query = "SELECT f FROM Fase f WHERE f.id = :id"
-), @NamedQuery(
-        name = "Fase.findByNome",
-        query = "SELECT f FROM Fase f WHERE f.nome = :nome"
-)})
-public class Fase{
+@NamedQueries({
+        @NamedQuery(name = "Fase.findAll", query = "SELECT f FROM Fase f"),
+        @NamedQuery(name = "Fase.findById", query = "SELECT f FROM Fase f WHERE f.id = :id")})
+public class Fase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -88,12 +81,13 @@ public class Fase{
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(super.hashCode(),id);
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
     }
+
     @Override
-    public boolean equals(Object object){
-        if(!(object instanceof Curso))
+    public boolean equals(Object object) {
+        if (!(object instanceof Curso))
             return false;
         Fase fase = (Fase) object;
         return Objects.equals(id, fase.id);

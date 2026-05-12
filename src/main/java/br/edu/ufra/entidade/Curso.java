@@ -7,19 +7,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "curso")
-@NamedQueries({@NamedQuery(
-        name = "Curso.findAll",
-        query = "SELECT c FROM Curso c"
-), @NamedQuery(
-        name = "Curso.findById",
-        query = "SELECT c FROM Curso c WHERE c.id = :id"
-), @NamedQuery(
-        name = "Curso.findByNome",
-        query = "SELECT c FROM Curso c WHERE c.nome = :nome"
-), @NamedQuery(
-        name = "Curso.findBySigla",
-        query = "SELECT c FROM Curso c WHERE c.sigla = :sigla"
-)})
+@NamedQueries({
+        @NamedQuery(name = "Curso.findAll", query = "SELECT c FROM Curso c"),
+        @NamedQuery(name = "Curso.findById", query = "SELECT c FROM Curso c WHERE c.id = :id")})
 public class Curso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -80,12 +70,13 @@ public class Curso {
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(super.hashCode(),id);
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), id);
     }
+
     @Override
-    public boolean equals(Object object){
-        if(!(object instanceof Curso))
+    public boolean equals(Object object) {
+        if (!(object instanceof Curso))
             return false;
         Curso curso = (Curso) object;
         return Objects.equals(id, curso.id);

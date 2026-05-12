@@ -7,8 +7,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "palpite")
 @NamedQueries({
-        @NamedQuery(name = "Palpite.findAll", query = "SELECT p FROM Palpite p")
-        , @NamedQuery(name = "Palpite.findById", query = "SELECT p FROM Palpite p WHERE p.id = :id")})
+        @NamedQuery(name = "Palpite.findAll", query = "SELECT p FROM Palpite p"),
+        @NamedQuery(name = "Palpite.findById", query = "SELECT p FROM Palpite p WHERE p.id = :id")})
 public class Palpite {
     @Id
     @Column(name = "id", nullable = false)

@@ -8,8 +8,8 @@ import java.util.Set;
 @Entity
 @Table(name = "grupo")
 @NamedQueries({
-        @NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g")
-        , @NamedQuery(name = "Grupo.findById", query = "SELECT g FROM Grupo g WHERE g.id = :id")})
+        @NamedQuery(name = "Grupo.findAll", query = "SELECT g FROM Grupo g"),
+        @NamedQuery(name = "Grupo.findById", query = "SELECT g FROM Grupo g WHERE g.id = :id")})
 public class Grupo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

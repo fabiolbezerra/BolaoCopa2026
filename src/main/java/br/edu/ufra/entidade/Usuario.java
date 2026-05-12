@@ -10,8 +10,8 @@ import java.util.Set;
 @Entity
 @Table(name = "usuario")
 @NamedQueries({
-        @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
-        , @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")})
+        @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+        @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")})
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
