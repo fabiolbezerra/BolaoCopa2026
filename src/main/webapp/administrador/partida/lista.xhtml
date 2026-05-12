@@ -6,7 +6,7 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         Partidas da Copa
     </ui:define>
@@ -14,6 +14,36 @@
     <ui:define name="content">
         <h1>Calendário de Partidas</h1>
 
+        <p:dataTable value="#{partidaBean.partidas}" var="p">
+            <p:column headerText="Fase">
+                <h:outputText value="#{p.fase.nome}" />
+            </p:column>
 
+            <p:column headerText="Local">
+                <h:outputText value="#{p.local}" />
+            </p:column>
+
+            <p:column headerText="Data e Hora">
+                <h:outputText value="#{p.inicioDaPartida}" >
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="Seleção A">
+                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla})" />
+            </p:column>
+
+            <p:column headerText="Placar">
+                <div align="center">
+                    <h:outputText value="#{p.golsA}" />
+                    X
+                    <h:outputText value="#{p.golsB}" />
+                </div>
+            </p:column>
+
+            <p:column headerText="Seleção B">
+                <h:outputText value="#{p.selecaoB.nome} (#{p.selecaoB.sigla})" />
+            </p:column>
+        </p:dataTable>
     </ui:define>
 </ui:composition>

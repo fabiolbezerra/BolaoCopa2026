@@ -2,6 +2,7 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -9,8 +10,8 @@ import java.util.Set;
 @Entity
 @Table(name = "partida")
 @NamedQueries({
-        @NamedQuery(name = "Fase.findAll", query = "SELECT p FROM Partida p"),
-        @NamedQuery(name = "Fase.findById", query = "SELECT p FROM Partida p WHERE p.id = :id")})
+        @NamedQuery(name = "Partida.findAll", query = "SELECT p FROM Partida p"),
+        @NamedQuery(name = "Partida.findById", query = "SELECT p FROM Partida p WHERE p.id = :id")})
 public class Partida {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +19,12 @@ public class Partida {
     private Integer id;
 
     @Column(name = "inicioDaPartida", nullable = false)
-    private Instant inicioDaPartida;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date inicioDaPartida;
 
     @Column(name = "atualizacaoDoResultado")
-    private Instant atualizacaoDoResultado;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date atualizacaoDoResultado;
 
     @Column(name = "local", nullable = false, length = 45)
     private String local;
@@ -62,19 +65,19 @@ public class Partida {
         this.id = id;
     }
 
-    public Instant getInicioDaPartida() {
+    public Date getInicioDaPartida() {
         return inicioDaPartida;
     }
 
-    public void setInicioDaPartida(Instant inicioDaPartida) {
+    public void setInicioDaPartida(Date inicioDaPartida) {
         this.inicioDaPartida = inicioDaPartida;
     }
 
-    public Instant getAtualizacaoDoResultado() {
+    public Date getAtualizacaoDoResultado() {
         return atualizacaoDoResultado;
     }
 
-    public void setAtualizacaoDoResultado(Instant atualizacaoDoResultado) {
+    public void setAtualizacaoDoResultado(Date atualizacaoDoResultado) {
         this.atualizacaoDoResultado = atualizacaoDoResultado;
     }
 

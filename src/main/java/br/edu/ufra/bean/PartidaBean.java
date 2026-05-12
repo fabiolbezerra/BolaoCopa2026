@@ -4,31 +4,29 @@ import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.util.UtilBean;
 
-import javax.annotation.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class PartidaBean {
     private List<Partida> partidas;
     private Partida partida = new Partida();
     private final PartidaRN PARTIDA_RN = new PartidaRN();
 
     public PartidaBean() {
-
+        System.out.println("Criando PartidaBean");
     }
 
+    @PostConstruct
     public void init() {
-        this.partidas = this.PARTIDA_RN.listar();
+        this.partidas = this.PARTIDA_RN.listarTodos();
     }
 
     public List<Partida> getPartidas() {
         return this.partidas;
-    }
-
-    public void setPartidas(List<Partida> partidas) {
-        this.partidas = partidas;
     }
 
     public Partida getPartida() {
@@ -42,7 +40,7 @@ public class PartidaBean {
     public void excluir() {
         if (this.PARTIDA_RN.excluir(this.partida)) {
             UtilBean.criarMensagemDeInformacao("Partida excluída");
-            this.partidas = this.PARTIDA_RN.listar();
+            this.partidas = this.PARTIDA_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível excluir a raça");
         }

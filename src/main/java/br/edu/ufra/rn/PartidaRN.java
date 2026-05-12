@@ -2,10 +2,7 @@ package br.edu.ufra.rn;
 
 import br.edu.ufra.dao.GenericDAO;
 import br.edu.ufra.entidade.Partida;
-import br.edu.ufra.entidade.Fase;
-import org.springframework.context.annotation.Import;
 
-import java.time.Instant;
 import java.util.List;
 
 public class PartidaRN {
@@ -22,46 +19,12 @@ public class PartidaRN {
         }
     }
 
-    private boolean determinarVencedor(Integer partidaId, Integer golsA, Integer golsB){
-        Partida partida = obter(partidaId);
-        if(Instant.now().isBefore(partida.getInicioDaPartida())){
-            return false;
-        }
-        partida.setGolsA(golsA);
-        partida.setGolsB(golsB);
-        partida.setAtualizacaoDoResultado(Instant.now());
-
-        definirVencedor(partida,golsA,golsB);
-
-        return PARTIDA_DAO.alterar(partida);
-
-
-    }
-    private void definirVencedor(Partida partida, Integer golsA, Integer golsB){
-        if(golsA>golsB){
-            partida.setTipoDeVitoria("NORMAL");
-            partida.setVencedor(partida.getSelecaoA());
-        }
-        else if(golsB>golsA){
-            partida.setTipoDeVitoria("NORMAL");
-            partida.setVencedor(partida.getSelecaoB());
-        }
-        else{
-            partida.setVencedor(null);
-            if(partida.getFase().getEliminatoria() != 0){
-                partida.setTipoDeVitoria("PÊNALTIS");
-            }else{
-                partida.setTipoDeVitoria("EMPATE");
-            }
-        }
-    }
-
-    public List<Partida> listar() {
+    public List<Partida> listarTodos() {
         return this.PARTIDA_DAO.obterTodos(Partida.class);
     }
 
     public Partida obter(Integer id) {
-        return (Partida)this.PARTIDA_DAO.obter(Partida.class, id);
+        return (Partida) this.PARTIDA_DAO.obter(Partida.class, id);
     }
 
     public boolean excluir(Partida partida) {
