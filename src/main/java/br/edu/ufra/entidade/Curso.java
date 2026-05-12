@@ -78,9 +78,12 @@ public class Curso {
     public void setUsuarios(Set<br.edu.ufra.entidade.Usuario> usuarios) {
         this.usuarios = usuarios;
     }
+
+    @Override
     public int hashCode(){
         return Objects.hash(super.hashCode(),id);
     }
+    @Override
     public boolean equals(Object object){
         if(!(object instanceof Curso))
             return false;
