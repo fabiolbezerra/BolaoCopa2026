@@ -6,13 +6,31 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         Fases da Copa
     </ui:define>
 
     <ui:define name="content">
         <h1>Fases da Copa do Mundo</h1>
+        <p:dataTable value="#{faseBean.fases}" var="f">
+            <p:column headerText="Nome">
+                <h:outputText value="#{f.nome}"/>
+            </p:column>
+
+            <p:column headerText="Início">
+                <h:outputText value="#{f.inicio}">
+                    <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </p:column>
+
+            <p:column headerText="fim">
+                <h:outputText value="#{f.fim}">
+                    <f:convertDateTime type="date" pattern="dd/MM/yyyy" />
+                </h:outputText>
+            </p:column>
+        </p:dataTable>
 
 
     </ui:define>

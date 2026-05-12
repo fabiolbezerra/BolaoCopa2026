@@ -5,12 +5,12 @@ import br.edu.ufra.rn.FaseRN;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class FaseBean implements Serializable {
 
     private Fase fase;
@@ -20,49 +20,8 @@ public class FaseBean implements Serializable {
 
     @PostConstruct
     public void init() {
-
-        fase = new Fase();
-
-        carregarFases();
+        fases = RN.listarTodos();
     }
-
-    public void carregarFases() {
-        fases = RN.listar();
-    }
-
-    public void salvar() {
-
-        boolean resultado = RN.salvar(fase);
-
-        if (resultado) {
-
-            fase = new Fase();
-
-            carregarFases();
-        }
-    }
-
-    public void editar(Fase faseSelecionada) {
-
-        if (faseSelecionada != null) {
-            this.fase = faseSelecionada;
-        }
-    }
-
-    public void excluir(Fase faseSelecionada) {
-
-        if (faseSelecionada != null) {
-
-            RN.excluir(faseSelecionada);
-
-            carregarFases();
-        }
-    }
-
-    public void novo() {
-        fase = new Fase();
-    }
-
 
     public Fase getFase() {
         return fase;
