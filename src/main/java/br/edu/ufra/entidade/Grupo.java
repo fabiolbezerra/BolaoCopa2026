@@ -2,6 +2,7 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -45,14 +46,18 @@ public class Grupo {
         this.selecoes = selecoes;
     }
 
-    public boolean equals(Object object) {
-        if (!(object instanceof Grupo)) return false;
-        Grupo grupo = (Grupo) object;
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-        return java.util.Objects.equals(id, grupo.id);
-    }
-
-    public int hashCode() {
-        return java.util.Objects.hash(super.hashCode(), id);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Grupo))
+			return false;
+		Grupo other = (Grupo) obj;
+		return Objects.equals(id, other.id);
+	}
 }
