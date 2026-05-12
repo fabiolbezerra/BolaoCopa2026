@@ -9,7 +9,7 @@ public class SelecaoRN {
 
     private final GenericDAO<Selecao> DAO = new GenericDAO<>();
 
-    public List<Selecao> listar() {
+    public List<Selecao> listarTodos() {
         return DAO.obterTodos(Selecao.class);
     }
 

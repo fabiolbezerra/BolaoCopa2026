@@ -22,7 +22,7 @@ public class SelecaoBean {
 
     @PostConstruct
     public void init() {
-        selecoes = SELECAO_RN.listar();
+        selecoes = SELECAO_RN.listarTodos();
     }
 
     public List<Selecao> getSelecoes() {
@@ -45,7 +45,7 @@ public class SelecaoBean {
         if (SELECAO_RN.salvar(selecao)) {
             UtilBean.criarMensagemDeInformacao("Seleção salva");
             selecao = new Selecao();
-            selecoes = SELECAO_RN.listar();
+            selecoes = SELECAO_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a seleção");
         }
@@ -54,7 +54,7 @@ public class SelecaoBean {
     public void excluir() {
         if (SELECAO_RN.excluir(selecao)) {
             UtilBean.criarMensagemDeInformacao("Seleção excluída");
-            selecoes = SELECAO_RN.listar();
+            selecoes = SELECAO_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível excluir a seleção");
         }
