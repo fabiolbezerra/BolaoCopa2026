@@ -1,10 +1,10 @@
 package br.edu.ufra.entidade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "bolao")
@@ -26,10 +26,10 @@ public class Bolao {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "dono", nullable = false)
-    private br.edu.ufra.entidade.Usuario dono;
+    private Usuario dono;
 
     @OneToMany(mappedBy = "bolao")
-    private Set<br.edu.ufra.entidade.Participante> participantes = new LinkedHashSet<>();
+    private List<Participante> participantes = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -55,19 +55,19 @@ public class Bolao {
         this.criacao = criacao;
     }
 
-    public br.edu.ufra.entidade.Usuario getDono() {
+    public Usuario getDono() {
         return dono;
     }
 
-    public void setDono(br.edu.ufra.entidade.Usuario dono) {
+    public void setDono(Usuario dono) {
         this.dono = dono;
     }
 
-    public Set<br.edu.ufra.entidade.Participante> getParticipantes() {
+    public List<Participante> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(Set<br.edu.ufra.entidade.Participante> participantes) {
+    public void setParticipantes(List<Participante> participantes) {
         this.participantes = participantes;
     }
     @Override

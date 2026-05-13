@@ -1,9 +1,9 @@
 package br.edu.ufra.entidade;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "campus")
@@ -21,10 +21,10 @@ public class Campus {
     private String nome;
 
     @OneToMany(mappedBy = "campus")
-    private Set<br.edu.ufra.entidade.Curso> cursos = new LinkedHashSet<>();
+    private List<Curso> cursos = new ArrayList<>();
 
     @OneToMany(mappedBy = "campus")
-    private Set<br.edu.ufra.entidade.Usuario> usuarios = new LinkedHashSet<>();
+    private List<Usuario> usuarios = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -42,19 +42,19 @@ public class Campus {
         this.nome = nome;
     }
 
-    public Set<br.edu.ufra.entidade.Curso> getCursos() {
+    public List<Curso> getCursos() {
         return cursos;
     }
 
-    public void setCursos(Set<br.edu.ufra.entidade.Curso> cursos) {
+    public void setCursos(List<Curso> cursos) {
         this.cursos = cursos;
     }
 
-    public Set<br.edu.ufra.entidade.Usuario> getUsuarios() {
+    public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(Set<br.edu.ufra.entidade.Usuario> usuarios) {
+    public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
     @Override

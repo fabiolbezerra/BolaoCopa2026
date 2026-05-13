@@ -6,21 +6,94 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         Cadastro do Bolão
     </ui:define>
 
     <ui:define name="content">
-        <h1>Membros do Bolão</h1>
+        <h1>Bolão #{bolaoBean.bolao.nome}</h1>
+
+        <br/>
 
         <h2>Detalhes do bolão</h2>
         <ul>
-            <li>Nome</li>
-            <li>Criação</li>
-            <li>Dono</li>
+            <li>Dono:</li>
+            <ul>
+                <li><h:outputText value="#{bolaoBean.bolao.dono.nome} #{bolaoBean.bolao.dono.sobrenome}"/></li>
+                <li>Curso: <h:outputText value="#{bolaoBean.bolao.dono.curso.nome}"/></li>
+                <li>Campus: <h:outputText value="#{bolaoBean.bolao.dono.campus.nome}"/></li>
+            </ul>
+            <li>
+                Criação:
+                <h:outputText value="#{bolaoBean.bolao.criacao}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                </h:outputText>
+            </li>
         </ul>
 
+        <h1>Membros do bolão</h1>
+
+        <br/>
+
+        <h:form>
+            <p:growl showDetail="true" showSummary="true"/>
+
+            <div class="ui-g">
+                <div class="ui-g-4">
+                    <p:panelGrid styleClass="ui-noborder" columns="2">
+                        <p:outputLabel value="Membro"/>
+                        <p:autoComplete value="#{bolaoBean.participante.usuario}"
+                                        minQueryLength="3"
+                                        completeMethod="#{usuarioBean.autoCompletePalpiteiros}"
+                                        var="palpiteiro"
+                                        itemValue="#{palpiteiro}"
+                                        itemLabel="#{palpiteiro}"
+                                        converter="usuarioConverter">
+
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{palpiteiro.nome} #{palpiteiro.sobrenome}"/>
+                            </p:column>
+
+                            <p:column headerText="Campus">
+                                <h:outputText value="#{palpiteiro.campus.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="Curso">
+                                <h:outputText value="#{palpiteiro.curso.nome}"/>
+                            </p:column>
+                        </p:autoComplete>
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Adicionar"
+                                             action="#{bolaoBean.adicionarParticipante()}"
+                                             update="@form" />
+                        </f:facet>
+                    </p:panelGrid>
+                </div>
+
+                <div class="ui-g-8">
+                    <p:dataTable value="#{bolaoBean.participantes}" var="membro">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{membro.usuario.nome} "/>
+                            <h:outputText value="#{membro.usuario.sobrenome}"/>
+                        </p:column>
+
+                        <p:column headerText="Curso/Campus">
+                            <h:outputText value="#{membro.usuario.curso.nome}/"
+                                          rendered="#{not empty membro.usuario.curso}"/>
+                            <h:outputText value="#{membro.usuario.campus.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="Operações" width="10%">
+                            <h:outputText value="Excluir Membro (se não for o dono)"
+                                          rendered="#{! (bolaoBean.bolao.dono eq membro.usuario)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+
+        </h:form>
 
     </ui:define>
 </ui:composition>

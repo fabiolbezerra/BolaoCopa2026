@@ -2,6 +2,7 @@ package br.edu.ufra.rn;
 
 import br.edu.ufra.dao.UsuarioDAO;
 import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.util.UtilTexto;
 
 import java.util.List;
@@ -24,8 +25,29 @@ public class UsuarioRN {
         }
     }
 
-    public List<Usuario> listar() {
+    public List<Usuario> listarTodos() {
         return DAO.obterTodos(Usuario.class);
+    }
+
+    public List<Usuario> listarPalpiteiros(String query) {
+        List<Usuario> resposta = DAO.obter(EnumPerfilUsuario.PALPITEIRO);
+        if (query == null || query.trim().equals("")) {
+            return resposta; //Todos
+        }
+
+        String nome = null;
+        for (int i = 0; i < resposta.size(); i++) {
+            nome =  resposta.get(i).getNome() + " " + resposta.get(i).getSobrenome();
+            if (! nome.toUpperCase().contains(query.toUpperCase())) {
+                resposta.remove(i);
+                i--;
+            }
+        }
+        return resposta;
+    }
+
+    public List<Usuario> listarAdminstradores() {
+        return DAO.obter(EnumPerfilUsuario.ADMINISTRADOR);
     }
 
     public Usuario obter(Integer id) {

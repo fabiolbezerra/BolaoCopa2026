@@ -173,4 +173,17 @@ public class Usuario {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer();
+        sb.append(nome)
+                .append(' ')
+                .append(sobrenome)
+                .append('(')
+                .append((curso == null ? "" : curso.getNome() + "/"))
+                .append(campus.getNome())
+                .append(')');
+        return sb.toString();
+    }
 }

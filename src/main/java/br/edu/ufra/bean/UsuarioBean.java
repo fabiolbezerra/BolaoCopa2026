@@ -22,9 +22,11 @@ import java.util.List;
 @RequestScoped
 public class UsuarioBean {
 
-    private List<Usuario> usuarios;
-    private Usuario usuario = new Usuario();
     private final UsuarioRN USUARIO_RN = new UsuarioRN();
+
+    private Usuario usuario = new Usuario();
+
+    private List<Usuario> usuarios;
 
     /**
      * Creates a new instance of UsuarioBean
@@ -34,7 +36,7 @@ public class UsuarioBean {
 
     @PostConstruct
     public void init() {
-        usuarios = USUARIO_RN.listar();
+        usuarios = USUARIO_RN.listarTodos();
     }
 
     public List<Usuario> getUsuarios() {
@@ -80,10 +82,14 @@ public class UsuarioBean {
         }
     }
 
+    public List<Usuario> autoCompletePalpiteiros(String query) {
+        return USUARIO_RN.listarPalpiteiros(query);
+    }
+
     public void excluir() {
         if (USUARIO_RN.excluir(usuario)) {
             UtilBean.criarMensagemDeInformacao("Usuario excluído");
-            usuarios = USUARIO_RN.listar();
+            usuarios = USUARIO_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível excluir o usuário");
         }

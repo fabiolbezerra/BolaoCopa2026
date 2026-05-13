@@ -15,32 +15,51 @@
     <ui:define name="content">
         <h1>Meus Bolões</h1>
 
-        <p:dataTable value="#{bolaoBean.boloes}" var="bolao">
-            <p:column headerText="Nome">
-                <h:outputText value="#{bolao.nome}" />
-            </p:column>
+        <br/>
 
-            <p:column headerText="Data de Criação">
-                <h:outputText value="#{bolao.criacao}" >
-                    <f:convertDateTime pattern="dd/MM/yyyy" />
-                </h:outputText>
-            </p:column>
+        <h:form>
+            <p:dataTable value="#{bolaoBean.boloes}" var="bolao">
+                <p:column headerText="Nome">
+                    <h:outputText value="#{bolao.nome}"/>
+                </p:column>
 
-            <p:column headerText="Dono">
-                <h:outputText value="#{bolao.dono.nome} #{bolao.dono.sobrenome}" />
-            </p:column>
+                <p:column headerText="Data de Criação">
+                    <h:outputText value="#{bolao.criacao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
 
-            <p:column headerText="Operações">
-                <h:outputText value="Excluir se dono" rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"/>
-                |
-                <h:outputText value="Editar se dono"/>
-                |
-                <h:outputText value="Membros se dono"/>
-                |
-                <h:outputText value="Sair se apenas participante"/>
-                |
-                <h:outputText value="Detalhes"/>
-            </p:column>
-        </p:dataTable>
+                <p:column headerText="Dono">
+                    <h:outputText value="#{bolao.dono.nome} #{bolao.dono.sobrenome}"/>
+                </p:column>
+
+                <p:column headerText="Operações">
+                    <p:commandButton value="Excluir"
+                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
+                                     action="#{bolaoBean.excluir()}">
+                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+                    </p:commandButton>
+                    |
+                    <p:commandButton value="Editar"
+                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
+                                     action="formulario.xhtml">
+                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+                    </p:commandButton>
+                    |
+                    <p:commandButton value="Membros"
+                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
+                                     action="formulario-membros.xhtml">
+                        <f:param name="bolaoID" value="#{bolao.id}"/>
+                    </p:commandButton>
+                    |
+                    <h:outputText value="Sair se apenas participante"/>
+                    |
+                    <p:commandButton value="Detalhes"
+                                     action="detalhes.xhtml">
+                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>

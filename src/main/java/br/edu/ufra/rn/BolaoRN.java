@@ -2,6 +2,7 @@ package br.edu.ufra.rn;
 
 import br.edu.ufra.dao.BolaoDAO;
 import br.edu.ufra.entidade.Bolao;
+import br.edu.ufra.entidade.Participante;
 import br.edu.ufra.entidade.Usuario;
 
 import java.util.List;
@@ -18,7 +19,32 @@ public class BolaoRN {
         }
     }
 
+    public Bolao obter(Integer id) {
+        if (id == null) {
+            return null;
+        } else {
+            return DAO.obter(Bolao.class, id);
+        }
+    }
+
     public List<Bolao> listarTodos() {
         return DAO.obterTodos(Bolao.class);
+    }
+
+    public boolean adicionarParticipante(Bolao bolao, Participante participante) {
+        if (bolao == null
+                || participante == null
+                || participante.getUsuario() == null
+                || participante.getBolao() == null) {
+            return false;
+        } else {
+            for (Participante p : bolao.getParticipantes()) {
+                if (p.getUsuario().equals(participante.getUsuario())) {
+                    //Participante já está no bolão
+                    return false;
+                }
+            }
+        }
+        return DAO.adicionarMembro(participante.getUsuario(), participante.getBolao());
     }
 }
