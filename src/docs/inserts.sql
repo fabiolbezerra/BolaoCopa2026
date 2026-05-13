@@ -34,10 +34,10 @@ VALUES -- Grupo A (ID: 1)
        (8, 'Bosnia and Herzegovina', 'BIH', NULL, 2),
 
        -- Grupo C (ID: 3)
-       (9, 'Brazil', 'BRA', NULL, 3),
-       (10, 'Morocco', 'MAR', NULL, 3),
-       (11, 'Scotland', 'SCO', NULL, 3),
-       (12, 'Haiti', 'HAI', NULL, 3),
+       (9, 'Brazil', 'BRA', 'brasil.png', 3),
+       (10, 'Morocco', 'MAR', 'marrocos.png', 3),
+       (11, 'Scotland', 'SCO', 'escocia.png', 3),
+       (12, 'Haiti', 'HAI', 'haiti.png', 3),
 
        -- Grupo D (ID: 4)
        (13, 'USA', 'USA', NULL, 4),

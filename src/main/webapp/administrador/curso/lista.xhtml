@@ -14,19 +14,28 @@
     <ui:define name="content">
         <h1>Lista de cursos</h1>
 
-        <p:dataTable value="#{cursoBean.cursos}" var="c">
-            <p:column headerText="Nome">
-                <h:outputText value="#{c.nome}"/>
-            </p:column>
+        <h:form>
+            <div class="ui-g">
+                <div class="ui-g-6">
+                    <p:dataTable value="#{cursoBean.cursos}" var="c">
+                        <p:column headerText="Nome" sortBy="#{c.nome}">
+                            <h:outputText value="#{c.nome}" />
+                        </p:column>
 
-            <p:column headerText="Sigla">
-                <h:outputText value="#{c.sigla}"/>
-            </p:column>
+                        <p:column headerText="Sigla">
+                            <h:outputText value="#{c.sigla}"/>
+                        </p:column>
 
-            <p:column headerText="Campus">
-                <h:outputText value="#{c.campus.nome}"/>
-            </p:column>
-        </p:dataTable>
+                        <p:column headerText="Campus" sortBy="#{c.campus.nome}">
+                            <h:outputText value="#{c.campus.nome}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+                <div class="ui-g-6">
+
+                </div>
+            </div>
+        </h:form>
 
     </ui:define>
 </ui:composition>

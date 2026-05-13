@@ -14,19 +14,32 @@
     <ui:define name="content">
         <h1>Lista de seleções</h1>
 
-        <p:dataTable value="#{selecaoBean.selecoes}" var="s">
-            <p:column headerText="Nome">
-                <h:outputText value="#{s.nome}"/>
-            </p:column>
+        <h:form>
+            <div class="ui-g">
+                <div class="ui-g-6">
+                    <p:dataTable value="#{selecaoBean.selecoes}" var="s">
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{s.nome}"/>
+                        </p:column>
 
-            <p:column headerText="Sigla">
-                <h:outputText value="#{s.sigla}"/>
-            </p:column>
+                        <p:column headerText="Símbolo">
+                            <p:graphicImage value="/resources/imagens/#{s.simbolo}" width="24px"/>
+                        </p:column>
 
-            <p:column headerText="Grupo">
-                <h:outputText value="#{s.grupo.nome}"/>
-            </p:column>
-        </p:dataTable>
+                        <p:column headerText="Sigla">
+                            <h:outputText value="#{s.sigla}"/>
+                        </p:column>
+
+                        <p:column headerText="Grupo">
+                            <h:outputText value="#{s.grupo.nome}"/>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+                <div class="ui-g-6">
+
+                </div>
+            </div>
+        </h:form>
 
     </ui:define>
 </ui:composition>
