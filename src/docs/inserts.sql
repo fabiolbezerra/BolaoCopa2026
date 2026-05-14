@@ -22,77 +22,76 @@ VALUES (1, 'Grupo A'),
 -- =========================
 INSERT INTO selecao (id, nome, sigla, simbolo, grupo)
 VALUES -- Grupo A (ID: 1)
-       (1, 'Mexico', 'MEX', NULL, 1),
-       (2, 'South Africa', 'RSA', NULL, 1),
-       (3, 'Korea Republic', 'KOR', NULL, 1),
-       (4, 'Czechia', 'CZE', NULL, 1),
+       (1, 'México', 'MEX', 'mexico.png', 1),
+       (2, 'África do Sul', 'RSA', 'africa-do-sul.png', 1),
+       (3, 'Coreia do Sul', 'KOR', 'coreia-do-sul.png', 1),
+       (4, 'República Tcheca', 'CZE', 'republica-tcheca.png', 1),
 
        -- Grupo B (ID: 2)
-       (5, 'Canada', 'CAN', NULL, 2),
-       (6, 'Switzerland', 'SUI', NULL, 2),
-       (7, 'Qatar', 'QAT', NULL, 2),
-       (8, 'Bosnia and Herzegovina', 'BIH', NULL, 2),
+       (5, 'Canadá', 'CAN', 'canada.png', 2),
+       (6, 'Suíça', 'SUI', 'suica.png', 2),
+       (7, 'Catar', 'QAT', 'catar.png', 2),
+       (8, 'Bósnia e Herzegovina', 'BIH', 'bosnia-e-herzegovina.png', 2),
 
        -- Grupo C (ID: 3)
-       (9, 'Brazil', 'BRA', 'brasil.png', 3),
-       (10, 'Morocco', 'MAR', 'marrocos.png', 3),
-       (11, 'Scotland', 'SCO', 'escocia.png', 3),
+       (9, 'Brasil', 'BRA', 'brasil.png', 3),
+       (10, 'Marrocos', 'MAR', 'marrocos.png', 3),
+       (11, 'Escócia', 'SCO', 'escocia.png', 3),
        (12, 'Haiti', 'HAI', 'haiti.png', 3),
 
        -- Grupo D (ID: 4)
-       (13, 'USA', 'USA', NULL, 4),
-       (14, 'Paraguay', 'PAR', NULL, 4),
-       (15, 'Australia', 'AUS', NULL, 4),
-       (16, 'Türkiye', 'TUR', NULL, 4),
+       (13, 'Estados Unidos', 'USA', 'estados-unidos.png', 4),
+       (14, 'Paraguai', 'PAR', 'paraguai.png', 4),
+       (15, 'Austrália', 'AUS', 'australia.png', 4),
+       (16, 'Turquia', 'TUR', 'turquia.png', 4),
 
        -- Grupo E (ID: 5)
-       (17, 'Germany', 'GER', NULL, 5),
-       (18, 'Ecuador', 'ECU', NULL, 5),
-       (19, 'Ivory Coast', 'CIV', NULL, 5),
-       (20, 'Curacao', 'CUW', NULL, 5),
+       (17, 'Alemanha', 'GER', 'alemanha.png', 5),
+       (18, 'Equador', 'ECU', 'equador.png', 5),
+       (19, 'Costa do Marfim', 'CIV', 'costa-do-marfim.png', 5),
+       (20, 'Curaçao', 'CUW', 'curacao.png', 5),
 
        -- Grupo F (ID: 6)
-       (21, 'Netherlands', 'NED', NULL, 6),
-       (22, 'Japan', 'JPN', NULL, 6),
-       (23, 'Tunisia', 'TUN', NULL, 6),
-       (24, 'Sweden', 'SWE', NULL, 6),
+       (21, 'Países Baixos', 'NED', 'paises-baixos.png', 6),
+       (22, 'Japão', 'JPN', 'japao.png', 6),
+       (23, 'Tunísia', 'TUN', 'tunisia.png', 6),
+       (24, 'Suécia', 'SWE', 'suecia.png', 6),
 
        -- Grupo G (ID: 7)
-       (25, 'Belgium', 'BEL', NULL, 7),
-       (26, 'Iran', 'IRN', NULL, 7),
-       (27, 'Egypt', 'EGY', NULL, 7),
-       (28, 'New Zealand', 'NZL', NULL, 7),
+       (25, 'Bélgica', 'BEL', 'belgica.png', 7),
+       (26, 'Irã', 'IRN', 'ira.png', 7),
+       (27, 'Egito', 'EGY', 'egito.png', 7),
+       (28, 'Nova Zelândia', 'NZL', 'nova-zelandia.png', 7),
 
        -- Grupo H (ID: 8)
-       (29, 'Spain', 'ESP', NULL, 8),
-       (30, 'Uruguay', 'URU', NULL, 8),
-       (31, 'Saudi Arabia', 'KSA', NULL, 8),
-       (32, 'Cape Verde', 'CPV', NULL, 8),
+       (29, 'Espanha', 'ESP', 'espanha.png', 8),
+       (30, 'Uruguai', 'URU', 'uruguai.png', 8),
+       (31, 'Arábia Saudita', 'KSA', 'arabia-saudita.png', 8),
+       (32, 'Cabo Verde', 'CPV', 'cabo-verde.png', 8),
 
        -- Grupo I (ID: 9)
-       (33, 'France', 'FRA', NULL, 9),
-       (34, 'Senegal', 'SEN', NULL, 9),
-       (35, 'Norway', 'NOR', NULL, 9),
-       (36, 'Iraq', 'IRQ', NULL, 9),
+       (33, 'França', 'FRA', 'franca.png', 9),
+       (34, 'Senegal', 'SEN', 'senegal.png', 9),
+       (35, 'Noruega', 'NOR', 'noruega.png', 9),
+       (36, 'Iraque', 'IRQ', 'iraque.png', 9),
 
        -- Grupo J (ID: 10)
-       (37, 'Argentina', 'ARG', NULL, 10),
-       (38, 'Austria', 'AUT', NULL, 10),
-       (39, 'Algeria', 'ALG', NULL, 10),
-       (40, 'Jordan', 'JOR', NULL, 10),
+       (37, 'Argentina', 'ARG', 'argentina.png', 10),
+       (38, 'Áustria', 'AUT', 'austria.png', 10),
+       (39, 'Argélia', 'ALG', 'argelia.png', 10),
+       (40, 'Jordânia', 'JOR', 'jordania.png', 10),
 
        -- Grupo K (ID: 11)
-       (41, 'Portugal', 'POR', NULL, 11),
-       (42, 'Colombia', 'COL', NULL, 11),
-       (43, 'Uzbekistan', 'UZB', NULL, 11),
-       (44, 'DR Congo', 'COD', NULL, 11),
+       (41, 'Portugal', 'POR', 'portugal.png', 11),
+       (42, 'Colômbia', 'COL', 'colombia.png', 11),
+       (43, 'Uzbequistão', 'UZB', 'uzbequistao.png', 11),
+       (44, 'República Democrática do Congo', 'COD', 'republica-democratica-do-congo.png', 11),
 
        -- Grupo L (ID: 12)
-       (45, 'England', 'ENG', NULL, 12),
-       (46, 'Croatia', 'CRO', NULL, 12),
-       (47, 'Panama', 'PAN', NULL, 12),
-       (48, 'Ghana', 'GHA', NULL, 12);
-
+       (45, 'Inglaterra', 'ENG', 'inglaterra.png', 12),
+       (46, 'Croácia', 'CRO', 'croacia.png', 12),
+       (47, 'Panamá', 'PAN', 'panama.png', 12),
+       (48, 'Gana', 'GHA', 'gana.png', 12);
 -- =========================
 -- FASES
 -- =========================
