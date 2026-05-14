@@ -64,4 +64,12 @@ public class BolaoRN {
         }
         return DAO.removerMembro(participanteParaSair);
     }
+    public boolean excluirBolao(Bolao bolao){
+        if (bolao == null) {
+            return false;
+        } else {
+            return DAO.excluir(bolao);
+        }
+    }
+
 }

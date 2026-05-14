@@ -48,12 +48,17 @@ public class BolaoBean {
         return boloes;
     }
 
-    public void excluir() {
-        //TODO: implementar a lógica para EXCLUSÃO do bolão
-    }
-
     public void salvar() {
         //TODO: implementar a lógica para SALVAR o bolão
+    }
+
+    public void excluir() {
+        if(BOLAO_RN.excluirBolao(bolao)){
+            UtilBean.criarMensagemDeInformacao("Bolão excluído");
+            boloes = BOLAO_RN.listarTodos();
+        }else{
+            UtilBean.criarMensagemDeErro("Não foi possível excluir bolão");
+        }
     }
 
     public boolean isApenasParticipante(Bolao bolao) {
