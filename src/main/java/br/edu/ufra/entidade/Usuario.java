@@ -3,9 +3,10 @@ package br.edu.ufra.entidade;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "usuario")
@@ -49,13 +50,13 @@ public class Usuario {
     private Campus campus;
 
     @OneToMany(mappedBy = "dono")
-    private Set<Bolao> boloes = new LinkedHashSet<>();
+    private List<Bolao> boloes = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario")
-    private Set<Palpite> palpites = new LinkedHashSet<>();
+    private List<Palpite> palpites = new ArrayList<>();
 
     @OneToMany(mappedBy = "usuario")
-    private Set<Participante> participantes = new LinkedHashSet<>();
+    private List<Participante> participantes = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -137,27 +138,27 @@ public class Usuario {
         this.campus = campus;
     }
 
-    public Set<Bolao> getBoloes() {
+    public List<Bolao> getBoloes() {
         return boloes;
     }
 
-    public void setBoloes(Set<Bolao> boloes) {
+    public void setBoloes(List<Bolao> boloes) {
         this.boloes = boloes;
     }
 
-    public Set<Palpite> getPalpites() {
+    public List<Palpite> getPalpites() {
         return palpites;
     }
 
-    public void setPalpites(Set<Palpite> palpites) {
+    public void setPalpites(List<Palpite> palpites) {
         this.palpites = palpites;
     }
 
-    public Set<Participante> getParticipantes() {
+    public List<Participante> getParticipantes() {
         return participantes;
     }
 
-    public void setParticipantes(Set<Participante> participantes) {
+    public void setParticipantes(List<Participante> participantes) {
         this.participantes = participantes;
     }
 

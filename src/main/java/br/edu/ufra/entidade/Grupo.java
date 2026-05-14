@@ -1,9 +1,9 @@
 package br.edu.ufra.entidade;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "grupo")
@@ -20,7 +20,7 @@ public class Grupo {
     private String nome;
 
     @OneToMany(mappedBy = "grupo")
-    private Set<br.edu.ufra.entidade.Selecao> selecoes = new LinkedHashSet<>();
+    private List<Selecao> selecoes = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -38,11 +38,11 @@ public class Grupo {
         this.nome = nome;
     }
 
-    public Set<br.edu.ufra.entidade.Selecao> getSelecoes() {
+    public List<Selecao> getSelecoes() {
         return selecoes;
     }
 
-    public void setSelecoes(Set<br.edu.ufra.entidade.Selecao> selecoes) {
+    public void setSelecoes(List<Selecao> selecoes) {
         this.selecoes = selecoes;
     }
 
