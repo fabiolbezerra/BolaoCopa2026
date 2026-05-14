@@ -52,7 +52,11 @@
                         <f:param name="bolaoID" value="#{bolao.id}"/>
                     </p:commandButton>
                     |
-                    <h:outputText value="Sair se apenas participante"/>
+                    <p:commandButton value="Sair se apenas participante"
+                                     rendered="#{bolaoBean.isApenasParticipante(bolao)}"
+                                     action="#{bolaoBean.sair()}">
+                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+                    </p:commandButton>
                     |
                     <p:commandButton value="Detalhes"
                                      action="detalhes.xhtml">

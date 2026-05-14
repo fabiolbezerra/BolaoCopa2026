@@ -99,4 +99,30 @@ public class BolaoBean {
             }
         }
     }
+
+    public boolean isApenasParticipante(Bolao bolao) {
+        Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
+        if (bolao == null || usuarioLogado == null) {
+            return false;
+        }
+        if (bolao.getDono().equals(usuarioLogado)) {
+            return false;
+        }
+        for (Participante p : bolao.getParticipantes()) {
+            if (p.getUsuario().equals(usuarioLogado)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void sair() {
+        Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
+        if (BOLAO_RN.sairDoBolao(bolao, usuarioLogado)) {
+            UtilBean.criarMensagemDeInformacao("Você saiu do bolão");
+            boloes = BOLAO_RN.obter(usuarioLogado);
+        } else {
+            UtilBean.criarMensagemDeErro("Não foi possível sair do bolão");
+        }
+    }
 }

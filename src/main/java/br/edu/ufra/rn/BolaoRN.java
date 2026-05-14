@@ -47,4 +47,21 @@ public class BolaoRN {
         }
         return DAO.adicionarMembro(participante.getUsuario(), participante.getBolao());
     }
+
+    public boolean sairDoBolao(Bolao bolao, Usuario usuario) {
+        if (bolao == null || usuario == null) {
+            return false;
+        }
+        Participante participanteParaSair = null;
+        for (Participante p : bolao.getParticipantes()) {
+            if (p.getUsuario().equals(usuario)) {
+                participanteParaSair = p;
+                break;
+            }
+        }
+        if (participanteParaSair == null) {
+            return false;
+        }
+        return DAO.removerMembro(participanteParaSair);
+    }
 }

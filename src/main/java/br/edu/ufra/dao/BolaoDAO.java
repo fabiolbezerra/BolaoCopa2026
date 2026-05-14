@@ -58,4 +58,30 @@ public class BolaoDAO extends GenericDAO<Bolao> {
             em.close();
         }
     }
+
+    public boolean removerMembro(Participante participante) {
+        EntityManager em = getEntityManager();
+        EntityTransaction transaction = null;
+        if (em != null) {
+            transaction = em.getTransaction();
+        } else {
+            return false;
+        }
+        try {
+            transaction.begin();
+            Participante p = em.merge(participante);
+            em.remove(p);
+            transaction.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+            if (transaction != null
+                    && transaction.isActive()) {
+                transaction.rollback();
+            }
+            return false;
+        } finally {
+            em.close();
+        }
+    }
 }
