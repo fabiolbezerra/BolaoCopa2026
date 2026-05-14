@@ -2,6 +2,7 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -15,7 +16,8 @@ public class Palpite {
     private Integer id;
 
     @Column(name = "dataDoPalpite", nullable = false)
-    private Instant dataDoPalpite;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataDoPalpite;
 
     @Column(name = "ultimaAlteracao")
     private Instant ultimaAlteracao;
@@ -48,11 +50,11 @@ public class Palpite {
         this.id = id;
     }
 
-    public Instant getDataDoPalpite() {
+    public Date getDataDoPalpite() {
         return dataDoPalpite;
     }
 
-    public void setDataDoPalpite(Instant dataDoPalpite) {
+    public void setDataDoPalpite(Date dataDoPalpite) {
         this.dataDoPalpite = dataDoPalpite;
     }
 
@@ -112,19 +114,19 @@ public class Palpite {
         this.partida = partida;
     }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!(obj instanceof Palpite))
-			return false;
-		Palpite other = (Palpite) obj;
-		return Objects.equals(id, other.id);
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Palpite))
+            return false;
+        Palpite other = (Palpite) obj;
+        return Objects.equals(id, other.id);
+    }
 
 }

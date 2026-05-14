@@ -1,11 +1,10 @@
 package br.edu.ufra.entidade;
 
 import javax.persistence.*;
-import java.time.Instant;
-import java.util.Date;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "partida")

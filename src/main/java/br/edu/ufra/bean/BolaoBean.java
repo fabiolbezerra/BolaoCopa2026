@@ -53,7 +53,7 @@ public class BolaoBean {
     }
 
     public void excluir() {
-        if(BOLAO_RN.excluirBolao(bolao)){
+        if(BOLAO_RN.excluir(bolao)){
             UtilBean.criarMensagemDeInformacao("Bolão excluído");
             boloes = BOLAO_RN.listarTodos();
         }else{

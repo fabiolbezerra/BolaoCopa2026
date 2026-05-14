@@ -3,8 +3,10 @@ package br.edu.ufra.rn;
 import br.edu.ufra.dao.UsuarioDAO;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
+import br.edu.ufra.util.UtilEmail;
 import br.edu.ufra.util.UtilTexto;
 
+import java.util.Date;
 import java.util.List;
 
 public class UsuarioRN {
@@ -37,8 +39,8 @@ public class UsuarioRN {
 
         String nome = null;
         for (int i = 0; i < resposta.size(); i++) {
-            nome =  resposta.get(i).getNome() + " " + resposta.get(i).getSobrenome();
-            if (! nome.toUpperCase().contains(query.toUpperCase())) {
+            nome = resposta.get(i).getNome() + " " + resposta.get(i).getSobrenome();
+            if (!nome.toUpperCase().contains(query.toUpperCase())) {
                 resposta.remove(i);
                 i--;
             }
@@ -77,5 +79,17 @@ public class UsuarioRN {
             return null;
         }
         return DAO.obter(email);
+    }
+
+    public String enviarEmailDeValidacao(String email) {
+        final String CODIGO_GERADO = UtilTexto.gerarNumeros(6);
+        StringBuilder texto = new StringBuilder();
+        texto
+                .append("Olá!\n")
+                .append("Digite o código abaixo no formulário de cadastro para validar seu email.")
+                .append("\n")
+                .append(CODIGO_GERADO);
+        UtilEmail.enviarEmail(email, "Validação do email", texto.toString());
+        return CODIGO_GERADO;
     }
 }
