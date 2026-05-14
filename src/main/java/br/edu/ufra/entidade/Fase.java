@@ -2,10 +2,7 @@ package br.edu.ufra.entidade;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "fase")
@@ -33,7 +30,7 @@ public class Fase {
     private Date fim;
 
     @OneToMany(mappedBy = "fase")
-    private Set<br.edu.ufra.entidade.Partida> partidas = new LinkedHashSet<>();
+    private List<br.edu.ufra.entidade.Partida> partidas = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -75,11 +72,11 @@ public class Fase {
         this.fim = fim;
     }
 
-    public Set<br.edu.ufra.entidade.Partida> getPartidas() {
+    public List<br.edu.ufra.entidade.Partida> getPartidas() {
         return partidas;
     }
 
-    public void setPartidas(Set<br.edu.ufra.entidade.Partida> partidas) {
+    public void setPartidas(List<br.edu.ufra.entidade.Partida> partidas) {
         this.partidas = partidas;
     }
 

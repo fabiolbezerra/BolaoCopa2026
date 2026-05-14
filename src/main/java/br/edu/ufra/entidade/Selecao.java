@@ -1,9 +1,7 @@
 package br.edu.ufra.entidade;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "selecao")
@@ -30,13 +28,13 @@ public class Selecao {
     private Grupo grupo;
 
     @OneToMany(mappedBy = "selecaoA")
-    private Set<Partida> partidasSelecaoA = new LinkedHashSet<>();
+    private List<Partida> partidasSelecaoA = new ArrayList<>();
 
     @OneToMany(mappedBy = "selecaoB")
-    private Set<Partida> partidasSelecaoB = new LinkedHashSet<>();
+    private List<Partida> partidasSelecaoB = new ArrayList<>();
 
     @OneToMany(mappedBy = "vencedor")
-    private Set<Partida> partidasVencedor = new LinkedHashSet<>();
+    private List<Partida> partidasVencedor = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -78,27 +76,28 @@ public class Selecao {
         this.grupo = grupo;
     }
 
-    public Set<Partida> getPartidasSelecaoA() {
+
+    public List<Partida> getPartidasSelecaoA() {
         return partidasSelecaoA;
     }
 
-    public void setPartidasSelecaoA(Set<Partida> partidasSelecaoA) {
+    public void setPartidasSelecaoA(List<Partida> partidasSelecaoA) {
         this.partidasSelecaoA = partidasSelecaoA;
     }
 
-    public Set<Partida> getPartidasSelecaoB() {
+    public List<Partida> getPartidasSelecaoB() {
         return partidasSelecaoB;
     }
 
-    public void setPartidasSelecaoB(Set<Partida> partidasSelecaoB) {
+    public void setPartidasSelecaoB(List<Partida> partidasSelecaoB) {
         this.partidasSelecaoB = partidasSelecaoB;
     }
 
-    public Set<Partida> getPartidasVencedor() {
+    public List<Partida> getPartidasVencedor() {
         return partidasVencedor;
     }
 
-    public void setPartidasVencedor(Set<Partida> partidasVencedor) {
+    public void setPartidasVencedor(List<Partida> partidasVencedor) {
         this.partidasVencedor = partidasVencedor;
     }
 

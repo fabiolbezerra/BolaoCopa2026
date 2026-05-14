@@ -1,9 +1,10 @@
 package br.edu.ufra.entidade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "curso")
@@ -27,7 +28,7 @@ public class Curso {
     private Campus campus;
 
     @OneToMany(mappedBy = "curso")
-    private Set<br.edu.ufra.entidade.Usuario> usuarios = new LinkedHashSet<>();
+    private List<br.edu.ufra.entidade.Usuario> usuarios = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -61,11 +62,11 @@ public class Curso {
         this.campus = campus;
     }
 
-    public Set<br.edu.ufra.entidade.Usuario> getUsuarios() {
+    public List<br.edu.ufra.entidade.Usuario> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(Set<br.edu.ufra.entidade.Usuario> usuarios) {
+    public void setUsuarios(List<br.edu.ufra.entidade.Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 

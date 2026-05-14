@@ -3,9 +3,9 @@ package br.edu.ufra.entidade;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "partida")
@@ -55,7 +55,7 @@ public class Partida {
     private br.edu.ufra.entidade.Selecao vencedor;
 
     @OneToMany(mappedBy = "partida")
-    private Set<Palpite> palpites = new LinkedHashSet<>();
+    private List<Palpite> palpites = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -145,11 +145,11 @@ public class Partida {
         this.vencedor = vencedor;
     }
 
-    public Set<Palpite> getPalpites() {
+    public List<Palpite> getPalpites() {
         return palpites;
     }
 
-    public void setPalpites(Set<Palpite> palpites) {
+    public void setPalpites(List<Palpite> palpites) {
         this.palpites = palpites;
     }
 
