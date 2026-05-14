@@ -8,7 +8,7 @@ import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import java.util.List;
 
 @ManagedBean
@@ -46,10 +46,6 @@ public class BolaoBean {
 
     public List<Bolao> getBoloes() {
         return boloes;
-    }
-
-    public List<Participante> getParticipantes() {
-        return participantes;
     }
 
     public void excluir() {
