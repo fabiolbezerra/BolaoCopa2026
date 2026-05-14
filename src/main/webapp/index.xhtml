@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">
+        Bolão da Copa
+    </ui:define>
+
+    <ui:define name="top">
+        <h:outputText value="Bolão da Copa do Mundo 2026" style="font-size: x-large"/>
+        <p:outputPanel style="float: right;">
+            <p:link value="Cadastrar" outcome="formulario-nova-conta.xhtml"/>
+
+            <h:outputText value=" | "/>
+
+            <p:link value="Entrar" outcome="login.xhtml"/>
+        </p:outputPanel>
+        <br/>
+        Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Rankings</h1>
+
+        <br/>
+
+        <h1>Próximas Partidas</h1>
+    </ui:define>
+</ui:composition>

@@ -6,14 +6,25 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html" xmlns:c="http://java.sun.com/jsf/html"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         Meus Bolões
     </ui:define>
 
     <ui:define name="content">
-        <h1>Meus Bolões</h1>
+        <h1>
+            <!-- Referência: https://www.baeldung.com/jstl -->
+            <c:choose>
+                <c:when test="#{usuarioBean.administrador}">
+                    Todos os Bolões
+                </c:when>
+                <c:otherwise>
+                    Meus Bolões
+                </c:otherwise>
+            </c:choose>
+        </h1>
 
         <br/>
 
@@ -34,24 +45,25 @@
                 </p:column>
 
                 <p:column headerText="Operações">
-                    <p:commandButton value="Excluir"
-                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
-                                     action="#{bolaoBean.excluir()}">
-                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
-                    </p:commandButton>
-                    |
                     <p:commandButton value="Editar"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
                                      action="formulario.xhtml">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
-                    |
+
                     <p:commandButton value="Membros"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
-                                     action="formulario-membros.xhtml">
+                                     action="formulario-membros.xhtml"
+                                     ajax="false">
                         <f:param name="bolaoID" value="#{bolao.id}"/>
                     </p:commandButton>
-                    |
+
+                    <p:commandButton value="Excluir"
+                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
+                                     action="#{bolaoBean.excluir()}">
+                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+                    </p:commandButton>
+
                     <p:commandButton value="Sair se apenas participante"
                                      rendered="#{bolaoBean.isApenasParticipante(bolao)}"
                                      action="#{bolaoBean.sair()}">

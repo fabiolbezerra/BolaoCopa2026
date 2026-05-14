@@ -12,13 +12,12 @@ import javax.faces.bean.ViewScoped;
 import java.util.List;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class BolaoBean {
 
     private final BolaoRN BOLAO_RN = new BolaoRN();
 
     private Bolao bolao = new Bolao();
-    private Participante participante = new Participante();
 
     private List<Bolao> boloes;
     private List<Participante> participantes;
@@ -28,15 +27,6 @@ public class BolaoBean {
 
     @PostConstruct
     public void init() {
-        String bolaoID = UtilBean.obterValor("bolaoID");
-        try {
-            this.bolao = BOLAO_RN.obter(Integer.parseInt(bolaoID));
-            this.participantes = this.bolao.getParticipantes();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        participante.setBolao(bolao);
-
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         if (usuarioLogado != null && usuarioLogado.getPerfil().isAdministrador()) {
             boloes = BOLAO_RN.listarTodos();
@@ -50,15 +40,8 @@ public class BolaoBean {
     }
 
     public void setBolao(Bolao bolao) {
-        this.bolao = bolao;
-    }
-
-    public Participante getParticipante() {
-        return participante;
-    }
-
-    public void setParticipante(Participante participante) {
-        this.participante = participante;
+        this.bolao = BOLAO_RN.obter(bolao.getId());
+        this.participantes = this.bolao.getParticipantes();
     }
 
     public List<Bolao> getBoloes() {
@@ -75,29 +58,6 @@ public class BolaoBean {
 
     public void salvar() {
         //TODO: implementar a lógica para SALVAR o bolão
-    }
-
-    public void adicionarParticipante() {
-        if (participante == null
-                || participante.getBolao() == null
-                || participante.getBolao().getId() == null
-                || participante.getUsuario() == null
-                || participante.getUsuario().getId() == null) {
-            UtilBean.criarMensagemDeAviso("Dados incompletos", "Participante é uma combinação de bolão e palpiteiro");
-        } else {
-            if (BOLAO_RN.adicionarParticipante(bolao, participante)) {
-                UtilBean.criarMensagemDeInformacao("Um novo participante foi adicionado ao bolão");
-
-                //Atualizando bolão, participante e lista de participantes do bolão
-                bolao = BOLAO_RN.obter(bolao.getId());
-                participante = new Participante();
-                participante.setBolao(bolao);
-                participantes = bolao.getParticipantes();
-            } else {
-                UtilBean.criarMensagemDeAviso("Um usuário não pode ser duplicado na lista de membros");
-                UtilBean.criarMensagemDeErro("Problema no banco do dados ao tentar incluir o participante");
-            }
-        }
     }
 
     public boolean isApenasParticipante(Bolao bolao) {
