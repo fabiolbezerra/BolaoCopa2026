@@ -22,6 +22,7 @@ public class PartidaBean {
 
     @PostConstruct
     public void init() {
+        System.out.println("PartidaBean.init()");
         this.partidas = this.PARTIDA_RN.listarTodos();
     }
 
@@ -49,10 +50,10 @@ public class PartidaBean {
     public void salvar() {
         if (this.PARTIDA_RN.salvar(this.partida)) {
             UtilBean.criarMensagemDeInformacao("Partida salva");
+            partidas = PARTIDA_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar o raça");
         }
-
     }
 
 }
