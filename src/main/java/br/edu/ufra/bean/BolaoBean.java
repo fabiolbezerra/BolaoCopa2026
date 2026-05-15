@@ -49,7 +49,11 @@ public class BolaoBean {
     }
 
     public void salvar() {
-        //TODO: implementar a lógica para SALVAR o bolão
+        if (BOLAO_RN.salvar(bolao)) {
+            UtilBean.criarMensagemDeInformacao("Bolão salvo");
+        } else {
+            UtilBean.criarMensagemDeErro("Não foi possível salvar o bolão");
+        }
     }
 
     public void excluir() {

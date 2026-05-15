@@ -5,6 +5,7 @@ import br.edu.ufra.entidade.Bolao;
 import br.edu.ufra.entidade.Participante;
 import br.edu.ufra.entidade.Usuario;
 
+import java.util.Date;
 import java.util.List;
 
 public class BolaoRN {
@@ -70,6 +71,16 @@ public class BolaoRN {
             return false;
         } else {
             return DAO.excluir(bolao);
+        }
+    }
+    public boolean salvar(Bolao bolao){
+        if(bolao == null){
+            return false;
+        }else{
+            Date criacao = new Date();
+            Date dataCriacao;
+            dataCriacao = criacao;
+            return DAO.criar(bolao);
         }
     }
 
