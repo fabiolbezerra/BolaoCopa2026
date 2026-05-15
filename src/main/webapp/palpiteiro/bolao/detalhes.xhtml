@@ -16,13 +16,29 @@
 
         <h2>Detalhes</h2>
         <ul>
-           <li>Dono:</li>
-           <li>Criação:</li>
+            <li>Dono: #{bolaoBean.bolao.dono.nome} #{bolaoBean.bolao.dono.sobrenome}</li>
+            <li>Criação: <h:outputText value="#{bolaoBean.bolao.criacao}">
+                <f:convertDateTime pattern="dd/MM/yyyy" xmlns:f="http://java.sun.com/jsf/core"/>
+            </h:outputText></li>
         </ul>
 
         <h2>Membros</h2>
 
-        <br/>
+        <p:dataTable value="#{bolaoBean.participantes}" var="participante"
+                     sortOrder="descending">
+            <p:column headerText="Nome">
+                #{participante.usuario.nome} #{participante.usuario.sobrenome}
+            </p:column>
+            <p:column headerText="Campus">
+                #{participante.usuario.campus.nome}
+            </p:column>
+            <p:column headerText="Curso">
+                #{participante.usuario.curso.nome}
+            </p:column>
+            <p:column headerText="Pontuação">
+                #{participante.usuario.pontuacao}
+            </p:column>
+        </p:dataTable>
 
     </ui:define>
 </ui:composition>

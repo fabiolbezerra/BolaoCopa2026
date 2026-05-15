@@ -44,6 +44,10 @@ public class BolaoBean {
         this.participantes = this.bolao.getParticipantes();
     }
 
+    public List<Participante> getParticipantes() {
+        return participantes;
+    }
+
     public List<Bolao> getBoloes() {
         return boloes;
     }
