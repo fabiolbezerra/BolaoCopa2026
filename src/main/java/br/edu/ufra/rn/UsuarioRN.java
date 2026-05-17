@@ -92,4 +92,15 @@ public class UsuarioRN {
         UtilEmail.enviarEmail(email, "Validação do email", texto.toString());
         return CODIGO_GERADO;
     }
+    public void enviarEmailDeSaudacao(String email) {
+        StringBuilder saudacao = new StringBuilder();
+        saudacao
+                .append("Olá palpiteiro(a)!\n")
+                .append("Seja bem vindo(a) !\n.")
+                .append("Agora você já pode:\n")
+                .append(" - Criar palpites\n")
+                .append(" - Acompanhar rankings\n")
+                .append(" - Participar de bolões\n");
+        UtilEmail.enviarEmail(email, "Seja bem vindo(a)!", saudacao.toString());
+    }
 }
