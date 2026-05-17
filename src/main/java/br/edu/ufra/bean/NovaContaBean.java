@@ -77,7 +77,6 @@ public class NovaContaBean {
     }
 
     public void enviarEmail() {
-        //TODO: enviar e-mail com código
         codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
         UtilBean.criarMensagemDeInformacao(codigoGerado);
         panelEmail = false;
@@ -101,6 +100,13 @@ public class NovaContaBean {
             return ""; //TODO: Encaminhar para página de login
         } else {
             return null;
+        }
+    }
+    public boolean enviarSaudacao(String email){
+        if (usuario.getEmail() == null) {
+            return false;
+        }else {
+            return USUARIO_RN.enviarEmailDeSaudacao(email);
         }
     }
 }
