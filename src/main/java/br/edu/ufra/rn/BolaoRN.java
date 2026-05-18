@@ -65,6 +65,14 @@ public class BolaoRN {
         }
         return DAO.removerMembro(participanteParaSair);
     }
+    public boolean removerParticipante(Participante participante, Bolao bolao) {
+        if (participante == null || participante.getBolao() == null) {
+            return false;
+        }
+        if (! bolao.getParticipantes().contains(participante)) {
+            return false;
+        }return DAO.removerMembro(participante);
+    }
 
     public boolean excluir(Bolao bolao){
         if (bolao == null) {

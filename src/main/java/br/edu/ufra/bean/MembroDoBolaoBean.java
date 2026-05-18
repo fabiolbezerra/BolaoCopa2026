@@ -79,4 +79,13 @@ public class MembroDoBolaoBean {
             }
         }
     }
+    public void removerParticipante() {
+        if (participante == null) {
+            UtilBean.criarMensagemDeAviso("Palpiteiro não encontrado");
+        }if (participante.getBolao() == null || participante.getBolao() != bolao) {
+            UtilBean.criarMensagemDeErro("Palpiteiro não participa deste bolão");
+        }else{
+            BOLAO_RN.removerParticipante(participante,bolao);
+        }
+    }
 }

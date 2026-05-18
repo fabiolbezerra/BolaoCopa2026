@@ -43,7 +43,7 @@ public class PartidaBean {
             UtilBean.criarMensagemDeInformacao("Partida excluída");
             this.partidas = this.PARTIDA_RN.listarTodos();
         } else {
-            UtilBean.criarMensagemDeErro("Não foi possível excluir a raça");
+            UtilBean.criarMensagemDeErro("Não foi possível excluir a partida");
         }
     }
 
@@ -52,7 +52,7 @@ public class PartidaBean {
             UtilBean.criarMensagemDeInformacao("Partida salva");
             partidas = PARTIDA_RN.listarTodos();
         } else {
-            UtilBean.criarMensagemDeErro("Não foi possível salvar o raça");
+            UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
         }
     }
 
