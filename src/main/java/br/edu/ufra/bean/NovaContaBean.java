@@ -7,7 +7,7 @@ import br.edu.ufra.util.UtilBean;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import java.time.LocalDate;
+import java.time.Instant;
 
 @ManagedBean
 @ViewScoped
@@ -17,7 +17,7 @@ public class NovaContaBean {
     private String email;
     private String codigoInformado; //Código secreto
     private String codigoGerado; //Código secreto
-    private LocalDate horarioDoCodigo; //Horário de inicialização do código
+    private Instant horarioDoCodigo; //Horário de inicialização do código
 
     private boolean panelEmail = true;
     private boolean panelCodigo = false;
@@ -73,7 +73,8 @@ public class NovaContaBean {
     public boolean isCodigoValido() {
         return codigoGerado != null
                 && !codigoGerado.isEmpty()
-                && codigoGerado.equals(codigoInformado);
+                && codigoGerado.equals(codigoInformado)
+                && horarioDoCodigo.plusSeconds(241).isAfter(Instant.now());
     }
 
     public void enviarEmail() {
@@ -82,20 +83,28 @@ public class NovaContaBean {
         panelEmail = false;
         panelCodigo = true;
         panelFormulario = false;
-        //TODO: Inicializar data
+        horarioDoCodigo = Instant.now();
+
     }
 
     public void validarEmail() {
         if (!isCodigoValido()) {
-            //TODO: Código expirado?
-            //TODO: Criar código com 6 números
-            //TODO: Inicializar codigoInformado
+            UtilBean.criarMensagemDeErro("Erro ao validar email", "O código informado está incorreto ou expirou. Um novo código foi gerado");
+            horarioDoCodigo = Instant.now();
+            codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
+            this.codigoInformado = null;
+        } else {
+            panelEmail = false;
+            panelCodigo = false;
+            panelFormulario = true;
         }
     }
 
     public String criarConta() {
-        boolean sucesso = false;
+        boolean sucesso = USUARIO_RN.salvar(usuario);
         //TODO: tentar criar novo usuário
+
+
         if (sucesso) {
             return ""; //TODO: Encaminhar para página de login
         } else {
