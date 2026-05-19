@@ -1,17 +1,24 @@
 package br.edu.ufra.bean;
 
 import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.Instant;
 
 @ManagedBean
 @ViewScoped
-public class NovaContaBean {
+public class NovaContaBean implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 4108360191111001470L;
+
     private final static UsuarioRN USUARIO_RN = new UsuarioRN();
 
     private String email;
@@ -101,21 +108,21 @@ public class NovaContaBean {
     }
 
     public String criarConta() {
+        this.usuario.setEmail(this.email);
+        this.usuario.setPontuacao(0);
+        this.usuario.setPerfil(EnumPerfilUsuario.PALPITEIRO);
+
         boolean sucesso = USUARIO_RN.salvar(usuario);
-        //TODO: tentar criar novo usuário
-
-
         if (sucesso) {
-            return ""; //TODO: Encaminhar para página de login
+            enviarSaudacao(usuario.getEmail());
+            return "login.xhtml?faces-redirect=true";
         } else {
             return null;
         }
     }
-    public boolean enviarSaudacao(String email){
-        if (usuario.getEmail() == null) {
-            return false;
-        }else {
-            return USUARIO_RN.enviarEmailDeSaudacao(email);
+    public void enviarSaudacao(String email){
+        if (usuario.getEmail() != null) {
+            USUARIO_RN.enviarEmailDeSaudacao(email);
         }
     }
 }

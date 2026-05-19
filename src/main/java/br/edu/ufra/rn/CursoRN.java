@@ -2,6 +2,7 @@ package br.edu.ufra.rn;
 
 import br.edu.ufra.dao.CursoDAO;
 import br.edu.ufra.entidade.Curso;
+import br.edu.ufra.entidade.Curso;
 
 import java.util.List;
 
@@ -14,8 +15,10 @@ public class CursoRN {
         return DAO.obterTodos(Curso.class);
     }
 
-
-
+    public Curso obter(Integer id) {
+        return DAO.obter(Curso.class, id);
+    }
+    
 
 
 }

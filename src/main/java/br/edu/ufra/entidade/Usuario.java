@@ -1,6 +1,7 @@
 package br.edu.ufra.entidade;
 
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
+import br.edu.ufra.entidade.tipo.EnumTipoUsuario;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -35,7 +36,8 @@ public class Usuario {
     private EnumPerfilUsuario perfil;
 
     @Column(name = "tipo", nullable = false, length = 10)
-    private String tipo;
+    @Enumerated(EnumType.STRING)
+    private EnumTipoUsuario tipo;
 
     @Column(name = "pontuacao")
     private Integer pontuacao;
@@ -105,11 +107,11 @@ public class Usuario {
         this.perfil = perfil;
     }
 
-    public String getTipo() {
+    public EnumTipoUsuario getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(EnumTipoUsuario tipo) {
         this.tipo = tipo;
     }
 
