@@ -29,6 +29,15 @@
         <br/>
 
         <h:form>
+
+            <p:commandButton
+                    value="Criar Novo Bolão"
+                    action="#{bolaoBean.novo}"
+                    icon="pi pi-plus" />
+
+        </h:form>
+
+        <h:form>
             <p:growl showSummary="true" showDetail="true"/>
 
             <p:dataTable value="#{bolaoBean.boloes}" var="bolao">
@@ -66,13 +75,13 @@
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
 
-                    <p:commandButton value="Sair se apenas participante"
+                    <p:commandButton value="Sair"
                                      rendered="#{bolaoBean.isApenasParticipante(bolao)}"
                                      action="#{bolaoBean.sair()}"
                                      ajax="false">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
-                    |
+
                     <p:commandButton value="Detalhes"
                                      action="detalhes.xhtml">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
