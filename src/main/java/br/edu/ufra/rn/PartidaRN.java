@@ -1,12 +1,12 @@
 package br.edu.ufra.rn;
 
-import br.edu.ufra.dao.GenericDAO;
+import br.edu.ufra.dao.PartidaDAO;
 import br.edu.ufra.entidade.Partida;
-
+import java.util.Date;
 import java.util.List;
 
 public class PartidaRN {
-    private final GenericDAO<Partida> PARTIDA_DAO = new GenericDAO();
+    private final PartidaDAO PARTIDA_DAO = new PartidaDAO();
 
     public PartidaRN() {
     }
@@ -29,5 +29,13 @@ public class PartidaRN {
 
     public boolean excluir(Partida partida) {
         return partida == null ? false : this.PARTIDA_DAO.excluir(partida);
+    }
+    public List<Partida> listarProximasPartidas() {
+        Date hoje = new Date();
+        List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje);
+        if (partidas == null || partidas.size() <= 6) {
+            return partidas;
+        }
+        return partidas.subList(0, 6);
     }
 }
