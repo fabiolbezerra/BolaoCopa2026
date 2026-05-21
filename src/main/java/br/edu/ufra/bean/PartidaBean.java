@@ -38,6 +38,14 @@ public class PartidaBean {
         this.partida = partida;
     }
 
+    public void publicar() {
+        //TODO: Pra ti Paulo
+    }
+
+    public void processar() {
+        //TODO: Pra ti Fábio
+    }
+
     public void excluir() {
         if (this.PARTIDA_RN.excluir(this.partida)) {
             UtilBean.criarMensagemDeInformacao("Partida excluída");

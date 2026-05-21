@@ -29,7 +29,7 @@ public class LandpageBean {
         } else {
             dezPrimeiros = ranking;
         }
-        proximosJogos = PARTIDA_RN.listarProximasPartidas();
+        proximosJogos = PARTIDA_RN.obterProximasOitoPartidas();
     }
 
     public List<Usuario> getDezPrimeiros() {
