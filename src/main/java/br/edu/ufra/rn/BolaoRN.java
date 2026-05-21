@@ -55,7 +55,6 @@ public class BolaoRN {
                         participante.getUsuario()
                 )) {
 
-                    // Participante já existe
                     return false;
                 }
             }
