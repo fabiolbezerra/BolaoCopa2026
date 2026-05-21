@@ -166,14 +166,12 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             Bolao b = em.merge(bolao);
 
-            // Remove participantes do bolão
             em.createQuery(
                             "delete from Participante p where p.bolao = :bolao"
                     )
                     .setParameter("bolao", b)
                     .executeUpdate();
 
-            // Remove o bolão
             em.remove(b);
 
             transaction.commit();
