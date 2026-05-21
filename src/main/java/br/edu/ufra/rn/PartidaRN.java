@@ -49,7 +49,7 @@ public class PartidaRN {
         return null; //TODO Pra ti Paulo
     }
 
-    public List<Partida> obterPartidasAnteriores(Date data) {
+    public List<Partida> obterPartidasAnteriores() {
         return null; //TODO Pra ti Paulo
     }
 }

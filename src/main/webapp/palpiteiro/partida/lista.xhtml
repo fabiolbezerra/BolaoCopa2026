@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        Partidas da Copa
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Calendário de Partidas</h1>
+
+        <h:form>
+            <p:tabView>
+                <p:tab title="Próximas">
+                    <p:dataTable value="#{partidaBean.proximasPartidas}" var="p">
+                        <p:column headerText="Fase">
+                            <h:outputText value="#{p.fase.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="Local" sortBy="#{p.local}">
+                            <h:outputText value="#{p.local}"/>
+                        </p:column>
+
+                        <p:column headerText="Data e Hora">
+                            <h:outputText value="#{p.inicioDaPartida}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Seleção A">
+                            <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla})"/>
+                        </p:column>
+
+                        <p:column headerText="Placar">
+                            <div align="center">
+                                <h:outputText value="#{p.golsA}"/>
+                                X
+                                <h:outputText value="#{p.golsB}"/>
+                            </div>
+                        </p:column>
+
+                        <p:column headerText="Seleção B">
+                            <h:outputText value="#{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+
+                <p:tab title="Anteriores">
+
+                </p:tab>
+            </p:tabView>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -12,9 +12,12 @@ import java.util.List;
 @ManagedBean
 @RequestScoped
 public class PartidaBean {
-    private List<Partida> partidas;
-    private Partida partida = new Partida();
     private final PartidaRN PARTIDA_RN = new PartidaRN();
+
+    private List<Partida> proximasPartidas;
+    private List<Partida> partidasAnteriores;
+
+    private Partida partida = new Partida();
 
     public PartidaBean() {
         System.out.println("Criando PartidaBean");
@@ -23,11 +26,12 @@ public class PartidaBean {
     @PostConstruct
     public void init() {
         System.out.println("PartidaBean.init()");
-        this.partidas = this.PARTIDA_RN.listarTodos();
+        this.proximasPartidas = this.PARTIDA_RN.obterProximasPartidas();
+        this.proximasPartidas = this.PARTIDA_RN.obterPartidasAnteriores();
     }
 
-    public List<Partida> getPartidas() {
-        return this.partidas;
+    public List<Partida> getProximasPartidas() {
+        return this.proximasPartidas;
     }
 
     public Partida getPartida() {
@@ -49,7 +53,7 @@ public class PartidaBean {
     public void excluir() {
         if (this.PARTIDA_RN.excluir(this.partida)) {
             UtilBean.criarMensagemDeInformacao("Partida excluída");
-            this.partidas = this.PARTIDA_RN.listarTodos();
+            this.proximasPartidas = this.PARTIDA_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível excluir a partida");
         }
@@ -58,7 +62,7 @@ public class PartidaBean {
     public void salvar() {
         if (this.PARTIDA_RN.salvar(this.partida)) {
             UtilBean.criarMensagemDeInformacao("Partida salva");
-            partidas = PARTIDA_RN.listarTodos();
+            proximasPartidas = PARTIDA_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
         }
