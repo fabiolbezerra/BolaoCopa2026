@@ -5,8 +5,8 @@ import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.rn.UsuarioRN;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.util.List;
 
@@ -24,13 +24,13 @@ public class LandpageBean {
     @PostConstruct
     public void init() {
         List<Usuario> ranking = USUARIO_RN.obterOrdenadoPorPontuacao();
-        if (ranking != null && ranking.size() > 10){
+        if (ranking != null && ranking.size() > 10) {
             dezPrimeiros = ranking.subList(0, 10);
         } else {
             dezPrimeiros = ranking;
         }
         proximosJogos = PARTIDA_RN.listarProximasPartidas();
-        }
+    }
 
     public List<Usuario> getDezPrimeiros() {
         return dezPrimeiros;

@@ -33,9 +33,9 @@ public class PartidaRN {
     public List<Partida> listarProximasPartidas() {
         Date hoje = new Date();
         List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje);
-        if (partidas == null || partidas.size() <= 6) {
+        if (partidas == null || partidas.size() <= 8) {
             return partidas;
         }
-        return partidas.subList(0, 6);
+        return partidas.subList(0, 8);
     }
 }

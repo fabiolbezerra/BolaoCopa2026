@@ -96,7 +96,7 @@ public class NovaContaBean implements Serializable {
 
     public void validarEmail() {
         if (!isCodigoValido()) {
-            UtilBean.criarMensagemDeErro("Erro ao validar email", "O código informado está incorreto ou expirou. Um novo código foi gerado");
+            UtilBean.criarMensagemDeErro("Erro ao validar email", "O código informado está incorreto ou expirou. Um novo código foi gerado.");
             horarioDoCodigo = Instant.now();
             codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
             this.codigoInformado = null;
@@ -110,6 +110,7 @@ public class NovaContaBean implements Serializable {
     public String criarConta() {
         this.usuario.setEmail(this.email);
         this.usuario.setPontuacao(0);
+        this.usuario.setPosicao(0);
         this.usuario.setPerfil(EnumPerfilUsuario.PALPITEIRO);
 
         boolean sucesso = USUARIO_RN.salvar(usuario);
