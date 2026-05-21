@@ -47,7 +47,14 @@ public class PartidaBean {
     }
 
     public void processar() {
-        //TODO: Pra ti Fábio
+        if (PARTIDA_RN.processar(partida)) {
+            UtilBean.criarMensagemDeInformacao("Pontuação dos palpiteiros atualizada!");
+            UtilBean.criarMensagemDeInformacao("Posição dos palpiteiros atualizada!");
+        } else {
+            UtilBean.criarMensagemDeErro("Não foi possível atualizar pontuação e posição dos palpiteiros.");
+            UtilBean.criarMensagemDeAviso("Uma partida deve corretamente atualizada, antes de ser processada.");
+            UtilBean.criarMensagemDeAviso("Verifique os placares da partida.");
+        }
     }
 
     public void excluir() {

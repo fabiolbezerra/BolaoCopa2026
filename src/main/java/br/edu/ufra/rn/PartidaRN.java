@@ -1,6 +1,7 @@
 package br.edu.ufra.rn;
 
 import br.edu.ufra.dao.PartidaDAO;
+import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 
 import java.util.Date;
@@ -36,6 +37,20 @@ public class PartidaRN {
         return partida == null ? false : this.PARTIDA_DAO.excluir(partida);
     }
 
+    public boolean processar(Partida partida) {
+        if (partida == null
+                || partida.getGolsA() == null
+                || partida.getGolsB() == null) {
+            return false;
+        }
+        final PalpiteRN PALPITE_RN = new PalpiteRN();
+        List<Palpite> palpites = PALPITE_RN.obter(partida);
+        for (Palpite palpite : palpites) {
+            //TODO: implementar processamento
+        }
+        return false;
+    }
+
     public List<Partida> obterProximasOitoPartidas() {
         Date hoje = new Date();
         List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje);
@@ -52,4 +67,5 @@ public class PartidaRN {
     public List<Partida> obterPartidasAnteriores() {
         return null; //TODO Pra ti Paulo
     }
+
 }
