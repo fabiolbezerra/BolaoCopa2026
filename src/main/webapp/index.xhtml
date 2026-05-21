@@ -6,29 +6,64 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+
     <ui:define name="title">
         Bolão da Copa
     </ui:define>
 
     <ui:define name="top">
-        <h:outputText value="Bolão da Copa do Mundo 2026" style="font-size: x-large"/>
+        <h:outputText value="Bolão da Copa do Mundo 2026"
+                      style="font-size: x-large; font-weight: bold;"/>
+
         <p:outputPanel style="float: right;">
             <p:link value="Cadastrar" outcome="formulario-nova-conta.xhtml"/>
-
             <h:outputText value=" | "/>
-
             <p:link value="Entrar" outcome="login.xhtml"/>
         </p:outputPanel>
         <br/>
-        Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026
+        <h:outputText value="Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026"
+                      style="font-style: italic; color: #555;"/>
     </ui:define>
 
+    <!-- ======================= CONTEÚDO PRINCIPAL ======================= -->
     <ui:define name="content">
+
         <h1>Rankings</h1>
 
-        <br/>
+        <p:panel header="Top 10 Palpiteiros" style="margin-bottom: 30px;">
+            <p:dataTable value="#{landpageBean.dezPrimeiros}"
+                         var="usuario"
+                         emptyMessage="Ainda não há rankings disponíveis."
+                         rows="10"
+                         paginator="false">
+
+                <p:column headerText="Posição" style="width: 80px; text-align: center;">
+                    <h:outputText value="#{usuario.posicao}"/>
+                </p:column>
+
+                <p:column headerText="Participante">
+                    <h:outputText value="#{usuario.nome}"/>
+                </p:column>
+
+                <p:column headerText="Pontos" style="width: 100px; text-align: center; font-weight: bold;">
+                    <h:outputText value="#{usuario.pontos}"/>
+                </p:column>
+
+                <p:column headerText="Campus / Curso">
+                    <h:outputText value="#{usuario.campus.nome} / #{usuario.curso.nome}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
 
         <h1>Próximas Partidas</h1>
+
+        <p:panel header="Próximos Jogos">
+            <p:outputLabel value="próximas partidas"
+                           style="color: #888; font-style: italic;"/>
+        </p:panel>
+
     </ui:define>
+
 </ui:composition>
