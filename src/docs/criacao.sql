@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`usuario` (
   `perfil` VARCHAR(15) NOT NULL,
   `tipo` VARCHAR(10) NOT NULL,
   `pontuacao` INT NULL DEFAULT 0,
+  `posicao` INT NULL DEFAULT 0,
   `curso` INT NULL,
   `campus` INT NOT NULL,
   PRIMARY KEY (`id`),

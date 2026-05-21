@@ -216,26 +216,26 @@ VALUES -- Campus Belém (ID: 1)
 -- ========================
 -- USUÁRIO ADMIN - Senha: a
 -- ========================
-insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, curso, campus)
+insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, posicao, curso, campus)
 VALUES (1, 'Henrique', 'Costa', 'antoniocavallero935@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 4, 1),
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
        (2, 'Gabriel', 'Chaves', 'gabrielchavesbiel@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 4, 1),
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
        (3, 'Paulo', 'Glória Neto', 'pauloglorianeto@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 4, 1),
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
        (4, 'Murillo', 'Espírito Santo', 'murillofes@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 4, 1);
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1);
 
 -- =============================
 -- USUÁRIO PALPITEIRO - Senha: a
 -- =============================
-insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, curso, campus)
+insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, posicao, curso, campus)
 VALUES (5, 'Fábio', 'Bezerra', 'fabio.bezerra@ufra.edu.br',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, null, 1),
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, 0, null, 1),
        (6, 'Fulano', 'de Tal', 'fulano@email.com.br',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, null, 1),
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, 0, null, 1),
        (7, 'Licinius', 'Dimitri', 'licinius@ufra.edu.br',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, null, 1);
+        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'PALPITEIRO', 'DOCENTE', 0, 0, null, 1);
 
 
 -- Bolões

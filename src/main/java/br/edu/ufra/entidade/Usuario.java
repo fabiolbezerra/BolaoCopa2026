@@ -42,6 +42,9 @@ public class Usuario {
     @Column(name = "pontuacao")
     private Integer pontuacao;
 
+    @Column(name = "posicao")
+    private Integer posicao;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "curso")
     private Curso curso;
@@ -121,6 +124,14 @@ public class Usuario {
 
     public void setPontuacao(Integer pontuacao) {
         this.pontuacao = pontuacao;
+    }
+
+    public Integer getPosicao() {
+        return posicao;
+    }
+
+    public void setPosicao(Integer posicao) {
+        this.posicao = posicao;
     }
 
     public Curso getCurso() {
