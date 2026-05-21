@@ -1,5 +1,7 @@
 package br.edu.ufra.entidade;
 
+import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,7 +37,8 @@ public class Partida {
     private Integer golsB;
 
     @Column(name = "tipoDeVitoria", length = 20)
-    private String tipoDeVitoria;
+    @Enumerated(EnumType.STRING)
+    private EnumTipoVitoria tipoDeVitoria;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fase", nullable = false)
@@ -104,11 +107,11 @@ public class Partida {
         this.golsB = golsB;
     }
 
-    public String getTipoDeVitoria() {
+    public EnumTipoVitoria getTipoDeVitoria() {
         return tipoDeVitoria;
     }
 
-    public void setTipoDeVitoria(String tipoDeVitoria) {
+    public void setTipoDeVitoria(EnumTipoVitoria tipoDeVitoria) {
         this.tipoDeVitoria = tipoDeVitoria;
     }
 

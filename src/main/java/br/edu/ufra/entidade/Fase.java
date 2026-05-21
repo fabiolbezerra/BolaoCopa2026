@@ -21,7 +21,7 @@ public class Fase {
     private String nome;
 
     @Column(name = "eliminatoria", nullable = false)
-    private Byte eliminatoria;
+    private boolean eliminatoria;
 
     @Column(name = "inicio", nullable = false)
     @Temporal(TemporalType.DATE)
@@ -50,11 +50,11 @@ public class Fase {
         this.nome = nome;
     }
 
-    public Byte getEliminatoria() {
+    public boolean isEliminatoria() {
         return eliminatoria;
     }
 
-    public void setEliminatoria(Byte eliminatoria) {
+    public void setEliminatoria(boolean eliminatoria) {
         this.eliminatoria = eliminatoria;
     }
 

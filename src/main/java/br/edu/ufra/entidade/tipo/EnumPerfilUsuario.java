@@ -22,7 +22,9 @@ public enum EnumPerfilUsuario {
         return descricao;
     }
 
-    public String getPagina() { return pagina; }
+    public String getPagina() {
+        return pagina;
+    }
 
     public boolean isPalpiteiro() {
         return this == PALPITEIRO;

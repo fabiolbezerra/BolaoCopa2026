@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`selecao` (
   `simbolo` VARCHAR(45) NULL,
   `grupo` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_selecao_grupo_idx` (`grupo` ASC) VISIBLE,
+  INDEX `fk_selecao_grupo_idx` (`grupo` ASC),
   CONSTRAINT `fk_selecao_grupo`
     FOREIGN KEY (`grupo`)
     REFERENCES `bolao_bd`.`grupo` (`id`)
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`curso` (
   `sigla` VARCHAR(10) NOT NULL,
   `campus` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_curso_campus1_idx` (`campus` ASC) VISIBLE,
+  INDEX `fk_curso_campus1_idx` (`campus` ASC),
   CONSTRAINT `fk_curso_campus1`
     FOREIGN KEY (`campus`)
     REFERENCES `bolao_bd`.`campus` (`id`)
@@ -98,9 +98,9 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`usuario` (
   `curso` INT NULL,
   `campus` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_usuario_curso1_idx` (`curso` ASC) VISIBLE,
-  INDEX `fk_usuario_campus1_idx` (`campus` ASC) VISIBLE,
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
+  INDEX `fk_usuario_curso1_idx` (`curso` ASC),
+  INDEX `fk_usuario_campus1_idx` (`campus` ASC),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC),
   CONSTRAINT `fk_usuario_curso1`
     FOREIGN KEY (`curso`)
     REFERENCES `bolao_bd`.`curso` (`id`)
@@ -125,7 +125,7 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`bolao` (
   `criacao` DATETIME NOT NULL,
   `dono` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_bolao_usuario1_idx` (`dono` ASC) VISIBLE,
+  INDEX `fk_bolao_usuario1_idx` (`dono` ASC),
   CONSTRAINT `fk_bolao_usuario1`
     FOREIGN KEY (`dono`)
     REFERENCES `bolao_bd`.`usuario` (`id`)
@@ -143,8 +143,8 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`participante` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `bolao` INT NOT NULL,
   `usuario` INT NOT NULL,
-  INDEX `fk_bolao_has_usuario_usuario1_idx` (`usuario` ASC) VISIBLE,
-  INDEX `fk_bolao_has_usuario_bolao1_idx` (`bolao` ASC) VISIBLE,
+  INDEX `fk_bolao_has_usuario_usuario1_idx` (`usuario` ASC),
+  INDEX `fk_bolao_has_usuario_bolao1_idx` (`bolao` ASC),
   PRIMARY KEY (`id`),
   CONSTRAINT `fk_bolao_has_usuario_bolao1`
     FOREIGN KEY (`bolao`)
@@ -186,16 +186,16 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`partida` (
   `local` VARCHAR(45) NOT NULL,
   `golsA` INT NULL,
   `golsB` INT NULL,
-  `tipoDeVitoria` VARCHAR(20) NULL,
+  `tipoDeVitoria` VARCHAR(20) NULL DEFAULT 'TEMPO_NORMAL',
   `fase` INT NOT NULL,
   `selecaoA` INT NOT NULL,
   `selecaoB` INT NOT NULL,
   `vencedor` INT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_partida_fase1_idx` (`fase` ASC) VISIBLE,
-  INDEX `fk_partida_selecao1_idx` (`selecaoA` ASC) VISIBLE,
-  INDEX `fk_partida_selecao2_idx` (`selecaoB` ASC) VISIBLE,
-  INDEX `fk_partida_selecao3_idx` (`vencedor` ASC) VISIBLE,
+  INDEX `fk_partida_fase1_idx` (`fase` ASC),
+  INDEX `fk_partida_selecao1_idx` (`selecaoA` ASC),
+  INDEX `fk_partida_selecao2_idx` (`selecaoB` ASC),
+  INDEX `fk_partida_selecao3_idx` (`vencedor` ASC),
   CONSTRAINT `fk_partida_fase1`
     FOREIGN KEY (`fase`)
     REFERENCES `bolao_bd`.`fase` (`id`)
@@ -235,8 +235,8 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`palpite` (
   `usuario` INT NOT NULL,
   `partida` INT NOT NULL,
   PRIMARY KEY (`id`),
-  INDEX `fk_palpite_usuario1_idx` (`usuario` ASC) VISIBLE,
-  INDEX `fk_palpite_partida1_idx` (`partida` ASC) VISIBLE,
+  INDEX `fk_palpite_usuario1_idx` (`usuario` ASC),
+  INDEX `fk_palpite_partida1_idx` (`partida` ASC),
   CONSTRAINT `fk_palpite_usuario1`
     FOREIGN KEY (`usuario`)
     REFERENCES `bolao_bd`.`usuario` (`id`)
