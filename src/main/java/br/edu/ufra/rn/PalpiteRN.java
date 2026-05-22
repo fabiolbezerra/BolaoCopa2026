@@ -9,6 +9,14 @@ import java.util.List;
 public class PalpiteRN {
     private final PalpiteDAO PALPITE_DAO = new PalpiteDAO();
 
+    public boolean salvar(List<Palpite> palpites) {
+        if (palpites == null
+                || palpites.isEmpty()) {
+            return false;
+        }
+        return PALPITE_DAO.salvar(palpites);
+    }
+
     public List<Palpite> obter(Partida partida) {
         if (partida == null || partida.getId() == null) {
             return null;

@@ -1,5 +1,7 @@
 package br.edu.ufra.entidade;
 
+import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
+
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.Date;
@@ -29,7 +31,8 @@ public class Palpite {
     private Integer golsB;
 
     @Column(name = "tipoDeVitoria", nullable = false, length = 20)
-    private String tipoDeVitoria;
+    @Enumerated(EnumType.STRING)
+    private EnumTipoVitoria tipoDeVitoria;
 
     @Column(name = "pontuacao")
     private Integer pontuacao;
@@ -82,11 +85,11 @@ public class Palpite {
         this.golsB = golsB;
     }
 
-    public String getTipoDeVitoria() {
+    public EnumTipoVitoria getTipoDeVitoria() {
         return tipoDeVitoria;
     }
 
-    public void setTipoDeVitoria(String tipoDeVitoria) {
+    public void setTipoDeVitoria(EnumTipoVitoria tipoDeVitoria) {
         this.tipoDeVitoria = tipoDeVitoria;
     }
 
