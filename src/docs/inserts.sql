@@ -23,50 +23,50 @@ VALUES (1, 'Grupo A'),
 INSERT INTO selecao (id, nome, sigla, simbolo, grupo)
 VALUES -- Grupo A (ID: 1)
        (1, 'México', 'MEX', 'mexico.png', 1),
-       (2, 'África do Sul', 'RSA', 'africa-do-sul.png', 1),
-       (3, 'Coreia do Sul', 'KOR', 'coreia-do-sul.png', 1),
-       (4, 'República Tcheca', 'CZE', 'republica-tcheca.png', 1),
+       (2, 'África do Sul', 'AFS', 'africa-do-sul.png', 1),
+       (3, 'Coreia do Sul', 'COR', 'coreia-do-sul.png', 1),
+       (4, 'República Tcheca', 'RCH', 'republica-tcheca.png', 1),
 
        -- Grupo B (ID: 2)
        (5, 'Canadá', 'CAN', 'canada.png', 2),
        (6, 'Suíça', 'SUI', 'suica.png', 2),
-       (7, 'Catar', 'QAT', 'catar.png', 2),
+       (7, 'Catar', 'CAT', 'catar.png', 2),
        (8, 'Bósnia e Herzegovina', 'BIH', 'bosnia-e-herzegovina.png', 2),
 
        -- Grupo C (ID: 3)
        (9, 'Brasil', 'BRA', 'brasil.png', 3),
        (10, 'Marrocos', 'MAR', 'marrocos.png', 3),
-       (11, 'Escócia', 'SCO', 'escocia.png', 3),
+       (11, 'Escócia', 'ESC', 'escocia.png', 3),
        (12, 'Haiti', 'HAI', 'haiti.png', 3),
 
        -- Grupo D (ID: 4)
-       (13, 'Estados Unidos', 'USA', 'estados-unidos.png', 4),
+       (13, 'Estados Unidos', 'EUA', 'estados-unidos.png', 4),
        (14, 'Paraguai', 'PAR', 'paraguai.png', 4),
        (15, 'Austrália', 'AUS', 'australia.png', 4),
        (16, 'Turquia', 'TUR', 'turquia.png', 4),
 
        -- Grupo E (ID: 5)
-       (17, 'Alemanha', 'GER', 'alemanha.png', 5),
-       (18, 'Equador', 'ECU', 'equador.png', 5),
+       (17, 'Alemanha', 'ALE', 'alemanha.png', 5),
+       (18, 'Equador', 'EQU', 'equador.png', 5),
        (19, 'Costa do Marfim', 'CIV', 'costa-do-marfim.png', 5),
-       (20, 'Curaçao', 'CUW', 'curacao.png', 5),
+       (20, 'Curaçao', 'CUR', 'curacao.png', 5),
 
        -- Grupo F (ID: 6)
-       (21, 'Países Baixos', 'NED', 'paises-baixos.png', 6),
-       (22, 'Japão', 'JPN', 'japao.png', 6),
+       (21, 'Países Baixos', 'NLD', 'paises-baixos.png', 6),
+       (22, 'Japão', 'JAP', 'japao.png', 6),
        (23, 'Tunísia', 'TUN', 'tunisia.png', 6),
-       (24, 'Suécia', 'SWE', 'suecia.png', 6),
+       (24, 'Suécia', 'SUE', 'suecia.png', 6),
 
        -- Grupo G (ID: 7)
        (25, 'Bélgica', 'BEL', 'belgica.png', 7),
-       (26, 'Irã', 'IRN', 'ira.png', 7),
-       (27, 'Egito', 'EGY', 'egito.png', 7),
+       (26, 'Irã', 'IRA', 'ira.png', 7),
+       (27, 'Egito', 'EGI', 'egito.png', 7),
        (28, 'Nova Zelândia', 'NZL', 'nova-zelandia.png', 7),
 
        -- Grupo H (ID: 8)
        (29, 'Espanha', 'ESP', 'espanha.png', 8),
        (30, 'Uruguai', 'URU', 'uruguai.png', 8),
-       (31, 'Arábia Saudita', 'KSA', 'arabia-saudita.png', 8),
+       (31, 'Arábia Saudita', 'ARA', 'arabia-saudita.png', 8),
        (32, 'Cabo Verde', 'CPV', 'cabo-verde.png', 8),
 
        -- Grupo I (ID: 9)
@@ -85,13 +85,13 @@ VALUES -- Grupo A (ID: 1)
        (41, 'Portugal', 'POR', 'portugal.png', 11),
        (42, 'Colômbia', 'COL', 'colombia.png', 11),
        (43, 'Uzbequistão', 'UZB', 'uzbequistao.png', 11),
-       (44, 'República Democrática do Congo', 'COD', 'republica-democratica-do-congo.png', 11),
+       (44, 'República Democrática do Congo', 'RDC', 'republica-democratica-do-congo.png', 11),
 
        -- Grupo L (ID: 12)
-       (45, 'Inglaterra', 'ENG', 'inglaterra.png', 12),
+       (45, 'Inglaterra', 'ING', 'inglaterra.png', 12),
        (46, 'Croácia', 'CRO', 'croacia.png', 12),
        (47, 'Panamá', 'PAN', 'panama.png', 12),
-       (48, 'Gana', 'GHA', 'gana.png', 12);
+       (48, 'Gana', 'GAN', 'gana.png', 12);
 -- =========================
 -- FASES
 -- =========================
@@ -108,28 +108,28 @@ VALUES (1, 'Fase de Grupos', 0, '2026-06-08', '2026-06-30'),
 INSERT INTO partida
 (id, inicioDaPartida, atualizacaoDoResultado, local, golsA, golsB, tipoDeVitoria, fase, selecaoA, selecaoB, vencedor)
 VALUES -- Rodada 1 e partidas inaugurais baseadas no mapeamento oficial e de estádios
-       (1, '2026-06-11 16:00:00', NULL, 'Mexico City', NULL, NULL, NULL, 1, 1, 2, NULL),
+       (1, '2026-06-11 16:00:00', NULL, 'Cidade do México', NULL, NULL, NULL, 1, 1, 2, NULL),
        (2, '2026-06-11 16:00:00', NULL, 'Guadalajara', NULL, NULL, NULL, 1, 3, 4, NULL),
        (3, '2026-06-12 16:00:00', NULL, 'Toronto', NULL, NULL, NULL, 1, 5, 8, NULL),
        (4, '2026-06-12 16:00:00', NULL, 'Los Angeles', NULL, NULL, NULL, 1, 13, 14, NULL),
-       (5, '2026-06-13 18:00:00', NULL, 'New York/New Jersey', NULL, NULL, NULL, 1, 9, 10, NULL),
-       (6, '2026-06-15 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 29, 32, NULL),
-       (7, '2026-06-15 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 25, 27, NULL),
-       (8, '2026-06-15 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 31, 30, NULL),
-       (9, '2026-06-15 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 26, 28, NULL),
-       (10, '2026-06-16 15:00:00', NULL, 'New York/New Jersey', NULL, NULL, NULL, 1, 33, 34, NULL),
-       (11, '2026-06-16 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 36, 35, NULL),
+       (5, '2026-06-13 18:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 9, 10, NULL),
+       (6, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 29, 32, NULL),
+       (7, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 25, 27, NULL),
+       (8, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 31, 30, NULL),
+       (9, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 26, 28, NULL),
+       (10, '2026-06-16 15:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 33, 34, NULL),
+       (11, '2026-06-16 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 36, 35, NULL),
 
        -- Rodadas intermediárias exigindo processamento intenso no agendamento e fusos
        (12, '2026-06-18 12:00:00', NULL, 'Atlanta', NULL, NULL, NULL, 1, 4, 2, NULL),
        (13, '2026-06-18 15:00:00', NULL, 'Los Angeles', NULL, NULL, NULL, 1, 6, 8, NULL),
        (14, '2026-06-18 18:00:00', NULL, 'Vancouver', NULL, NULL, NULL, 1, 5, 7, NULL),
        (15, '2026-06-18 21:00:00', NULL, 'Guadalajara', NULL, NULL, NULL, 1, 1, 3, NULL),
-       (16, '2026-06-19 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 9, 12, NULL),
-       (17, '2026-06-19 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 11, 10, NULL),
-       (18, '2026-06-19 16:00:00', NULL, 'TBD', NULL, NULL, NULL, 1, 16, 14, NULL),
-       (19, '2026-06-22 20:00:00', NULL, 'New York/New Jersey', NULL, NULL, NULL, 1, 35, 34, NULL),
-       (20, '2026-06-23 16:00:00', NULL, 'San Francisco Bay Area', NULL, NULL, NULL, 1, 41, 43, NULL),
+       (16, '2026-06-19 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 9, 12, NULL),
+       (17, '2026-06-19 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 11, 10, NULL),
+       (18, '2026-06-19 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 16, 14, NULL),
+       (19, '2026-06-22 20:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 35, 34, NULL),
+       (20, '2026-06-23 16:00:00', NULL, 'Área da Baía de São Francisco', NULL, NULL, NULL, 1, 41, 43, NULL),
        (21, '2026-06-23 16:00:00', NULL, 'Houston', NULL, NULL, NULL, 1, 45, 48, NULL),
        (22, '2026-06-23 16:00:00', NULL, 'Boston', NULL, NULL, NULL, 1, 47, 46, NULL),
 
@@ -138,11 +138,11 @@ VALUES -- Rodada 1 e partidas inaugurais baseadas no mapeamento oficial e de est
        (24, '2026-06-24 15:00:00', NULL, 'Seattle', NULL, NULL, NULL, 1, 8, 7, NULL),
        (25, '2026-06-24 18:00:00', NULL, 'Miami', NULL, NULL, NULL, 1, 11, 9, NULL),
        (26, '2026-06-24 18:00:00', NULL, 'Atlanta', NULL, NULL, NULL, 1, 10, 12, NULL),
-       (27, '2026-06-24 21:00:00', NULL, 'Mexico City', NULL, NULL, NULL, 1, 4, 1, NULL),
+       (27, '2026-06-24 21:00:00', NULL, 'Cidade do México', NULL, NULL, NULL, 1, 4, 1, NULL),
        (28, '2026-06-24 21:00:00', NULL, 'Monterrey', NULL, NULL, NULL, 1, 2, 3, NULL),
        (29, '2026-06-24 16:00:00', NULL, 'Toronto', NULL, NULL, NULL, 1, 42, 44, NULL),
-       (30, '2026-06-25 16:00:00', NULL, 'New York/New Jersey', NULL, NULL, NULL, 1, 18, 17, NULL),
-       (31, '2026-06-27 17:00:00', NULL, 'New York/New Jersey', NULL, NULL, NULL, 1, 47, 45, NULL);
+       (30, '2026-06-25 16:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 18, 17, NULL),
+       (31, '2026-06-27 17:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 47, 45, NULL);
 
 -- =========================
 -- CAMPUS UFRA (simplificado)
