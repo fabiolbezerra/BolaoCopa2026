@@ -30,6 +30,10 @@ public class Partida {
     @Column(name = "local", nullable = false, length = 45)
     private String local;
 
+    @Column(name = "publicada", nullable = false)
+    private boolean publicada;
+
+
     @Column(name = "golsA")
     private Integer golsA;
 
@@ -154,6 +158,10 @@ public class Partida {
     public void setPalpites(List<Palpite> palpites) {
         this.palpites = palpites;
     }
+
+    public boolean isPublicada() { return publicada; }
+
+    public void setPublicada(boolean publicada) { this.publicada = publicada; }
 
     @Override
     public final boolean equals(Object o) {

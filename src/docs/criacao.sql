@@ -184,6 +184,7 @@ CREATE TABLE IF NOT EXISTS `bolao_bd`.`partida` (
   `inicioDaPartida` DATETIME NOT NULL,
   `atualizacaoDoResultado` DATETIME NULL,
   `local` VARCHAR(45) NOT NULL,
+  `publicada` TINYINT NOT NULL,
   `golsA` INT NULL,
   `golsB` INT NULL,
   `tipoDeVitoria` VARCHAR(20) NULL DEFAULT 'TEMPO_NORMAL',

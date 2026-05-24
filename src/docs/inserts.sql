@@ -106,43 +106,43 @@ VALUES (1, 'Fase de Grupos', 0, '2026-06-08', '2026-06-30'),
 -- PARTIDAS (FASE DE GRUPOS - EXEMPLOS)
 -- =========================
 INSERT INTO partida
-(id, inicioDaPartida, atualizacaoDoResultado, local, golsA, golsB, tipoDeVitoria, fase, selecaoA, selecaoB, vencedor)
+(id, inicioDaPartida, atualizacaoDoResultado, local, publicada, golsA, golsB, tipoDeVitoria, fase, selecaoA, selecaoB, vencedor)
 VALUES -- Rodada 1 e partidas inaugurais baseadas no mapeamento oficial e de estádios
-       (1, '2026-06-11 16:00:00', NULL, 'Cidade do México', NULL, NULL, NULL, 1, 1, 2, NULL),
-       (2, '2026-06-11 16:00:00', NULL, 'Guadalajara', NULL, NULL, NULL, 1, 3, 4, NULL),
-       (3, '2026-06-12 16:00:00', NULL, 'Toronto', NULL, NULL, NULL, 1, 5, 8, NULL),
-       (4, '2026-06-12 16:00:00', NULL, 'Los Angeles', NULL, NULL, NULL, 1, 13, 14, NULL),
-       (5, '2026-06-13 18:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 9, 10, NULL),
-       (6, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 29, 32, NULL),
-       (7, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 25, 27, NULL),
-       (8, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 31, 30, NULL),
-       (9, '2026-06-15 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 26, 28, NULL),
-       (10, '2026-06-16 15:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 33, 34, NULL),
-       (11, '2026-06-16 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 36, 35, NULL),
+       (1, '2026-06-11 16:00:00', NULL, 'Cidade do México', FALSE, NULL, NULL, NULL, 1, 1, 2, NULL),
+       (2, '2026-06-11 16:00:00', NULL, 'Guadalajara', FALSE,NULL, NULL, NULL, 1, 3, 4, NULL),
+       (3, '2026-06-12 16:00:00', NULL, 'Toronto',FALSE, NULL, NULL, NULL, 1, 5, 8, NULL),
+       (4, '2026-06-12 16:00:00', NULL, 'Los Angeles',FALSE, NULL, NULL, NULL, 1, 13, 14, NULL),
+       (5, '2026-06-13 18:00:00', NULL, 'Nova York/Nova Jersey', FALSE, NULL, NULL, NULL, 1, 9, 10, NULL),
+       (6, '2026-06-15 16:00:00', NULL, 'A definir',FALSE, NULL, NULL, NULL, 1, 29, 32, NULL),
+       (7, '2026-06-15 16:00:00', NULL, 'A definir',FALSE, NULL, NULL, NULL, 1, 25, 27, NULL),
+       (8, '2026-06-15 16:00:00', NULL, 'A definir',FALSE, NULL, NULL, NULL, 1, 31, 30, NULL),
+       (9, '2026-06-15 16:00:00', NULL, 'A definir', FALSE,NULL, NULL, NULL, 1, 26, 28, NULL),
+       (10, '2026-06-16 15:00:00', NULL, 'Nova York/Nova Jersey', FALSE, NULL, NULL, NULL, 1, 33, 34, NULL),
+       (11, '2026-06-16 16:00:00', NULL, 'A definir', FALSE,NULL, NULL, NULL, 1, 36, 35, NULL),
 
        -- Rodadas intermediárias exigindo processamento intenso no agendamento e fusos
-       (12, '2026-06-18 12:00:00', NULL, 'Atlanta', NULL, NULL, NULL, 1, 4, 2, NULL),
-       (13, '2026-06-18 15:00:00', NULL, 'Los Angeles', NULL, NULL, NULL, 1, 6, 8, NULL),
-       (14, '2026-06-18 18:00:00', NULL, 'Vancouver', NULL, NULL, NULL, 1, 5, 7, NULL),
-       (15, '2026-06-18 21:00:00', NULL, 'Guadalajara', NULL, NULL, NULL, 1, 1, 3, NULL),
-       (16, '2026-06-19 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 9, 12, NULL),
-       (17, '2026-06-19 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 11, 10, NULL),
-       (18, '2026-06-19 16:00:00', NULL, 'A definir', NULL, NULL, NULL, 1, 16, 14, NULL),
-       (19, '2026-06-22 20:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 35, 34, NULL),
-       (20, '2026-06-23 16:00:00', NULL, 'Área da Baía de São Francisco', NULL, NULL, NULL, 1, 41, 43, NULL),
-       (21, '2026-06-23 16:00:00', NULL, 'Houston', NULL, NULL, NULL, 1, 45, 48, NULL),
-       (22, '2026-06-23 16:00:00', NULL, 'Boston', NULL, NULL, NULL, 1, 47, 46, NULL),
+       (12, '2026-06-18 12:00:00', NULL, 'Atlanta', FALSE, NULL, NULL, NULL, 1, 4, 2, NULL),
+       (13, '2026-06-18 15:00:00', NULL, 'Los Angeles', FALSE, NULL, NULL, NULL, 1, 6, 8, NULL),
+       (14, '2026-06-18 18:00:00', NULL, 'Vancouver', FALSE, NULL, NULL, NULL, 1, 5, 7, NULL),
+       (15, '2026-06-18 21:00:00', NULL, 'Guadalajara', FALSE, NULL, NULL, NULL, 1, 1, 3, NULL),
+       (16, '2026-06-19 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 9, 12, NULL),
+       (17, '2026-06-19 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 11, 10, NULL),
+       (18, '2026-06-19 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 16, 14, NULL),
+       (19, '2026-06-22 20:00:00', NULL, 'Nova York/Nova Jersey', FALSE, NULL, NULL, NULL, 1, 35, 34, NULL),
+       (20, '2026-06-23 16:00:00', NULL, 'Área da Baía de São Francisco', FALSE, NULL, NULL, NULL, 1, 41, 43, NULL),
+       (21, '2026-06-23 16:00:00', NULL, 'Houston', FALSE, NULL, NULL, NULL, 1, 45, 48, NULL),
+       (22, '2026-06-23 16:00:00', NULL, 'Boston', FALSE, NULL, NULL, NULL, 1, 47, 46, NULL),
 
        -- Super rodada definidora do dia 24 de junho e desfecho da matriz de classificação
-       (23, '2026-06-24 15:00:00', NULL, 'Vancouver', NULL, NULL, NULL, 1, 6, 5, NULL),
-       (24, '2026-06-24 15:00:00', NULL, 'Seattle', NULL, NULL, NULL, 1, 8, 7, NULL),
-       (25, '2026-06-24 18:00:00', NULL, 'Miami', NULL, NULL, NULL, 1, 11, 9, NULL),
-       (26, '2026-06-24 18:00:00', NULL, 'Atlanta', NULL, NULL, NULL, 1, 10, 12, NULL),
-       (27, '2026-06-24 21:00:00', NULL, 'Cidade do México', NULL, NULL, NULL, 1, 4, 1, NULL),
-       (28, '2026-06-24 21:00:00', NULL, 'Monterrey', NULL, NULL, NULL, 1, 2, 3, NULL),
-       (29, '2026-06-24 16:00:00', NULL, 'Toronto', NULL, NULL, NULL, 1, 42, 44, NULL),
-       (30, '2026-06-25 16:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 18, 17, NULL),
-       (31, '2026-06-27 17:00:00', NULL, 'Nova York/Nova Jersey', NULL, NULL, NULL, 1, 47, 45, NULL);
+       (23, '2026-06-24 15:00:00', NULL, 'Vancouver', FALSE, NULL, NULL, NULL, 1, 6, 5, NULL),
+       (24, '2026-06-24 15:00:00', NULL, 'Seattle', FALSE, NULL, NULL, NULL, 1, 8, 7, NULL),
+       (25, '2026-06-24 18:00:00', NULL, 'Miami', FALSE, NULL, NULL, NULL, 1, 11, 9, NULL),
+       (26, '2026-06-24 18:00:00', NULL, 'Atlanta', FALSE, NULL, NULL, NULL, 1, 10, 12, NULL),
+       (27, '2026-06-24 21:00:00', NULL, 'Cidade do México', FALSE, NULL, NULL, NULL, 1, 4, 1, NULL),
+       (28, '2026-06-24 21:00:00', NULL, 'Monterrey', FALSE, NULL, NULL, NULL, 1, 2, 3, NULL),
+       (29, '2026-06-24 16:00:00', NULL, 'Toronto', FALSE, NULL, NULL, NULL, 1, 42, 44, NULL),
+       (30, '2026-06-25 16:00:00', NULL, 'Nova York/Nova Jersey', FALSE, NULL, NULL, NULL, 1, 18, 17, NULL),
+       (31, '2026-06-27 17:00:00', NULL, 'Nova York/Nova Jersey', FALSE, NULL, NULL, NULL, 1, 47, 45, NULL);
 
 -- =========================
 -- CAMPUS UFRA (simplificado)
