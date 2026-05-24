@@ -1,6 +1,8 @@
 package br.edu.ufra.bean;
 
+import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
+import br.edu.ufra.rn.PalpiteRN;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.util.UtilBean;
 
@@ -13,11 +15,13 @@ import java.util.List;
 @RequestScoped
 public class PartidaBean {
     private final PartidaRN PARTIDA_RN = new PartidaRN();
+    private final PalpiteRN PALPITE_RN = new PalpiteRN();
 
     private List<Partida> proximasPartidas;
     private List<Partida> partidasAnteriores;
 
     private Partida partida = new Partida();
+    private Palpite palpite = new Palpite();
 
     public PartidaBean() {
         System.out.println("Criando PartidaBean");
@@ -34,6 +38,8 @@ public class PartidaBean {
         return this.proximasPartidas;
     }
 
+    public List<Partida> getPartidasAnteriores() {return this.partidasAnteriores;}
+
     public Partida getPartida() {
         return this.partida;
     }
@@ -43,7 +49,13 @@ public class PartidaBean {
     }
 
     public void publicar() {
-        //TODO: Pra ti Paulo
+        if(partida != null) {
+            partida.setSelecaoA(partida.getSelecaoA());
+            partida.setSelecaoB(partida.getSelecaoB());
+            UtilBean.criarMensagemDeInformacao("Partida publicada com sucesso");
+        } else {
+            UtilBean.criarMensagemDeErro("Nãp foi possível publicar a partida");
+        }
     }
 
     public void processar() {
@@ -72,6 +84,18 @@ public class PartidaBean {
             proximasPartidas = PARTIDA_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
+        }
+    }
+    public void palpitar(){
+        if (palpite != null) {
+            palpite.setPartida(partida);
+            if (PALPITE_RN.salvar()) {
+                UtilBean.criarMensagemDeInformacao("Palpite registrado com sucesso");
+                setPartida(PARTIDA_RN.obter(partida.getId()));
+                palpite = new Palpite();
+            } else {
+                UtilBean.criarMensagemDeErro("Não foi possível registrar o palpite");
+            }
         }
     }
 
