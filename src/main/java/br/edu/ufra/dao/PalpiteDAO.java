@@ -2,6 +2,7 @@ package br.edu.ufra.dao;
 
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
+import br.edu.ufra.entidade.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -50,6 +51,41 @@ public class PalpiteDAO extends GenericDAO<Palpite> {
         } catch (Exception e) {
             e.printStackTrace(System.err);
         } finally {
+            em.close();
+        }
+        return resposta;
+    }
+    public List<Palpite> obter(Usuario usuario) {
+        EntityManager em = getEntityManager();
+        final String JPQL = "SELECT p FROM Palpite p WHERE p.usuario = :usuario";
+        TypedQuery<Palpite> query = em.createQuery(JPQL, Palpite.class);
+        List<Palpite> resposta = null;
+        try {
+            resposta = query
+                    .setParameter("usuario", usuario)
+                    .getResultList();
+            return resposta;
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }  finally {
+            em.close();
+        }
+        return resposta;
+
+    }
+    public Palpite obter(Usuario usuario, Partida partida) {
+        EntityManager em = getEntityManager();
+        final String JPQL = "SELECT p FROM Palpite p WHERE p.usuario = :usuario AND p.partida = :partida";
+        TypedQuery<Palpite> query = em.createQuery(JPQL, Palpite.class);
+        Palpite resposta = null;
+        try {
+            resposta = query
+                    .setParameter("usuario", usuario)
+                    .setParameter("partida", partida)
+                    .getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }  finally {
             em.close();
         }
         return resposta;
