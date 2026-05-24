@@ -176,10 +176,7 @@ public class UsuarioRN {
         return DAO.obterOrdenadosPorPontuacao();
     }
 
-    public List<Usuario> obterOrdenadoPorPontuacao(
-            Usuario usuario
-    ) {
-
+    public List<Usuario> obterOrdenadoPorPontuacao(Usuario usuario) {
         List<Usuario> usuarios =
                 DAO.obterOrdenadosPorPontuacao();
 

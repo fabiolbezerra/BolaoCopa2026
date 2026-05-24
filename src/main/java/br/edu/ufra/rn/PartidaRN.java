@@ -35,7 +35,11 @@ public class PartidaRN {
     }
 
     public boolean excluir(Partida partida) {
-        return partida == null ? false : this.PARTIDA_DAO.excluir(partida);
+        if (partida == null || !partida.getPalpites().isEmpty()) {
+            return false;
+        } else {
+            return this.PARTIDA_DAO.excluir(partida);
+        }
     }
 
     private int fibonacci(int n) {
@@ -104,11 +108,15 @@ public class PartidaRN {
     }
 
     public List<Partida> obterProximasPartidas() {
-        return null; //TODO Pra ti Paulo
+        Date hoje = new Date();
+        List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje);
+        return partidas;
     }
 
     public List<Partida> obterPartidasAnteriores() {
-        return null; //TODO Pra ti Paulo
+        Date hoje = new Date();
+        List<Partida> partidas =  PARTIDA_DAO.obterPartidasAnteriores(hoje);
+        return partidas;
     }
 
 }

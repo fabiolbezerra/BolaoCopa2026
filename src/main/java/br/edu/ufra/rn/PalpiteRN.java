@@ -24,4 +24,7 @@ public class PalpiteRN {
             return PALPITE_DAO.obter(partida);
         }
     }
+    public boolean salvar() {
+        return true;
+    }
 }
