@@ -89,13 +89,15 @@ public class PartidaBean {
     public void palpitar(){
         if (palpite != null) {
             palpite.setPartida(partida);
-            if (PALPITE_RN.salvar()) {
+            if (PALPITE_RN.salvar(palpite)) {
                 UtilBean.criarMensagemDeInformacao("Palpite registrado com sucesso");
                 setPartida(PARTIDA_RN.obter(partida.getId()));
                 palpite = new Palpite();
             } else {
                 UtilBean.criarMensagemDeErro("Não foi possível registrar o palpite");
             }
+        }else {
+            UtilBean.criarMensagemDeErro("Não foi possível registrar o palpite");
         }
     }
 

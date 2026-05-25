@@ -31,9 +31,6 @@ public class PalpiteRN {
         trintaMinutesAntes.add(Calendar.MINUTE, -30);
 
         if (new Date().after(trintaMinutesAntes.getTime())) {
-            UtilBean.criarMensagemDeAviso(
-                    "Não é possível palpitar 30 minutos antes do início da partida"
-            );
             return false;
         }
         palpite.setDataDoPalpite(new Date());
