@@ -44,6 +44,13 @@ public class UtilData {
         return gc.getTime();
     }
 
+    public static Date adicionarMinutos(Date data, int minutos) {
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(data);
+        gc.add(GregorianCalendar.MINUTE, minutos);
+        return gc.getTime();
+    }
+
     public static Date criarData(String data) {
         String[] padroes = {
                 "dd/MM/yy",
