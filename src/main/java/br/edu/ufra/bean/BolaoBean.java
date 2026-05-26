@@ -21,23 +21,31 @@ public class BolaoBean {
     private Bolao bolao = new Bolao();
 
     private List<Bolao> boloes;
-    private List<Participante> participantes;
 
     public BolaoBean() {
     }
 
     @PostConstruct
     public void init() {
-
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
+        try {
+            String bolaoID = UtilBean.obterValor("bolaoID");
+            if (bolaoID != null && !bolaoID.isEmpty()) {
+                int id = Integer.parseInt(bolaoID);
+                if (id > 0) {
+                    bolao = BOLAO_RN.obter(id);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         if (usuarioLogado != null
                 && usuarioLogado.getPerfil().isAdministrador()) {
-
+            //Todos os bolões na plataforma
             boloes = BOLAO_RN.listarTodos();
-
         } else {
-
+            //Bolões do usuário palpiteiro logado
             boloes = BOLAO_RN.obter(usuarioLogado);
         }
     }
@@ -47,12 +55,7 @@ public class BolaoBean {
     }
 
     public void setBolao(Bolao bolao) {
-
         this.bolao = BOLAO_RN.obter(bolao.getId());
-
-        if (this.bolao != null) {
-            this.participantes = this.bolao.getParticipantes();
-        }
     }
 
     public List<Bolao> getBoloes() {
@@ -60,32 +63,25 @@ public class BolaoBean {
     }
 
     public List<Participante> getParticipantes() {
-        return participantes;
+        if (bolao != null) {
+            return bolao.getParticipantes();
+        }
+        return null;
     }
 
     public void salvar() {
-
         try {
-
             Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
 
             if (usuarioLogado == null) {
-
-                UtilBean.criarMensagemDeErro(
-                        "Usuário não autenticado"
-                );
-
+                UtilBean.criarMensagemDeErro("Usuário não autenticado");
                 return;
             }
 
             // Apenas dono pode salvar
             if (bolao.getDono() != null
                     && !bolao.getDono().equals(usuarioLogado)) {
-
-                UtilBean.criarMensagemDeErro(
-                        "Apenas o dono pode salvar o bolão"
-                );
-
+                UtilBean.criarMensagemDeErro("Apenas o dono pode salvar o bolão");
                 return;
             }
 
@@ -108,97 +104,36 @@ public class BolaoBean {
                 participante.setUsuario(usuarioLogado);
                 participante.setBolao(bolao);
 
-                BOLAO_RN.adicionarParticipante(
-                        bolao,
-                        participante
-                );
-
+                BOLAO_RN.adicionarParticipante(bolao, participante);
                 boloes = BOLAO_RN.obter(usuarioLogado);
 
-                UtilBean.criarMensagemDeInformacao(
-                        "Bolão salvo com sucesso!"
-                );
+                UtilBean.criarMensagemDeInformacao("Bolão salvo com sucesso!");
 
                 bolao = new Bolao();
 
             } else {
-
-                UtilBean.criarMensagemDeErro(
-                        "Não foi possível salvar o bolão"
-                );
+                UtilBean.criarMensagemDeErro("Não foi possível salvar o bolão");
             }
 
         } catch (Exception e) {
-
-            UtilBean.criarMensagemDeErro(
-                    "Erro ao salvar o bolão"
-            );
-
+            UtilBean.criarMensagemDeErro("Erro ao salvar o bolão");
             e.printStackTrace();
         }
     }
 
     public void excluir() {
-
-        try {
-
-            Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
-
-            if (usuarioLogado == null
-                    || bolao == null
-                    || bolao.getDono() == null) {
-
-                UtilBean.criarMensagemDeErro(
-                        "Não foi possível excluir o bolão"
-                );
-
-                return;
-            }
-
-            // Apenas dono pode excluir
-            if (!bolao.getDono().equals(usuarioLogado)) {
-
-                UtilBean.criarMensagemDeErro(
-                        "Apenas o dono pode excluir o bolão"
-                );
-
-                return;
-            }
-
-            boolean excluiu = BOLAO_RN.excluir(bolao);
-
-            if (excluiu) {
-
-                boloes = BOLAO_RN.obter(usuarioLogado);
-
-                UtilBean.criarMensagemDeInformacao(
-                        "Bolão excluído com sucesso!"
-                );
-
-                bolao = new Bolao();
-
-            } else {
-
-                UtilBean.criarMensagemDeErro(
-                        "Não foi possível excluir o bolão"
-                );
-            }
-
-        } catch (Exception e) {
-
-            UtilBean.criarMensagemDeErro(
-                    "Erro ao excluir o bolão"
-            );
-
-            e.printStackTrace();
+        if (BOLAO_RN.excluir(bolao)) {
+            UtilBean.criarMensagemDeInformacao("Bolão excluído com sucesso!");
+            boloes = BOLAO_RN.obter(UtilBean.obterUsuarioLogado());
+        } else {
+            UtilBean.criarMensagemDeErro("Não foi possível excluir o bolão selecionado!");
         }
     }
 
     public boolean isApenasParticipante(Bolao bolao) {
-
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
 
-        if (bolao == null || usuarioLogado == null) {
+        if (bolao == null || bolao.getParticipantes() == null || usuarioLogado == null) {
             return false;
         }
 
@@ -206,12 +141,7 @@ public class BolaoBean {
             return false;
         }
 
-        if (bolao.getParticipantes() == null) {
-            return false;
-        }
-
         for (Participante p : bolao.getParticipantes()) {
-
             if (p.getUsuario().equals(usuarioLogado)) {
                 return true;
             }
@@ -221,29 +151,15 @@ public class BolaoBean {
     }
 
     public void sair() {
-
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
 
         if (BOLAO_RN.sairDoBolao(bolao, usuarioLogado)) {
-
-            UtilBean.criarMensagemDeInformacao(
-                    "Você saiu do bolão"
-            );
+            UtilBean.criarMensagemDeInformacao("Você saiu do bolão");
 
             boloes = BOLAO_RN.obter(usuarioLogado);
-
         } else {
-
-            UtilBean.criarMensagemDeErro(
-                    "Não foi possível sair do bolão"
-            );
+            UtilBean.criarMensagemDeErro("Não foi possível sair do bolão");
         }
     }
 
-    public String novo() {
-
-        bolao = new Bolao();
-
-        return "formulario.xhtml?faces-redirect=true";
-    }
 }

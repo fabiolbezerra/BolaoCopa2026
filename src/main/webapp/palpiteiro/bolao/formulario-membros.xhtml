@@ -86,8 +86,12 @@
                         </p:column>
 
                         <p:column headerText="Operações" width="10%">
-                            <h:outputText value="Excluir Membro (se não for o dono)"
-                                          rendered="#{! (membroDoBolaoBean.bolao.dono eq membro.usuario)}"/>
+                            <p:commandButton value="Excluir"
+                                             rendered="#{! (membroDoBolaoBean.bolao.dono eq membro.usuario)}"
+                                             action="#{membroDoBolaoBean.removerParticipante()}"
+                                             update="@form">
+                                <f:setPropertyActionListener value="#{membro}" target="#{membroDoBolaoBean.participante}" />
+                            </p:commandButton>
                         </p:column>
                     </p:dataTable>
                 </div>

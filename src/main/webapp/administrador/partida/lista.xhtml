@@ -15,7 +15,8 @@
         <h1>Calendário de Partidas</h1>
 
         <h:form>
-            <p:dataTable value="#{partidaBean.proximasPartidas}" var="p">
+            <p:dataTable value="#{partidaBean.proximasPartidas}" var="p"
+                         emptyMessage="Nenhuma partida">
                 <p:column headerText="Fase">
                     <h:outputText value="#{p.fase.nome}"/>
                 </p:column>

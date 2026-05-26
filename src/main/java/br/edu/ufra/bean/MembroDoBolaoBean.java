@@ -68,24 +68,34 @@ public class MembroDoBolaoBean {
             if (BOLAO_RN.adicionarParticipante(bolao, participante)) {
                 UtilBean.criarMensagemDeInformacao("Um novo participante foi adicionado ao bolão");
 
-                //Atualizando bolão, participante e lista de participantes do bolão
-                bolao = BOLAO_RN.obter(bolao.getId());
-                participante = new Participante();
-                participante.setBolao(bolao);
-                participantes = bolao.getParticipantes();
+                atualizarListaDeParticipantes();
             } else {
                 UtilBean.criarMensagemDeAviso("Um usuário não pode ser duplicado na lista de membros");
                 UtilBean.criarMensagemDeErro("Problema no banco do dados ao tentar incluir o participante");
             }
         }
     }
+
+    private void atualizarListaDeParticipantes() {
+        //Atualizando bolão, participante e lista de participantes do bolão
+        bolao = BOLAO_RN.obter(bolao.getId());
+        participante = new Participante();
+        participante.setBolao(bolao);
+        participantes = bolao.getParticipantes();
+    }
+
     public void removerParticipante() {
         if (participante == null) {
             UtilBean.criarMensagemDeAviso("Palpiteiro não encontrado");
-        }if (participante.getBolao() == null || participante.getBolao() != bolao) {
+        } else if (participante.getBolao() == null || participante.getBolao() != bolao) {
             UtilBean.criarMensagemDeErro("Palpiteiro não participa deste bolão");
-        }else{
-            BOLAO_RN.removerParticipante(participante,bolao);
+        } else {
+            if (BOLAO_RN.removerParticipante(participante, bolao)) {
+                atualizarListaDeParticipantes();
+                UtilBean.criarMensagemDeInformacao("Participante removido com sucesso");
+            } else {
+                UtilBean.criarMensagemDeErro("Não foi possível remover o participante");
+            }
         }
     }
 }

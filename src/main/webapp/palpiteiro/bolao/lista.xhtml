@@ -30,10 +30,10 @@
 
         <h:form>
 
-            <p:commandButton
-                    value="Criar Novo Bolão"
-                    action="#{bolaoBean.novo}"
-                    icon="pi pi-plus" />
+            <p:commandButton value="Criar Novo Bolão"
+                             rendered="#{usuarioBean.palpiteiro}"
+                             action="formulario.xhtml"
+                             icon="pi pi-plus"/>
 
         </h:form>
 
@@ -64,27 +64,27 @@
 
                     <p:commandButton value="Membros"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
-                                     action="formulario-membros.xhtml"
-                                     ajax="false">
+                                     action="formulario-membros.xhtml">
                         <f:param name="bolaoID" value="#{bolao.id}"/>
                     </p:commandButton>
 
                     <p:commandButton value="Excluir"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
-                                     action="#{bolaoBean.excluir()}">
+                                     action="#{bolaoBean.excluir()}"
+                                     update="@form">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
 
                     <p:commandButton value="Sair"
                                      rendered="#{bolaoBean.isApenasParticipante(bolao)}"
                                      action="#{bolaoBean.sair()}"
-                                     ajax="false">
+                                     update="@form">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
 
                     <p:commandButton value="Detalhes"
                                      action="detalhes.xhtml">
-                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+                        <f:param value="#{bolao.id}" name="bolaoID"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>

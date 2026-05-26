@@ -18,19 +18,19 @@
             <div class="ui-g">
                 <div class="ui-g-6">
                     <p:dataTable value="#{selecaoBean.selecoes}" var="s">
-                        <p:column headerText="Nome">
+                        <p:column headerText="Nome" sortBy="#{s.nome}">
                             <h:outputText value="#{s.nome}"/>
                         </p:column>
 
-                        <p:column headerText="Símbolo">
+                        <p:column headerText="Símbolo" width="20%">
                             <p:graphicImage value="/resources/imagens/#{s.simbolo}" width="24px"/>
                         </p:column>
 
-                        <p:column headerText="Sigla">
+                        <p:column headerText="Sigla" width="20%">
                             <h:outputText value="#{s.sigla}"/>
                         </p:column>
 
-                        <p:column headerText="Grupo">
+                        <p:column headerText="Grupo" width="20%" sortBy="#{s.grupo.nome}">
                             <h:outputText value="#{s.grupo.nome}"/>
                         </p:column>
                     </p:dataTable>
