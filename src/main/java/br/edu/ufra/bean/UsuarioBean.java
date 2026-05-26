@@ -83,7 +83,7 @@ public class UsuarioBean {
     }
 
     public List<Usuario> autoCompletePalpiteiros(String query) {
-        return USUARIO_RN.listarPalpiteiros(query);
+        return USUARIO_RN.obterPalpiteiros(query);
     }
 
     public void excluir() {

@@ -3,8 +3,11 @@ package br.edu.ufra.rn;
 import br.edu.ufra.dao.PartidaDAO;
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
+import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.entidade.comparador.ComparadorUsuarioPontuacao;
 import br.edu.ufra.rn.processamento.*;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -64,7 +67,7 @@ public class PartidaRN {
         return resultado;
     }
 
-    public boolean processar(Partida partida) {
+    public boolean processarPontuacao(Partida partida) {
         if (partida == null
                 || partida.getId() == null
                 || partida.getGolsA() == null
@@ -88,14 +91,47 @@ public class PartidaRN {
         for (Palpite palpite : palpites) {
             //Manipulador identifica qual índice, da série de fibonacci, interessa
             //Os dois primeiros números da série são poucos pontos, então soma-se dois
-            pontuacao = fibonacci(2 + manipuladorDaPontuacao.processar(palpite));
+            pontuacao = manipuladorDaPontuacao.processar(palpite);
+            if (pontuacao > 0) {
+                pontuacao = fibonacci(2 + pontuacao);
+            } else {
+                pontuacao = 0; //não pontua
+            }
             palpite.setPontuacao(pontuacao);
         }
         //Pontuação dos palpites processada, então salvar os palpites
         boolean palpitesAtualizados = PALPITE_RN.salvar(palpites);
 
-        //TODO: Falta ordenar palpiteiros após atualização dos palpites
         return false;
+    }
+
+    public boolean processarOrdenacao(Partida partida) {
+        if (partida == null
+                || partida.getId() == null
+                || partida.getGolsA() == null
+                || partida.getGolsB() == null) {
+            return false;
+        }
+        final UsuarioRN USUARIO_RN = new UsuarioRN();
+
+        List<Usuario> palpiteiros = USUARIO_RN.obter(partida);
+
+        Integer pontuacao = 0;
+        for (Usuario palpiteiro : palpiteiros) {
+            pontuacao = USUARIO_RN.obterPontuacao(palpiteiro);
+            palpiteiro.setPontuacao(pontuacao);
+        }
+
+        //Ordenação inversa da pontuação
+        Collections.sort(palpiteiros, new ComparadorUsuarioPontuacao());
+        int posicao = 1;
+        for (Usuario palpiteiro : palpiteiros) {
+            palpiteiro.setPosicao(posicao);
+            posicao++;
+        }
+
+        //Pontuação dos palpites processada, então salvar os palpites
+        return USUARIO_RN.salvar(palpiteiros);
     }
 
     public List<Partida> obterProximasOitoPartidas() {
@@ -115,7 +151,7 @@ public class PartidaRN {
 
     public List<Partida> obterPartidasAnteriores() {
         Date hoje = new Date();
-        List<Partida> partidas =  PARTIDA_DAO.obterPartidasAnteriores(hoje);
+        List<Partida> partidas = PARTIDA_DAO.obterPartidasAnteriores(hoje);
         return partidas;
     }
 

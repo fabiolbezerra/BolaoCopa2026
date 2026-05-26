@@ -38,7 +38,9 @@ public class PartidaBean {
         return this.proximasPartidas;
     }
 
-    public List<Partida> getPartidasAnteriores() {return this.partidasAnteriores;}
+    public List<Partida> getPartidasAnteriores() {
+        return this.partidasAnteriores;
+    }
 
     public Partida getPartida() {
         return this.partida;
@@ -49,7 +51,7 @@ public class PartidaBean {
     }
 
     public void publicar() {
-        if(partida != null) {
+        if (partida != null) {
             partida.setSelecaoA(partida.getSelecaoA());
             partida.setSelecaoB(partida.getSelecaoB());
             UtilBean.criarMensagemDeInformacao("Partida publicada com sucesso");
@@ -59,15 +61,17 @@ public class PartidaBean {
     }
 
     public void processar() {
-        if (PARTIDA_RN.processar(partida)) {
+        if (PARTIDA_RN.processarPontuacao(partida)) {
             UtilBean.criarMensagemDeInformacao("Pontuação dos palpiteiros atualizada!");
-            UtilBean.criarMensagemDeInformacao("Posição dos palpiteiros atualizada!");
+            if (PARTIDA_RN.processarOrdenacao(partida)) {
+                UtilBean.criarMensagemDeInformacao("Posição dos palpiteiros atualizada!");
+            }
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível atualizar pontuação e posição dos palpiteiros.");
-            UtilBean.criarMensagemDeAviso("Uma partida deve corretamente atualizada, antes de ser processada.");
-            UtilBean.criarMensagemDeAviso("Verifique os placares da partida.");
+            UtilBean.criarMensagemDeAviso("Placar", "Verifique o placar (gols e tipo de vitória) da partida.");
         }
     }
+
 
     public void excluir() {
         if (this.PARTIDA_RN.excluir(this.partida)) {
@@ -86,7 +90,8 @@ public class PartidaBean {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
         }
     }
-    public void palpitar(){
+
+    public void palpitar() {
         if (palpite != null) {
             palpite.setPartida(partida);
             if (PALPITE_RN.salvar(palpite)) {
@@ -96,7 +101,7 @@ public class PartidaBean {
             } else {
                 UtilBean.criarMensagemDeErro("Não foi possível registrar o palpite");
             }
-        }else {
+        } else {
             UtilBean.criarMensagemDeErro("Não foi possível registrar o palpite");
         }
     }

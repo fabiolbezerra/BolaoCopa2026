@@ -106,19 +106,20 @@ VALUES (1, 'Fase de Grupos', 0, '2026-06-08', '2026-06-30'),
 -- PARTIDAS (FASE DE GRUPOS - EXEMPLOS)
 -- =========================
 INSERT INTO partida
-(id, inicioDaPartida, atualizacaoDoResultado, local, publicada, golsA, golsB, tipoDeVitoria, fase, selecaoA, selecaoB, vencedor)
+(id, inicioDaPartida, atualizacaoDoResultado, local, publicada, golsA, golsB, tipoDeVitoria, fase, selecaoA, selecaoB,
+ vencedor)
 VALUES -- Rodada 1 e partidas inaugurais baseadas no mapeamento oficial e de estádios
        (1, '2026-06-11 16:00:00', NULL, 'Cidade do México', FALSE, NULL, NULL, NULL, 1, 1, 2, NULL),
-       (2, '2026-06-11 16:00:00', NULL, 'Guadalajara', FALSE,NULL, NULL, NULL, 1, 3, 4, NULL),
-       (3, '2026-06-12 16:00:00', NULL, 'Toronto',FALSE, NULL, NULL, NULL, 1, 5, 8, NULL),
-       (4, '2026-06-12 16:00:00', NULL, 'Los Angeles',FALSE, NULL, NULL, NULL, 1, 13, 14, NULL),
+       (2, '2026-06-11 16:00:00', NULL, 'Guadalajara', FALSE, NULL, NULL, NULL, 1, 3, 4, NULL),
+       (3, '2026-06-12 16:00:00', NULL, 'Toronto', FALSE, NULL, NULL, NULL, 1, 5, 8, NULL),
+       (4, '2026-06-12 16:00:00', NULL, 'Los Angeles', FALSE, NULL, NULL, NULL, 1, 13, 14, NULL),
        (5, '2026-06-13 18:00:00', NULL, 'Nova York/Nova Jersey', FALSE, NULL, NULL, NULL, 1, 9, 10, NULL),
-       (6, '2026-06-15 16:00:00', NULL, 'A definir',FALSE, NULL, NULL, NULL, 1, 29, 32, NULL),
-       (7, '2026-06-15 16:00:00', NULL, 'A definir',FALSE, NULL, NULL, NULL, 1, 25, 27, NULL),
-       (8, '2026-06-15 16:00:00', NULL, 'A definir',FALSE, NULL, NULL, NULL, 1, 31, 30, NULL),
-       (9, '2026-06-15 16:00:00', NULL, 'A definir', FALSE,NULL, NULL, NULL, 1, 26, 28, NULL),
+       (6, '2026-06-15 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 29, 32, NULL),
+       (7, '2026-06-15 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 25, 27, NULL),
+       (8, '2026-06-15 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 31, 30, NULL),
+       (9, '2026-06-15 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 26, 28, NULL),
        (10, '2026-06-16 15:00:00', NULL, 'Nova York/Nova Jersey', FALSE, NULL, NULL, NULL, 1, 33, 34, NULL),
-       (11, '2026-06-16 16:00:00', NULL, 'A definir', FALSE,NULL, NULL, NULL, 1, 36, 35, NULL),
+       (11, '2026-06-16 16:00:00', NULL, 'A definir', FALSE, NULL, NULL, NULL, 1, 36, 35, NULL),
 
        -- Rodadas intermediárias exigindo processamento intenso no agendamento e fusos
        (12, '2026-06-18 12:00:00', NULL, 'Atlanta', FALSE, NULL, NULL, NULL, 1, 4, 2, NULL),
@@ -254,3 +255,13 @@ insert into participante (id, bolao, usuario)
 values (3, 2, 5),
        (4, 2, 6),
        (5, 2, 7);
+
+-- ========
+-- PALPITES TODO: Acrescentar mais inserts de palpites para testes
+-- ========
+insert into palpite
+(id, dataDoPalpite, ultimaAlteracao, golsA, golsB, tipoDeVitoria, pontuacao, usuario, partida)
+values
+    (1, '2026-05-26', '2026-05-26', 1, 0, 'TEMPO_NORMAL', 10, 5, 1),
+    (2, '2026-05-26', '2026-05-26', 1, 0, 'TEMPO_NORMAL', 0, 6, 1),
+    (3, '2026-05-26', '2026-05-26', 1, 0, 'TEMPO_NORMAL', null, 7, 1);

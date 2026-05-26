@@ -4,6 +4,7 @@ import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.util.UtilBean;
+import jdk.jshell.execution.Util;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -86,12 +87,11 @@ public class NovaContaBean implements Serializable {
 
     public void enviarEmail() {
         codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
-        UtilBean.criarMensagemDeInformacao(codigoGerado);
+        UtilBean.criarMensagemDeInformacao("Código", "Email enviado com informação para validação!");
         panelEmail = false;
         panelCodigo = true;
         panelFormulario = false;
         horarioDoCodigo = Instant.now();
-
     }
 
     public void validarEmail() {
@@ -101,6 +101,7 @@ public class NovaContaBean implements Serializable {
             codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
             this.codigoInformado = null;
         } else {
+            UtilBean.criarMensagemDeInformacao("Validação", "Código informado foi validado");
             panelEmail = false;
             panelCodigo = false;
             panelFormulario = true;
@@ -115,15 +116,20 @@ public class NovaContaBean implements Serializable {
 
         boolean sucesso = USUARIO_RN.salvar(usuario);
         if (sucesso) {
-            enviarSaudacao(usuario.getEmail());
+            enviarSaudacao(usuario);
+            UtilBean.criarMensagemDeAviso("Sucesso", "Conta gerada com sucesso!");
+            UtilBean.criarMensagemDeAviso("E-mail", "Verifique sua caixa de entrada no e-mail.");
             return "login.xhtml?faces-redirect=true";
         } else {
             return null;
         }
     }
-    public void enviarSaudacao(String email){
-        if (usuario.getEmail() != null) {
-            USUARIO_RN.enviarEmailDeSaudacao(email);
+
+    public void enviarSaudacao(Usuario usuario) {
+        if (usuario != null
+                && usuario.getId() != null
+                && usuario.getEmail() != null) {
+            USUARIO_RN.enviarEmailDeSaudacao(usuario);
         }
     }
 }
