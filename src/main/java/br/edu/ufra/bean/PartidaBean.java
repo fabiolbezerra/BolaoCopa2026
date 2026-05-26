@@ -31,7 +31,7 @@ public class PartidaBean {
     public void init() {
         System.out.println("PartidaBean.init()");
         this.proximasPartidas = this.PARTIDA_RN.obterProximasPartidas();
-        this.proximasPartidas = this.PARTIDA_RN.obterPartidasAnteriores();
+        this.partidasAnteriores = this.PARTIDA_RN.obterPartidasAnteriores();
     }
 
     public List<Partida> getProximasPartidas() {

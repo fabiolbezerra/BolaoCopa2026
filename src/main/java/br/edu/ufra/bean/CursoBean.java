@@ -1,5 +1,6 @@
 package br.edu.ufra.bean;
 
+import br.edu.ufra.entidade.Campus;
 import br.edu.ufra.entidade.Curso;
 import br.edu.ufra.rn.CursoRN;
 
@@ -34,6 +35,10 @@ public class CursoBean {
 
     public void setCurso(Curso curso) {
         this.curso = curso;
+    }
+
+    public List<Curso> obterCursos(Campus campus) {
+        return CURSO_RN.obter(campus);
     }
 
 }

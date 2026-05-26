@@ -28,7 +28,7 @@ public class PalpiteBean {
 
     @PostConstruct
     public void init() {
-        String partidaID = UtilBean.obterValor("partida");
+        String partidaID = UtilBean.obterValor("partidaID");
         if (partidaID != null) {
             try {
                 int id = Integer.parseInt(partidaID);

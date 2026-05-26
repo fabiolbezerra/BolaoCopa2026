@@ -24,64 +24,81 @@
         <br/>
 
         <h:form>
-            <p:growl showSummary="true" showDetail="true" />
+            <p:growl showSummary="true" showDetail="true"/>
 
             <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{novaContaBean.panelEmail}">
                 <p:outputLabel value="E-mail"/>
-                <p:inputText value="#{novaContaBean.email}" />
+                <p:inputText value="#{novaContaBean.email}" size="50"/>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Criar" action="#{novaContaBean.enviarEmail()}" ajax="false" />
+                    <p:commandButton value="Criar" action="#{novaContaBean.enviarEmail()}" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
 
             <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{novaContaBean.panelCodigo}">
                 <p:outputLabel value="Código"/>
-                <p:inputText value="#{novaContaBean.codigoInformado}" />
+                <p:inputText value="#{novaContaBean.codigoInformado}" size="7"/>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Validar" action="#{novaContaBean.validarEmail()}" ajax="false" />
+                    <p:commandButton value="Validar E-mail" action="#{novaContaBean.validarEmail()}" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
 
             <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{novaContaBean.panelFormulario}">
+                <p:outputLabel value="E-mail"/>
+                <h:outputText value="#{novaContaBean.email}"/>
+
                 <p:outputLabel value="Nome"/>
-                <p:inputText value="#{novaContaBean.usuario.nome}" />
+                <p:inputText value="#{novaContaBean.usuario.nome}" size="40"/>
 
                 <p:outputLabel value="Sobrenome"/>
-                <p:inputText value="#{novaContaBean.usuario.sobrenome}" />
+                <p:inputText value="#{novaContaBean.usuario.sobrenome}" size="40"/>
 
                 <p:outputLabel value="Tipo"/>
                 <p:selectOneMenu value="#{novaContaBean.usuario.tipo}">
-                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
+                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true"/>
 
-                    <f:selectItem itemLabel="Discente (Aluno)" itemValue="DISCENTE" />
-                    <f:selectItem itemLabel="Docente (Professor)" itemValue="DOCENTE" />
-                    <f:selectItem itemLabel="Técnico (Funcionário)" itemValue="TECNICO" />
+                    <f:selectItem itemLabel="Discente (Aluno)" itemValue="DISCENTE"/>
+                    <f:selectItem itemLabel="Docente (Professor)" itemValue="DOCENTE"/>
+                    <f:selectItem itemLabel="Técnico (Funcionário)" itemValue="TECNICO"/>
 
-                    <p:ajax update="menuCurso" />
-                </p:selectOneMenu>
-
-                <p:outputLabel value="Curso"/>
-                <p:selectOneMenu id="menuCurso" value="#{novaContaBean.usuario.curso}" converter="cursoConverter"
-                                 disabled="#{novaContaBean.usuario.tipo eq 'TECNICO'
-                                 or novaContaBean.usuario.tipo eq 'DOCENTE'}">
-                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{cursoBean.cursos}" var="c" itemLabel="#{c.nome}" itemValue="#{c}" />
+                    <p:ajax update="menuCurso"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Campus"/>
-                <p:selectOneMenu value="#{novaContaBean.usuario.campus}"  converter="campusConverter">
-                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true" />
-                    <f:selectItems value="#{campusBean.campi}" var="c" itemLabel="#{c.nome}" itemValue="#{c}" />
+                <p:selectOneMenu value="#{novaContaBean.usuario.campus}"
+                                 converter="campusConverter">
+                    <p:ajax event="change" update="menuCurso"/>
+                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{campusBean.campi}" var="c" itemLabel="#{c.nome}" itemValue="#{c}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Curso"/>
+                <p:selectOneMenu id="menuCurso"
+                                 value="#{novaContaBean.usuario.curso}"
+                                 converter="cursoConverter"
+                                 disabled="#{novaContaBean.usuario.tipo eq 'TECNICO'or novaContaBean.usuario.tipo eq 'DOCENTE'}">
+                    <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true"/>
+                    <f:selectItems value="#{cursoBean.obterCursos(novaContaBean.usuario.campus)}"
+                                   var="c"
+                                   itemLabel="#{c.nome}"
+                                   itemValue="#{c}"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Senha"/>
-                <p:password value="#{novaContaBean.usuario.senha}" />
+                <p:password id="pSenha1"
+                            value="#{novaContaBean.usuario.senha}"
+                            required="true"/>
 
+                <p:outputLabel value="Confirme a Senha"/>
+                <p:password id="pSenha2"
+                            value="#{novaContaBean.senha}"
+                            required="true"
+                            match="pSenha1"
+                            validatorMessage="Senhas devem ser iguais"/>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Salvar Usuário" action="#{novaContaBean.criarConta()}" ajax="false" />
+                    <p:commandButton value="Salvar Usuário" action="#{novaContaBean.criarConta()}" ajax="false"/>
                 </f:facet>
             </p:panelGrid>
 

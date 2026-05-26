@@ -40,7 +40,8 @@
         <h:form>
             <p:growl showSummary="true" showDetail="true"/>
 
-            <p:dataTable value="#{bolaoBean.boloes}" var="bolao">
+            <p:dataTable value="#{bolaoBean.boloes}" var="bolao"
+                         emptyMessage="Nenhum bolão cadastrado">
                 <p:column headerText="Nome">
                     <h:outputText value="#{bolao.nome}"/>
                 </p:column>

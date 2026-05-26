@@ -21,42 +21,45 @@
 
                 <p:tab title="Próximas">
                     <p:dataTable value="#{partidaBean.proximasPartidas}" var="p"
-                                 sortBy="#{p.inicioDaPartida}" sortOrder="ascending">
+                                 emptyMessage="Nenhuma partida">
 
-                        <p:column headerText="Fase">
+                        <p:column headerText="Fase" width="15%">
                             <h:outputText value="#{p.fase.nome}"/>
                         </p:column>
 
-                        <p:column headerText="Data e Hora" sortBy="#{p.inicioDaPartida}">
+                        <p:column headerText="Data e Hora" sortBy="#{p.inicioDaPartida}" width="15%">
                             <h:outputText value="#{p.inicioDaPartida}">
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
                             </h:outputText>
                         </p:column>
 
-                        <p:column headerText="Seleção A">
-                            <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla})"/>
-                        </p:column>
-
                         <p:column headerText="Placar">
-                            <div align="center">
-                                <h:outputText value="#{p.golsA}"/> X <h:outputText value="#{p.golsB}"/>
-                            </div>
+                            <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/>
+                                <p:graphicImage value="/resources/imagens/#{p.selecaoA.simbolo}" width="24px"/>
+                                <h:outputText value="#{p.golsA}"/> <p:spacer width="10px" />
+                                X
+                                <p:spacer width="10px" /><h:outputText value="#{p.golsB} "/>
+                                <p:graphicImage value="/resources/imagens/#{p.selecaoB.simbolo}" width="24px"/>
+                                <h:outputText value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
+                            </p:outputPanel>
                         </p:column>
 
-                        <p:column headerText="Seleção B">
-                            <h:outputText value="#{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
-                        </p:column>
-
-                        <p:column headerText="Local">
+                        <p:column headerText="Local" width="15%" sortBy="#{p.local}">
                             <h:outputText value="#{p.local}"/>
                         </p:column>
 
+                        <p:column headerText="Operações">
+                            <p:commandButton value="Palpitar" action="/palpiteiro/palpite/formulario.xhtml?faces-redirect=true" >
+                                <f:param name="partidaID" value="#{p.id}" />
+                            </p:commandButton>
+                        </p:column>
                     </p:dataTable>
                 </p:tab>
 
                 <p:tab title="Anteriores">
                     <p:dataTable value="#{partidaBean.partidasAnteriores}" var="p"
-                                 sortBy="#{p.inicioDaPartida}" sortOrder="descending">
+                                 emptyMessage="Nenhuma partida">
 
                         <p:column headerText="Fase">
                             <h:outputText value="#{p.fase.nome}"/>

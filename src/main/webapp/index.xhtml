@@ -38,16 +38,16 @@
                          rows="10"
                          paginator="false">
 
-                <p:column headerText="Posição" style="width: 80px; text-align: center;">
+                <p:column headerText="Posição" width="15%">
                     <h:outputText value="#{usuario.posicao}"/>
+                </p:column>
+
+                <p:column headerText="Pontos" width="15%">
+                    <h:outputText value="#{usuario.pontuacao}"/>
                 </p:column>
 
                 <p:column headerText="Participante">
                     <h:outputText value="#{usuario.nome}"/>
-                </p:column>
-
-                <p:column headerText="Pontos" style="width: 100px; text-align: center; font-weight: bold;">
-                    <h:outputText value="#{usuario.pontuacao}"/>
                 </p:column>
 
                 <p:column headerText="Campus / Curso">

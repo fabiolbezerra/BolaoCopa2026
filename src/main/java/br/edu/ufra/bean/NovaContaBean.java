@@ -23,6 +23,7 @@ public class NovaContaBean implements Serializable {
     private final static UsuarioRN USUARIO_RN = new UsuarioRN();
 
     private String email;
+    private String senha;
     private String codigoInformado; //Código secreto
     private String codigoGerado; //Código secreto
     private Instant horarioDoCodigo; //Horário de inicialização do código
@@ -48,6 +49,14 @@ public class NovaContaBean implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getCodigoInformado() {

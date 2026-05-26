@@ -1,25 +1,29 @@
 package br.edu.ufra.rn;
 
 import br.edu.ufra.dao.CursoDAO;
-import br.edu.ufra.entidade.Curso;
+import br.edu.ufra.entidade.Campus;
 import br.edu.ufra.entidade.Curso;
 
 import java.util.List;
 
 public class CursoRN {
 
-    private final CursoDAO DAO = new CursoDAO();
+    private final CursoDAO CURSO_DAO = new CursoDAO();
 
 
     public List<Curso> listarTodos() {
-        return DAO.obterTodos(Curso.class);
+        return CURSO_DAO.obterTodos(Curso.class);
     }
 
     public Curso obter(Integer id) {
-        return DAO.obter(Curso.class, id);
+        return CURSO_DAO.obter(Curso.class, id);
     }
     
-
-
+    public List<Curso> obter(Campus campus) {
+        if (campus == null || campus.getId() == null || campus.getId() == 0) {
+            return null;
+        }
+        return CURSO_DAO.obter(campus);
+    }
 }
 
