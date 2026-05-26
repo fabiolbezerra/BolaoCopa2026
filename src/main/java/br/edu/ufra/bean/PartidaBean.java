@@ -5,10 +5,12 @@ import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.rn.PalpiteRN;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.util.UtilBean;
+import br.edu.ufra.util.UtilData;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import java.util.Date;
 import java.util.List;
 
 @ManagedBean
@@ -30,8 +32,18 @@ public class PartidaBean {
     @PostConstruct
     public void init() {
         System.out.println("PartidaBean.init()");
+        proximasEAnteriores();
+    }
+
+    private void proximasEAnteriores() {
         this.proximasPartidas = this.PARTIDA_RN.obterProximasPartidas();
         this.partidasAnteriores = this.PARTIDA_RN.obterPartidasAnteriores();
+    }
+
+    public boolean isExpirada(Partida partida) {
+        Date agora = new Date();
+        Date agoraMais30 = UtilData.adicionarMinutos(agora, 30);
+        return agoraMais30.after(partida.getInicioDaPartida());
     }
 
     public List<Partida> getProximasPartidas() {
@@ -50,42 +62,42 @@ public class PartidaBean {
         this.partida = partida;
     }
 
-    public void publicar() {
-        if (partida != null) {
-            partida.setSelecaoA(partida.getSelecaoA());
-            partida.setSelecaoB(partida.getSelecaoB());
-            UtilBean.criarMensagemDeInformacao("Partida publicada com sucesso");
-        } else {
-            UtilBean.criarMensagemDeErro("Nãp foi possível publicar a partida");
-        }
-    }
-
-    public void processar() {
+        public void processar() {
         if (PARTIDA_RN.processarPontuacao(partida)) {
             UtilBean.criarMensagemDeInformacao("Pontuação dos palpiteiros atualizada!");
             if (PARTIDA_RN.processarOrdenacao(partida)) {
                 UtilBean.criarMensagemDeInformacao("Posição dos palpiteiros atualizada!");
             }
+            proximasEAnteriores();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível atualizar pontuação e posição dos palpiteiros.");
             UtilBean.criarMensagemDeAviso("Placar", "Verifique o placar (gols e tipo de vitória) da partida.");
         }
     }
 
-
     public void excluir() {
         if (this.PARTIDA_RN.excluir(this.partida)) {
             UtilBean.criarMensagemDeInformacao("Partida excluída");
-            this.proximasPartidas = this.PARTIDA_RN.listarTodos();
+            proximasEAnteriores();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível excluir a partida");
+        }
+    }
+
+    public void publicar() {
+        this.partida.setPublicada(true);
+        if (this.PARTIDA_RN.salvar(this.partida)) {
+            UtilBean.criarMensagemDeInformacao("Partida publicada");
+            proximasEAnteriores();
+        } else {
+            UtilBean.criarMensagemDeErro("Não foi possível publicar a partida");
         }
     }
 
     public void salvar() {
         if (this.PARTIDA_RN.salvar(this.partida)) {
             UtilBean.criarMensagemDeInformacao("Partida salva");
-            proximasPartidas = PARTIDA_RN.listarTodos();
+            proximasEAnteriores();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
         }
