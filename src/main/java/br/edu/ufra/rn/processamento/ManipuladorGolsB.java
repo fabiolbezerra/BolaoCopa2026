@@ -18,9 +18,9 @@ public class ManipuladorGolsB extends ManipuladorResultadoAbstrato {
         }
 
         int golsBPalpite = palpite.getGolsB();
-        int golsBPartiida = palpite.getPartida().getGolsB();
+        int golsBPartida = palpite.getPartida().getGolsB();
 
-        int resultado = golsBPalpite == golsBPartiida ? 1 : 0;
+        int resultado = golsBPalpite == golsBPartida ? 1 : 0;
         if (getProximo() != null) {
             resultado += getProximo().processar(palpite);
         }
