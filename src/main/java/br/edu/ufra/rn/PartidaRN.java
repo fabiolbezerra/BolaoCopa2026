@@ -138,22 +138,22 @@ public class PartidaRN {
 
     public List<Partida> obterProximasOitoPartidas() {
         Date hoje = new Date();
-        List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje);
+        List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje, false);
         if (partidas == null || partidas.size() <= 8) {
             return partidas;
         }
         return partidas.subList(0, 8);
     }
 
-    public List<Partida> obterProximasPartidas() {
+    public List<Partida> obterProximasPartidas(boolean administrador) {
         Date hoje = new Date();
-        List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje);
+        List<Partida> partidas = PARTIDA_DAO.obterProximasPartidas(hoje, administrador);
         return partidas;
     }
 
-    public List<Partida> obterPartidasAnteriores() {
+    public List<Partida> obterPartidasAnteriores(boolean administrador) {
         Date hoje = new Date();
-        List<Partida> partidas = PARTIDA_DAO.obterPartidasAnteriores(hoje);
+        List<Partida> partidas = PARTIDA_DAO.obterPartidasAnteriores(hoje, administrador);
         return partidas;
     }
 

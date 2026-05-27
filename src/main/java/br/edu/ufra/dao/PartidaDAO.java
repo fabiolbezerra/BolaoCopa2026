@@ -9,9 +9,14 @@ import java.util.List;
 
 public class PartidaDAO extends GenericDAO<Partida> {
 
-    public List<Partida> obterProximasPartidas(Date data) {
+    public List<Partida> obterProximasPartidas(Date data, boolean administrador) {
         EntityManager em = getEntityManager();
-        final String JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida >= :data ORDER BY p.inicioDaPartida ASC";
+        String JPQL = null;
+        if (administrador) {
+            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida >= :data ORDER BY p.inicioDaPartida ASC";
+        } else {
+            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida >= :data and p.publicada = true ORDER BY p.inicioDaPartida ASC";
+        }
         TypedQuery<Partida> query = em.createQuery(JPQL, Partida.class);
         List<Partida> resposta = null;
         try {
@@ -27,10 +32,16 @@ public class PartidaDAO extends GenericDAO<Partida> {
         return resposta;
     }
 
-    public List<Partida> obterPartidasAnteriores(Date data) {
+    public List<Partida> obterPartidasAnteriores(Date data, boolean administrador) {
         EntityManager em = getEntityManager();
-        final String JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida < :data ORDER BY p.inicioDaPartida ASC";
+        String JPQL = null;
+        if (administrador) {
+            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida < :data ORDER BY p.inicioDaPartida ASC";
+        } else {
+            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida < :data and p.publicada = true ORDER BY p.inicioDaPartida ASC";
+        }
         TypedQuery<Partida> query = em.createQuery(JPQL, Partida.class);
+
         List<Partida> resposta = null;
         try {
             resposta = query
