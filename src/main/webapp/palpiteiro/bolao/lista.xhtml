@@ -70,10 +70,15 @@
                     </p:commandButton>
 
                     <p:commandButton value="Excluir"
+                                     icon="fa fa-trash-o"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
                                      action="#{bolaoBean.excluir()}"
                                      update="@form">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+
+                        <p:confirm header="Confirmação"
+                                   message="Deseja excluir o bolão?"
+                                   icon="fa fa-exclamation" />
                     </p:commandButton>
 
                     <p:commandButton value="Sair"
@@ -89,6 +94,15 @@
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                <p:commandButton value="Não" type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-flat"
+                                 icon="fa fa-ban"/>
+                <p:commandButton value="Sim" type="button"
+                                 styleClass="ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+            </p:confirmDialog>
         </h:form>
     </ui:define>
 </ui:composition>
