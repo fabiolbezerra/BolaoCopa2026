@@ -36,8 +36,9 @@ public class PartidaBean {
     }
 
     private void proximasEAnteriores() {
-        this.proximasPartidas = this.PARTIDA_RN.obterProximasPartidas();
-        this.partidasAnteriores = this.PARTIDA_RN.obterPartidasAnteriores();
+        boolean administrador = UtilBean.obterUsuarioLogado().getPerfil().isAdministrador();
+        this.proximasPartidas = this.PARTIDA_RN.obterProximasPartidas(administrador);
+        this.partidasAnteriores = this.PARTIDA_RN.obterPartidasAnteriores(administrador);
     }
 
     public boolean isExpirada(Partida partida) {
