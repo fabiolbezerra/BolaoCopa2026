@@ -38,6 +38,10 @@ public class Selecao {
     @OneToMany(mappedBy = "vencedor")
     private List<Partida> partidasVencedor = new ArrayList<>();
 
+    @OneToMany
+    @JoinColumn(name = "selecaoVencedora")
+    private List<Palpite> palpites = new ArrayList<>();
+
     public Integer getId() {
         return id;
     }
@@ -101,6 +105,14 @@ public class Selecao {
 
     public void setPartidasVencedor(List<Partida> partidasVencedor) {
         this.partidasVencedor = partidasVencedor;
+    }
+
+    public List<Palpite> getPalpites() {
+        return palpites;
+    }
+
+    public void setPalpites(List<Palpite> palpites) {
+        this.palpites = palpites;
     }
 
     @Override

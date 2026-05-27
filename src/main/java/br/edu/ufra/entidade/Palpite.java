@@ -45,6 +45,10 @@ public class Palpite {
     @JoinColumn(name = "partida", nullable = false)
     private Partida partida;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "selecaoVencedora")
+    private Selecao selecaoVencedora;
+
     public Integer getId() {
         return id;
     }
@@ -115,6 +119,14 @@ public class Palpite {
 
     public void setPartida(Partida partida) {
         this.partida = partida;
+    }
+
+    public Selecao getSelecaoVencedora() {
+        return selecaoVencedora;
+    }
+
+    public void setSelecaoVencedora(Selecao selecaoVencedora) {
+        this.selecaoVencedora = selecaoVencedora;
     }
 
     @Override
