@@ -3,7 +3,6 @@ package br.edu.ufra.entidade;
 import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 
@@ -22,7 +21,8 @@ public class Palpite {
     private Date dataDoPalpite;
 
     @Column(name = "ultimaAlteracao")
-    private Instant ultimaAlteracao;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date ultimaAlteracao;
 
     @Column(name = "golsA", nullable = false)
     private Integer golsA;
@@ -39,11 +39,11 @@ public class Palpite {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usuario", nullable = false)
-    private br.edu.ufra.entidade.Usuario usuario;
+    private Usuario usuario;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "partida", nullable = false)
-    private br.edu.ufra.entidade.Partida partida;
+    private Partida partida;
 
     public Integer getId() {
         return id;
@@ -61,11 +61,11 @@ public class Palpite {
         this.dataDoPalpite = dataDoPalpite;
     }
 
-    public Instant getUltimaAlteracao() {
+    public Date getUltimaAlteracao() {
         return ultimaAlteracao;
     }
 
-    public void setUltimaAlteracao(Instant ultimaAlteracao) {
+    public void setUltimaAlteracao(Date ultimaAlteracao) {
         this.ultimaAlteracao = ultimaAlteracao;
     }
 
@@ -101,19 +101,19 @@ public class Palpite {
         this.pontuacao = pontuacao;
     }
 
-    public br.edu.ufra.entidade.Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(br.edu.ufra.entidade.Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public br.edu.ufra.entidade.Partida getPartida() {
+    public Partida getPartida() {
         return partida;
     }
 
-    public void setPartida(br.edu.ufra.entidade.Partida partida) {
+    public void setPartida(Partida partida) {
         this.partida = partida;
     }
 

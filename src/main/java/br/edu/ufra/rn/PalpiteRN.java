@@ -4,9 +4,7 @@ import br.edu.ufra.dao.PalpiteDAO;
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
-import br.edu.ufra.util.UtilBean;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +24,7 @@ public class PalpiteRN {
         if (palpite == null || palpite.getPartida() == null) {
             return false;
         }
+        //Restrição: Salvar palpite até 30 minutos antes do início da partida
         Calendar trintaMinutesAntes = Calendar.getInstance();
         trintaMinutesAntes.setTime(palpite.getPartida().getInicioDaPartida());
         trintaMinutesAntes.add(Calendar.MINUTE, -30);
@@ -33,10 +32,14 @@ public class PalpiteRN {
         if (new Date().after(trintaMinutesAntes.getTime())) {
             return false;
         }
-        palpite.setDataDoPalpite(new Date());
-        List<Palpite> lista = new ArrayList<>();
-        lista.add(palpite);
-        return PALPITE_DAO.salvar(lista);
+
+        if (palpite.getId() == null || palpite.getId() == 0) {
+            palpite.setDataDoPalpite(new Date());
+            return PALPITE_DAO.criar(palpite);
+        } else {
+            palpite.setUltimaAlteracao(new Date());
+            return PALPITE_DAO.alterar(palpite);
+        }
     }
 
     public List<Palpite> obter(Partida partida) {
