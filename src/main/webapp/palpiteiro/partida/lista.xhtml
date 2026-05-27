@@ -62,22 +62,18 @@
                                                action="/administrador/partida/formulario.xhtml?faces-redirect=true">
                                     <f:param name="partidaID" value="#{p.id}"/>
 
-                                    <p:menuitem value="Processar"
-                                                action="#{partidaBean.processar()}"
-                                                update="@form">
-                                        <f:setPropertyActionListener value="p" target="#{partidaBean.partida}" />
-                                    </p:menuitem>
-
                                     <p:menuitem value="Excluir"
+                                                title="Excluir a partida, quando não há palpites na mesma"
                                                 action="#{partidaBean.excluir()}"
                                                 update="@form">
-                                        <f:setPropertyActionListener value="p" target="#{partidaBean.partida}" />
+                                        <f:setPropertyActionListener value="p" target="#{partidaBean.partida}"/>
                                     </p:menuitem>
 
                                     <p:menuitem value="Publicar"
-                                                action="#{partidaBean.excluir()}"
+                                                title="Exibir ou ocultar as partidas dos palpiteiros"
+                                                action="#{partidaBean.publicar()}"
                                                 update="@form">
-                                        <f:setPropertyActionListener value="p" target="#{partidaBean.partida}" />
+                                        <f:setPropertyActionListener value="p" target="#{partidaBean.partida}"/>
                                     </p:menuitem>
                                 </p:splitButton>
                             </p:outputPanel>
@@ -115,6 +111,21 @@
 
                         <p:column headerText="Local">
                             <h:outputText value="#{p.local}"/>
+                        </p:column>
+
+                        <p:column headerText="Operações" width="15%" rendered="#{usuarioBean.administrador}">
+
+                            <p:splitButton value="Placar"
+                                           action="/administrador/partida/formulario-placar.xhtml?faces-redirect=true">
+                                <f:param name="partidaID" value="#{p.id}"/>
+
+                                <p:menuitem value="Processar"
+                                            title="Calcular pontuações dos palpites e classificar os palpiteiros"
+                                            action="#{partidaBean.processar()}"
+                                            update="@form">
+                                    <f:setPropertyActionListener value="p" target="#{partidaBean.partida}"/>
+                                </p:menuitem>
+                            </p:splitButton>
                         </p:column>
 
                     </p:dataTable>

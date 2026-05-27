@@ -21,6 +21,7 @@ public class PartidaRN {
         if (partida == null) {
             return false;
         } else {
+            //TODO: partidas com palpite não podem ser despublicadas
             if (partida.getId() == null || partida.getId() == 0) {
                 return this.PARTIDA_DAO.alterar(partida);
             } else {
@@ -39,6 +40,7 @@ public class PartidaRN {
 
     public boolean excluir(Partida partida) {
         if (partida == null || !partida.getPalpites().isEmpty()) {
+            //TODO: excluir apenas partidas que não possuem palpites
             return false;
         } else {
             return this.PARTIDA_DAO.excluir(partida);
