@@ -48,8 +48,8 @@ public class PartidaRN {
     }
 
     private int fibonacci(int n) {
-        //0 1 1 2 3 5 8 13
-        //1 2 3 4 5 6 7 8
+        //0 1 1 2 3 5 8 13 --- valor
+        //1 2 3 4 5 6 7 8  --- índices
         int primeiro = 0;
         int segundo = 1;
         int resultado = primeiro + segundo;
@@ -86,7 +86,8 @@ public class PartidaRN {
                 .adicionarManipulador(new ManipuladorGolsA())
                 .adicionarManipulador(new ManipuladorGolsB())
                 .adicionarManipulador(new ManipuladorPlacarVencedor())
-                .adicionarManipulador(new ManipuladorPlacarExato());
+                .adicionarManipulador(new ManipuladorPlacarExato())
+                .adicionarManipulador(new ManipuladorSelecaoVencedora());
         ManipuladorResultadoAbstrato manipuladorDaPontuacao = manipuladorBuilder.construir();
 
         int pontuacao = 0;

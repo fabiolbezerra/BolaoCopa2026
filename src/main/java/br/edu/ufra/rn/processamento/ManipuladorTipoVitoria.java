@@ -18,6 +18,17 @@ public class ManipuladorTipoVitoria extends ManipuladorResultadoAbstrato {
             return 0;
         }
 
+        //Fase de grupo não processa Tipo de Vitória (Tempo Normal, Prorrogação ou Pênaltis)
+        if (!palpite.getPartida().getFase().isEliminatoria()) {
+            if (getProximo() != null) {
+                //Pula para o próximo processamento
+                return getProximo().processar(palpite);
+            } else {
+                //Ou retorna zero
+                return 0;
+            }
+        }
+
         EnumTipoVitoria tipoDeVitoriaPartida = palpite.getPartida().getTipoDeVitoria();
         EnumTipoVitoria tipoDeVitoriaPalpite = palpite.getTipoDeVitoria();
 

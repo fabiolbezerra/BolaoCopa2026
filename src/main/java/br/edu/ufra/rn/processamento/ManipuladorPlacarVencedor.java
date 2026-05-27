@@ -3,6 +3,11 @@ package br.edu.ufra.rn.processamento;
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 
+/**
+ * Manipulador do cálculo da pontuação para placares construídos no tempo normal do jogo.
+ *
+ * O placar vencedor considera quem venceu o jogo ou se houve empate.
+ */
 public class ManipuladorPlacarVencedor extends ManipuladorResultadoAbstrato {
 
     public ManipuladorPlacarVencedor() {
