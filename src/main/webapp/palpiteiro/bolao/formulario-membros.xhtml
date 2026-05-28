@@ -83,13 +83,13 @@
                         value="Sim"
                         type="button"
                         styleClass="ui-confirmdialog-yes"
-                        icon="pi pi-check" />
+                        icon="pi pi-check"/>
 
                 <p:commandButton
                         value="Não"
                         type="button"
                         styleClass="ui-confirmdialog-no"
-                        icon="pi pi-times" />
+                        icon="pi pi-times"/>
 
             </p:confirmDialog>
 
@@ -137,10 +137,9 @@
 
                         <f:facet name="footer">
 
-                            <p:commandButton
-                                    value="Adicionar"
-                                    action="#{membroDoBolaoBean.adicionarParticipante()}"
-                                    update="@form" />
+                            <p:commandButton value="Adicionar"
+                                             action="#{membroDoBolaoBean.adicionarParticipante()}"
+                                             update="@form"/>
 
                         </f:facet>
 
@@ -183,13 +182,11 @@
                                     value="Excluir"
                                     rendered="#{!(membroDoBolaoBean.bolao.dono eq membro.usuario)}"
                                     action="#{membroDoBolaoBean.removerParticipante()}"
-                                    update="@form"
-                                    icon="pi pi-trash"
-                                    styleClass="ui-button-danger">
+                                    update="@form">
 
                                 <f:setPropertyActionListener
                                         value="#{membro}"
-                                        target="#{membroDoBolaoBean.participante}" />
+                                        target="#{membroDoBolaoBean.participante}"/>
 
                                 <p:confirm
                                         header="Confirmação"

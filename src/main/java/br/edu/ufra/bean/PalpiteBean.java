@@ -33,6 +33,7 @@ public class PalpiteBean {
     @PostConstruct
     public void init() {
         String partidaID = UtilBean.obterValor("partidaID");
+        Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         if (partidaID != null) {
             try {
                 int id = Integer.parseInt(partidaID);
@@ -42,12 +43,13 @@ public class PalpiteBean {
                     UtilBean.criarMensagemDeAviso("Não foi possível recuperar a partida. Código inválido.");
                 } else {
                     // Verifica se o palpiteiro já tem palpite nessa partida
-                    Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
                     Palpite palpiteExistente = PALPITE_RN.obter(usuarioLogado, partida);
                     if (palpiteExistente != null) {
                         palpite = palpiteExistente; // carrega para edição
                     } else {
                         palpite = new Palpite(); // cria novo
+                        palpite.setUsuario(usuarioLogado);
+                        palpite.setPartida(partida);
                     }
                 }
             } catch (Exception e) {
@@ -55,7 +57,6 @@ public class PalpiteBean {
                 UtilBean.criarMensagemDeErro("Não foi possível recuperar a partida.");
             }
         }
-        Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         meusPalpites = PALPITE_RN.obter(usuarioLogado);
     }
 
@@ -63,12 +64,6 @@ public class PalpiteBean {
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         palpite.setUsuario(usuarioLogado);
         palpite.setPartida(partida);
-        if (selecaoVencedoraId != null) {
-            palpite.setSelecaoVencedora(SELECAO_RN.obter(selecaoVencedoraId));
-        }
-        if (palpite.getTipoDeVitoria() == null) {
-            palpite.setTipoDeVitoria(EnumTipoVitoria.TEMPO_NORMAL);
-        }
         if (PALPITE_RN.salvar(palpite)) {
             return "/palpiteiro/palpite/lista.xhtml?faces-redirect=true";
         } else {
@@ -76,6 +71,7 @@ public class PalpiteBean {
             return null;
         }
     }
+
     public void excluir() {
         if (PALPITE_RN.excluir(palpite)) {
             UtilBean.criarMensagemDeInformacao("Palpite excluído!");

@@ -2,6 +2,7 @@ package br.edu.ufra.bean;
 
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
+import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.rn.PalpiteRN;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.util.UtilBean;
@@ -23,7 +24,6 @@ public class PartidaBean {
     private List<Partida> partidasAnteriores;
 
     private Partida partida = new Partida();
-    private Palpite palpite = new Palpite();
 
     public PartidaBean() {
         System.out.println("Criando PartidaBean");
@@ -33,6 +33,21 @@ public class PartidaBean {
     public void init() {
         System.out.println("PartidaBean.init()");
         proximasEAnteriores();
+
+        String partidaID = UtilBean.obterValor("partidaID");
+        Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
+        if (partidaID != null) {
+            try {
+                int id = Integer.parseInt(partidaID);
+                partida = PARTIDA_RN.obter(id);
+                if (partida == null) {
+                    partida = new Partida();
+                }
+            } catch (Exception e) {
+                partida = new Partida();
+                UtilBean.criarMensagemDeErro("Não foi possível recuperar a partida.");
+            }
+        }
     }
 
     private void proximasEAnteriores() {
@@ -63,7 +78,7 @@ public class PartidaBean {
         this.partida = partida;
     }
 
-        public void processar() {
+    public void processar() {
         if (PARTIDA_RN.processarPontuacao(partida)) {
             UtilBean.criarMensagemDeInformacao("Pontuação dos palpiteiros atualizada!");
             if (PARTIDA_RN.processarOrdenacao(partida)) {
@@ -101,21 +116,6 @@ public class PartidaBean {
             proximasEAnteriores();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
-        }
-    }
-
-    public void palpitar() {
-        if (palpite != null) {
-            palpite.setPartida(partida);
-            if (PALPITE_RN.salvar(palpite)) {
-                UtilBean.criarMensagemDeInformacao("Palpite registrado com sucesso");
-                setPartida(PARTIDA_RN.obter(partida.getId()));
-                palpite = new Palpite();
-            } else {
-                UtilBean.criarMensagemDeErro("Não foi possível registrar o palpite");
-            }
-        } else {
-            UtilBean.criarMensagemDeErro("Não foi possível registrar o palpite");
         }
     }
 

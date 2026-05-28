@@ -20,7 +20,7 @@ public class Participante {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "usuario", nullable = false)
-    private br.edu.ufra.entidade.Usuario usuario;
+    private Usuario usuario;
 
     public Integer getId() {
         return id;
@@ -38,11 +38,11 @@ public class Participante {
         this.bolao = bolao;
     }
 
-    public br.edu.ufra.entidade.Usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(br.edu.ufra.entidade.Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

@@ -17,96 +17,84 @@
         <br/>
 
         <h:form>
+            <h:inputHidden value="#{partidaBean.partida.id}"/>
+
             <p:panelGrid styleClass="ui-noborder" columns="2">
 
                 <f:facet name="header">
                     Dados da partida
                 </f:facet>
 
-            <p:outputLabel
-                    value="Data"/>
-            <p:inputText
-                id="Data"
-                value="#{partidaBean.partida.inicioDaPartida}"
-                required="true"
-                requiredMessage="Informe a data da partida" />
+                <p:outputLabel value="Data"/>
+                <h:outputText value="#{partidaBean.partida.inicioDaPartida}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                </h:outputText>
 
-            <p:outputLabel
-                    value="Local"
-                    for = "local"/>
-            <p:inputText
-                 id="local"
-                 value="#{partidaBean.partida.local}"
-                 required="true"
-                 requiredMessage="Informe o local da partida" />
+                <p:outputLabel value="Local"
+                               for="local"/>
+                <p:inputText id="local"
+                             value="#{partidaBean.partida.local}"
+                             required="true"
+                             requiredMessage="Informe o local da partida"/>
 
-            <p:outputLabel
-                    value="Fase"
-                    for = "fase"/>
-            <p:selectOneMenu
-                    id = "fase"
-                    value="#{partidaBean.partida.fase}"
-                    converter="faseConverter"
-                    required = "true"
-                    style = "width: 100%">
-                <f:selectItem
-                        itemLabel="Selecione..."
-                        itemValue="" noSelectionOption="false"/>
-                <f:selectItems
-                        value="#{faseBean.fases}"
-                        var="f"
-                        itemLabel="#{f.nome}"
-                        itemValue="#{f}"/>
-            </p:selectOneMenu>
+                <p:outputLabel value="Fase"
+                               for="somFase"/>
+                <p:selectOneMenu id="somFase"
+                                 value="#{partidaBean.partida.fase}"
+                                 converter="faseConverter"
+                                 required="true">
+                    <f:selectItem itemLabel="Selecione..."
+                                  itemValue="null"
+                                  noSelectionOption="false"/>
+                    <f:selectItems value="#{faseBean.fases}"
+                                   var="f"
+                                   itemLabel="#{f.nome}"
+                                   itemValue="#{f}"/>
+                </p:selectOneMenu>
 
-            <p:outputLabel
-                    value="Seleção A"/>
-            <p:selectOneMenu
-                    value="#{partidaBean.partida.selecaoA}"
+                <p:outputLabel value="Seleção A"/>
+                <p:selectOneMenu value="#{partidaBean.partida.selecaoA}"
+                                 converter="selecaoConverter">
+                    <f:selectItem
+                            itemLabel="Selecione..."
+                            itemValue=""
+                            noSelectionOption="true"/>
+                    <f:selectItems
+                            value="#{selecaoBean.selecoes}"
+                            var="s" itemLabel="#{s.nome}"
+                            itemValue="#{s}"/>
+                </p:selectOneMenu>
 
-                    converter="selecaoConverter">
-                <f:selectItem
-                        itemLabel="Selecione..."
-                        itemValue=""
-                        noSelectionOption="true"/>
-                <f:selectItems
-                        value="#{selecaoBean.selecoes}"
-                        var="s" itemLabel="#{s.nome}"
-                        itemValue="#{s}"/>
-            </p:selectOneMenu>
+                <p:outputLabel
+                        value="Seleção B"/>
+                <p:selectOneMenu
+                        value="#{partidaBean.partida.selecaoB}"
 
-            <p:outputLabel
-                    value="Seleção B"/>
-            <p:selectOneMenu
-                    value="#{partidaBean.partida.selecaoB}"
+                        converter="selecaoConverter">
+                    <f:selectItem
+                            itemLabel="Selecione..."
+                            itemValue=""
+                            noSelectionOption="true"/>
+                    <f:selectItems
+                            value="#{selecaoBean.selecoes}"
+                            var="s"
+                            itemLabel="#{s.nome}"
+                            itemValue="#{s}"/>
+                </p:selectOneMenu>
 
-                    converter="selecaoConverter">
-                <f:selectItem
-                        itemLabel="Selecione..."
-                        itemValue=""
-                        noSelectionOption="true"/>
-                <f:selectItems
-                        value="#{selecaoBean.selecoes}"
-                        var="s"
-                        itemLabel="#{s.nome}"
-                        itemValue="#{s}"/>
-            </p:selectOneMenu>
-
-        </p:panelGrid>
+            </p:panelGrid>
 
             <br/>
 
-            <p:commandButton
-                    value="Salvar Partida"
-                    action="#{partidaBean.salvar}"
-                    update="@form"
-                    icon="pi pi-save" />
+            <p:commandButton value="Salvar Partida"
+                             icon="fa fa-floppy-o"
+                             action="#{partidaBean.salvar}"
+                             update="@form"/>
 
-            <p:commandButton
-                    value="Cancelar"
-                    action="/palpiteiro/partida/lista.xhtml"
-                    update="@form"
-                    icon="pi pi-times" />
+            <p:button value="Cancelar"
+                      icon="fa fa-ban"
+                      outcome="/palpiteiro/partida/lista.xhtml"
+            />
         </h:form>
 
     </ui:define>

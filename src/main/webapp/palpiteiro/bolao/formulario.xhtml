@@ -24,36 +24,31 @@
 
             <p:growl
                     showSummary="true"
-                    showDetail="true" />
+                    showDetail="true"/>
 
-            <h:inputHidden
-                    value="#{bolaoBean.bolao.id}" />
+            <h:inputHidden value="#{bolaoBean.bolao.id}"/>
 
             <p:panelGrid columns="2">
-
                 <f:facet name="header">
                     Dados do Bolão
                 </f:facet>
 
-                <h:outputLabel
-                        for="nome"
-                        value="Nome do Bolão:" />
+                <p:outputLabel for="nome"
+                               value="Nome do Bolão:"/>
 
-                <p:inputText
-                        id="nome"
-                        value="#{bolaoBean.bolao.nome}"
-                        required="true"
-                        requiredMessage="Informe o nome do bolão" />
+                <p:inputText id="nome"
+                             value="#{bolaoBean.bolao.nome}"
+                             required="true"
+                             requiredMessage="Informe o nome do bolão"/>
 
             </p:panelGrid>
 
             <br/>
 
-            <p:commandButton
-                    value="Salvar Bolão"
-                    action="#{bolaoBean.salvar}"
-                    ajax="false"
-                    icon="pi pi-save" />
+            <p:commandButton value="Salvar Bolão"
+                             action="#{bolaoBean.salvar}"
+                             ajax="false"
+                             icon="fa fa-floppy-o"/>
         </h:form>
 
     </ui:define>

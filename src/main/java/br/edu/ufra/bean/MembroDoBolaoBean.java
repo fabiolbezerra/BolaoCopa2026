@@ -2,20 +2,22 @@ package br.edu.ufra.bean;
 
 import br.edu.ufra.entidade.Bolao;
 import br.edu.ufra.entidade.Participante;
-import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.rn.BolaoRN;
+import br.edu.ufra.rn.ParticipanteRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.List;
+import java.util.Objects;
 
 @ManagedBean
 @ViewScoped
 public class MembroDoBolaoBean {
 
     private final BolaoRN BOLAO_RN = new BolaoRN();
+    private final ParticipanteRN PARTICIPANTE_RN = new ParticipanteRN();
 
     private Bolao bolao = new Bolao();
     private Participante participante = new Participante();
@@ -29,8 +31,8 @@ public class MembroDoBolaoBean {
     public void init() {
         String bolaoID = UtilBean.obterValor("bolaoID");
         try {
-            this.bolao = BOLAO_RN.obter(Integer.parseInt(bolaoID));
-            this.participantes = this.bolao.getParticipantes();
+            bolao = BOLAO_RN.obter(Integer.parseInt(bolaoID));
+            participantes = PARTICIPANTE_RN.obter(bolao);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -81,21 +83,23 @@ public class MembroDoBolaoBean {
         bolao = BOLAO_RN.obter(bolao.getId());
         participante = new Participante();
         participante.setBolao(bolao);
-        participantes = bolao.getParticipantes();
+
+        participantes = PARTICIPANTE_RN.obter(bolao);
     }
 
     public void removerParticipante() {
         if (participante == null) {
             UtilBean.criarMensagemDeAviso("Palpiteiro não encontrado");
-        } else if (participante.getBolao() == null || participante.getBolao() != bolao) {
+        } else if (participante.getBolao() == null
+                || ! Objects.equals(participante.getBolao(), bolao)) {
             UtilBean.criarMensagemDeErro("Palpiteiro não participa deste bolão");
         } else {
             if (BOLAO_RN.removerParticipante(participante, bolao)) {
-                atualizarListaDeParticipantes();
                 UtilBean.criarMensagemDeInformacao("Participante removido com sucesso");
             } else {
                 UtilBean.criarMensagemDeErro("Não foi possível remover o participante");
             }
         }
+        atualizarListaDeParticipantes();
     }
 }

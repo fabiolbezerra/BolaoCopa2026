@@ -1,4 +1,5 @@
 package br.edu.ufra.bean.converter;
+
 import br.edu.ufra.entidade.Fase;
 import br.edu.ufra.rn.FaseRN;
 
@@ -26,8 +27,7 @@ public class FaseConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
-        if (value == null
-                || ! (value instanceof Fase)) {
+        if (value == null || !(value instanceof Fase)) {
             return null;
         }
         Fase fase = (Fase) value;

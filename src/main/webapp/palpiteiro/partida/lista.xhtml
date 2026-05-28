@@ -16,6 +16,16 @@
     <ui:define name="content">
         <h1>Calendário de Partidas</h1>
 
+        <br/>
+
+        <p:button value="Adicionar Partida"
+                  rendered="#{usuarioBean.administrador}"
+                  outcome="/administrador/partida/formulario.xhtml"
+        />
+
+        <br/>
+        <br/>
+
         <h:form>
             <p:tabView>
 
@@ -59,7 +69,7 @@
 
                             <p:outputPanel rendered="#{usuarioBean.administrador}">
                                 <p:splitButton value="Editar"
-                                               action="/administrador/partida/formulario.xhtml?faces-redirect=true">
+                                               action="/administrador/partida/formulario.xhtml">
                                     <f:param name="partidaID" value="#{p.id}"/>
 
                                     <p:menuitem value="Excluir"
@@ -79,12 +89,6 @@
                             </p:outputPanel>
                         </p:column>
                     </p:dataTable>
-                    <p:commandButton
-                            value="Adicionar partida"
-                            action="/administrador/partida/formulario.xhtml"
-                            update="@form"
-                            icon="pi pi-save"/>
-
                 </p:tab>
 
                 <p:tab title="Anteriores">
