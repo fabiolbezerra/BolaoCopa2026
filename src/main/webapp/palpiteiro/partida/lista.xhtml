@@ -50,12 +50,12 @@
                         </p:column>
 
                         <p:column headerText="Operações" width="15%">
-                            <p:commandButton value="Palpitar"
-                                             rendered="#{usuarioBean.palpiteiro}"
-                                             disabled="#{partidaBean.isExpirada(p)}"
-                                             action="/palpiteiro/palpite/formulario.xhtml?faces-redirect=true">
+                            <p:button value="Palpitar"
+                                      rendered="#{usuarioBean.palpiteiro}"
+                                      disabled="#{partidaBean.isExpirada(p)}"
+                                      outcome="/palpiteiro/palpite/formulario.xhtml">
                                 <f:param name="partidaID" value="#{p.id}"/>
-                            </p:commandButton>
+                            </p:button>
 
                             <p:outputPanel rendered="#{usuarioBean.administrador}">
                                 <p:splitButton value="Editar"

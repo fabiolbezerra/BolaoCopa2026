@@ -79,10 +79,13 @@ public class PalpiteDAO extends GenericDAO<Palpite> {
         TypedQuery<Palpite> query = em.createQuery(JPQL, Palpite.class);
         Palpite resposta = null;
         try {
-            resposta = query
+            List<Palpite> resultados = query
                     .setParameter("usuario", usuario)
                     .setParameter("partida", partida)
-                    .getSingleResult();
+                    .getResultList();
+            if (resultados != null && !resultados.isEmpty()) {
+                resposta = resultados.get(0);
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }  finally {
