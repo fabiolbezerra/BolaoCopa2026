@@ -26,7 +26,7 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
         try {
 
-            resposta = (List<Bolao>) query
+            resposta = query
                     .setParameter("usuario", usuario)
                     .getResultList();
 
@@ -52,12 +52,14 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
         try {
 
+            transaction.begin();
+
+            Bolao bolaoGerenciado = em.merge(bolao);
+
             Participante participante = new Participante();
 
             participante.setUsuario(usuario);
-            participante.setBolao(bolao);
-
-            transaction.begin();
+            participante.setBolao(bolaoGerenciado);
 
             em.persist(participante);
 
@@ -69,7 +71,7 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             e.printStackTrace(System.err);
 
-            if (transaction != null && transaction.isActive()) {
+            if (transaction.isActive()) {
                 transaction.rollback();
             }
 
@@ -91,9 +93,9 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             transaction.begin();
 
-            Participante p = em.merge(participante);
+            Participante participanteGerenciado = em.merge(participante);
 
-            em.remove(p);
+            em.remove(participanteGerenciado);
 
             transaction.commit();
 
@@ -103,7 +105,7 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             e.printStackTrace(System.err);
 
-            if (transaction != null && transaction.isActive()) {
+            if (transaction.isActive()) {
                 transaction.rollback();
             }
 
@@ -131,7 +133,20 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             } else {
 
-                em.merge(bolao);
+                Bolao bolaoBanco = em.find(Bolao.class, bolao.getId());
+
+                if (bolaoBanco != null) {
+
+                    bolaoBanco.setNome(bolao.getNome());
+                    bolaoBanco.setDono(bolao.getDono());
+                    bolaoBanco.setCriacao(bolao.getCriacao());
+
+                    em.merge(bolaoBanco);
+
+                } else {
+
+                    em.persist(bolao);
+                }
             }
 
             transaction.commit();
@@ -142,7 +157,7 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             e.printStackTrace(System.err);
 
-            if (transaction != null && transaction.isActive()) {
+            if (transaction.isActive()) {
                 transaction.rollback();
             }
 
@@ -164,15 +179,15 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             transaction.begin();
 
-            Bolao b = em.merge(bolao);
+            Bolao bolaoGerenciado = em.merge(bolao);
 
             em.createQuery(
                             "delete from Participante p where p.bolao = :bolao"
                     )
-                    .setParameter("bolao", b)
+                    .setParameter("bolao", bolaoGerenciado)
                     .executeUpdate();
 
-            em.remove(b);
+            em.remove(bolaoGerenciado);
 
             transaction.commit();
 
@@ -182,7 +197,7 @@ public class BolaoDAO extends GenericDAO<Bolao> {
 
             e.printStackTrace(System.err);
 
-            if (transaction != null && transaction.isActive()) {
+            if (transaction.isActive()) {
                 transaction.rollback();
             }
 

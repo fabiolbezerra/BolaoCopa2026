@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition
         template="/template.xhtml"
         xmlns="http://www.w3.org/1999/xhtml"
@@ -9,86 +10,165 @@
         xmlns:h="http://java.sun.com/jsf/html"
         xmlns:c="http://java.sun.com/jsp/jstl/core"
         xmlns:f="http://java.sun.com/jsf/core">
+
     <ui:define name="title">
         Meus Bolões
     </ui:define>
 
     <ui:define name="content">
+
         <h1>
-            <!-- Referência: https://www.baeldung.com/jstl -->
+
             <c:choose>
+
                 <c:when test="#{usuarioBean.administrador}">
                     Todos os Bolões
                 </c:when>
+
                 <c:otherwise>
                     Meus Bolões
                 </c:otherwise>
+
             </c:choose>
+
         </h1>
 
         <br/>
 
         <h:form>
 
-            <p:commandButton value="Criar Novo Bolão"
-                             rendered="#{usuarioBean.palpiteiro}"
-                             action="formulario.xhtml"
-                             icon="pi pi-plus"/>
+            <p:commandButton
+                    value="Criar Novo Bolão"
+                    rendered="#{usuarioBean.palpiteiro}"
+                    action="formulario.xhtml"
+                    icon="pi pi-plus"/>
 
         </h:form>
 
         <h:form>
-            <p:growl showSummary="true" showDetail="true"/>
 
-            <p:dataTable value="#{bolaoBean.boloes}" var="bolao"
-                         emptyMessage="Nenhum bolão cadastrado">
+            <p:growl
+                    showSummary="true"
+                    showDetail="true"/>
+
+            <p:confirmDialog
+                    global="true"
+                    showEffect="fade"
+                    hideEffect="fade">
+
+                <p:commandButton
+                        value="Sim"
+                        type="button"
+                        styleClass="ui-confirmdialog-yes"
+                        icon="pi pi-check" />
+
+                <p:commandButton
+                        value="Não"
+                        type="button"
+                        styleClass="ui-confirmdialog-no"
+                        icon="pi pi-times" />
+
+            </p:confirmDialog>
+
+            <p:dataTable
+                    value="#{bolaoBean.boloes}"
+                    var="bolao"
+                    emptyMessage="Nenhum bolão cadastrado">
+
                 <p:column headerText="Nome">
+
                     <h:outputText value="#{bolao.nome}"/>
+
                 </p:column>
 
                 <p:column headerText="Data de Criação">
+
                     <h:outputText value="#{bolao.criacao}">
+
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
+
                     </h:outputText>
+
                 </p:column>
 
                 <p:column headerText="Dono">
-                    <h:outputText value="#{bolao.dono.nome} #{bolao.dono.sobrenome}"/>
+
+                    <h:outputText
+                            value="#{bolao.dono.nome} #{bolao.dono.sobrenome}"/>
+
                 </p:column>
 
                 <p:column headerText="Operações">
-                    <p:commandButton value="Editar"
-                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
-                                     action="formulario.xhtml">
-                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+
+                    <p:button
+                            value="Editar"
+                            rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
+                            outcome="formulario.xhtml">
+
+                        <f:param
+                                name="bolaoID"
+                                value="#{bolao.id}"/>
+
+                    </p:button>
+
+                    <p:button
+                            value="Membros"
+                            rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
+                            outcome="formulario-membros.xhtml">
+
+                        <f:param
+                                name="bolaoID"
+                                value="#{bolao.id}"/>
+
+                    </p:button>
+
+                    <p:commandButton
+                            value="Excluir"
+                            rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
+                            action="#{bolaoBean.excluir()}"
+                            update="@form"
+                            icon="pi pi-trash"
+                            styleClass="ui-button-danger">
+
+                        <f:setPropertyActionListener
+                                value="#{bolao}"
+                                target="#{bolaoBean.bolao}"/>
+
+                        <p:confirm
+                                header="Confirmação"
+                                message="Deseja realmente excluir este bolão?"
+                                icon="pi pi-exclamation-triangle"/>
+
                     </p:commandButton>
 
-                    <p:commandButton value="Membros"
-                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
-                                     action="formulario-membros.xhtml">
-                        <f:param name="bolaoID" value="#{bolao.id}"/>
+                    <p:commandButton
+                            value="Sair"
+                            rendered="#{bolaoBean.isApenasParticipante(bolao)}"
+                            action="#{bolaoBean.sair()}"
+                            update="@form">
+
+                        <f:setPropertyActionListener
+                                value="#{bolao}"
+                                target="#{bolaoBean.bolao}"/>
+
                     </p:commandButton>
 
-                    <p:commandButton value="Excluir"
-                                     rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
-                                     action="#{bolaoBean.excluir()}"
-                                     update="@form">
-                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
-                    </p:commandButton>
+                    <p:button
+                            value="Detalhes"
+                            outcome="detalhes.xhtml">
 
-                    <p:commandButton value="Sair"
-                                     rendered="#{bolaoBean.isApenasParticipante(bolao)}"
-                                     action="#{bolaoBean.sair()}"
-                                     update="@form">
-                        <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
-                    </p:commandButton>
+                        <f:param
+                                name="bolaoID"
+                                value="#{bolao.id}"/>
 
-                    <p:commandButton value="Detalhes"
-                                     action="detalhes.xhtml">
-                        <f:param value="#{bolao.id}" name="bolaoID"/>
-                    </p:commandButton>
+                    </p:button>
+
                 </p:column>
+
             </p:dataTable>
+
         </h:form>
+
     </ui:define>
+
 </ui:composition>

@@ -22,13 +22,22 @@
 
         <h:form>
 
-            <p:panelGrid columns="2" styleClass="ui-noborder">
+            <p:growl
+                    showSummary="true"
+                    showDetail="true" />
+
+            <h:inputHidden
+                    value="#{bolaoBean.bolao.id}" />
+
+            <p:panelGrid columns="2">
 
                 <f:facet name="header">
                     Dados do Bolão
                 </f:facet>
 
-                <h:outputLabel for="nome" value="Nome do Bolão:" />
+                <h:outputLabel
+                        for="nome"
+                        value="Nome do Bolão:" />
 
                 <p:inputText
                         id="nome"
@@ -43,9 +52,8 @@
             <p:commandButton
                     value="Salvar Bolão"
                     action="#{bolaoBean.salvar}"
-                    update="@form"
+                    ajax="false"
                     icon="pi pi-save" />
-
         </h:form>
 
     </ui:define>
