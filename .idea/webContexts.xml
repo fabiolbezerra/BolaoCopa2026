@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/administrador/fase/lista.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/administrador/fase" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/bolao/lista.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/bolao" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/palpite/formulario.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/palpite" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/template.xhtml" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
     </option>

@@ -62,4 +62,11 @@ public class PalpiteRN {
         }
         return PALPITE_DAO.obter(palpiteiro, partida);
     }
+
+    public boolean excluir(Palpite palpite) {
+        if (palpite == null || palpite.getId() == null) {
+            return false;
+        }
+        return PALPITE_DAO.excluir(palpite);
+    }
 }

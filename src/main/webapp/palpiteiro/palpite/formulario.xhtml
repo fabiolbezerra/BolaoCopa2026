@@ -6,25 +6,96 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+
     <ui:define name="title">
-        Cadastro de Palpite
+        Palpite
     </ui:define>
 
     <ui:define name="content">
-        <h1>Cadastrar Palpite</h1>
-
-        <br/>
+        <h1>Palpite</h1>
 
         <h:form>
-            <p:panelGrid styleClass="ui-noborder" columns="2">
 
+            <!-- DADOS DA PARTIDA -->
+            <p:panel header="Dados da Partida">
+                <h:panelGrid columns="2" columnClasses="label-col, value-col"
+                             style="width: 100%">
 
+                    <h:outputText value="Fase:"/>
+                    <h:outputText value="#{palpiteBean.partida.fase != null ? palpiteBean.partida.fase.nome : 'Não informada'}"/>
 
-                <f:facet name="header">
+                    <h:outputText value="Data e Hora:"/>
+                    <h:outputText value="#{palpiteBean.partida.inicioDaPartida}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                    </h:outputText>
 
-                </f:facet>
-            </p:panelGrid>
+                    <h:outputText value="Local:"/>
+                    <h:outputText value="#{palpiteBean.partida.local != null ? palpiteBean.partida.local : 'Sem local determinado'}"/>
+
+                </h:panelGrid>
+            </p:panel>
+
+            <br/>
+
+            <!-- PALPITE -->
+            <p:panel header="Meu Palpite">
+
+                <p:messages autoUpdate="true"/>
+
+                <h:outputText value="Coloque o resultado de quanto você acha que vai ser o jogo:"/>
+
+                <h:panelGrid columns="3" style="width: 50%; margin: 0 auto; text-align: center;"
+                             columnClasses="selecao-col, placar-col, selecao-col">
+
+                    <h:outputText value="#{palpiteBean.partida.selecaoA != null ? palpiteBean.partida.selecaoA.nome : ''}"
+                                  style="font-weight: bold; display: block;"/>
+                    <h:outputText value=""/>
+                    <h:outputText value="#{palpiteBean.partida.selecaoB != null ? palpiteBean.partida.selecaoB.nome : ''}"
+                                  style="font-weight: bold; display: block;"/>
+
+                    <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoA.simbolo}" width="32px"/>
+                    <h:outputText value="x" style="font-weight: bold; font-size: 1.5em; display: block; text-align: center;"/>
+                    <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoB.simbolo}" width="32px"/>
+
+                    <p:inputText value="#{palpiteBean.palpite.golsA}"
+                                 style="width: 60px; text-align: center;"
+                                 required="true"
+                                 requiredMessage="Informe os gols"/>
+                    <h:outputText value=""/>
+                    <p:inputText value="#{palpiteBean.palpite.golsB}"
+                                 style="width: 60px; text-align: center;"
+                                 required="true"
+                                 requiredMessage="Informe os gols"/>
+
+                </h:panelGrid>
+
+                <br/>
+
+                <!-- CAMPO APENAS PARA FASE ELIMINATÓRIA -->
+                <h:panelGrid columns="2" cellpadding="5"
+                             rendered="#{palpiteBean.partida.fase != null and palpiteBean.partida.fase.eliminatoria}">
+
+                    <h:outputText value="Tipo de Vitória:"/>
+                    <p:selectOneMenu value="#{palpiteBean.palpite.tipoDeVitoria}">
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}"/>
+                        <f:selectItems value="#{palpiteBean.tiposDeVitoria}"
+                                       var="tipo"
+                                       itemLabel="#{tipo.descricao}"
+                                       itemValue="#{tipo}"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+            </p:panel>
+
+            <br/>
+
+            <!-- BOTÕES -->
+            <p:commandButton value="Salvar" action="#{palpiteBean.salvar()}"/>
+            <h:outputText value=" "/>
+            <p:button value="Cancelar"
+                      outcome="/palpiteiro/palpite/lista.xhtml"/>
         </h:form>
 
     </ui:define>

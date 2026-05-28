@@ -13,6 +13,7 @@ import java.util.Objects;
         @NamedQuery(name = "Palpite.findById", query = "SELECT p FROM Palpite p WHERE p.id = :id")})
 public class Palpite {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 

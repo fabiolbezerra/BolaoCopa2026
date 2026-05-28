@@ -3,8 +3,10 @@ package br.edu.ufra.bean;
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.rn.PalpiteRN;
+import br.edu.ufra.rn.SelecaoRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +21,9 @@ public class PalpiteBean {
     private Palpite palpite = new Palpite();
     private Partida partida = new Partida();
     private List<Palpite> meusPalpites;
+    private Integer selecaoVencedoraId;
 
+    private final SelecaoRN SELECAO_RN = new SelecaoRN();
     private final PalpiteRN PALPITE_RN = new PalpiteRN();
     private final PartidaRN PARTIDA_RN = new PartidaRN();
 
@@ -36,6 +40,15 @@ public class PalpiteBean {
                 if (partida == null) {
                     partida = new Partida();
                     UtilBean.criarMensagemDeAviso("Não foi possível recuperar a partida. Código inválido.");
+                } else {
+                    // Verifica se o palpiteiro já tem palpite nessa partida
+                    Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
+                    Palpite palpiteExistente = PALPITE_RN.obter(usuarioLogado, partida);
+                    if (palpiteExistente != null) {
+                        palpite = palpiteExistente; // carrega para edição
+                    } else {
+                        palpite = new Palpite(); // cria novo
+                    }
                 }
             } catch (Exception e) {
                 partida = new Partida();
@@ -46,17 +59,34 @@ public class PalpiteBean {
         meusPalpites = PALPITE_RN.obter(usuarioLogado);
     }
 
-    public void salvar() {
+    public String salvar() {
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         palpite.setUsuario(usuarioLogado);
         palpite.setPartida(partida);
+        if (selecaoVencedoraId != null) {
+            palpite.setSelecaoVencedora(SELECAO_RN.obter(selecaoVencedoraId));
+        }
+        if (palpite.getTipoDeVitoria() == null) {
+            palpite.setTipoDeVitoria(EnumTipoVitoria.TEMPO_NORMAL);
+        }
         if (PALPITE_RN.salvar(palpite)) {
-            UtilBean.criarMensagemDeInformacao("Palpite salvo!");
-            meusPalpites = PALPITE_RN.obter(usuarioLogado);
-            palpite = new Palpite();
+            return "/palpiteiro/palpite/lista.xhtml?faces-redirect=true";
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar o palpite.");
+            return null;
         }
+    }
+    public void excluir() {
+        if (PALPITE_RN.excluir(palpite)) {
+            UtilBean.criarMensagemDeInformacao("Palpite excluído!");
+            meusPalpites = PALPITE_RN.obter(UtilBean.obterUsuarioLogado());
+        } else {
+            UtilBean.criarMensagemDeErro("Não foi possível excluir o palpite.");
+        }
+    }
+
+    public EnumTipoVitoria[] getTiposDeVitoria() {
+        return EnumTipoVitoria.values();
     }
 
     public Palpite getPalpite() {
@@ -81,5 +111,13 @@ public class PalpiteBean {
 
     public void setMeusPalpites(List<Palpite> meusPalpites) {
         this.meusPalpites = meusPalpites;
+    }
+
+    public Integer getSelecaoVencedoraId() {
+        return selecaoVencedoraId;
+    }
+
+    public void setSelecaoVencedoraId(Integer selecaoVencedoraId) {
+        this.selecaoVencedoraId = selecaoVencedoraId;
     }
 }
