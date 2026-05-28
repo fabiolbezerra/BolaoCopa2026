@@ -89,7 +89,7 @@ public class Fase {
 
     @Override
     public boolean equals(Object object) {
-        if (!(object instanceof Curso))
+        if (!(object instanceof Fase))
             return false;
         Fase fase = (Fase) object;
         return Objects.equals(id, fase.id);
