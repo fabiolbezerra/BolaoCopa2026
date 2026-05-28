@@ -70,10 +70,15 @@
                     </p:commandButton>
 
                     <p:commandButton value="Excluir"
+                                     icon="fa fa-trash-o"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
                                      action="#{bolaoBean.excluir()}"
                                      update="@form">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
+
+                        <p:confirm header="Confirmação"
+                                   message="Deseja excluir o bolão?"
+                                   icon="fa fa-exclamation" />
                     </p:commandButton>
 
                     <p:commandButton value="Sair"
