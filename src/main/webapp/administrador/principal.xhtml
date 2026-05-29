@@ -13,13 +13,23 @@
 
     <ui:define name="content">
         <h1>Página principal - Administrador</h1>
+
+        <h2>Dados Básicos</h2>
         <ul>
             <li><p:link value="Listar Cursos" outcome="/administrador/curso/lista.xhtml"/></li>
             <li><p:link value="Listar Seleções" outcome="/administrador/selecao/lista.xhtml"/></li>
             <li><p:link value="Listar as Fases da Copa do Mundo" outcome="/administrador/fase/lista.xhtml"/></li>
+        </ul>
+
+        <h2>Partidas</h2>
+        <ul>
             <li><p:link value="Listar as Partidas" outcome="/palpiteiro/partida/lista.xhtml"/></li>
+        </ul>
+
+        <h2>Usuários</h2>
+        <ul>
             <li><p:link value="Listar bolões" outcome="/palpiteiro/bolao/lista.xhtml"/></li>
-            <li><p:link value="Administrar usuários" outcome="/administrador/usuario/lista.xhtml"/></li>
+            <li><p:link value="Administração dos usuários" outcome="/administrador/usuario/lista.xhtml"/></li>
         </ul>
     </ui:define>
 </ui:composition>

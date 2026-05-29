@@ -14,16 +14,22 @@
     <ui:define name="content">
         <h1>Página principal</h1>
 
+        <h2>Partidas</h2>
         <ul>
             <li><p:link value="Partidas" outcome="/palpiteiro/partida/lista.xhtml"/></li>
+        </ul>
+
+        <h2>Meus Dados</h2>
+        <ul>
             <li><p:link value="Meus bolões" outcome="/palpiteiro/bolao/lista.xhtml"/></li>
             <li><p:link value="Meus palpites" outcome="/palpiteiro/palpite/lista.xhtml"/></li>
-            <li>Ranking</li>
-            <ul>
-                <li>Geral</li>
-                <li>Campus</li>
-                <li>Curso</li>
-            </ul>
+        </ul>
+
+        <h2>Rankings</h2>
+        <ul>
+            <li>Geral</li>
+            <li>Campus</li>
+            <li>Curso</li>
         </ul>
     </ui:define>
 </ui:composition>
