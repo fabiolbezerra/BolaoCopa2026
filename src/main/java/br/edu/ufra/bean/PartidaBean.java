@@ -92,7 +92,7 @@ public class PartidaBean {
     }
 
     public void excluir() {
-        if (this.PARTIDA_RN.excluir(this.partida)) {
+        if (this.PARTIDA_RN.excluir(partida)) {
             UtilBean.criarMensagemDeInformacao("Partida excluída");
             proximasEAnteriores();
         } else {
@@ -102,7 +102,7 @@ public class PartidaBean {
 
     public void publicar() {
         this.partida.setPublicada(true);
-        if (this.PARTIDA_RN.salvar(this.partida)) {
+        if (this.PARTIDA_RN.salvar(partida)) {
             UtilBean.criarMensagemDeInformacao("Partida publicada");
             proximasEAnteriores();
         } else {
@@ -111,8 +111,8 @@ public class PartidaBean {
     }
 
     public void salvar() {
-        if (this.PARTIDA_RN.salvar(this.partida)) {
-            UtilBean.criarMensagemDeInformacao("Partida salva");
+        if (this.PARTIDA_RN.salvar(partida)) {
+            UtilBean.criarMensagemDeInformacao("Partida salva com sucesso!");
             proximasEAnteriores();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");

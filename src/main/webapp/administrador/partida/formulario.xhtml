@@ -25,10 +25,20 @@
                     Dados da partida
                 </f:facet>
 
-                <p:outputLabel value="Data"/>
-                <h:outputText value="#{partidaBean.partida.inicioDaPartida}">
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
-                </h:outputText>
+
+                <p:outputLabel value="Data e hora" for = "calendar"/>
+                <p:calendar
+                        id="calendar"
+                        value = "#{partidaBean.partida.inicioDaPartida}"
+                        pattern = "dd/MM/yyyy HH:mm"
+                        timeZone = "America/Sao_Paulo"
+                        mindate = "11/06/2026"
+                        maxdate = "19/07/2026"
+                        mode = "popup"
+                        required = "true"
+                        readonlyInput = "true"
+                />
+
 
                 <p:outputLabel value="Local"
                                for="local"/>

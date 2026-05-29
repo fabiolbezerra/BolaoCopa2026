@@ -18,14 +18,13 @@ public class PartidaRN {
     }
 
     public boolean salvar(Partida partida) {
-        if (partida == null) {
+        if (partida == null || partida.isPublicada() && partida.getPalpites() != null) {
             return false;
         } else {
-            //TODO: partidas com palpite não podem ser despublicadas
-            if (partida.getId() == null || partida.getId() == 0) {
-                return this.PARTIDA_DAO.alterar(partida);
-            } else {
+            if (partida.getId() == null ) {
                 return this.PARTIDA_DAO.criar(partida);
+            } else{
+                return this.PARTIDA_DAO.alterar(partida);
             }
         }
     }
@@ -40,7 +39,6 @@ public class PartidaRN {
 
     public boolean excluir(Partida partida) {
         if (partida == null || !partida.getPalpites().isEmpty()) {
-            //TODO: excluir apenas partidas que não possuem palpites
             return false;
         } else {
             return this.PARTIDA_DAO.excluir(partida);
