@@ -149,6 +149,36 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         return resposta;
     }
 
+    public List<Usuario> pesquisar(String chave) {
+        EntityManager em = getEntityManager();
+
+        final String JPQL = "select o from Usuario o " +
+                "left join o.curso c " + //left porque nem sempre o usuário terá um curso
+                "join o.campus cc " +
+                "where (o.nome like :chave or o.sobrenome like :chave) " +
+                "or o.email like :chave " +
+                "or c.nome like :chave " +
+                "or cc.nome like :chave " +
+                "order by o.nome asc";
+
+        TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
+
+        List<Usuario> resposta = null;
+
+        try {
+            String chaveGenerica = "%" + chave + "%";
+            resposta = query
+                    .setParameter("chave", chaveGenerica)
+                    .getResultList();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+
+        return resposta;
+    }
+
     public List<Usuario> obter(Partida partida) {
         EntityManager em = getEntityManager();
 

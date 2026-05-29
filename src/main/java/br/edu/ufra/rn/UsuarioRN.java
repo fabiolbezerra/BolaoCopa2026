@@ -39,6 +39,13 @@ public class UsuarioRN {
         return USUARIO_DAO.obterTodos(Usuario.class);
     }
 
+    public List<Usuario> pesquisar(String chave) {
+        if (chave == null || chave.isEmpty()) {
+            return listarTodos();
+        }
+        return USUARIO_DAO.pesquisar(chave);
+    }
+
     public List<Usuario> obterPalpiteiros() {
         return USUARIO_DAO.obter(EnumPerfilUsuario.PALPITEIRO);
     }
