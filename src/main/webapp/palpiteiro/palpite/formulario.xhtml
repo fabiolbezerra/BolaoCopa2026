@@ -94,12 +94,6 @@
                                        itemLabel="#{tipo.descricao}"
                                        itemValue="#{tipo}"/>
                     </p:selectOneMenu>
-
-<!--                    <p:selectOneRadio>-->
-<!--                        <f:selectItem />-->
-<!--                        <f:selectItem />-->
-<!--                    </p:selectOneRadio>-->
-
                 </h:panelGrid>
             </p:panel>
 
@@ -108,7 +102,7 @@
             <!-- BOTÕES -->
             <p:commandButton value="Salvar"
                              icon="fa fa-floppy-o"
-                             action="#{palpiteBean.salvar()}"/>
+                             action="#{palpiteBean.salvar}"/>
             <h:outputText value=" "/>
             <p:button value="Cancelar"
                       icon="fa fa-ban"

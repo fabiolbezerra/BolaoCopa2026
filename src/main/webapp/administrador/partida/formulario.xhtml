@@ -7,6 +7,7 @@
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
         xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
     <ui:define name="title">
         Cadastro de Partida
     </ui:define>
@@ -15,11 +16,16 @@
         <h1>Cadastrar Partida</h1>
 
         <br/>
+        <br/>
+        <br/>
 
         <h:form>
             <h:inputHidden value="#{partidaBean.partida.id}"/>
 
             <p:panelGrid styleClass="ui-noborder" columns="2">
+                <p:messages autoupdate="true" style="width: 100%"/>
+
+                <br/>
 
                 <f:facet name="header">
                     Dados da partida
@@ -63,23 +69,23 @@
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Seleção A"/>
-                <p:selectOneMenu value="#{partidaBean.partida.selecaoA}"
-                                 converter="selecaoConverter">
+                <p:selectOneMenu
+                        value="#{partidaBean.partida.selecaoA}"
+                        converter="selecaoConverter">
                     <f:selectItem
                             itemLabel="Selecione..."
                             itemValue=""
                             noSelectionOption="true"/>
                     <f:selectItems
                             value="#{selecaoBean.selecoes}"
-                            var="s" itemLabel="#{s.nome}"
+                            var="s"
+                            itemLabel="#{s.nome}"
                             itemValue="#{s}"/>
                 </p:selectOneMenu>
 
-                <p:outputLabel
-                        value="Seleção B"/>
+                <p:outputLabel value="Seleção B"/>
                 <p:selectOneMenu
                         value="#{partidaBean.partida.selecaoB}"
-
                         converter="selecaoConverter">
                     <f:selectItem
                             itemLabel="Selecione..."
