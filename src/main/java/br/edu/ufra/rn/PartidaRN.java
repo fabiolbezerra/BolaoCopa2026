@@ -34,7 +34,7 @@ public class PartidaRN {
     }
 
     public Partida obter(Integer id) {
-        return (Partida) this.PARTIDA_DAO.obter(Partida.class, id);
+        return this.PARTIDA_DAO.obter(Partida.class, id);
     }
 
     public boolean excluir(Partida partida) {

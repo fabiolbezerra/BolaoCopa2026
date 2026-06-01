@@ -10,13 +10,19 @@ import br.edu.ufra.util.UtilData;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @ManagedBean
-@RequestScoped
-public class PartidaBean {
+@ViewScoped
+public class PartidaBean implements Serializable {
+
+    @Serial
+    private static final long serialVersionUID = 1L;
+
     private final PartidaRN PARTIDA_RN = new PartidaRN();
     private final PalpiteRN PALPITE_RN = new PalpiteRN();
 
