@@ -20,6 +20,7 @@
 
         <h:form>
             <p:button value="Novo Palpite"
+                      icon="fa fa-plus"
                       outcome="/palpiteiro/partida/lista.xhtml"
                       style="margin-bottom: 10px;"/>
 
@@ -54,12 +55,14 @@
 
                 <p:column headerText="Operações">
                     <p:button value="Editar"
+                              icon="fa fa-pencil-square-o"
                               outcome="/palpiteiro/palpite/formulario.xhtml"
                               disabled="#{partidaBean.isExpirada(pal.partida)}">
                         <f:param name="partidaID" value="#{pal.partida.id}"/>
                     </p:button>
                     <h:outputText value=" "/>
                     <p:commandButton value="Excluir"
+                                     icon="fa fa-trash-o"
                                      action="#{palpiteBean.excluir()}"
                                      disabled="#{partidaBean.isExpirada(pal.partida)}"
                                      update="@form">

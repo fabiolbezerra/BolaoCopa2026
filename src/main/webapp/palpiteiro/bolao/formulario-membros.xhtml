@@ -83,13 +83,13 @@
                         value="Sim"
                         type="button"
                         styleClass="ui-confirmdialog-yes"
-                        icon="pi pi-check"/>
+                        icon="fa fa-check"/>
 
                 <p:commandButton
                         value="Não"
                         type="button"
                         styleClass="ui-confirmdialog-no"
-                        icon="pi pi-times"/>
+                        icon="fa fa-ban"/>
 
             </p:confirmDialog>
 
@@ -138,6 +138,7 @@
                         <f:facet name="footer">
 
                             <p:commandButton value="Adicionar"
+                                             icon="fa fa-plus"
                                              action="#{membroDoBolaoBean.adicionarParticipante()}"
                                              update="@form"/>
 
@@ -180,6 +181,7 @@
 
                             <p:commandButton
                                     value="Excluir"
+                                    icon="fa fa-trash-o"
                                     rendered="#{!(membroDoBolaoBean.bolao.dono eq membro.usuario)}"
                                     action="#{membroDoBolaoBean.removerParticipante()}"
                                     update="@form">

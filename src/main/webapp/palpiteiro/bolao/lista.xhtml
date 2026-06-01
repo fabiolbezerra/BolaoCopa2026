@@ -33,7 +33,7 @@
             <p:commandButton value="Criar Novo Bolão"
                              rendered="#{usuarioBean.palpiteiro}"
                              action="formulario.xhtml"
-                             icon="pi pi-plus"/>
+                             icon="fa fa-plus"/>
 
         </h:form>
 
@@ -58,12 +58,14 @@
 
                 <p:column headerText="Operações">
                     <p:commandButton value="Editar"
+                                     icon="fa fa-pencil-square-o"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
                                      action="formulario.xhtml">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
 
                     <p:commandButton value="Membros"
+                                     icon="fa fa-users"
                                      rendered="#{bolao.dono eq usuarioBean.usuarioLogado}"
                                      action="formulario-membros.xhtml">
                         <f:param name="bolaoID" value="#{bolao.id}"/>
