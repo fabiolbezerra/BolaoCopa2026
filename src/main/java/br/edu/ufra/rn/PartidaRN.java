@@ -18,7 +18,7 @@ public class PartidaRN {
     }
 
     public boolean salvar(Partida partida) {
-        if (partida == null || partida.isPublicada() && partida.getPalpites() != null) {
+        if (partida == null || partida.isPublicada() && partida.getPalpites() != null && !partida.getPalpites().isEmpty()) {
             return false;
         } else {
             if (partida.getId() == null ) {
