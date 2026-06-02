@@ -86,7 +86,8 @@
                     <p:commandButton value="Sair"
                                      rendered="#{bolaoBean.isApenasParticipante(bolao)}"
                                      action="#{bolaoBean.sair()}"
-                                     update="@form">
+                                     update="@form"
+                                     icon="arrow-right-from-bracket">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
 

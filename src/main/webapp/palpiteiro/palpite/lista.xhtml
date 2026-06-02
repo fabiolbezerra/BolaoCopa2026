@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition
         template="/template.xhtml"
         xmlns="http://www.w3.org/1999/xhtml"
@@ -14,32 +15,42 @@
     </ui:define>
 
     <ui:define name="content">
+
         <h1>Meus Palpites</h1>
 
         <br/>
 
         <h:form>
+
             <p:button value="Novo Palpite"
                       icon="fa fa-plus"
                       outcome="/palpiteiro/partida/lista.xhtml"
                       style="margin-bottom: 10px;"/>
 
-            <p:dataTable value="#{palpiteBean.meusPalpites}" var="pal"
+            <p:dataTable value="#{palpiteBean.meusPalpites}"
+                         var="pal"
                          emptyMessage="Você ainda não fez nenhum palpite.">
 
                 <p:column headerText="Jogo">
-                    <p:outputPanel style="display: flex; align-items: center; gap: 8px;">
-                        <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoA.simbolo}" width="24px"/>
+                    <p:outputPanel style="display:flex; align-items:center; gap:8px;">
+                        <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoA.simbolo}"
+                                        width="24"/>
+
                         <h:outputText value="#{pal.partida.selecaoA.nome}"/>
+
                         <h:outputText value=" x "/>
+
                         <h:outputText value="#{pal.partida.selecaoB.nome}"/>
-                        <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoB.simbolo}" width="24px"/>
+
+                        <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoB.simbolo}"
+                                        width="24"/>
                     </p:outputPanel>
                 </p:column>
 
                 <p:column headerText="Data da Partida">
                     <h:outputText value="#{pal.partida.inicioDaPartida}">
-                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                           timeZone="GMT-3"/>
                     </h:outputText>
                 </p:column>
 
@@ -49,29 +60,63 @@
 
                 <p:column headerText="Data do Palpite">
                     <h:outputText value="#{pal.dataDoPalpite}">
-                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                           timeZone="GMT-3"/>
                     </h:outputText>
                 </p:column>
 
                 <p:column headerText="Operações">
+
                     <p:button value="Editar"
                               icon="fa fa-pencil-square-o"
                               outcome="/palpiteiro/palpite/formulario.xhtml"
                               disabled="#{partidaBean.isExpirada(pal.partida)}">
-                        <f:param name="partidaID" value="#{pal.partida.id}"/>
+                        <f:param name="partidaID"
+                                 value="#{pal.partida.id}"/>
                     </p:button>
+
                     <h:outputText value=" "/>
+
                     <p:commandButton value="Excluir"
                                      icon="fa fa-trash-o"
-                                     action="#{palpiteBean.excluir()}"
-                                     disabled="#{partidaBean.isExpirada(pal.partida)}"
-                                     update="@form">
-                        <f:setPropertyActionListener value="#{pal}" target="#{palpiteBean.palpite}"/>
+                                     action="#{palpiteBean.excluir}"
+                                     update="@form"
+                                     disabled="#{partidaBean.isExpirada(pal.partida)}">
+
+                        <f:setPropertyActionListener
+                                value="#{pal}"
+                                target="#{palpiteBean.palpite}"/>
+
+                        <p:confirm header="Confirmação"
+                                   message="Deseja excluir este palpite?"
+                                   icon="fa fa-exclamation"/>
+
                     </p:commandButton>
+
                 </p:column>
 
             </p:dataTable>
+
+            <p:confirmDialog global="true"
+                             showEffect="fade"
+                             hideEffect="fade"
+                             responsive="true"
+                             width="350">
+
+                <p:commandButton value="Não"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-flat"
+                                 icon="fa fa-ban"/>
+
+                <p:commandButton value="Sim"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+
+            </p:confirmDialog>
+
         </h:form>
 
     </ui:define>
+
 </ui:composition>
