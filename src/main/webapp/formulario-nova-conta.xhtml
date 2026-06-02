@@ -31,7 +31,10 @@
                 <p:inputText value="#{novaContaBean.email}" size="50"/>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Criar" action="#{novaContaBean.enviarEmail()}" ajax="false"/>
+                    <p:commandButton value="Criar"
+                                     icon="fa fa-plus"
+                                     action="#{novaContaBean.enviarEmail()}"
+                                     ajax="false"/>
                 </f:facet>
             </p:panelGrid>
 
@@ -40,7 +43,10 @@
                 <p:inputText value="#{novaContaBean.codigoInformado}" size="7"/>
 
                 <f:facet name="footer">
-                    <p:commandButton value="Validar E-mail" action="#{novaContaBean.validarEmail()}" ajax="false"/>
+                    <p:commandButton value="Validar E-mail"
+                                     icon="fa fa-check"
+                                     action="#{novaContaBean.validarEmail()}"
+                                     ajax="false"/>
                 </f:facet>
             </p:panelGrid>
 
@@ -77,7 +83,7 @@
                 <p:selectOneMenu id="menuCurso"
                                  value="#{novaContaBean.usuario.curso}"
                                  converter="cursoConverter"
-                                 disabled="#{novaContaBean.usuario.tipo eq 'TECNICO'or novaContaBean.usuario.tipo eq 'DOCENTE'}">
+                                 disabled="#{novaContaBean.usuario.tipo eq 'TECNICO' or novaContaBean.usuario.tipo eq 'DOCENTE'}">
                     <f:selectItem itemLabel="Selecione..." itemValue="" noSelectionOption="true"/>
                     <f:selectItems value="#{cursoBean.obterCursos(novaContaBean.usuario.campus)}"
                                    var="c"
@@ -88,20 +94,18 @@
                 <p:outputLabel value="Senha"/>
                 <p:password id="pSenha1"
                             value="#{novaContaBean.usuario.senha}"
-                            required="true"/>
+                            match="pSenha2"
+                            validatorMessage="Senhas devem ser iguais"/>
 
                 <p:outputLabel value="Confirme a Senha"/>
                 <p:password id="pSenha2"
-                            value="#{novaContaBean.senha}"
-                            required="true"
-                            match="pSenha1"
-                            validatorMessage="Senhas devem ser iguais"/>
+                            value="#{novaContaBean.senha}"/>
 
                 <f:facet name="footer">
                     <p:commandButton value="Salvar Usuário"
                                      icon="fa fa-floppy-o"
                                      action="#{novaContaBean.criarConta()}"
-                                     ajax="false"/>
+                                     update="@form"/>
                 </f:facet>
             </p:panelGrid>
 

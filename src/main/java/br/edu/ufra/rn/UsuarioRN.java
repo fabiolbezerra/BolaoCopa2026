@@ -1,6 +1,8 @@
 package br.edu.ufra.rn;
 
 import br.edu.ufra.dao.UsuarioDAO;
+import br.edu.ufra.entidade.Campus;
+import br.edu.ufra.entidade.Curso;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
@@ -173,4 +175,13 @@ public class UsuarioRN {
         return USUARIO_DAO.obterOrdenadosPorPontuacao();
     }
 
+    public List<Usuario> obterOrdenadoPorPontuacao(Campus campus) {
+        //TODO Implemente validação e chamada ao DAO
+        return null;
+    }
+
+    public List<Usuario> obterOrdenadoPorPontuacao(Curso curso) {
+        //TODO Implemente validação e chamada ao DAO
+        return null;
+    }
 }

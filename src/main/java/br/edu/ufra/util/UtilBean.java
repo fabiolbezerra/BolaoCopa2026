@@ -123,6 +123,10 @@ public class UtilBean {
                 usuarioTemp.setNome(usuario.getNome());
                 usuarioTemp.setSobrenome(usuario.getSobrenome());
                 usuarioTemp.setEmail(usuario.getEmail());
+                usuarioTemp.setPontuacao(usuario.getPontuacao());
+                usuarioTemp.setPosicao(usuario.getPosicao());
+                usuarioTemp.setCampus(usuario.getCampus());
+                usuarioTemp.setCurso(usuario.getCurso());
                 usuarioTemp.setPerfil(usuario.getPerfil());
             }
             UtilBean.naSessao(CHAVE_USUARIO, usuarioTemp);

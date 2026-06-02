@@ -4,7 +4,6 @@ import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.util.UtilBean;
-import jdk.jshell.execution.Util;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -95,6 +94,7 @@ public class NovaContaBean implements Serializable {
     }
 
     public void enviarEmail() {
+        //TODO: Verificar se já existe usuário com o e-mail informado
         codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
         UtilBean.criarMensagemDeInformacao("Código", "Email enviado com informação para validação!");
         panelEmail = false;

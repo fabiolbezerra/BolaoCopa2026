@@ -23,7 +23,6 @@ public class PalpiteBean {
     private List<Palpite> meusPalpites;
     private Integer selecaoVencedoraId;
 
-    private final SelecaoRN SELECAO_RN = new SelecaoRN();
     private final PalpiteRN PALPITE_RN = new PalpiteRN();
     private final PartidaRN PARTIDA_RN = new PartidaRN();
 
