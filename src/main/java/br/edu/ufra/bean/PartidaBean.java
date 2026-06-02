@@ -3,6 +3,7 @@ package br.edu.ufra.bean;
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
 import br.edu.ufra.rn.PalpiteRN;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.util.UtilBean;
@@ -117,6 +118,26 @@ public class PartidaBean implements Serializable {
     }
 
     public void salvar() {
+        if (this.PARTIDA_RN.salvar(partida)) {
+            UtilBean.criarMensagemDeInformacao("Partida salva com sucesso!");
+            proximasEAnteriores();
+        } else {
+            UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
+        }
+    }
+
+    public void atualizarPlacar() {
+        if(partida.getGolsA() > partida.getGolsB()) {
+            partida.setVencedor(partida.getSelecaoA());
+        } else if(partida.getGolsA() < partida.getGolsB()) {
+            partida.setVencedor(partida.getSelecaoB());
+        }
+        if(!partida.getFase().isEliminatoria()) {
+            partida.setTipoDeVitoria(EnumTipoVitoria.TEMPO_NORMAL);
+        }
+        partida.setPublicada(true);
+        partida.setAtualizacaoDoResultado(new Date());
+
         if (this.PARTIDA_RN.salvar(partida)) {
             UtilBean.criarMensagemDeInformacao("Partida salva com sucesso!");
             proximasEAnteriores();
