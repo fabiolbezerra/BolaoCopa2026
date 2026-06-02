@@ -1,0 +1,146 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        Usuários
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Usuários Banidos</h1>
+
+        <h:form>
+            <p:growl showDetail="true" showSummary="true"/>
+
+            <div class="ui-g">
+                <div class="ui-g-6">
+                    <p:dataTable id="dtUsuarios"
+                                 value="#{gerenciarUsuarioBean.usuariosBanidos}"
+                                 var="usuario"
+                                 selectionMode="single"
+                                 selection="#{gerenciarUsuarioBean.usuario}"
+                                 rowKey="#{usuario.id}"
+                                 emptyMessage="Lista de usuários vazia">
+
+                        <p:ajax update="@form" event="rowSelect" listener="#{gerenciarUsuarioBean.selecionar()}"/>
+
+                        <p:column headerText="Nome" sortBy="#{usuario.nome}">
+                            <h:outputText value="#{usuario.nome} #{usuario.sobrenome}"/>
+                        </p:column>
+
+                        <p:column headerText="Campus" sortBy="#{usuario.campus.nome}">
+                            <h:outputText value="#{usuario.campus.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="Curso">
+                            <h:outputText value="#{usuario.curso.nome}"/>
+                        </p:column>
+
+                        <p:column headerText="E-mail">
+                            <h:outputText value="#{usuario.email}"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo">
+                            <h:outputText value="#{usuario.tipo.descricao}"/>
+                        </p:column>
+
+                        <p:column headerText="Operações">
+                            <p:button value="Banir"
+                                      icon="fa fa-user-times"
+                                      outcome="formulario-banir.xhtml">
+                                <f:param value="#{usuario.id}" name="usuarioID"/>
+                            </p:button>
+                        </p:column>
+                    </p:dataTable>
+                </div>
+                <div class="ui-g-6">
+                    <h1>Detalhes do Usuário Selecionado</h1>
+
+                    <br/>
+
+                    <p:outputPanel id="opUsuarioSelecionado" rendered="#{not empty gerenciarUsuarioBean.usuario}">
+                        <p:panelGrid columns="2" styleClass="ui-noborder">
+                            <p:outputLabel value="Pontuação"/>
+                            <h:outputText value="#{gerenciarUsuarioBean.usuario.pontuacao}"/>
+
+                            <p:outputLabel value="Posição"/>
+                            <h:outputText value="#{gerenciarUsuarioBean.usuario.posicao}"/>
+                        </p:panelGrid>
+
+                        <br/><br/>
+
+                        <p:dataTable id="dtBoloes"
+                                     value="#{gerenciarUsuarioBean.boloes}"
+                                     var="bolao"
+                                     emptyMessage="Usuário não participa de bolão">
+                            <f:facet name="header">
+                                Bolões
+                            </f:facet>
+
+                            <p:column headerText="Bolão">
+                                <h:outputText value="#{bolao.nome}"/>
+                            </p:column>
+
+                            <p:column headerText="Dono?">
+                                <h:outputText rendered="#{not (bolao.dono eq gerenciarUsuarioBean.usuario)}"
+                                              value="Não"/>
+                                <h:outputText rendered="#{bolao.dono eq gerenciarUsuarioBean.usuario}"
+                                              value="Sim"/>
+                            </p:column>
+                        </p:dataTable>
+
+                        <br/><br/>
+
+                        <p:dataTable value="#{gerenciarUsuarioBean.palpites}"
+                                     var="palpite"
+                                     emptyMessage="Usuário não fez palpites ainda">
+                            <f:facet name="header">
+                                Palpites nas Partidas
+                            </f:facet>
+
+                            <p:column headerText="Data" width="20%">
+                                <h:outputText value="#{palpite.dataDoPalpite}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Atualização" width="20%">
+                                <h:outputText value="#{palpite.ultimaAlteracao}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Partida" sortBy="#{palpite.partida.inicioDaPartida}" width="20%">
+                                <h:outputText value="#{palpite.partida.inicioDaPartida}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Palpite" style="text-align: center;">
+                                <p:outputPanel
+                                        style="display: flex; align-items: center; gap: 8px; justify-content: center">
+                                    <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoA.simbolo}"
+                                                    width="24px"/>
+                                    <h:outputText value="#{palpite.partida.selecaoA.sigla} "/>
+                                    <h:outputText value=" #{palpite.golsA} "/>
+                                    x
+                                    <h:outputText value=" #{palpite.golsB} "/>
+                                    <h:outputText value=" #{palpite.partida.selecaoB.sigla}"/>
+                                    <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoB.simbolo}"
+                                                    width="24px"/>
+                                </p:outputPanel>
+
+                            </p:column>
+                        </p:dataTable>
+                    </p:outputPanel>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

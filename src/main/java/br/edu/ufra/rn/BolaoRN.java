@@ -5,14 +5,42 @@ import br.edu.ufra.entidade.Bolao;
 import br.edu.ufra.entidade.Participante;
 import br.edu.ufra.entidade.Usuario;
 
+import java.util.Date;
 import java.util.List;
 
 public class BolaoRN {
 
     private final BolaoDAO DAO = new BolaoDAO();
 
-    public List<Bolao> obter(Usuario usuario) {
+    public boolean salvar(Bolao bolao) {
+        if (bolao == null) {
+            return false;
+        }
 
+        if (bolao.getId() == null || bolao.getId() == 0) {
+            //Criar
+            bolao.setCriacao(new Date());
+
+//            Participante participante = new Participante();
+//            participante.setUsuario(bolao.getDono());
+//            participante.setBolao(bolao);
+
+            return DAO.criar(bolao);
+        } else {
+            //Alterar
+            return DAO.alterar(bolao);
+        }
+    }
+
+    public boolean excluir(Bolao bolao) {
+        if (bolao == null || bolao.getId() == null) {
+            return false;
+        }
+
+        return DAO.excluir(bolao);
+    }
+
+    public List<Bolao> obter(Usuario usuario) {
         if (usuario == null) {
             return null;
         }
@@ -21,7 +49,6 @@ public class BolaoRN {
     }
 
     public Bolao obter(Integer id) {
-
         if (id == null) {
             return null;
         }
@@ -30,15 +57,11 @@ public class BolaoRN {
     }
 
     public List<Bolao> listarTodos() {
-
         return DAO.obterTodos(Bolao.class);
     }
 
-    public boolean adicionarParticipante(
-            Bolao bolao,
-            Participante participante
-    ) {
-
+    public boolean adicionarParticipante(Bolao bolao,
+                                         Participante participante) {
         if (bolao == null
                 || participante == null
                 || participante.getUsuario() == null
@@ -60,17 +83,10 @@ public class BolaoRN {
             }
         }
 
-        return DAO.adicionarMembro(
-                participante.getUsuario(),
-                participante.getBolao()
-        );
+        return DAO.adicionarMembro(participante.getUsuario(), participante.getBolao());
     }
 
-    public boolean removerParticipante(
-            Participante participante,
-            Bolao bolao
-    ) {
-
+    public boolean removerParticipante(Participante participante, Bolao bolao) {
         if (participante == null || bolao == null) {
             return false;
         }
@@ -107,23 +123,5 @@ public class BolaoRN {
         }
 
         return DAO.removerMembro(participanteParaSair);
-    }
-
-    public boolean salvar(Bolao bolao) {
-
-        if (bolao == null) {
-            return false;
-        }
-
-        return DAO.salvar(bolao);
-    }
-
-    public boolean excluir(Bolao bolao) {
-
-        if (bolao == null || bolao.getId() == null) {
-            return false;
-        }
-
-        return DAO.excluir(bolao);
     }
 }

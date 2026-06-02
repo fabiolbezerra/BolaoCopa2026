@@ -12,13 +12,13 @@ import java.util.List;
 public class BolaoDAO extends GenericDAO<Bolao> {
 
     public List<Bolao> obter(Usuario usuario) {
-
         EntityManager em = getEntityManager();
 
-        final String JPQL =
-                "select distinct b from Bolao b " +
-                        "left join b.participantes p " +
-                        "where b.dono = :usuario or p.usuario = :usuario";
+        final String JPQL = "select distinct b from Bolao b " +
+                "left join b.participantes p " +
+                "where b.dono = :usuario or p.usuario = :usuario";
+
+        //String SQL = "select p.bolao from Participante p where p.usuario = :usuario";
 
         Query query = em.createQuery(JPQL);
 
@@ -117,57 +117,56 @@ public class BolaoDAO extends GenericDAO<Bolao> {
         }
     }
 
-    public boolean salvar(Bolao bolao) {
-
-        EntityManager em = getEntityManager();
-
-        EntityTransaction transaction = em.getTransaction();
-
-        try {
-
-            transaction.begin();
-
-            if (bolao.getId() == null) {
-
-                em.persist(bolao);
-
-            } else {
-
-                Bolao bolaoBanco = em.find(Bolao.class, bolao.getId());
-
-                if (bolaoBanco != null) {
-
-                    bolaoBanco.setNome(bolao.getNome());
-                    bolaoBanco.setDono(bolao.getDono());
-                    bolaoBanco.setCriacao(bolao.getCriacao());
-
-                    em.merge(bolaoBanco);
-
-                } else {
-
-                    em.persist(bolao);
-                }
-            }
-
-            transaction.commit();
-
-            return true;
-
-        } catch (Exception e) {
-
-            e.printStackTrace(System.err);
-
-            if (transaction.isActive()) {
-                transaction.rollback();
-            }
-
-            return false;
-
-        } finally {
-
-            em.close();
-        }
-    }
+//    public boolean salvar(Bolao bolao) {
+//        EntityManager em = getEntityManager();
+//
+//        EntityTransaction transaction = em.getTransaction();
+//
+//        try {
+//
+//            transaction.begin();
+//
+//            if (bolao.getId() == null) {
+//
+//                em.persist(bolao);
+//
+//            } else {
+//
+//                Bolao bolaoBanco = em.find(Bolao.class, bolao.getId());
+//
+//                if (bolaoBanco != null) {
+//
+//                    bolaoBanco.setNome(bolao.getNome());
+//                    bolaoBanco.setDono(bolao.getDono());
+//                    bolaoBanco.setCriacao(bolao.getCriacao());
+//
+//                    em.merge(bolaoBanco);
+//
+//                } else {
+//
+//                    em.persist(bolao);
+//                }
+//            }
+//
+//            transaction.commit();
+//
+//            return true;
+//
+//        } catch (Exception e) {
+//
+//            e.printStackTrace(System.err);
+//
+//            if (transaction.isActive()) {
+//                transaction.rollback();
+//            }
+//
+//            return false;
+//
+//        } finally {
+//
+//            em.close();
+//        }
+//    }
 
     public boolean excluir(Bolao bolao) {
 

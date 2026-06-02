@@ -1,6 +1,10 @@
 package br.edu.ufra.bean;
 
+import br.edu.ufra.entidade.Bolao;
+import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.rn.BolaoRN;
+import br.edu.ufra.rn.PalpiteRN;
 import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.util.UtilBean;
 
@@ -13,16 +17,22 @@ import java.util.List;
 @ViewScoped
 public class GerenciarUsuarioBean {
     private final UsuarioRN USUARIO_RN = new UsuarioRN();
+    private final BolaoRN BOLAO_RN = new BolaoRN();
+    private final PalpiteRN PALPITE_RN = new PalpiteRN();
 
     private Usuario usuario;
 
     private String chave;
 
     private List<Usuario> usuarios;
+    private List<Usuario> usuariosBanidos;
+    private List<Palpite> palpites;
+    private List<Bolao> boloes;
 
     @PostConstruct
     public void init() {
-
+        //TODO: Inicializar lista de banidos
+        //TODO: recuperar o usuário a partir do usuarioID
     }
 
     public Usuario getUsuario() {
@@ -45,18 +55,40 @@ public class GerenciarUsuarioBean {
         return usuarios;
     }
 
+    public List<Usuario> getUsuariosBanidos() {
+        return usuariosBanidos;
+    }
+
+    public void setUsuariosBanidos(List<Usuario> usuariosBanidos) {
+        this.usuariosBanidos = usuariosBanidos;
+    }
+
+    public List<Bolao> getBoloes() {
+        return boloes;
+    }
+
+    public List<Palpite> getPalpites() {
+        return palpites;
+    }
+
     public void selecionar() {
         if (usuario != null) {
+            palpites = PALPITE_RN.obter(usuario);
+            boloes = BOLAO_RN.obter(usuario);
             UtilBean.criarMensagemDeInformacao(usuario.getNome(), "Selecionado!");
         }
     }
 
     public void pesquisar() {
         usuarios = USUARIO_RN.pesquisar(chave);
-        if (!usuarios.isEmpty()) {
+        if (usuarios != null && !usuarios.isEmpty()) {
             UtilBean.criarMensagemDeInformacao("Usuários encontrados com sucesso!");
         } else {
             UtilBean.criarMensagemDeAviso("Nenhum usuário encontrado.");
         }
+    }
+
+    public void banir() {
+        //TODO: implementar chamada ao banimento
     }
 }
