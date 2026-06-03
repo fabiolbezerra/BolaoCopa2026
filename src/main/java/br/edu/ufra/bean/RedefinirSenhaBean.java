@@ -124,7 +124,7 @@ public class RedefinirSenhaBean implements Serializable {
     public String redefinirSenha() {
         boolean sucesso = USUARIO_RN.alterarSenha(usuario, senha);
         if (sucesso) {
-            USUARIO_RN.enviarEmailDeSaudacao(usuario);
+            USUARIO_RN.enviarEmailDeRedefinicaoDaSenha(usuario);
             UtilBean.criarMensagemDeAviso("Sucesso", "Conta gerada com sucesso!");
             UtilBean.criarMensagemDeAviso("E-mail", "Verifique sua caixa de entrada no e-mail.");
             return "login.xhtml?faces-redirect=true";
