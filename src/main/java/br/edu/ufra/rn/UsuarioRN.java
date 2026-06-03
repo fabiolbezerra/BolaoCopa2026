@@ -216,6 +216,31 @@ public class UsuarioRN {
         }
     }
 
+    public boolean enviarEmailDeRedefinicaoDaSenha(Usuario usuario) {
+        if (usuario == null || usuario.getId() == null || usuario.getId() == 0) {
+            return false;
+        } else {
+            StringBuilder msgNovaSenha =
+                    new StringBuilder();
+
+            msgNovaSenha
+                    .append("Olá ")
+                    .append(usuario.getNome())
+                    .append(" ")
+                    .append(usuario.getSobrenome())
+                    .append("!\n\nSua senha foi REDEFINIDA no Bolão da Copa do Mundo 2026!\n\n")
+                    .append("Evite fazer os seus palpites de última hora.\n\n")
+                    .append("Abraços\n\n")
+                    .append("Equipe do Bolão da Copa do Mundo 2026")
+                    .append("\n\n");
+
+            UtilEmail.enviarEmail(usuario.getEmail(),
+                    "Senha Redefinida com Sucesso",
+                    msgNovaSenha.toString());
+            return true;
+        }
+    }
+
     public List<Usuario> obterOrdenadoPorPontuacao() {
         return USUARIO_DAO.obterOrdenadosPorPontuacao();
     }
