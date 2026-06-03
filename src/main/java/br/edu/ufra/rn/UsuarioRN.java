@@ -37,6 +37,20 @@ public class UsuarioRN {
         }
     }
 
+    public boolean alterarSenha(Usuario usuario, String novaSenha) {
+        if (usuario == null
+                || usuario.getId() == null
+                || usuario.getId() == 0
+                || novaSenha == null) {
+            return false;
+        } else {
+            String senhaCriptografada = UtilTexto.criptografarSHA256(usuario.getSenha());
+            usuario.setSenha(senhaCriptografada);
+            return salvar(usuario);
+
+        }
+    }
+
     public List<Usuario> listarTodos() {
         return USUARIO_DAO.obterTodos(Usuario.class);
     }
@@ -119,12 +133,43 @@ public class UsuarioRN {
         }
     }
 
+    public String enviarEmailDeValidacao(Usuario usuario) {
+        if (usuario == null || usuario.getId() == null || usuario.getId() == 0) {
+            return null;
+        }
+
+        final String CODIGO_GERADO = UtilTexto.gerarNumeros(6);
+
+        StringBuilder texto = new StringBuilder();
+        texto
+                .append("Olá")
+                .append(usuario.getNome())
+                .append(" ")
+                .append(usuario.getSobrenome())
+                .append("!\n\n")
+                .append("Digite o código abaixo no formulário de REDEFINIÇÃO da senha para VALIDAR seu e-mail.")
+                .append("\n\n")
+                .append(CODIGO_GERADO)
+                .append("\n\n")
+                .append("Abraços\n\n")
+                .append("Equipe do Bolão da Copa do Mundo 2026")
+                .append("\n\n");
+
+        UtilEmail.enviarEmail(
+                usuario.getEmail(),
+                "Redefinição da senha",
+                texto.toString()
+        );
+
+        return CODIGO_GERADO;
+    }
+
     public String enviarEmailDeValidacao(String email) {
         final String CODIGO_GERADO = UtilTexto.gerarNumeros(6);
 
         StringBuilder texto = new StringBuilder();
         texto
-                .append("Olá!\n")
+                .append("Olá!\n\n")
                 .append("Digite o código abaixo no formulário de cadastro para VALIDAR seu e-mail.")
                 .append("\n\n")
                 .append(CODIGO_GERADO)

@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        Recuperar Senha
+    </ui:define>
+
+    <ui:define name="top">
+        <h:outputText value="Bolão da Copa do Mundo 2026" style="font-size: x-large"/>
+        <br/>
+        Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Redefinir Senha</h1>
+
+        <br/>
+
+        <h:form>
+            <p:growl showSummary="true" showDetail="true"/>
+
+            <p:panelGrid styleClass="ui-noborder"
+                         columns="2"
+                         rendered="#{redefinirSenhaBean.panelEmail}">
+
+                <f:facet name="header">
+                    <h2>Passo 1/3 - Informar e-mail</h2>
+                </f:facet>
+
+                <p:outputLabel value="E-mail"/>
+                <p:inputText value="#{redefinirSenhaBean.email}" size="50"/>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Iniciar"
+                                     title="Iniciar a redefinição da senha"
+                                     icon="fa fa-check"
+                                     action="#{redefinirSenhaBean.enviarEmail()}"
+                                     ajax="false"/>
+                </f:facet>
+            </p:panelGrid>
+
+            <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{redefinirSenhaBean.panelCodigo}">
+
+                <f:facet name="header">
+                    <h2>Passo 2/3 - Validar código</h2>
+                </f:facet>
+
+                <p:outputLabel value="Código"/>
+                <p:inputText value="#{redefinirSenhaBean.codigoInformado}" size="7"/>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Validar Código"
+                                     title="Validar e-mail antes de redefinir a senha"
+                                     icon="fa fa-check"
+                                     action="#{redefinirSenhaBean.validarEmail()}"
+                                     ajax="false"/>
+                </f:facet>
+            </p:panelGrid>
+
+            <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{redefinirSenhaBean.panelFormulario}">
+
+                <f:facet name="header">
+                    <h2>Passo 3/3 - Alterar senha</h2>
+                </f:facet>
+
+                <p:outputLabel value="Senha"/>
+                <p:password id="pSenha1"
+                            value="#{redefinirSenhaBean.usuario.senha}"
+                            match="pSenha2"
+                            validatorMessage="Senhas devem ser iguais"/>
+
+                <p:outputLabel value="Confirme a Senha"/>
+                <p:password id="pSenha2"
+                            value="#{redefinirSenhaBean.senha}"/>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Alterar Senha"
+                                     icon="fa fa-refresh"
+                                     action="#{redefinirSenhaBean.redefinirSenha()}"
+                                     update="@form"/>
+                </f:facet>
+            </p:panelGrid>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>

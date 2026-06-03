@@ -89,23 +89,30 @@ public class NovaContaBean implements Serializable {
     public boolean isCodigoValido() {
         return codigoGerado != null
                 && !codigoGerado.isEmpty()
-                && codigoGerado.equals(codigoInformado)
-                && horarioDoCodigo.plusSeconds(241).isAfter(Instant.now());
+                && codigoGerado.equals(codigoInformado) //Códigos iguais
+                && horarioDoCodigo.plusSeconds(241).isAfter(Instant.now()); //Validação dentro do limite de tempo
     }
 
     public void enviarEmail() {
-        //TODO: Verificar se já existe usuário com o e-mail informado
-        codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
-        UtilBean.criarMensagemDeInformacao("Código", "Email enviado com informação para validação!");
-        panelEmail = false;
-        panelCodigo = true;
-        panelFormulario = false;
-        horarioDoCodigo = Instant.now();
+        if (USUARIO_RN.obter(email) != null) {
+            //Já existe um cadastro com o e-mail
+            UtilBean.criarMensagemDeErro("E-mail já está cadastrado.");
+            UtilBean.criarMensagemDeAviso("Usar e-mail diferente.");
+        } else {
+            codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
+            panelEmail = false;
+            panelCodigo = true;
+            panelFormulario = false;
+            horarioDoCodigo = Instant.now();
+            UtilBean.criarMensagemDeInformacao("Código", "Email enviado com informação para validação!");
+            UtilBean.criarMensagemDeAviso("Atenção", "Mensagem pode estar no spam");
+        }
     }
 
     public void validarEmail() {
         if (!isCodigoValido()) {
-            UtilBean.criarMensagemDeErro("Erro ao validar email", "O código informado está incorreto ou expirou. Um novo código foi gerado.");
+            UtilBean.criarMensagemDeErro("O código informado está incorreto ou expirou.");
+            UtilBean.criarMensagemDeErro("Um novo código foi gerado.");
             horarioDoCodigo = Instant.now();
             codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
             this.codigoInformado = null;

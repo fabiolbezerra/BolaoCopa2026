@@ -17,7 +17,7 @@ public class UtilEmail {
     }
 
     /**
-     * Método de execução assíncrona, pois seu comportamento é executado no escopo de uma thread
+     * Execução assíncrona, pois seu comportamento é executado no escopo de uma thread
      *
      * @param destinatario destinatário
      * @param assunto      título ou assunto do e-mail
@@ -42,7 +42,7 @@ public class UtilEmail {
             }
         });
 
-        thread.start(); //Inicia a thread ... método run() é chamado
+        thread.start(); //Inicia a thread ... run() é chamado
     }
 
 }

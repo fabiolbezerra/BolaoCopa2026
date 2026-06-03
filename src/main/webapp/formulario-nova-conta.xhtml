@@ -26,9 +26,20 @@
         <h:form>
             <p:growl showSummary="true" showDetail="true"/>
 
-            <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{novaContaBean.panelEmail}">
+            <p:panelGrid styleClass="ui-noborder"
+                         columns="2"
+                         rendered="#{novaContaBean.panelEmail}">
+
+                <f:facet name="header">
+                    <h2>Passo 1/3 - Informar e-mail válido</h2>
+                </f:facet>
+
                 <p:outputLabel value="E-mail"/>
-                <p:inputText value="#{novaContaBean.email}" size="50"/>
+                <p:inputText value="#{novaContaBean.email}" size="50">
+                    <f:validator validatorId="emailUnicoValidator"/>
+                    <f:validator validatorId="emailValidator"/>
+                    <!-- <f:validator validatorId="emailUfraValidator"/> -->
+                </p:inputText>
 
                 <f:facet name="footer">
                     <p:commandButton value="Criar"
@@ -39,6 +50,11 @@
             </p:panelGrid>
 
             <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{novaContaBean.panelCodigo}">
+
+                <f:facet name="header">
+                    <h2>Passo 2/3 - Validar e-mail</h2>
+                </f:facet>
+
                 <p:outputLabel value="Código"/>
                 <p:inputText value="#{novaContaBean.codigoInformado}" size="7"/>
 
@@ -51,6 +67,11 @@
             </p:panelGrid>
 
             <p:panelGrid styleClass="ui-noborder" columns="2" rendered="#{novaContaBean.panelFormulario}">
+
+                <f:facet name="header">
+                    <h2>Passo 3/3 - Criar novo usuário</h2>
+                </f:facet>
+
                 <p:outputLabel value="E-mail"/>
                 <h:outputText value="#{novaContaBean.email}"/>
 
