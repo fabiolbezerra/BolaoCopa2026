@@ -4,6 +4,7 @@ import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.entidade.tipo.EnumTipoUsuario;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -61,6 +62,15 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<Participante> participantes = new ArrayList<>();
+
+    @Column(name = "banido", nullable = false)
+    private Boolean banido;
+
+    @Column(name = "dataBanimento")
+    private Instant dataBanimento;
+
+    @Column(name = "justificativa", length = 100)
+    private String justificativa;
 
     public Integer getId() {
         return id;
@@ -172,6 +182,30 @@ public class Usuario {
 
     public void setParticipantes(List<Participante> participantes) {
         this.participantes = participantes;
+    }
+
+    public Boolean getBanido() {
+        return banido;
+    }
+
+    public void setBanido(Boolean banido) {
+        this.banido = banido;
+    }
+
+    public Instant getDataBanimento() {
+        return dataBanimento;
+    }
+
+    public void setDataBanimento(Instant dataBanimento) {
+        this.dataBanimento = dataBanimento;
+    }
+
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
     }
 
     @Override
