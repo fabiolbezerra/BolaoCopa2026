@@ -246,12 +246,16 @@ public class UsuarioRN {
     }
 
     public List<Usuario> obterOrdenadoPorPontuacao(Campus campus) {
-        //TODO Implemente validação e chamada ao DAO
-        return null;
+        if (campus == null || campus.getId() == null) {
+            return null;
+        }
+        return USUARIO_DAO.obterOrdenadosPorPontuacao(campus);
     }
 
     public List<Usuario> obterOrdenadoPorPontuacao(Curso curso) {
-        //TODO Implemente validação e chamada ao DAO
-        return null;
+        if (curso == null || curso.getId() == null) {
+            return null;
+        }
+        return USUARIO_DAO.obterOrdenadosPorPontuacao(curso);
     }
 }

@@ -6,7 +6,6 @@ import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.rn.PalpiteRN;
-import br.edu.ufra.rn.SelecaoRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
