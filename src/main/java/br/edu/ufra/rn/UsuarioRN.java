@@ -272,6 +272,7 @@ public class UsuarioRN {
             return false;
         } else {
             usuario.setBanido(true);
+            usuario.setDataBanimento(new Date());
             return USUARIO_DAO.alterar(usuario);
         }
     }

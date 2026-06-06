@@ -89,6 +89,10 @@ public class GerenciarUsuarioBean {
     }
 
     public void banir() {
-        //TODO: implementar chamada ao banimento
+        if (USUARIO_RN.banir(usuario)) {
+            UtilBean.criarMensagemDeInformacao("Usuário banido com sucesso!");
+        } else {
+            UtilBean.criarMensagemDeErro("Erro ao Banir", "Não foi possível alterar o usuário");
+        }
     }
 }

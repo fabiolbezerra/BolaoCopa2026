@@ -19,7 +19,12 @@
 
         <h:form>
 
+            <!-- TODO: Informações para banimento -->
+            <f:facet name="footer">
+                <p:commandButton value="Banir"
+                                 action="#{gerenciarUsuarioBean.banir()}"/>
 
+            </f:facet>
         </h:form>
 
     </ui:define>
