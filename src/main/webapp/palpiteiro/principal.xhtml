@@ -24,13 +24,12 @@
             <li><p:link value="Meus bolões" outcome="/palpiteiro/bolao/lista.xhtml"/></li>
             <li><p:link value="Meus palpites" outcome="/palpiteiro/palpite/lista.xhtml"/></li>
         </ul>
-
         <h2>Rankings</h2>
         <ul>
-            <li>Geral</li>
-            <li>Campus</li>
+            <li><p:link value="Geral" outcome="/palpiteiro/usuario/lista-geral.xhtml"/></li>
+            <li><p:link value="Campus" outcome="/palpiteiro/usuario/lista-campus.xhtml"/></li>
             <p:outputPanel rendered="#{not empty usuarioBean.usuarioLogado.curso}">
-                <li>Curso</li>
+                <li><p:link value="Curso" outcome="/palpiteiro/usuario/lista-curso.xhtml"/></li>
             </p:outputPanel>
         </ul>
     </ui:define>
