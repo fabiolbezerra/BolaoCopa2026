@@ -7,7 +7,6 @@ package br.edu.ufra.seguranca;
 
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.rn.UsuarioRN;
-import br.edu.ufra.util.UtilTexto;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -31,12 +30,9 @@ public class AuthenticationHandler implements AuthenticationProvider {
         String login = a.getName();
         String senha = a.getCredentials().toString();
 
-        //Criptografar a senha digitada
-        String senhaCripto = UtilTexto.criptografarSHA256(senha);
-
         //Autenticando o usuário
         UsuarioRN RN = new UsuarioRN();
-        Usuario usuarioAutenticado = RN.login(login, senhaCripto);
+        Usuario usuarioAutenticado = RN.autenticar(login, senha);
         if (usuarioAutenticado == null) {
             //E-mail ou senha inválidos
             throw new BadCredentialsException("Email ou senha inválidos");

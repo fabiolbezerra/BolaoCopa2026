@@ -6,6 +6,7 @@ import br.edu.ufra.entidade.tipo.EnumTipoUsuario;
 import javax.persistence.*;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +20,10 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "dataCadastro", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCadastro;
 
     @Column(name = "nome", nullable = false, length = 45)
     private String nome;
@@ -64,13 +69,14 @@ public class Usuario {
     private List<Participante> participantes = new ArrayList<>();
 
     @Column(name = "banido", nullable = false)
-    private Boolean banido;
+    private boolean banido;
+
+    @Column(name = "justificativaBanimento", length = 150)
+    private String justificativaBanimento;
 
     @Column(name = "dataBanimento")
-    private Instant dataBanimento;
-
-    @Column(name = "justificativa", length = 100)
-    private String justificativa;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataBanimento;
 
     public Integer getId() {
         return id;
@@ -184,28 +190,36 @@ public class Usuario {
         this.participantes = participantes;
     }
 
-    public Boolean getBanido() {
+    public boolean isBanido() {
         return banido;
     }
 
-    public void setBanido(Boolean banido) {
+    public void setBanido(boolean banido) {
         this.banido = banido;
     }
 
-    public Instant getDataBanimento() {
+    public String getJustificativaBanimento() {
+        return justificativaBanimento;
+    }
+
+    public void setJustificativaBanimento(String justificativaBanimento) {
+        this.justificativaBanimento = justificativaBanimento;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Date getDataBanimento() {
         return dataBanimento;
     }
 
-    public void setDataBanimento(Instant dataBanimento) {
+    public void setDataBanimento(Date dataBanimento) {
         this.dataBanimento = dataBanimento;
-    }
-
-    public String getJustificativa() {
-        return justificativa;
-    }
-
-    public void setJustificativa(String justificativa) {
-        this.justificativa = justificativa;
     }
 
     @Override

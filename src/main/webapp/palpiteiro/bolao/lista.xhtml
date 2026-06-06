@@ -84,10 +84,11 @@
                     </p:commandButton>
 
                     <p:commandButton value="Sair"
+                                     title="Sair ou deixar de ser membro do bolão."
                                      rendered="#{bolaoBean.isApenasParticipante(bolao)}"
                                      action="#{bolaoBean.sair()}"
                                      update="@form"
-                                     icon="arrow-right-from-bracket">
+                                     icon="fa fa-sign-out">
                         <f:setPropertyActionListener value="#{bolao}" target="#{bolaoBean.bolao}"/>
                     </p:commandButton>
 

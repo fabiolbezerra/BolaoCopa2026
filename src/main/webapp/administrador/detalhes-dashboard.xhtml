@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html">
+
+    <ui:define name="title">
+        Dashboard
+    </ui:define>
+
+    <ui:define name="content">
+        <h2>Estatísticas</h2>
+
+        <br/>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <p:panel header="Últimas 24 horas">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Palpiteiros cadastrados:"/>
+                        <h:outputText value="#{estatisticasBean.novosCadastros24h}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <p:panel header="Últimas 24 horas">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Novos palpites:"/>
+                        <h:outputText value="#{estatisticasBean.novosPalpites24h}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <p:panel header="Últimas 24 horas">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Palpites alterados:"/>
+                        <h:outputText value="#{estatisticasBean.alteracoesDePalpites24h}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-3">
+                <p:panel header="Últimas 24 horas">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Banimentos:"/>
+                        <h:outputText value="#{estatisticasBean.numeroDeUsuariosBanidos24h}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <p:panel header="Quantidades">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Palpiteiros:"/>
+                        <h:outputText value="#{estatisticasBean.numeroDeCadastros}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <p:panel header="Quantidades">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Palpites:"/>
+                        <h:outputText value="#{estatisticasBean.numeroDePalpites}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-4">
+                <p:panel header="Quantidades">
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Banimentos:"/>
+                        <h:outputText value="#{estatisticasBean.numeroDeUsuariosBanidos}"/>
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
