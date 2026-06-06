@@ -259,14 +259,20 @@ public class UsuarioRN {
         }
         return USUARIO_DAO.obterOrdenadosPorPontuacao(curso);
     }
-    public List<Usuario> obterUsuariosBanidos() {
-        return USUARIO_DAO.obterUsuariosBanidos();
+
+    public List<Usuario> obterBanidos() {
+        return USUARIO_DAO.obterBanidos();
     }
+
     public boolean banir(Usuario usuario) {
-        if (usuario == null || usuario.getId() == null || usuario.getId() == 0 || usuario.isBanido() || usuario.getPerfil().isAdministrador()) {
+        if (usuario == null
+                || usuario.getId() == null
+                || usuario.getId() == 0
+                || usuario.getPerfil().isAdministrador()) {
             return false;
-        }else{
-            return USUARIO_DAO.banirUsuario(usuario);
+        } else {
+            usuario.setBanido(true);
+            return USUARIO_DAO.alterar(usuario);
         }
     }
 }

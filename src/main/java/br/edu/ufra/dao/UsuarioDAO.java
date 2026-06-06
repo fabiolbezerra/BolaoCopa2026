@@ -382,39 +382,19 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         }
         return resposta;
     }
-    public List<Usuario> obterUsuariosBanidos() {
+
+    public List<Usuario> obterBanidos() {
         EntityManager em = getEntityManager();
         final String JPQL = "select u from Usuario u  where u.banido = true";
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
         List<Usuario> resposta = new ArrayList<>();
         try {
             resposta = query.getResultList();
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace(System.err);
-        }finally {
+        } finally {
             em.close();
         }
         return resposta;
-    }
-    public boolean banirUsuario(Usuario usuario) {
-        EntityManager em = getEntityManager();
-        EntityTransaction tx = em.getTransaction();
-        final String JPQL = "update Usuario set banido = true where usuario = :usuario";
-        Query query = em.createQuery(JPQL);
-        try {
-            tx.begin();
-            query.setParameter("usuario", usuario);
-            query.executeUpdate();
-            tx.commit();
-            return true;
-        }catch (Exception e) {
-            e.printStackTrace(System.err);
-            if(tx.isActive()){
-                tx.rollback();
-            }
-        }finally {
-            em.close();
-        }
-        return false;
     }
 }
