@@ -11,7 +11,7 @@ public class EstatisticasDePalpiteRN {
 
     public long obterNovosPalpites24h() {
         Date hoje = new Date();
-        Date umDia = UtilData.adicionarDias(hoje, 1);
+        Date umDia = UtilData.adicionarDias(hoje, -1);
         return PALPITE_DAO.obterPalpites(hoje, umDia);
     }
 
@@ -21,7 +21,7 @@ public class EstatisticasDePalpiteRN {
 
     public long obterAlteracoesDePalpites24h() {
         Date hoje = new Date();
-        Date umDia = UtilData.adicionarDias(hoje, 1);
+        Date umDia = UtilData.adicionarDias(hoje, -1);
         return PALPITE_DAO.obterAlteracoesDePalpites(hoje, umDia);
     }
 

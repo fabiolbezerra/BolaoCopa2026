@@ -12,7 +12,7 @@ public class EstatisticasDeUsuarioRN {
 
     public long obterNovosCadastros24h() {
         Date hoje = new Date();
-        Date umDia = UtilData.adicionarDias(hoje, 1);
+        Date umDia = UtilData.adicionarDias(hoje, -1);
         return USUARIO_DAO.obterCadastros(hoje, umDia);
     }
 
@@ -30,7 +30,7 @@ public class EstatisticasDeUsuarioRN {
 
     public long obterNumeroDeUsuariosBanidos24h() {
         Date hoje = new Date();
-        Date umDia = UtilData.adicionarDias(hoje, 1);
+        Date umDia = UtilData.adicionarDias(hoje, -1);
         return USUARIO_DAO.obterBanimentos(hoje, umDia);
     }
 
