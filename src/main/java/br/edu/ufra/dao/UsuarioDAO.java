@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -299,6 +300,85 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
             em.close();
         }
 
+        return resposta;
+    }
+
+    public Long obterCadastros(Date dataInicio, Date dataFim) {
+        String JPQL = "select count(u) from Usuario u where u.dataCadastro >= :dataInicio and u.dataCadastro <= :dataFim";
+        EntityManager em = getEntityManager();
+        final Query query = em.createQuery(JPQL);
+        Long resposta = 0L;
+        Object respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .setParameter("dataInicio", dataInicio)
+                    .setParameter("dataFim", dataFim)
+                    .getSingleResult();
+            resposta = ((Number) respostaConsulta).longValue();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Long obterNumeroDeCadastros() {
+        String JPQL = "select count(u) from Usuario u";
+        EntityManager em = getEntityManager();
+        final Query query = em.createQuery(JPQL);
+        Long resposta = 0L;
+        Object respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .getSingleResult();
+            resposta = ((Number) respostaConsulta).longValue();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Long obterBanimentos(Date dataInicio, Date dataFim) {
+        String JPQL = "select count(u) from Usuario u " +
+                "where u.dataBanimento >= :dataInicio " +
+                "and u.dataBanimento <= :dataFim " +
+                "and u.banido = true";
+        EntityManager em = getEntityManager();
+        final Query query = em.createQuery(JPQL);
+        Long resposta = 0L;
+        Object respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .setParameter("dataInicio", dataInicio)
+                    .setParameter("dataFim", dataFim)
+                    .getSingleResult();
+            resposta = ((Number) respostaConsulta).longValue();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Long obterNumeroDeBanimentos() {
+        String JPQL = "select count(u) from Usuario u where u.banido = true";
+        EntityManager em = getEntityManager();
+        final Query query = em.createQuery(JPQL);
+        Long resposta = 0L;
+        Object respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .getSingleResult();
+            resposta = ((Number) respostaConsulta).longValue();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
         return resposta;
     }
 }

@@ -4,7 +4,9 @@ import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.entidade.tipo.EnumTipoUsuario;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,6 +20,10 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "dataCadastro", nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataCadastro;
 
     @Column(name = "nome", nullable = false, length = 45)
     private String nome;
@@ -61,6 +67,16 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     private List<Participante> participantes = new ArrayList<>();
+
+    @Column(name = "banido", nullable = false)
+    private boolean banido;
+
+    @Column(name = "justificativaBanimento", length = 150)
+    private String justificativaBanimento;
+
+    @Column(name = "dataBanimento")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dataBanimento;
 
     public Integer getId() {
         return id;
@@ -172,6 +188,38 @@ public class Usuario {
 
     public void setParticipantes(List<Participante> participantes) {
         this.participantes = participantes;
+    }
+
+    public boolean isBanido() {
+        return banido;
+    }
+
+    public void setBanido(boolean banido) {
+        this.banido = banido;
+    }
+
+    public String getJustificativaBanimento() {
+        return justificativaBanimento;
+    }
+
+    public void setJustificativaBanimento(String justificativaBanimento) {
+        this.justificativaBanimento = justificativaBanimento;
+    }
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+
+    public Date getDataBanimento() {
+        return dataBanimento;
+    }
+
+    public void setDataBanimento(Date dataBanimento) {
+        this.dataBanimento = dataBanimento;
     }
 
     @Override

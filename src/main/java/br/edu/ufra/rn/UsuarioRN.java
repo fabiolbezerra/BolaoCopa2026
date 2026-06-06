@@ -9,6 +9,7 @@ import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.util.UtilEmail;
 import br.edu.ufra.util.UtilTexto;
 
+import java.util.Date;
 import java.util.List;
 
 public class UsuarioRN {
@@ -22,6 +23,7 @@ public class UsuarioRN {
             if (usuario.getId() == null || usuario.getId() == 0) {
                 String senhaCriptografada = UtilTexto.criptografarSHA256(usuario.getSenha());
                 usuario.setSenha(senhaCriptografada);
+                usuario.setDataCadastro(new Date());
                 return USUARIO_DAO.criar(usuario);
             } else {
                 return USUARIO_DAO.alterar(usuario);
@@ -106,15 +108,16 @@ public class UsuarioRN {
         }
     }
 
-    public Usuario login(String usuario, String senha) {
+    public Usuario autenticar(String usuario, String senha) {
         if (usuario == null
                 || usuario.trim().isEmpty()
                 || senha == null
                 || senha.trim().isEmpty()) {
             return null;
         }
-
-        return USUARIO_DAO.login(usuario, senha);
+        //Criptografar a senha digitada
+        String senhaCripto = UtilTexto.criptografarSHA256(senha);
+        return USUARIO_DAO.login(usuario, senhaCripto);
     }
 
     public Usuario obter(String email) {
@@ -191,8 +194,7 @@ public class UsuarioRN {
         if (usuario == null || usuario.getId() == null || usuario.getId() == 0) {
             return false;
         } else {
-            StringBuilder saudacao =
-                    new StringBuilder();
+            StringBuilder saudacao = new StringBuilder();
 
             saudacao
                     .append("Olá ")
@@ -220,8 +222,7 @@ public class UsuarioRN {
         if (usuario == null || usuario.getId() == null || usuario.getId() == 0) {
             return false;
         } else {
-            StringBuilder msgNovaSenha =
-                    new StringBuilder();
+            StringBuilder msgNovaSenha = new StringBuilder();
 
             msgNovaSenha
                     .append("Olá ")
