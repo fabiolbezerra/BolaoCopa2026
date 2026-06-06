@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -380,5 +381,40 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
             em.close();
         }
         return resposta;
+    }
+    public List<Usuario> obterUsuariosBanidos() {
+        EntityManager em = getEntityManager();
+        final String JPQL = "select u from Usuario u  where u.banido = true";
+        TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
+        List<Usuario> resposta = new ArrayList<>();
+        try {
+            resposta = query.getResultList();
+        }catch (Exception e) {
+            e.printStackTrace(System.err);
+        }finally {
+            em.close();
+        }
+        return resposta;
+    }
+    public boolean banirUsuario(Usuario usuario) {
+        EntityManager em = getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        final String JPQL = "update Usuario set banido = true where usuario = :usuario";
+        Query query = em.createQuery(JPQL);
+        try {
+            tx.begin();
+            query.setParameter("usuario", usuario);
+            query.executeUpdate();
+            tx.commit();
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace(System.err);
+            if(tx.isActive()){
+                tx.rollback();
+            }
+        }finally {
+            em.close();
+        }
+        return false;
     }
 }
