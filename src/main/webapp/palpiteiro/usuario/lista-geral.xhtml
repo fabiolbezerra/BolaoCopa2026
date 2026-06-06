@@ -13,5 +13,28 @@
 
     <ui:define name="content">
         <h1>Ranking Geral</h1>
+        <br/>
+        <h:form>
+            <p:dataTable value="#{rankingBean.rankingGeral}"
+                         var="u"
+                         emptyMessage="Nenhum palpiteiro encontrado."
+                         rowIndexVar="idx">
+                <p:column headerText="Posição">
+                    <h:outputText value="#{idx + 1}"/>
+                </p:column>
+                <p:column headerText="Palpiteiro">
+                    <h:outputText value="#{u.nome} #{u.sobrenome}"/>
+                </p:column>
+                <p:column headerText="Campus">
+                    <h:outputText value="#{u.campus.nome}"/>
+                </p:column>
+                <p:column headerText="Curso">
+                    <h:outputText value="#{empty u.curso ? '-' : u.curso.nome}"/>
+                </p:column>
+                <p:column headerText="Pontuação">
+                    <h:outputText value="#{u.pontuacao != null ? u.pontuacao : 0}"/>
+                </p:column>
+            </p:dataTable>
+        </h:form>
     </ui:define>
 </ui:composition>
