@@ -26,10 +26,10 @@
         </ul>
         <h2>Rankings</h2>
         <ul>
-            <li><a href="#{request.contextPath}/palpiteiro/ranking/lista-geral.xhtml">Geral</a></li>
-            <li><a href="#{request.contextPath}/palpiteiro/ranking/lista-campus.xhtml">Campus</a></li>
+            <li><p:link value="Geral" outcome="/palpiteiro/usuario/lista-geral.xhtml"/></li>
+            <li><p:link value="Campus" outcome="/palpiteiro/usuario/lista-campus.xhtml"/></li>
             <p:outputPanel rendered="#{not empty usuarioBean.usuarioLogado.curso}">
-                <li><a href="#{request.contextPath}/palpiteiro/ranking/lista-curso.xhtml">Curso</a></li>
+                <li><p:link value="Curso" outcome="/palpiteiro/usuario/lista-curso.xhtml"/></li>
             </p:outputPanel>
         </ul>
     </ui:define>
