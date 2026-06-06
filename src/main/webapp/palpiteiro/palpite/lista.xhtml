@@ -33,41 +33,41 @@
                          var="pal"
                          emptyMessage="Você ainda não fez nenhum palpite.">
 
-                <p:column headerText="Jogo">
-                    <p:outputPanel style="display:flex; align-items:center; gap:8px;">
+                <p:column headerText="Palpite/Jogo">
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
                         <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoA.simbolo}"
                                         width="24"/>
 
-                        <h:outputText value="#{pal.partida.selecaoA.nome}"/>
+                        <h:outputText value=" #{pal.partida.selecaoA.nome} "/>
 
-                        <h:outputText value=" x "/>
+                        <h:outputText value="[ #{pal.golsA} x #{pal.golsB} ]"/>
 
-                        <h:outputText value="#{pal.partida.selecaoB.nome}"/>
+                        <h:outputText value=" #{pal.partida.selecaoB.nome} "/>
 
                         <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoB.simbolo}"
                                         width="24"/>
                     </p:outputPanel>
                 </p:column>
 
-                <p:column headerText="Data da Partida">
+                <p:column headerText="Data da Partida" width="15%">
                     <h:outputText value="#{pal.partida.inicioDaPartida}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
                                            timeZone="GMT-3"/>
                     </h:outputText>
                 </p:column>
 
-                <p:column headerText="Meu Palpite">
-                    <h:outputText value="#{pal.golsA} x #{pal.golsB}"/>
-                </p:column>
-
-                <p:column headerText="Data do Palpite">
-                    <h:outputText value="#{pal.dataDoPalpite}">
+                <p:column headerText="Data do Palpite" width="15%">
+                    <h:outputText value="#{pal.ultimaAlteracao}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
                                            timeZone="GMT-3"/>
                     </h:outputText>
                 </p:column>
 
-                <p:column headerText="Operações">
+                <p:column headerText="Pontuação" width="15%">
+                    <h:outputText value="#{pal.pontuacao}"/>
+                </p:column>
+
+                <p:column headerText="Operações" width="15%">
 
                     <p:button value="Editar"
                               icon="fa fa-pencil-square-o"

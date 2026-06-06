@@ -27,6 +27,8 @@
         <br/>
 
         <h:form>
+            <p:growl showSummary="true" showDetail="true"/>
+
             <p:tabView>
 
                 <p:tab title="Próximas">
@@ -43,24 +45,25 @@
                             </h:outputText>
                         </p:column>
 
-                        <p:column headerText="Placar">
-                            <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/>
-                                <p:graphicImage value="/resources/imagens/#{p.selecaoA.simbolo}" width="24px"/>
-                                <h:outputText value="#{p.golsA}"/> <p:spacer width="10px"/>
-                                X
-                                <p:spacer width="10px"/><h:outputText value="#{p.golsB} "/>
-                                <p:graphicImage value="/resources/imagens/#{p.selecaoB.simbolo}" width="24px"/>
-                                <h:outputText value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
-                            </p:outputPanel>
-                        </p:column>
-
                         <p:column headerText="Local" width="15%" sortBy="#{p.local}">
                             <h:outputText value="#{p.local}"/>
                         </p:column>
 
-                        <p:column headerText="Operações" width="15%">
+                        <p:column headerText="Partida ">
+                            <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/> <p:spacer width="10px"/>
+                                <p:graphicImage value="/resources/imagens/#{p.selecaoA.simbolo}" width="24px"/>
+                                <p:spacer width="10px"/>
+                                x
+                                <p:spacer width="10px"/>
+                                <p:graphicImage value="/resources/imagens/#{p.selecaoB.simbolo}" width="24px"/>
+                                <p:spacer width="10px"/> <h:outputText value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
+                            </p:outputPanel>
+                        </p:column>
+
+                        <p:column headerText="Operações" width="10%">
                             <p:button value="Palpitar"
+                                      icon="fa fa-futbol-o"
                                       rendered="#{usuarioBean.palpiteiro}"
                                       disabled="#{partidaBean.isExpirada(p)}"
                                       outcome="/palpiteiro/palpite/formulario.xhtml">
@@ -75,9 +78,13 @@
 
                                     <p:menuitem value="Excluir"
                                                 title="Excluir a partida, quando não há palpites na mesma"
-                                                action="#{partidaBean.excluir}"
+                                                action="#{partidaBean.excluir()}"
                                                 update="@form">
                                         <f:setPropertyActionListener value="#{p}" target="#{partidaBean.partida}"/>
+
+                                        <p:confirm header="Confirmação"
+                                                   message="Deseja realmente excluir essa partida?"
+                                                   icon="pi pi-exclamation-triangle"/>
                                     </p:menuitem>
 
                                     <p:menuitem value="Publicar"
@@ -106,35 +113,39 @@
                             </h:outputText>
                         </p:column>
 
-                        <p:column headerText="Seleção A">
-                            <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla})"/>
-                        </p:column>
-
-                        <p:column headerText="Placar">
-                            <div align="center">
-                                <h:outputText value="#{p.golsA}"/> X <h:outputText value="#{p.golsB}"/>
-                            </div>
-                        </p:column>
-
-                        <p:column headerText="Seleção B">
-                            <h:outputText value="#{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
-                        </p:column>
-
                         <p:column headerText="Local">
                             <h:outputText value="#{p.local}"/>
                         </p:column>
 
-                        <p:column headerText="Operações" width="15%" rendered="#{usuarioBean.administrador}">
+                        <p:column headerText="Partida / Placar" width="40%">
+                            <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/> <p:spacer width="10px"/>
+                                <p:graphicImage value="/resources/imagens/#{p.selecaoA.simbolo}" width="24px"/>
+                                <p:spacer width="10px"/><h:outputText value="[ #{p.golsA}"/> <p:spacer width="10px"/>
+                                x
+                                <p:spacer width="10px"/> <h:outputText value="#{p.golsB} ]"/><p:spacer width="10px"/>
+                                <p:graphicImage value="/resources/imagens/#{p.selecaoB.simbolo}" width="24px"/>
+                                <p:spacer width="10px"/> <h:outputText value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
+                            </p:outputPanel>
+                        </p:column>
+
+                        <p:column headerText="Operações" width="10%" rendered="#{usuarioBean.administrador}">
 
                             <p:splitButton value="Placar"
+                                           icon="fa fa-futbol-o"
                                            action="/administrador/partida/formulario-placar.xhtml">
                                 <f:param name="partidaID" value="#{p.id}"/>
 
                                 <p:menuitem value="Processar"
+                                            icon="fa fa-cogs"
                                             title="Calcular pontuações dos palpites e classificar os palpiteiros"
                                             action="#{partidaBean.processar()}"
                                             update="@form">
-                                    <f:setPropertyActionListener value="p" target="#{partidaBean.partida}"/>
+                                    <f:setPropertyActionListener value="#{p}" target="#{partidaBean.partida}"/>
+
+                                    <p:confirm header="Confirmação"
+                                               message="Deseja realmente processar essa partida?"
+                                               icon="pi pi-exclamation-triangle"/>
                                 </p:menuitem>
                             </p:splitButton>
                         </p:column>
@@ -143,6 +154,22 @@
                 </p:tab>
 
             </p:tabView>
+
+            <p:confirmDialog global="true"
+                             showEffect="fade"
+                             hideEffect="fade">
+
+                <p:commandButton value="Sim"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+
+                <p:commandButton value="Não"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-no"
+                                 icon="fa fa-ban"/>
+
+            </p:confirmDialog>
         </h:form>
 
     </ui:define>
