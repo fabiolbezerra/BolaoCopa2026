@@ -8,11 +8,11 @@ import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import java.util.List;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class RankingBean {
 
     private List<Usuario> rankingGeral;
