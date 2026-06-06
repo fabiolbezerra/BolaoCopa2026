@@ -18,7 +18,7 @@ public class PartidaRN {
     }
 
     public boolean salvar(Partida partida) {
-        if (partida == null || partida.isPublicada() && partida.getPalpites() != null && !partida.getPalpites().isEmpty()) {
+        if (partida == null || partida.getSelecaoA() == null || partida.getSelecaoB() == null) {
             return false;
         } else {
             if (partida.getId() == null ) {
@@ -103,7 +103,7 @@ public class PartidaRN {
         //Pontuação dos palpites processada, então salvar os palpites
         boolean palpitesAtualizados = PALPITE_RN.salvar(palpites);
 
-        return false;
+        return palpitesAtualizados;
     }
 
     public boolean processarOrdenacao(Partida partida) {
@@ -132,7 +132,8 @@ public class PartidaRN {
         }
 
         //Pontuação dos palpites processada, então salvar os palpites
-        return USUARIO_RN.salvar(palpiteiros);
+        boolean usuariosAtualizados = USUARIO_RN.salvar(palpiteiros);
+        return usuariosAtualizados;
     }
 
     public List<Partida> obterProximasOitoPartidas() {

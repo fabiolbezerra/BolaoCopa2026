@@ -16,33 +16,27 @@
         <h1>Cadastrar Partida</h1>
 
         <br/>
-        <br/>
-        <br/>
 
         <h:form>
+            <p:messages autoupdate="true" showDetail="true" showSummary="true" style="width: 100%"/>
+
             <h:inputHidden value="#{partidaBean.partida.id}"/>
 
             <p:panelGrid styleClass="ui-noborder" columns="2">
-                <p:messages autoupdate="true" style="width: 100%"/>
-
-                <br/>
 
                 <f:facet name="header">
                     Dados da partida
                 </f:facet>
 
-
-                <p:outputLabel value="Data e hora" for = "calendar"/>
-                <p:calendar
-                        id="calendar"
-                        value = "#{partidaBean.partida.inicioDaPartida}"
-                        pattern = "dd/MM/yyyy HH:mm"
-                        timeZone = "America/Sao_Paulo"
-                        mindate = "11/06/2026"
-                        maxdate = "19/07/2026"
-                        mode = "popup"
-                        required = "true"
-                        readonlyInput = "true"
+                <p:outputLabel value="Data e hora" for="calendar"/>
+                <p:calendar id="calendar"
+                            value="#{partidaBean.partida.inicioDaPartida}"
+                            pattern="dd/MM/yyyy HH:mm"
+                            timeZone="America/Sao_Paulo"
+                            maxdate="19/07/2026"
+                            mode="popup"
+                            required="true"
+                            readonlyInput="true"
                 />
 
 
@@ -69,33 +63,27 @@
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Seleção A"/>
-                <p:selectOneMenu
-                        value="#{partidaBean.partida.selecaoA}"
-                        converter="selecaoConverter">
-                    <f:selectItem
-                            itemLabel="Selecione..."
-                            itemValue=""
-                            noSelectionOption="true"/>
-                    <f:selectItems
-                            value="#{selecaoBean.selecoes}"
-                            var="s"
-                            itemLabel="#{s.nome}"
-                            itemValue="#{s}"/>
+                <p:selectOneMenu value="#{partidaBean.partida.selecaoA}"
+                                 converter="selecaoConverter">
+                    <f:selectItem itemLabel="Selecione..."
+                                  itemValue=""
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{selecaoBean.selecoes}"
+                                   var="s"
+                                   itemLabel="#{s.nome}"
+                                   itemValue="#{s}"/>
                 </p:selectOneMenu>
 
                 <p:outputLabel value="Seleção B"/>
-                <p:selectOneMenu
-                        value="#{partidaBean.partida.selecaoB}"
-                        converter="selecaoConverter">
-                    <f:selectItem
-                            itemLabel="Selecione..."
-                            itemValue=""
-                            noSelectionOption="true"/>
-                    <f:selectItems
-                            value="#{selecaoBean.selecoes}"
-                            var="s"
-                            itemLabel="#{s.nome}"
-                            itemValue="#{s}"/>
+                <p:selectOneMenu value="#{partidaBean.partida.selecaoB}"
+                                 converter="selecaoConverter">
+                    <f:selectItem itemLabel="Selecione..."
+                                  itemValue=""
+                                  noSelectionOption="true"/>
+                    <f:selectItems value="#{selecaoBean.selecoes}"
+                                   var="s"
+                                   itemLabel="#{s.nome}"
+                                   itemValue="#{s}"/>
                 </p:selectOneMenu>
 
             </p:panelGrid>
@@ -104,11 +92,11 @@
 
             <p:commandButton value="Salvar Partida"
                              icon="fa fa-floppy-o"
-                             action="#{partidaBean.salvar}"
+                             action="#{partidaBean.salvar()}"
                              update="@form"/>
 
             <p:button value="Voltar"
-                      icon="fa fa-undo"
+                      icon="fa fa-arrow-left"
                       outcome="/palpiteiro/partida/lista.xhtml"
             />
         </h:form>

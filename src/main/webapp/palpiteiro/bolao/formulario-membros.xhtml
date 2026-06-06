@@ -70,26 +70,22 @@
 
         <h:form>
 
-            <p:growl
-                    showDetail="true"
-                    showSummary="true"/>
+            <p:growl showDetail="true"
+                     showSummary="true"/>
 
-            <p:confirmDialog
-                    global="true"
-                    showEffect="fade"
-                    hideEffect="fade">
+            <p:confirmDialog global="true"
+                             showEffect="fade"
+                             hideEffect="fade">
 
-                <p:commandButton
-                        value="Sim"
-                        type="button"
-                        styleClass="ui-confirmdialog-yes"
-                        icon="fa fa-check"/>
+                <p:commandButton value="Sim"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
 
-                <p:commandButton
-                        value="Não"
-                        type="button"
-                        styleClass="ui-confirmdialog-no"
-                        icon="fa fa-ban"/>
+                <p:commandButton value="Não"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-no"
+                                 icon="fa fa-ban"/>
 
             </p:confirmDialog>
 
@@ -97,9 +93,8 @@
 
                 <div class="ui-g-4">
 
-                    <p:panelGrid
-                            styleClass="ui-noborder"
-                            columns="2">
+                    <p:panelGrid styleClass="ui-noborder"
+                                 columns="2">
 
                         <p:outputLabel value="Membro"/>
 
@@ -114,8 +109,7 @@
 
                             <p:column headerText="Nome">
 
-                                <h:outputText
-                                        value="#{palpiteiro.nome} #{palpiteiro.sobrenome}"/>
+                                <h:outputText value="#{palpiteiro.nome} #{palpiteiro.sobrenome}"/>
 
                             </p:column>
 
@@ -127,10 +121,7 @@
                             </p:column>
 
                             <p:column headerText="Curso">
-
-                                <h:outputText
-                                        value="#{palpiteiro.curso.nome}"/>
-
+                                <h:outputText value="#{palpiteiro.curso.nome}"/>
                             </p:column>
 
                         </p:autoComplete>
@@ -151,29 +142,20 @@
 
                 <div class="ui-g-8">
 
-                    <p:dataTable
-                            value="#{membroDoBolaoBean.participantes}"
-                            var="membro">
+                    <p:dataTable value="#{membroDoBolaoBean.participantes}"
+                                 var="membro">
 
                         <p:column headerText="Nome">
+                            <h:outputText value="#{membro.usuario.nome} "/>
 
-                            <h:outputText
-                                    value="#{membro.usuario.nome} "/>
-
-                            <h:outputText
-                                    value="#{membro.usuario.sobrenome}"/>
-
+                            <h:outputText value="#{membro.usuario.sobrenome}"/>
                         </p:column>
 
                         <p:column headerText="Curso/Campus">
+                            <h:outputText value="#{membro.usuario.curso.nome}/"
+                                          rendered="#{not empty membro.usuario.curso}"/>
 
-                            <h:outputText
-                                    value="#{membro.usuario.curso.nome}/"
-                                    rendered="#{not empty membro.usuario.curso}"/>
-
-                            <h:outputText
-                                    value="#{membro.usuario.campus.nome}"/>
-
+                            <h:outputText value="#{membro.usuario.campus.nome}"/>
                         </p:column>
 
                         <p:column
@@ -191,19 +173,14 @@
                                         value="#{membro}"
                                         target="#{membroDoBolaoBean.participante}"/>
 
-                                <p:confirm
-                                        header="Confirmação"
-                                        message="Deseja realmente remover este participante?"
-                                        icon="pi pi-exclamation-triangle"/>
+                                <p:confirm header="Confirmação"
+                                           message="Deseja realmente remover este participante?"
+                                           icon="pi pi-exclamation-triangle"/>
 
                             </p:commandButton>
-
                         </p:column>
-
                     </p:dataTable>
-
                 </div>
-
             </div>
         </h:form>
     </ui:define>

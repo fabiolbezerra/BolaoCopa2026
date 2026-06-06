@@ -47,7 +47,8 @@
                 </p:column>
 
                 <p:column headerText="Participante">
-                    <h:outputText value="#{usuario.nome}"/>
+                    <h:outputText value="#{usuario.nome}"/> 
+                    (<h:outputText value="#{usuario.tipo.descricao}"/>)
                 </p:column>
 
                 <p:column headerText="Campus / Curso">

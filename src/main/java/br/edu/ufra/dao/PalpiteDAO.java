@@ -42,7 +42,7 @@ public class PalpiteDAO extends GenericDAO<Palpite> {
 
     public List<Palpite> obter(Partida partida) {
         EntityManager em = getEntityManager();
-        final String JPQL = "SELECT p FROM Palpite p WHERE p.partida >= :partida";
+        final String JPQL = "SELECT p FROM Palpite p WHERE p.partida = :partida";
         TypedQuery<Palpite> query = em.createQuery(JPQL, Palpite.class);
         List<Palpite> resposta = null;
         try {
