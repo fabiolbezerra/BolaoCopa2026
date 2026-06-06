@@ -259,4 +259,14 @@ public class UsuarioRN {
         }
         return USUARIO_DAO.obterOrdenadosPorPontuacao(curso);
     }
+    public List<Usuario> obterUsuariosBanidos() {
+        return USUARIO_DAO.obterUsuariosBanidos();
+    }
+    public boolean banir(Usuario usuario) {
+        if (usuario == null || usuario.getId() == null || usuario.getId() == 0 || usuario.isBanido() || usuario.getPerfil().isAdministrador()) {
+            return false;
+        }else{
+            return USUARIO_DAO.banirUsuario(usuario);
+        }
+    }
 }
