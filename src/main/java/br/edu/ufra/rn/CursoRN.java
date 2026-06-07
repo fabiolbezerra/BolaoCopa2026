@@ -18,12 +18,32 @@ public class CursoRN {
     public Curso obter(Integer id) {
         return CURSO_DAO.obter(Curso.class, id);
     }
-    
+
     public List<Curso> obter(Campus campus) {
         if (campus == null || campus.getId() == null || campus.getId() == 0) {
             return null;
         }
         return CURSO_DAO.obter(campus);
+    }
+
+    public List<Curso> obter(String query) {
+        if (query == null || query.trim().equals("")) {
+            return null;
+        }
+
+        List<Curso> resposta = listarTodos();
+
+        String nome = null;
+
+        for (int i = 0; i < resposta.size(); i++) {
+            nome = resposta.get(i).getNome() + " " + resposta.get(i).getCampus().getNome();
+            if (!nome.toUpperCase().contains(query.toUpperCase())) {
+                resposta.remove(i);
+                i--;
+            }
+        }
+
+        return resposta;
     }
 }
 

@@ -35,11 +35,11 @@
                     <p:dataTable value="#{partidaBean.proximasPartidas}" var="p"
                                  emptyMessage="Nenhuma partida">
 
-                        <p:column headerText="Fase" width="15%">
+                        <p:column headerText="Fase" width="10%">
                             <h:outputText value="#{p.fase.nome}"/>
                         </p:column>
 
-                        <p:column headerText="Data e Hora" sortBy="#{p.inicioDaPartida}" width="15%">
+                        <p:column headerText="Data e Hora" sortBy="#{p.inicioDaPartida}" width="10%">
                             <h:outputText value="#{p.inicioDaPartida}">
                                 <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
                             </h:outputText>
@@ -51,14 +51,20 @@
 
                         <p:column headerText="Partida ">
                             <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/> <p:spacer width="10px"/>
+                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/> <p:spacer
+                                    width="10px"/>
                                 <p:graphicImage value="/resources/imagens/#{p.selecaoA.simbolo}" width="24px"/>
                                 <p:spacer width="10px"/>
                                 x
                                 <p:spacer width="10px"/>
                                 <p:graphicImage value="/resources/imagens/#{p.selecaoB.simbolo}" width="24px"/>
-                                <p:spacer width="10px"/> <h:outputText value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
+                                <p:spacer width="10px"/> <h:outputText
+                                    value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
                             </p:outputPanel>
+                        </p:column>
+
+                        <p:column headerText="Publicada" width="10%">
+                            <h:outputText value="#{p.publicada ? 'Sim' : 'Não'}"/>
                         </p:column>
 
                         <p:column headerText="Operações" width="10%">
@@ -119,13 +125,15 @@
 
                         <p:column headerText="Partida / Placar" width="40%">
                             <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/> <p:spacer width="10px"/>
+                                <h:outputText value="#{p.selecaoA.nome} (#{p.selecaoA.sigla}) "/> <p:spacer
+                                    width="10px"/>
                                 <p:graphicImage value="/resources/imagens/#{p.selecaoA.simbolo}" width="24px"/>
                                 <p:spacer width="10px"/><h:outputText value="[ #{p.golsA}"/> <p:spacer width="10px"/>
                                 x
                                 <p:spacer width="10px"/> <h:outputText value="#{p.golsB} ]"/><p:spacer width="10px"/>
                                 <p:graphicImage value="/resources/imagens/#{p.selecaoB.simbolo}" width="24px"/>
-                                <p:spacer width="10px"/> <h:outputText value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
+                                <p:spacer width="10px"/> <h:outputText
+                                    value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
                             </p:outputPanel>
                         </p:column>
 

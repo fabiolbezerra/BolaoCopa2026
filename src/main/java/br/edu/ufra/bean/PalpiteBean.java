@@ -58,15 +58,14 @@ public class PalpiteBean {
         meusPalpites = PALPITE_RN.obter(usuarioLogado);
     }
 
-    public String salvar() {
+    public void salvar() {
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         palpite.setUsuario(usuarioLogado);
         palpite.setPartida(partida);
         if (PALPITE_RN.salvar(palpite)) {
-            return "/palpiteiro/palpite/lista.xhtml?faces-redirect=true";
+            UtilBean.criarMensagemDeInformacao("Palpite salvo com sucesso!");
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar o palpite.");
-            return null;
         }
     }
 

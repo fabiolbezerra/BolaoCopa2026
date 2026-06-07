@@ -2,7 +2,6 @@ package br.edu.ufra.bean;
 
 import br.edu.ufra.entidade.Campus;
 import br.edu.ufra.rn.CampusRN;
-import br.edu.ufra.rn.CursoRN;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -37,5 +36,8 @@ public class CampusBean {
         this.campus = campus;
     }
 
+    public List<Campus> autoCompleteCampus(String query) {
+        return CAMPUS_RN.obter(query);
+    }
 }
 

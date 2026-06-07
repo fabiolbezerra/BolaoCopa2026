@@ -37,5 +37,14 @@
         <ul>
             <li><p:link value="Dashboard" outcome="/administrador/detalhes-dashboard.xhtml"/></li>
         </ul>
+
+        <h2>Rankings</h2>
+        <ul>
+            <li><p:link value="Geral" outcome="/palpiteiro/usuario/lista-geral.xhtml"/></li>
+            <li><p:link value="Campus" outcome="/palpiteiro/usuario/lista-campus.xhtml"/></li>
+            <p:outputPanel rendered="#{not empty usuarioBean.usuarioLogado.curso}">
+                <li><p:link value="Curso" outcome="/palpiteiro/usuario/lista-curso.xhtml"/></li>
+            </p:outputPanel>
+        </ul>
     </ui:define>
 </ui:composition>

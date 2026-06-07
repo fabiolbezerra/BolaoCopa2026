@@ -41,4 +41,7 @@ public class CursoBean {
         return CURSO_RN.obter(campus);
     }
 
+    public List<Curso> autoCompleteCurso(String query) {
+        return CURSO_RN.obter(query);
+    }
 }
