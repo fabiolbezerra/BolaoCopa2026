@@ -2,6 +2,7 @@ package br.edu.ufra.bean;
 
 import br.edu.ufra.entidade.Bolao;
 import br.edu.ufra.entidade.Palpite;
+import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.rn.BolaoRN;
 import br.edu.ufra.rn.PalpiteRN;
@@ -31,8 +32,22 @@ public class GerenciarUsuarioBean {
 
     @PostConstruct
     public void init() {
-        //TODO: Inicializar lista de banidos
-        //TODO: recuperar o usuário a partir do usuarioID
+        usuariosBanidos =  USUARIO_RN.obterBanidos();
+
+        String usuarioID = UtilBean.obterValor("usuarioID");
+        Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
+        if (usuarioID != null) {
+            try {
+                int id = Integer.parseInt(usuarioID);
+                usuario = USUARIO_RN.obter(id);
+                if (usuario == null) {
+                    usuario = new Usuario();
+                }
+            } catch (Exception e) {
+                usuario = new Usuario();
+                UtilBean.criarMensagemDeErro("Não foi possível recuperar o usuário.");
+            }
+        }
     }
 
     public Usuario getUsuario() {

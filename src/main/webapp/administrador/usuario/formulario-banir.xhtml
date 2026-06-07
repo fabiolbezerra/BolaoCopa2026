@@ -13,18 +13,51 @@
     </ui:define>
 
     <ui:define name="content">
-        <h1>Justificando Banimento do Usuário</h1>
-
-        <!-- TODO: Dados do usuário que será banido -->
+        <h1>Formulário de banimento de usuário</h1>
 
         <h:form>
+            <h:inputHidden value="#{gerenciarUsuarioBean.usuario.id}"/>
+            <p:panel header="Dados do usuário">
+                <p:panelGrid styleClass="ui-noborder" columns ="2" columnClass="label-col, value,col" style="width: 100%">
+                    <h:outputLabel value="Nome:"/>
+                    <h:outputText value="#{gerenciarUsuarioBean.usuario.nome} #{gerenciarUsuarioBean.usuario.sobrenome}"/>
 
-            <!-- TODO: Informações para banimento -->
-            <f:facet name="footer">
-                <p:commandButton value="Banir"
-                                 action="#{gerenciarUsuarioBean.banir()}"/>
+                    <h:outputLabel value="Campus:"/>
+                    <h:outputText value="#{gerenciarUsuarioBean.usuario.campus.nome}"/>
 
-            </f:facet>
+                    <h:outputLabel value="Curso:"/>
+                    <h:outputText value="#{gerenciarUsuarioBean.usuario.curso != null ? gerenciarUsuarioBean.usuario.curso.nome : 'Não informado'}"/>
+
+                    <h:outputLabel value="Data de cadastro:"/>
+                    <h:outputText value="#{gerenciarUsuarioBean.usuario.dataCadastro}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                    </h:outputText>
+
+                    <h:outputLabel value="Tipo de usuário:"/>
+                    <h:outputText value="#{gerenciarUsuarioBean.usuario.tipo}"/>
+
+                    <h:outputText/>
+                </p:panelGrid>
+            </p:panel>
+
+            <p:panel header="Justificativa do banimento">
+                <p:panelGrid styleClass="ui-noborder" columns ="2" columnClass="label-col, value,col" style="width: 100%">
+                        <p:inputTextarea rows="4" cols="100" required="true" value="#{gerenciarUsuarioBean.usuario.justificativaBanimento}"/>
+                </p:panelGrid>
+
+                <p:messages showDetail="true" showSummary="true" style="width: 30%"/>
+
+                <f:facet name="footer">
+                    <p:commandButton value="Banir"
+                                     icon="fa fa-ban"
+                                     action="#{gerenciarUsuarioBean.banir()}"/>
+
+                    <p:button value="Voltar"
+                              icon="fa fa-arrow-left"
+                              outcome="lista.xhtml"/>
+
+                </f:facet>
+            </p:panel>
         </h:form>
 
     </ui:define>
