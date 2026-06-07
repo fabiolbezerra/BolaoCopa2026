@@ -115,7 +115,7 @@
 
                         <p:column headerText="Data e Hora" sortBy="#{p.inicioDaPartida}">
                             <h:outputText value="#{p.inicioDaPartida}">
-                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
                             </h:outputText>
                         </p:column>
 

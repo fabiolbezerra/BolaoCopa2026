@@ -231,7 +231,9 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
     public List<Usuario> obterOrdenadosPorPontuacao() {
         EntityManager em = getEntityManager();
 
-        final String JPQL = "select u from Usuario u where u.perfil = :perfil order by u.pontuacao desc";
+        final String JPQL = "select u from Usuario u " +
+                "where u.perfil = :perfil and u.banido = false " +
+                "order by u.pontuacao desc";
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
 
         List<Usuario> resposta = null;
@@ -255,7 +257,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         EntityManager em = getEntityManager();
 
         final String JPQL = "select u from Usuario u " +
-                "where u.perfil = :perfil and u.campus = :campus " +
+                "where u.perfil = :perfil and u.campus = :campus and u.banido = false " +
                 "order by u.pontuacao desc";
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
 
@@ -281,7 +283,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         EntityManager em = getEntityManager();
 
         final String JPQL = "select u from Usuario u " +
-                "where u.perfil = :perfil and u.curso = :curso " +
+                "where u.perfil = :perfil and u.curso = :curso and u.banido = false " +
                 "order by u.pontuacao desc";
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
 
