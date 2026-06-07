@@ -2,7 +2,6 @@ package br.edu.ufra.bean;
 
 import br.edu.ufra.entidade.Bolao;
 import br.edu.ufra.entidade.Palpite;
-import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.rn.BolaoRN;
 import br.edu.ufra.rn.PalpiteRN;
