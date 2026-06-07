@@ -36,6 +36,9 @@ public class AuthenticationHandler implements AuthenticationProvider {
         if (usuarioAutenticado == null) {
             //E-mail ou senha inválidos
             throw new BadCredentialsException("Email ou senha inválidos");
+        } else if (usuarioAutenticado.isBanido()) {
+            //Banimento
+            throw new BadCredentialsException("Usuário não autorizado a palpitar");
         } else {
             //Usuário foi autenticado, então concedendo autorização
             GrantedAuthorityImpl ga = new GrantedAuthorityImpl("ROLE_" + usuarioAutenticado.getPerfil());
