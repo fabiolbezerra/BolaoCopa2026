@@ -4,7 +4,7 @@ import br.edu.ufra.dao.CursoDAO;
 import br.edu.ufra.entidade.Campus;
 import br.edu.ufra.entidade.Curso;
 
-import java.util.List;
+import java.util.*;
 
 public class CursoRN {
 
@@ -26,23 +26,31 @@ public class CursoRN {
         return CURSO_DAO.obter(campus);
     }
 
+    //obter somente pelo curso
     public List<Curso> obter(String query) {
         if (query == null || query.trim().equals("")) {
             return null;
         }
 
-        List<Curso> resposta = listarTodos();
+        List<Curso> cursos = listarTodos();
 
         String nome = null;
 
-        for (int i = 0; i < resposta.size(); i++) {
-            nome = resposta.get(i).getNome() + " " + resposta.get(i).getCampus().getNome();
+        for (int i = 0; i < cursos.size(); i++) {
+            nome = cursos.get(i).getNome() + " " + cursos.get(i).getCampus().getNome();
             if (!nome.toUpperCase().contains(query.toUpperCase())) {
-                resposta.remove(i);
+                cursos.remove(i);
                 i--;
             }
         }
+        List<Curso> resposta = new ArrayList<>();
+        Set<String> listaSemRepeticao = new HashSet<>();
 
+        for (Curso curso : cursos) {
+            if(listaSemRepeticao.add(curso.getNome())){
+                resposta.add(curso);
+            }
+        }
         return resposta;
     }
 }
