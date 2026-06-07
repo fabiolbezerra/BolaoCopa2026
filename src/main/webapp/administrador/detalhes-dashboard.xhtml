@@ -81,5 +81,31 @@
                 </p:panel>
             </div>
         </div>
+
+
+        <h2>Gráficos</h2>
+
+        <br/>
+
+        <div class="ui-g">
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p:chart type="pie" model="#{graficosBean.palpiteirosPorTipo}"/>
+            </div>
+
+            <div class="ui-g-12 ui-md-6 ui-lg-6">
+                <p:chart type="pie" model="#{graficosBean.palpiteirosPorCampus}"/>
+            </div>
+
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <p:tabView value="#{graficosBean.campi}" var="campus">
+                    <p:tab title="#{campus.nome}">
+                        <p:panel>
+                            <p:chart type="pie" model="#{graficosBean.criarGraficoPalpiteirosPorCurso(campus)}"/>
+                        </p:panel>
+                    </p:tab>
+                </p:tabView>
+
+            </div>
+        </div>
     </ui:define>
 </ui:composition>

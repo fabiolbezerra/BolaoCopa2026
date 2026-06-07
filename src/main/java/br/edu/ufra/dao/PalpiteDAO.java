@@ -137,7 +137,7 @@ public class PalpiteDAO extends GenericDAO<Palpite> {
     }
 
     public Long obterAlteracoesDePalpites(Date dataInicio, Date dataFim) {
-        String JPQL = "select count(p) from Palpite p where p.ultimaAlteracao >=  :dataInicio and p.dataDoPalpite <= :dataFim";
+        String JPQL = "select count(p) from Palpite p where p.ultimaAlteracao >=  :dataInicio and p.ultimaAlteracao <= :dataFim";
         EntityManager em = getEntityManager();
         final Query query = em.createQuery(JPQL);
         Long resposta = 0L;

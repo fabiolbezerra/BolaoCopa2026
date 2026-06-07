@@ -2,14 +2,13 @@ package br.edu.ufra.dao;
 
 import br.edu.ufra.entidade.*;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
+import br.edu.ufra.entidade.tipo.EnumTipoUsuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  *
@@ -342,10 +341,47 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         return resposta;
     }
 
+    public Long obterNumeroDeCadastros(Campus campus) {
+        String JPQL = "select count(u) from Usuario u where u.campus = :campus ";
+        EntityManager em = getEntityManager();
+        final Query query = em.createQuery(JPQL);
+        Long resposta = 0L;
+        Object respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .setParameter("campus", campus)
+                    .getSingleResult();
+            resposta = ((Number) respostaConsulta).longValue();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Long obterNumeroDeCadastros(Curso curso) {
+        String JPQL = "select count(u) from Usuario u where u.curso = :curso ";
+        EntityManager em = getEntityManager();
+        final Query query = em.createQuery(JPQL);
+        Long resposta = 0L;
+        Object respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .setParameter("curso", curso)
+                    .getSingleResult();
+            resposta = ((Number) respostaConsulta).longValue();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
     public Long obterBanimentos(Date dataInicio, Date dataFim) {
         String JPQL = "select count(u) from Usuario u " +
-                "where u.dataBanimento >= :dataInicio " +
-                "and u.dataBanimento <= :dataFim " +
+                "where u.dataBanimento >= :dataInicio and u.dataBanimento <= :dataFim " +
                 "and u.banido = true";
         EntityManager em = getEntityManager();
         final Query query = em.createQuery(JPQL);
@@ -390,6 +426,92 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         List<Usuario> resposta = new ArrayList<>();
         try {
             resposta = query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Map<String, Integer> obterCadastrosPorCampus() {
+        String JPQL = "select u.campus, count(u) from Usuario u " +
+                "group by u.campus";
+        EntityManager em = getEntityManager();
+        final TypedQuery<Object[]> query = em.createQuery(JPQL, Object[].class);
+        Map<String, Integer> resposta = null;
+        List<Object[]> respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .getResultList();
+            if (respostaConsulta != null && !respostaConsulta.isEmpty()) {
+                resposta = new HashMap<>();
+                String chave = null;
+                Integer valor = null;
+                for (Object[] registro : respostaConsulta) {
+                    chave = ((Campus) registro[0]).getNome();
+                    valor = ((Number) registro[1]).intValue();
+                    resposta.put(chave, valor);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Map<String, Integer> obterCadastrosPorCurso(Campus campus) {
+        String JPQL = "select u.curso, count(u) from Usuario u " +
+                "where u.campus = :campus " +
+                "group by u.curso";
+        EntityManager em = getEntityManager();
+        final TypedQuery<Object[]> query = em.createQuery(JPQL, Object[].class);
+        Map<String, Integer> resposta = null;
+        List<Object[]> respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .setParameter("campus", campus)
+                    .getResultList();
+            if (respostaConsulta != null && !respostaConsulta.isEmpty()) {
+                resposta = new HashMap<>();
+                String chave = null;
+                Integer valor = null;
+                for (Object[] registro : respostaConsulta) {
+                    chave = ((Curso) registro[0]).getNome();
+                    valor = ((Number) registro[1]).intValue();
+                    resposta.put(chave, valor);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Map<String, Integer> obterCadastrosPorTipoUsuario() {
+        String JPQL = "select u.tipo, count(u) from Usuario u " +
+                "group by u.tipo";
+        EntityManager em = getEntityManager();
+        final TypedQuery<Object[]> query = em.createQuery(JPQL, Object[].class);
+        Map<String, Integer> resposta = null;
+        List<Object[]> respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .getResultList();
+            if (respostaConsulta != null && !respostaConsulta.isEmpty()) {
+                resposta = new HashMap<>();
+                String chave = null;
+                Integer valor = null;
+                for (Object[] registro : respostaConsulta) {
+                    chave = ((EnumTipoUsuario) registro[0]).getDescricao();
+                    valor = ((Number) registro[1]).intValue();
+                    resposta.put(chave, valor);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
         } finally {
