@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/administrador/fase/lista.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/administrador/fase" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/administrador/partida/formulario-placar.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/administrador/partida" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/bolao/lista.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/bolao" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/palpite/formulario.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/palpite" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/palpite/lista.xhtml" value="file://$PROJECT_DIR$/src/main/webapp/palpiteiro/palpite" />

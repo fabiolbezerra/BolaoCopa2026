@@ -79,12 +79,25 @@
 
                 <h:outputText value="Tipo de Vitória:"/>
                 <p:selectOneMenu value="#{partidaBean.partida.tipoDeVitoria}">
+                    <p:ajax update="selecaoVencedoraAdmin"/>
                     <f:selectItem itemLabel="Selecione..." itemValue="#{null}"/>
-                    <f:selectItems value="#{palpiteBean.tiposDeVitoria}"
+                    <f:selectItems value="#{partidaBean.tiposDeVitoria}"
                                    var="tipo"
                                    itemLabel="#{tipo.descricao}"
                                    itemValue="#{tipo}"/>
                 </p:selectOneMenu>
+
+                <h:outputText value="Seleção Vencedora:"/>
+                <p:selectOneRadio id="selecaoVencedoraAdmin"
+                                  value="#{partidaBean.selecaoVencedoraId}"
+                                  layout="lineDirection"
+                                  disabled="#{partidaBean.partida.tipoDeVitoria == null or !partidaBean.partida.tipoDeVitoria.penaltis}">
+                    <f:selectItem itemLabel="#{partidaBean.partida.selecaoA.nome}"
+                                  itemValue="#{partidaBean.partida.selecaoA.id}"/>
+                    <f:selectItem itemLabel="#{partidaBean.partida.selecaoB.nome}"
+                                  itemValue="#{partidaBean.partida.selecaoB.id}"/>
+                </p:selectOneRadio>
+
             </h:panelGrid>
 
 

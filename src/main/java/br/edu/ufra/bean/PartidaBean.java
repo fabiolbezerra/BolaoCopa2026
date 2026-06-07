@@ -6,6 +6,7 @@ import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
 import br.edu.ufra.rn.PalpiteRN;
 import br.edu.ufra.rn.PartidaRN;
+import br.edu.ufra.rn.SelecaoRN;
 import br.edu.ufra.util.UtilBean;
 import br.edu.ufra.util.UtilData;
 
@@ -31,6 +32,8 @@ public class PartidaBean implements Serializable {
     private List<Partida> partidasAnteriores;
 
     private Partida partida = new Partida();
+    private Integer selecaoVencedoraId;
+    private final SelecaoRN SELECAO_RN = new SelecaoRN();
 
     public PartidaBean() {
         System.out.println("Criando PartidaBean");
@@ -127,17 +130,20 @@ public class PartidaBean implements Serializable {
     }
 
     public void atualizarPlacar() {
-        if(partida.getGolsA() > partida.getGolsB()) {
+        if (partida.getGolsA() > partida.getGolsB()) {
             partida.setVencedor(partida.getSelecaoA());
-        } else if(partida.getGolsA() < partida.getGolsB()) {
+        } else if (partida.getGolsA() < partida.getGolsB()) {
             partida.setVencedor(partida.getSelecaoB());
+        } else {
+            if (partida.getFase().isEliminatoria() && selecaoVencedoraId != null) {
+                partida.setVencedor(SELECAO_RN.obter(selecaoVencedoraId));
+            }
         }
-        if(!partida.getFase().isEliminatoria()) {
+        if (!partida.getFase().isEliminatoria()) {
             partida.setTipoDeVitoria(EnumTipoVitoria.TEMPO_NORMAL);
         }
         partida.setPublicada(true);
         partida.setAtualizacaoDoResultado(new Date());
-
         if (this.PARTIDA_RN.salvar(partida)) {
             UtilBean.criarMensagemDeInformacao("Partida salva com sucesso!");
             proximasEAnteriores();
@@ -145,5 +151,18 @@ public class PartidaBean implements Serializable {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a partida");
         }
     }
+
+    public EnumTipoVitoria[] getTiposDeVitoria() {
+        return EnumTipoVitoria.values();
+    }
+
+    public Integer getSelecaoVencedoraId() {
+        return selecaoVencedoraId;
+    }
+
+    public void setSelecaoVencedoraId(Integer selecaoVencedoraId) {
+        this.selecaoVencedoraId = selecaoVencedoraId;
+    }
+
 
 }
