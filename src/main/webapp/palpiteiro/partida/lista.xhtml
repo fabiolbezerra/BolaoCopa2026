@@ -63,7 +63,8 @@
                             </p:outputPanel>
                         </p:column>
 
-                        <p:column headerText="Publicada" width="10%">
+                        <p:column headerText="Publicada" width="10%"
+                                  rendered="#{usuarioBean.administrador}">
                             <h:outputText value="#{p.publicada ? 'Sim' : 'Não'}"/>
                         </p:column>
 
