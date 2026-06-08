@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html">
+    <ui:define name="title">
+        Regras de Pontuação
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>🏆 Regras do Bolão da Copa</h1>
+
+        <br/>
+
+        <h2>1. Como ganhar pontos em cada jogo</h2>
+        <p>Você pontua se acertar qualquer um destes 5 itens:</p>
+        <ol>
+            <li><strong>Gols de um time:</strong> Acertar quantos gols uma das seleções fez.</li>
+            <li><strong>Resultado:</strong> Acertar quem venceu ou se deu empate.</li>
+            <li><strong>Placar exato:</strong> Acertar o placar completo (Ex: 3x1).</li>
+            <li><strong>Tipo de vitória:</strong> Acertar se foi no tempo normal, prorrogação ou pênaltis.</li>
+            <li><strong>Vencedor nos pênaltis:</strong> Se houver pênaltis, acertar quem ganhou a disputa.</li>
+        </ol>
+
+        <br/><br/>
+
+        <h2>2. Quantos pontos você faz</h2>
+        <p>Conte quantos itens você acertou no jogo e veja na tabela abaixo:</p>
+
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Acertos</th>
+                <th>Pontos obtidos</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>0</td>
+                <td>0 ponto</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>1 ponto</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>2 pontos</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>3 pontos</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5 pontos</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>8 pontos</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>13 pontos</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <br/>
+
+        <h3>
+            💡 Curiosidade: A pontuação segue a sequência de Fibonacci (0, 1, 1, 2, 3, 5, 8, 13...).
+        </h3>
+
+        <br/><br/>
+
+        <h2>3. Observações rápidas</h2>
+        <ul>
+            <li>Errou tudo = <strong>0 pontos</strong>.</li>
+            <li><strong>Os acertos somam:</strong> Se você acertar o placar exato, automaticamente já acertou os
+                gols dos 2 times e o resultado do jogo. Isso soma 4 acertos, garantindo <strong>5 pontos</strong>.
+            </li>
+            <li>O palpite só é válido se for enviado <strong>antes do início do jogo</strong>.</li>
+        </ul>
+
+        <br/><br/>
+
+        <h2>4. Exemplo Prático:</h2>
+        <p>
+            <strong>Jogo:</strong> França 2 x 0 Marrocos (Tempo Normal)<br/>
+            <strong>Seu palpite:</strong> França 2 x 0 Marrocos (Tempo Normal)</p>
+        <p>
+            🎯 <strong>Você acertou:</strong> gols da França + gols do Marrocos + resultado + placar exato + tipo de
+            vitória = <strong>5 acertos (8 pontos)</strong>.
+        </p>
+    </ui:define>
+</ui:composition>

@@ -31,6 +31,8 @@
 
         <h1>Rankings</h1>
 
+        <br/>
+
         <p:panel header="Top 10 Palpiteiros" style="margin-bottom: 30px;">
             <p:dataTable value="#{landpageBean.dezPrimeiros}"
                          var="usuario"
@@ -38,17 +40,17 @@
                          rows="10"
                          paginator="false">
 
-                <p:column headerText="Posição" width="15%">
+                <p:column headerText="Posição" width="10%">
                     <h:outputText value="#{usuario.posicao}"/>
                 </p:column>
 
-                <p:column headerText="Pontos" width="15%">
+                <p:column headerText="Pontos" width="10%">
                     <h:outputText value="#{usuario.pontuacao}"/>
                 </p:column>
 
                 <p:column headerText="Participante">
-                    <h:outputText value="#{usuario.nome}"/> 
-                    (<h:outputText value="#{usuario.tipo.descricao}"/>)
+                    <h:outputText value="#{usuario.nome} #{usuario.sobrenome}"/> (<h:outputText
+                        value="#{usuario.tipo.descricao}"/>)
                 </p:column>
 
                 <p:column headerText="Campus / Curso">
@@ -64,17 +66,19 @@
             <p:outputLabel value="próximas partidas"
                            style="color: #888; font-style: italic;"/>
             <p:dataGrid value="#{landpageBean.proximosJogos}" var="jogo" columns="4">
-                <p:panel header="#{jogo.local}" >
+                <p:panel header="#{jogo.local}">
                     <h:outputText value="#{jogo.inicioDaPartida}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
                     </h:outputText>
                     <br/>
                     <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                        <p:graphicImage value="/resources/imagens/#{jogo.selecaoA.simbolo}" width="24px" style="padding: 5px"/>
+                        <p:graphicImage value="/resources/imagens/#{jogo.selecaoA.simbolo}" width="24px"
+                                        style="padding: 5px"/>
                         <h:outputText value=" #{jogo.selecaoA.sigla} "/>
                         x
                         <h:outputText value=" #{jogo.selecaoB.sigla} "/>
-                        <p:graphicImage value="/resources/imagens/#{jogo.selecaoB.simbolo}" width="24px" style="padding: 5px"/>
+                        <p:graphicImage value="/resources/imagens/#{jogo.selecaoB.simbolo}" width="24px"
+                                        style="padding: 5px"/>
                     </p:outputPanel>
                     <br/>
                 </p:panel>

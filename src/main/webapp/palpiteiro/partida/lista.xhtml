@@ -19,9 +19,9 @@
         <br/>
 
         <p:button value="Adicionar Partida"
+                  icon="fa fa-user-plus"
                   rendered="#{usuarioBean.administrador}"
-                  outcome="/administrador/partida/formulario.xhtml"
-        />
+                  outcome="/administrador/partida/formulario.xhtml"/>
 
         <br/>
         <br/>
@@ -63,8 +63,7 @@
                             </p:outputPanel>
                         </p:column>
 
-                        <p:column headerText="Publicada" width="10%"
-                                  rendered="#{usuarioBean.administrador}">
+                        <p:column headerText="Publicada" width="10%" rendered="#{usuarioBean.administrador}">
                             <h:outputText value="#{p.publicada ? 'Sim' : 'Não'}"/>
                         </p:column>
 

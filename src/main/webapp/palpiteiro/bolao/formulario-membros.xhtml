@@ -104,26 +104,20 @@
                                 completeMethod="#{usuarioBean.autoCompletePalpiteiros}"
                                 var="palpiteiro"
                                 itemValue="#{palpiteiro}"
-                                itemLabel="#{palpiteiro}"
+                                itemLabel="#{palpiteiro.nome}"
                                 converter="usuarioConverter">
 
                             <p:column headerText="Nome">
-
                                 <h:outputText value="#{palpiteiro.nome} #{palpiteiro.sobrenome}"/>
-
                             </p:column>
 
                             <p:column headerText="Campus">
-
-                                <h:outputText
-                                        value="#{palpiteiro.campus.nome}"/>
-
+                                <h:outputText value="#{palpiteiro.campus.nome}"/>
                             </p:column>
 
                             <p:column headerText="Curso">
                                 <h:outputText value="#{palpiteiro.curso.nome}"/>
                             </p:column>
-
                         </p:autoComplete>
 
                         <f:facet name="footer">
@@ -146,16 +140,14 @@
                                  var="membro">
 
                         <p:column headerText="Nome">
-                            <h:outputText value="#{membro.usuario.nome} "/>
-
-                            <h:outputText value="#{membro.usuario.sobrenome}"/>
+                            <h:outputText value="#{membro.usuario.nome} #{membro.usuario.sobrenome}"/>
                         </p:column>
 
-                        <p:column headerText="Curso/Campus">
-                            <h:outputText value="#{membro.usuario.curso.nome}/"
-                                          rendered="#{not empty membro.usuario.curso}"/>
-
+                        <p:column headerText="Campus / Curso">
                             <h:outputText value="#{membro.usuario.campus.nome}"/>
+
+                            <h:outputText value="/ #{membro.usuario.curso.nome}"
+                                          rendered="#{not empty membro.usuario.curso}"/>
                         </p:column>
 
                         <p:column

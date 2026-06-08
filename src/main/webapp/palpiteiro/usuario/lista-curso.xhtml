@@ -14,47 +14,60 @@
 
     <ui:define name="content">
         <h:form>
-        <c:choose>
-            <c:when test="#{usuarioBean.administrador}">
-                <p:panel header="Selecionar curso">
-                    <p:autoComplete
-                            value="#{rankingBean.curso}"
-                            minQueryLength="2"
-                            completeMethod="#{cursoBean.autoCompleteCurso}"
-                            forceSelection="true"
-                            var="c"
-                            itemValue="#{c}"
-                            itemLabel="#{c.nome}"
-                            converter="cursoConverter"/>
+            <c:choose>
+                <c:when test="#{usuarioBean.administrador}">
+                    <p:panel header="Selecionar curso">
+                        <p:autoComplete
+                                value="#{rankingBean.curso}"
+                                minQueryLength="2"
+                                completeMethod="#{cursoBean.autoCompleteCurso}"
+                                forceSelection="true"
+                                var="c"
+                                itemValue="#{c}"
+                                itemLabel="#{c.nome}"
+                                converter="cursoConverter">
 
-                    <f:facet name="footer">
-                        <p:commandButton value="Atualizar"
-                                         action="#{rankingBean.atualizarRankingCurso}"
-                                         ajax="false"/>
-                    </f:facet>
-                </p:panel>
-            </c:when>
-            <c:otherwise>
-                <h1>Ranking - #{usuarioBean.usuarioLogado.curso.nome}</h1>
-            </c:otherwise>
-        </c:choose>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{c.nome}"/>
+                            </p:column>
 
-        <br/>
+                            <p:column headerText="Campus">
+                                <h:outputText value="#{c.campus.nome}"/>
+                            </p:column>
+                        </p:autoComplete>
 
+                        <f:facet name="footer">
+                            <p:commandButton value="Atualizar"
+                                             action="#{rankingBean.atualizarRankingCurso}"
+                                             ajax="false"/>
+                        </f:facet>
+                    </p:panel>
+                </c:when>
+                <c:otherwise>
+                    <h1>Ranking - #{usuarioBean.usuarioLogado.curso.nome} - #{usuarioBean.usuarioLogado.curso.campus.nome}</h1>
+                </c:otherwise>
+            </c:choose>
 
-        <br/>
+            <br/>
+
             <p:dataTable value="#{rankingBean.rankingCurso}"
                          var="u"
                          emptyMessage="Nenhum palpiteiro encontrado para este curso."
-                         rowIndexVar="idx">
-                <p:column headerText="Posição">
+                         rowIndexVar="idx"
+                         rows="25"
+                         paginatorAlwaysVisible="false"
+                         paginator="true"
+                         rowsPerPageTemplate="25, 50">
+                <p:column headerText="Posição" width="10%">
                     <h:outputText value="#{idx + 1}"/>
                 </p:column>
+
+                <p:column headerText="Pontuação" width="10%">
+                    <h:outputText value="#{u.pontuacao != null ? u.pontuacao : 0}"/>
+                </p:column>
+
                 <p:column headerText="Palpiteiro">
                     <h:outputText value="#{u.nome} #{u.sobrenome}"/>
-                </p:column>
-                <p:column headerText="Pontuação">
-                    <h:outputText value="#{u.pontuacao != null ? u.pontuacao : 0}"/>
                 </p:column>
             </p:dataTable>
         </h:form>

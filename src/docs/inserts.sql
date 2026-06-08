@@ -274,10 +274,10 @@ VALUES -- Campus Belém (ID: 1)
 -- ========================
 insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, posicao, curso, campus)
 VALUES (1, 'Henrique', 'Costa', 'antoniocavallero935@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
+        '9d41da0e0d934e7a140fffe38834bd0ab61f946f64230596b58835bf1684bc38', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
        (2, 'Gabriel', 'Chaves', 'gabrielchavesbiel@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
+        '9d41da0e0d934e7a140fffe38834bd0ab61f946f64230596b58835bf1684bc38', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
        (3, 'Paulo', 'Glória Neto', 'pauloglorianeto@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
+        '9d41da0e0d934e7a140fffe38834bd0ab61f946f64230596b58835bf1684bc38', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),
        (4, 'Murillo', 'Espírito Santo', 'murillofes@gmail.com',
-        'ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1);
+        '9d41da0e0d934e7a140fffe38834bd0ab61f946f64230596b58835bf1684bc38', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1);
