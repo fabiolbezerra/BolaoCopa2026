@@ -62,6 +62,12 @@
                                     value=" #{p.selecaoB.nome} (#{p.selecaoB.sigla})"/>
                             </p:outputPanel>
                         </p:column>
+
+                        <p:column headerText="Publicada" width="10%"
+                                  rendered="#{usuarioBean.administrador}">
+                            <h:outputText value="#{p.publicada ? 'Sim' : 'Não'}"/>
+                        </p:column>
+
                         <p:column headerText="Operações" width="10%">
                             <p:button value="Palpitar"
                                       icon="fa fa-futbol-o"
