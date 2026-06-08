@@ -96,11 +96,13 @@ VALUES -- Grupo A (ID: 1)
 -- FASES
 -- =========================
 INSERT INTO fase (id, nome, eliminatoria, inicio, fim)
-VALUES (1, 'Fase de Grupos', 0, '2026-06-08', '2026-06-30'),
-       (2, 'Oitavas de Final', 1, '2026-07-02', '2026-07-05'),
-       (3, 'Quartas de Final', 1, '2026-07-08', '2026-07-10'),
-       (4, 'Semifinal', 1, '2026-07-13', '2026-07-14'),
-       (5, 'Final', 1, '2026-07-19', '2026-07-19');
+VALUES  (1, 'Fase de Grupos', 0, '2026-06-08', '2026-06-30'),
+        (2, 'Dezesseis avos de final', 1, '2026-06-28', '2026-07-03'),
+        (3, 'Oitavas de final', 1, '2026-07-04', '2026-07-07'),
+        (4, 'Quartas de final', 1, '2026-07-08', '2026-07-11'),
+        (5, 'Semifinal', 1, '2026-07-14', '2026-07-15'),
+        (6, 'Disputa pelo 3º lugar', 1, '2026-07-18', '2026-07-18'),
+        (7, 'Final', 1, '2026-07-19', '2026-07-19');
 
 -- =========================
 -- PARTIDAS (FASE DE GRUPOS - EXEMPLOS)
