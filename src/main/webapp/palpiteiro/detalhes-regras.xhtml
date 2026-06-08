@@ -4,9 +4,7 @@
 <ui:composition
         template="/template.xhtml"
         xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-        xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <ui:define name="title">
         Regras de Pontuação
     </ui:define>
@@ -17,14 +15,37 @@
         <br/>
 
         <h2>1. Como ganhar pontos em cada jogo</h2>
-        <p>Você pontua se acertar qualquer um destes 5 itens:</p>
-        <ol>
-            <li><strong>Gols de um time:</strong> Acertar quantos gols uma das seleções fez.</li>
-            <li><strong>Resultado:</strong> Acertar quem venceu ou se deu empate.</li>
-            <li><strong>Placar exato:</strong> Acertar o placar completo (Ex: 3x1).</li>
-            <li><strong>Tipo de vitória:</strong> Acertar se foi no tempo normal, prorrogação ou pênaltis.</li>
-            <li><strong>Vencedor nos pênaltis:</strong> Se houver pênaltis, acertar quem ganhou a disputa.</li>
-        </ol>
+        <p>Você pontua se acertar qualquer um dos critérios apresentados na tabela abaixo.</p>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Critério</th>
+                <th>Descrição</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>Gols de um time</strong></td>
+                <td>Acertar quantos gols uma das seleções fez.</td>
+            </tr>
+            <tr>
+                <td><strong>Resultado</strong></td>
+                <td>Acertar quem venceu ou se deu empate.</td>
+            </tr>
+            <tr>
+                <td><strong>Placar exato</strong></td>
+                <td>Acertar o placar completo (Ex: 3x1).</td>
+            </tr>
+            <tr>
+                <td><strong>Tipo de vitória</strong></td>
+                <td>Acertar, quando jogo eliminatório, se foi no tempo normal, prorrogação ou pênaltis.</td>
+            </tr>
+            <tr>
+                <td><strong>Vencedor nos pênaltis</strong></td>
+                <td>Se houver pênaltis, acertar quem ganhou a disputa.</td>
+            </tr>
+            </tbody>
+        </table>
 
         <br/><br/>
 
@@ -95,7 +116,7 @@
             <strong>Seu palpite:</strong> França 2 x 0 Marrocos (Tempo Normal)</p>
         <p>
             🎯 <strong>Você acertou:</strong> gols da França + gols do Marrocos + resultado + placar exato + tipo de
-            vitória = <strong>5 acertos (8 pontos)</strong>.
+            vitória (se jogo eliminatório) = <strong>5 acertos (8 pontos)</strong>.
         </p>
     </ui:define>
 </ui:composition>

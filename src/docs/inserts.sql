@@ -269,9 +269,9 @@ VALUES -- Campus Belém (ID: 1)
        (41, 'Engenharia Agrícola', 'EA', 6),
        (42, 'Letras/Língua Portuguesa', 'LP', 6);
 
--- ========================
--- USUÁRIO ADMIN - Senha: a
--- ========================
+-- =============================
+-- USUÁRIO ADMIN - Senha: Bol40!
+-- =============================
 insert into usuario (id, nome, sobrenome, email, senha, perfil, tipo, pontuacao, posicao, curso, campus)
 VALUES (1, 'Henrique', 'Costa', 'antoniocavallero935@gmail.com',
         '9d41da0e0d934e7a140fffe38834bd0ab61f946f64230596b58835bf1684bc38', 'ADMINISTRADOR', 'DISCENTE', 0, 0, 4, 1),

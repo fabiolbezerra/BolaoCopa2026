@@ -136,6 +136,69 @@ public class UsuarioRN {
         }
     }
 
+    public List<Usuario> obterOrdenadoPorPontuacao() {
+        return USUARIO_DAO.obterOrdenadosPorPontuacao();
+    }
+
+    public List<Usuario> obterOrdenadoPorPontuacao(Campus campus) {
+        if (campus == null || campus.getId() == null) {
+            return null;
+        }
+        return USUARIO_DAO.obterOrdenadosPorPontuacao(campus);
+    }
+
+    public List<Usuario> obterOrdenadoPorPontuacao(Curso curso) {
+        if (curso == null || curso.getId() == null) {
+            return null;
+        }
+        return USUARIO_DAO.obterOrdenadosPorPontuacao(curso);
+    }
+
+    public List<Usuario> obterBanidos() {
+        return USUARIO_DAO.obterBanidos();
+    }
+
+    public boolean banir(Usuario usuario) {
+        if (usuario == null
+                || usuario.getId() == null
+                || usuario.getId() == 0
+                || usuario.getPerfil().isAdministrador()) {
+            return false;
+        } else {
+            usuario.setBanido(true);
+            usuario.setDataBanimento(new Date());
+            return USUARIO_DAO.alterar(usuario);
+        }
+    }
+
+    public String enviarEmailDeValidacao(String email) {
+        final String CODIGO_GERADO = UtilTexto.gerarNumeros(6);
+
+        StringBuilder texto = new StringBuilder();
+        texto
+                .append("Olá!\n\n")
+                .append("Digite o código abaixo no formulário de cadastro para VALIDAR seu e-mail.")
+                .append("\n\n")
+                .append(CODIGO_GERADO)
+                .append("\n\n")
+                .append("Para evitar banimentos, NÃO USAR nome ou sobrenome com conteúdo:\n")
+                .append(" - ofensivo;\n")
+                .append(" - vulgar;\n")
+                .append(" - religioso;\n")
+                .append(" - ou político.\n\n")
+                .append("Abraços\n\n")
+                .append("Equipe do Bolão da Copa do Mundo 2026")
+                .append("\n\n");
+
+        UtilEmail.enviarEmail(
+                email,
+                "Validação do e-mail",
+                texto.toString()
+        );
+
+        return CODIGO_GERADO;
+    }
+
     public String enviarEmailDeValidacao(Usuario usuario) {
         if (usuario == null || usuario.getId() == null || usuario.getId() == 0) {
             return null;
@@ -167,29 +230,6 @@ public class UsuarioRN {
         return CODIGO_GERADO;
     }
 
-    public String enviarEmailDeValidacao(String email) {
-        final String CODIGO_GERADO = UtilTexto.gerarNumeros(6);
-
-        StringBuilder texto = new StringBuilder();
-        texto
-                .append("Olá!\n\n")
-                .append("Digite o código abaixo no formulário de cadastro para VALIDAR seu e-mail.")
-                .append("\n\n")
-                .append(CODIGO_GERADO)
-                .append("\n\n")
-                .append("Abraços\n\n")
-                .append("Equipe do Bolão da Copa do Mundo 2026")
-                .append("\n\n");
-
-        UtilEmail.enviarEmail(
-                email,
-                "Validação do e-mail",
-                texto.toString()
-        );
-
-        return CODIGO_GERADO;
-    }
-
     public boolean enviarEmailDeSaudacao(Usuario usuario) {
         if (usuario == null || usuario.getId() == null || usuario.getId() == 0) {
             return false;
@@ -205,8 +245,7 @@ public class UsuarioRN {
                     .append(" - Acompanhar rankings\n")
                     .append(" - Participar de bolões\n\n")
                     .append("Abraços\n\n")
-                    .append("Equipe do Bolão da Copa do Mundo 2026")
-                    .append("\n\n");
+                    .append("Equipe do Bolão da Copa do Mundo 2026\n");
 
             UtilEmail.enviarEmail(
                     usuario.getEmail(),
@@ -242,38 +281,4 @@ public class UsuarioRN {
         }
     }
 
-    public List<Usuario> obterOrdenadoPorPontuacao() {
-        return USUARIO_DAO.obterOrdenadosPorPontuacao();
-    }
-
-    public List<Usuario> obterOrdenadoPorPontuacao(Campus campus) {
-        if (campus == null || campus.getId() == null) {
-            return null;
-        }
-        return USUARIO_DAO.obterOrdenadosPorPontuacao(campus);
-    }
-
-    public List<Usuario> obterOrdenadoPorPontuacao(Curso curso) {
-        if (curso == null || curso.getId() == null) {
-            return null;
-        }
-        return USUARIO_DAO.obterOrdenadosPorPontuacao(curso);
-    }
-
-    public List<Usuario> obterBanidos() {
-        return USUARIO_DAO.obterBanidos();
-    }
-
-    public boolean banir(Usuario usuario) {
-        if (usuario == null
-                || usuario.getId() == null
-                || usuario.getId() == 0
-                || usuario.getPerfil().isAdministrador()) {
-            return false;
-        } else {
-            usuario.setBanido(true);
-            usuario.setDataBanimento(new Date());
-            return USUARIO_DAO.alterar(usuario);
-        }
-    }
 }
