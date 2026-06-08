@@ -12,14 +12,12 @@
             <property name="javax.persistence.jdbc.user" value="bolao_user"/>
             <!--            <property name="javax.persistence.jdbc.user" value="root"/>-->
             <property name="javax.persistence.jdbc.password" value="bol40CAS!"/>
-            <!--            <property name="javax.persistence.jdbc.password" value="root"/>-->
-            <!--            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>-->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="javax.persistence.schema-generation.database.action" value="none"/>
             <!-- Propriedades específicas do EclipseLink - POOL DE CONEXÕES -->
             <property name="eclipselink.jdbc.connections.share" value="true"/>
             <property name="eclipselink.connection-pool.default.initial" value="5"/>
-            <property name="eclipselink.connection-pool.default.max" value="30"/>
+            <property name="eclipselink.connection-pool.default.max" value="20"/>
             <!--307 seg-->
             <property name="eclipselink.jdbc.timeout" value="30"/>
             <!-- 7 seg-->

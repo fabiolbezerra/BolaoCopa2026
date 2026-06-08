@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        Palpites da Partida
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h1>Palpites</h1>
+
+        <br/>
+
+        <h:form>
+
+            <p:panelGrid columns="2" styleClass="ui-noborder">
+                <f:facet name="header">Dados da Partida</f:facet>
+
+                <p:outputLabel value="Data"/>
+                <h:outputText value="#{palpiteBean.partida.inicioDaPartida}">
+                    <f:convertDateTime timeZone="GMT-3" pattern="dd/MM/yyyy HH:mm"/>
+                </h:outputText>
+
+                <p:outputLabel value="Local"/>
+                <h:outputText value="#{palpiteBean.partida.local}"/>
+
+                <p:outputLabel value="Seleções"/>
+                <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                    <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoA.simbolo}" width="24px"
+                                    style="padding: 5px"/>
+                    <h:outputText value=" #{palpiteBean.partida.selecaoA.sigla} "/>
+                    x
+                    <h:outputText value=" #{palpiteBean.partida.selecaoB.sigla} "/>
+                    <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoB.simbolo}" width="24px"
+                                    style="padding: 5px"/>
+                </p:outputPanel>
+            </p:panelGrid>
+
+            <br/>
+
+            <p:dataTable value="#{palpiteBean.palpitesDaPartida}"
+                         var="palpite"
+                         emptyMessage="Você ainda não fez nenhum palpite.">
+
+                <p:column headerText="Palpite">
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                        <h:outputText value="#{palpite.partida.selecaoA.sigla} "/>
+                        <h:outputText value="#{palpite.golsA} x #{palpite.golsB}"/>
+                        <h:outputText value=" #{palpite.partida.selecaoB.sigla}"/>
+                    </p:outputPanel>
+                </p:column>
+
+                <p:column headerText="Resultado">
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                        <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                            <h:outputText value="#{palpite.partida.selecaoA.sigla} "/>
+                            <h:outputText value="#{palpite.partida.golsA} x #{palpite.partida.golsB}"/>
+                            <h:outputText value=" #{palpite.partida.selecaoB.sigla}"/>
+                        </p:outputPanel>
+                    </p:outputPanel>
+                </p:column>
+
+                <p:column headerText="Data do Palpite" width="12%">
+                    <h:outputText value="#{palpite.ultimaAlteracao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Pontuação" width="12%">
+                    <h:outputText value="#{palpite.pontuacao}"/>
+                </p:column>
+            </p:dataTable>
+
+            <p:confirmDialog global="true"
+                             showEffect="fade"
+                             hideEffect="fade"
+                             responsive="true"
+                             width="350">
+
+                <p:commandButton value="Não"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-no ui-button-flat"
+                                 icon="fa fa-ban"/>
+
+                <p:commandButton value="Sim"
+                                 type="button"
+                                 styleClass="ui-confirmdialog-yes"
+                                 icon="fa fa-check"/>
+
+            </p:confirmDialog>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

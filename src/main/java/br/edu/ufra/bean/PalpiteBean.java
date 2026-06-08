@@ -19,8 +19,10 @@ public class PalpiteBean {
 
     private Palpite palpite = new Palpite();
     private Partida partida = new Partida();
-    private List<Palpite> meusPalpites;
     private Integer selecaoVencedoraId;
+
+    private List<Palpite> meusPalpites;
+    private List<Palpite> palpitesDaPartida;
 
     private final PalpiteRN PALPITE_RN = new PalpiteRN();
     private final PartidaRN PARTIDA_RN = new PartidaRN();
@@ -38,7 +40,6 @@ public class PalpiteBean {
                 partida = PARTIDA_RN.obter(id);
                 if (partida == null) {
                     partida = new Partida();
-                    UtilBean.criarMensagemDeAviso("Não foi possível recuperar a partida. Código inválido.");
                 } else {
                     // Verifica se o palpiteiro já tem palpite nessa partida
                     Palpite palpiteExistente = PALPITE_RN.obter(usuarioLogado, partida);
@@ -112,5 +113,12 @@ public class PalpiteBean {
 
     public void setSelecaoVencedoraId(Integer selecaoVencedoraId) {
         this.selecaoVencedoraId = selecaoVencedoraId;
+    }
+
+    public List<Palpite> getPalpitesDaPartida() {
+        if (palpitesDaPartida == null) {
+            palpitesDaPartida = PALPITE_RN.obter(partida);
+        }
+        return palpitesDaPartida;
     }
 }
