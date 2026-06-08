@@ -24,7 +24,7 @@
             Olá #{usuarioBean.usuarioLogado.nome} #{usuarioBean.usuarioLogado.sobrenome}!
 
             <!-- Painel Centralizado Corretamente -->
-            <p:outputPanel style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <p:outputPanel style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); text-align: center;" rendered="#{usuarioBean.palpiteiro}">
                 <p:outputLabel value="Pontuação: #{usuarioBean.usuarioLogado.pontuacao}"/> <br/>
                 <p:outputLabel value="Posição: #{usuarioBean.usuarioLogado.posicao}"/>
             </p:outputPanel>
