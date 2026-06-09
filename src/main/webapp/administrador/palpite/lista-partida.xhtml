@@ -49,7 +49,17 @@
 
             <p:dataTable value="#{palpiteBean.palpitesDaPartida}"
                          var="palpite"
-                         emptyMessage="Você ainda não fez nenhum palpite.">
+                         emptyMessage="Nenhum palpite na partida"
+                         rows="25"
+                         paginatorAlwaysVisible="false"
+                         paginator="true"
+                         rowsPerPageTemplate="25, 50">
+
+                <p:column headerText="Palpiteiro"
+                          filterBy="#{palpite.usuario.email}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{palpite.usuario.email} "/>
+                </p:column>
 
                 <p:column headerText="Palpite">
                     <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
