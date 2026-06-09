@@ -29,9 +29,9 @@ public class ManipuladorSelecaoVencedora extends ManipuladorResultadoAbstrato {
 
         int resultado = 0;
 
-        //Fase eliminatória avalia seleção vencedora da prorrogação ou pênaltis
+        //Fase eliminatória avalia seleção vencedora nos PÊNALTIS
         if (palpite.getPartida().getFase().isEliminatoria()
-                && !palpite.getPartida().getTipoDeVitoria().isTempoNormal()) {
+                && palpite.getPartida().getTipoDeVitoria().isPenaltis()) {
             Selecao vencedorPartida = palpite.getPartida().getVencedor();
             Selecao vencedorPalpite = palpite.getSelecaoVencedora();
             resultado = Objects.equals(vencedorPartida, vencedorPalpite) ? 1 : 0;

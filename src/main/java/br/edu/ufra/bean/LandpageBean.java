@@ -23,12 +23,7 @@ public class LandpageBean {
 
     @PostConstruct
     public void init() {
-        List<Usuario> ranking = USUARIO_RN.obterOrdenadoPorPontuacao();
-        if (ranking != null && ranking.size() > 10) {
-            dezPrimeiros = ranking.subList(0, 10);
-        } else {
-            dezPrimeiros = ranking;
-        }
+        dezPrimeiros = USUARIO_RN.obterOrdenadoPorPontuacao(10);
         proximosJogos = PARTIDA_RN.obterProximasOitoPartidas();
     }
 

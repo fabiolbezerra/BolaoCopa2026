@@ -16,7 +16,10 @@
         <h:form>
             <c:choose>
                 <c:when test="#{usuarioBean.administrador}">
-                    <p:panel header="Selecionar curso">
+                    <p:panelGrid styleClass="ui-noborder" columns="1">
+                        <f:facet name="header">
+                            Selecionar curso
+                        </f:facet>
                         <p:autoComplete
                                 value="#{rankingBean.curso}"
                                 minQueryLength="2"
@@ -42,7 +45,7 @@
                                              action="#{rankingBean.atualizarRankingCurso}"
                                              ajax="false"/>
                         </f:facet>
-                    </p:panel>
+                    </p:panelGrid>
                 </c:when>
                 <c:otherwise>
                     <h1>Ranking - #{usuarioBean.usuarioLogado.curso.nome} - #{usuarioBean.usuarioLogado.curso.campus.nome}</h1>

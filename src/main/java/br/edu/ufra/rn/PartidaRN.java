@@ -21,9 +21,9 @@ public class PartidaRN {
         if (partida == null || partida.getSelecaoA() == null || partida.getSelecaoB() == null) {
             return false;
         } else {
-            if (partida.getId() == null ) {
+            if (partida.getId() == null) {
                 return this.PARTIDA_DAO.criar(partida);
-            } else{
+            } else {
                 return this.PARTIDA_DAO.alterar(partida);
             }
         }

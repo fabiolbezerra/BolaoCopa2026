@@ -136,8 +136,12 @@ public class UsuarioRN {
         }
     }
 
-    public List<Usuario> obterOrdenadoPorPontuacao() {
-        return USUARIO_DAO.obterOrdenadosPorPontuacao();
+    public List<Usuario> obterOrdenadoPorPontuacao(int limite) {
+        if (limite <= 0) {
+            return USUARIO_DAO.obterOrdenadosPorPontuacao(0);
+        }
+        ;
+        return USUARIO_DAO.obterOrdenadosPorPontuacao(limite);
     }
 
     public List<Usuario> obterOrdenadoPorPontuacao(Campus campus) {

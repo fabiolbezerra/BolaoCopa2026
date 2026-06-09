@@ -34,7 +34,7 @@ public class RankingBean {
     public void init() {
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
 
-        rankingGeral = USUARIO_RN.obterOrdenadoPorPontuacao();
+        rankingGeral = USUARIO_RN.obterOrdenadoPorPontuacao(0); //todos
 
         if (usuarioLogado != null && usuarioLogado.getCampus() != null) {
             rankingCampus = USUARIO_RN.obterOrdenadoPorPontuacao(usuarioLogado.getCampus());

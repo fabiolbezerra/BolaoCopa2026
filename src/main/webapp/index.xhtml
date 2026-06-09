@@ -62,13 +62,13 @@
 
         <h1>Próximas Partidas</h1>
 
+        <br/>
+
         <p:panel header="Próximos Jogos">
-            <p:outputLabel value="próximas partidas"
-                           style="color: #888; font-style: italic;"/>
             <p:dataGrid value="#{landpageBean.proximosJogos}" var="jogo" columns="4">
                 <p:panel header="#{jogo.local}">
                     <h:outputText value="#{jogo.inicioDaPartida}">
-                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
                     </h:outputText>
                     <br/>
                     <p:outputPanel style="display: flex; justify-content: center; align-items: center;">

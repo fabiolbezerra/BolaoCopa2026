@@ -228,16 +228,19 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         return resposta.intValue();
     }
 
-    public List<Usuario> obterOrdenadosPorPontuacao() {
+    public List<Usuario> obterOrdenadosPorPontuacao(int limite) {
         EntityManager em = getEntityManager();
 
         final String JPQL = "select u from Usuario u " +
                 "where u.perfil = :perfil and u.banido = false " +
                 "order by u.pontuacao desc";
+
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
+        if (limite > 0) {
+            query.setMaxResults(limite);
+        }
 
         List<Usuario> resposta = null;
-
         try {
             resposta = query
                     .setParameter("perfil", EnumPerfilUsuario.PALPITEIRO)

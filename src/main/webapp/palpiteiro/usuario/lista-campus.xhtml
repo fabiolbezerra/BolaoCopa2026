@@ -17,7 +17,11 @@
             <!-- Referência: https://www.baeldung.com/jstl -->
             <c:choose>
                 <c:when test="#{usuarioBean.administrador}">
-                    <p:panel header="Selecionar campus">
+                    <p:panelGrid styleClass="ui-noborder" columns="1"                   >
+                        <f:facet name="header">
+                            Selecionar campus
+                        </f:facet>
+
                         <p:autoComplete
                                 value="#{rankingBean.campus}"
                                 minQueryLength="2"
@@ -34,7 +38,7 @@
                                              action="#{rankingBean.atualizarRankingCampus()}"
                                              ajax="false"/>
                         </f:facet>
-                    </p:panel>
+                    </p:panelGrid>
                 </c:when>
                 <c:otherwise>
                     <h1>Ranking - #{usuarioBean.usuarioLogado.campus.nome}</h1>

@@ -67,6 +67,7 @@ public class PalpiteBean {
             UtilBean.criarMensagemDeInformacao("Palpite salvo com sucesso!");
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar o palpite.");
+            UtilBean.criarMensagemDeAviso("Limite", "Palpite pode ser definido até 30min antes do início da partida.");
         }
     }
 
