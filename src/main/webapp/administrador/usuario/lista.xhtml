@@ -43,7 +43,11 @@
                                  selectionMode="single"
                                  selection="#{gerenciarUsuarioBean.usuario}"
                                  rowKey="#{usuario.id}"
-                                 emptyMessage="Lista de usuários vazia">
+                                 emptyMessage="Lista de usuários vazia"
+                                 rows="25"
+                                 paginatorAlwaysVisible="false"
+                                 paginator="true"
+                                 rowsPerPageTemplate="25, 50">
 
                         <p:ajax update="@form" event="rowSelect" listener="#{gerenciarUsuarioBean.selecionar()}"/>
 
@@ -65,6 +69,10 @@
 
                         <p:column headerText="Tipo">
                             <h:outputText value="#{usuario.tipo.descricao}"/>
+                        </p:column>
+
+                        <p:column headerText="Banido?">
+                            <h:outputText value="#{usuario.banido ? 'Sim' : 'Não'}"/>
                         </p:column>
 
                         <p:column headerText="Operações">
@@ -109,6 +117,14 @@
                                               value="Não"/>
                                 <h:outputText rendered="#{bolao.dono eq gerenciarUsuarioBean.usuario}"
                                               value="Sim"/>
+                            </p:column>
+
+                            <p:column headerText="Operações">
+                                <p:button value="Detalhes"
+                                          icon="fa fa-info-circle"
+                                          outcome="/palpiteiro/bolao/detalhes.xhtml">
+                                    <f:param value="#{bolao.id}" name="bolaoID"/>
+                                </p:button>
                             </p:column>
                         </p:dataTable>
 

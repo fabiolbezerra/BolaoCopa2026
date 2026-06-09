@@ -24,20 +24,31 @@
 
         <h2>Membros</h2>
 
-        <p:dataTable value="#{bolaoBean.participantes}" var="participante"
-                     sortOrder="descending">
-            <p:column headerText="Nome">
+        <p:dataTable value="#{bolaoBean.participantes}"
+                     var="participante"
+                     sortOrder="descending"
+                     rowIndexVar="i">
+            <p:column headerText="Posição">
+                #{i+1}
+            </p:column>
+
+            <p:column headerText="Nome" width="25%">
                 #{participante.usuario.nome} #{participante.usuario.sobrenome}
             </p:column>
-            <p:column headerText="Campus">
-                #{participante.usuario.campus.nome}
-            </p:column>
-            <p:column headerText="Curso">
-                #{participante.usuario.curso.nome}
-            </p:column>
+
             <p:column headerText="Pontuação">
                 #{participante.usuario.pontuacao}
             </p:column>
+
+            <p:column headerText="Posição Geral">
+                #{participante.usuario.posicao}
+            </p:column>
+
+            <p:column headerText="Campus / Curso">
+                <h:outputText value="#{participante.usuario.campus.nome}"/>
+                <h:outputText value=" / #{participante.usuario.curso.nome}" rendered="#{not empty participante.usuario.curso}"/>
+            </p:column>
+
         </p:dataTable>
 
     </ui:define>

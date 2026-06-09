@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ParticipanteRN {
     private final ParticipanteDAO PARTICIPANTE_DAO = new ParticipanteDAO();
+
     public List<Participante> obter(Bolao bolao) {
         if (bolao == null || bolao.getId() == null || bolao.getId() == 0) {
             return null;

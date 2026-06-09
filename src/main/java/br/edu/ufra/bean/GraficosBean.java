@@ -44,9 +44,11 @@ public class GraficosBean {
         PieChartModel resposta = new PieChartModel();
         Map<String, Integer> palpiteiros = ESTATISTICA_USUARIO_RN.obterPalpiteirosPorCurso(campus);
         Integer quantidade = null;
-        for (String chave : palpiteiros.keySet()) {
-            quantidade = palpiteiros.get(chave);
-            resposta.set(chave, quantidade);
+        if (palpiteiros != null) {
+            for (String chave : palpiteiros.keySet()) {
+                quantidade = palpiteiros.get(chave);
+                resposta.set(chave, quantidade);
+            }
         }
         resposta.setTitle("Palpiteiros por Curso - " + campus.getNome());
         resposta.setLegendPosition("w");

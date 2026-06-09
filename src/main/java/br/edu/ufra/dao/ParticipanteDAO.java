@@ -11,7 +11,7 @@ public class ParticipanteDAO extends GenericDAO<Participante> {
     public List<Participante> obter(Bolao bolao) {
         EntityManager em = getEntityManager();
 
-        final String JPQL = "select p from Participante p where p.bolao = :bolao";
+        final String JPQL = "select p from Participante p where p.bolao = :bolao order by p.usuario.pontuacao desc";
         TypedQuery<Participante> query = em.createQuery(JPQL, Participante.class);
 
         List<Participante> resposta = null;

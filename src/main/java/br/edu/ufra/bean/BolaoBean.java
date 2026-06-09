@@ -4,6 +4,7 @@ import br.edu.ufra.entidade.Bolao;
 import br.edu.ufra.entidade.Participante;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.rn.BolaoRN;
+import br.edu.ufra.rn.ParticipanteRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
@@ -17,32 +18,27 @@ import java.util.List;
 public class BolaoBean {
 
     private final BolaoRN BOLAO_RN = new BolaoRN();
+    private final ParticipanteRN PARTICIPANTE_RN = new ParticipanteRN();
 
     private Bolao bolao = new Bolao();
 
     private List<Bolao> boloes;
+    private List<Participante> participantes;
 
     public BolaoBean() {
     }
 
     @PostConstruct
     public void init() {
-
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
 
         try {
-
             String bolaoID = UtilBean.obterValor("bolaoID");
-
             if (bolaoID != null && !bolaoID.isEmpty()) {
-
                 int id = Integer.parseInt(bolaoID);
-
-                if (id > 0) {
-                    bolao = BOLAO_RN.obter(id);
-                }
+                bolao = BOLAO_RN.obter(id);
+                participantes = PARTICIPANTE_RN.obter(bolao);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,12 +67,7 @@ public class BolaoBean {
     }
 
     public List<Participante> getParticipantes() {
-
-        if (bolao != null) {
-            return bolao.getParticipantes();
-        }
-
-        return null;
+        return participantes;
     }
 
     public void salvar() {
@@ -123,6 +114,7 @@ public class BolaoBean {
             e.printStackTrace();
         }
     }
+
     public void excluir() {
 
         if (BOLAO_RN.excluir(bolao)) {
@@ -136,6 +128,7 @@ public class BolaoBean {
             UtilBean.criarMensagemDeErro("Não foi possível excluir o bolão selecionado!");
         }
     }
+
     public boolean isApenasParticipante(Bolao bolao) {
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         if (bolao == null
@@ -156,6 +149,7 @@ public class BolaoBean {
         }
         return false;
     }
+
     public void sair() {
 
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
