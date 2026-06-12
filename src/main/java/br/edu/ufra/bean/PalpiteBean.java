@@ -4,8 +4,9 @@ import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
-import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.rn.PalpiteRN;
+import br.edu.ufra.rn.PartidaRN;
+import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
@@ -19,13 +20,15 @@ public class PalpiteBean {
 
     private Palpite palpite = new Palpite();
     private Partida partida = new Partida();
-    private Integer selecaoVencedoraId;
+    private Usuario usuario = new Usuario();
 
     private List<Palpite> meusPalpites;
     private List<Palpite> palpitesDaPartida;
+    private List<Palpite> palpitesDoUsuario;
 
     private final PalpiteRN PALPITE_RN = new PalpiteRN();
     private final PartidaRN PARTIDA_RN = new PartidaRN();
+    private final UsuarioRN USUARIO_RN = new UsuarioRN();
 
     public PalpiteBean() {
     }
@@ -33,6 +36,7 @@ public class PalpiteBean {
     @PostConstruct
     public void init() {
         String partidaID = UtilBean.obterValor("partidaID");
+        String usuarioID = UtilBean.obterValor("usuarioID");
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
         if (partidaID != null) {
             try {
@@ -52,8 +56,22 @@ public class PalpiteBean {
                     }
                 }
             } catch (Exception e) {
+                System.err.println("Erro ao obter partida: " + e.getMessage());
                 partida = new Partida();
                 UtilBean.criarMensagemDeErro("Não foi possível recuperar a partida.");
+            }
+        }
+        if (usuarioID != null) {
+            try {
+                int id = Integer.parseInt(usuarioID);
+                usuario = USUARIO_RN.obter(id);
+                if (usuario == null) {
+                    usuario = new Usuario();
+                } else {
+                    palpitesDoUsuario = PALPITE_RN.obter(usuario);
+                }
+            } catch (Exception e) {
+                System.err.println("Erro ao obter usuário: " + e.getMessage());
             }
         }
         meusPalpites = PALPITE_RN.obter(usuarioLogado);
@@ -100,6 +118,14 @@ public class PalpiteBean {
         this.partida = partida;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public List<Palpite> getMeusPalpites() {
         return meusPalpites;
     }
@@ -108,12 +134,12 @@ public class PalpiteBean {
         this.meusPalpites = meusPalpites;
     }
 
-    public Integer getSelecaoVencedoraId() {
-        return selecaoVencedoraId;
+    public List<Palpite> getPalpitesDoUsuario() {
+        return palpitesDoUsuario;
     }
 
-    public void setSelecaoVencedoraId(Integer selecaoVencedoraId) {
-        this.selecaoVencedoraId = selecaoVencedoraId;
+    public void setPalpitesDoUsuario(List<Palpite> palpitesDoUsuario) {
+        this.palpitesDoUsuario = palpitesDoUsuario;
     }
 
     public List<Palpite> getPalpitesDaPartida() {

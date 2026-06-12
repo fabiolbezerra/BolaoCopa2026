@@ -233,7 +233,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
         final String JPQL = "select u from Usuario u " +
                 "where u.perfil = :perfil and u.banido = false " +
-                "order by u.pontuacao desc";
+                "order by u.pontuacao desc, u.posicao";
 
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
         if (limite > 0) {
@@ -261,7 +261,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
         final String JPQL = "select u from Usuario u " +
                 "where u.perfil = :perfil and u.campus = :campus and u.banido = false " +
-                "order by u.pontuacao desc";
+                "order by u.pontuacao desc, u.posicao";
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
 
         List<Usuario> resposta = null;
@@ -287,7 +287,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
         final String JPQL = "select u from Usuario u " +
                 "where u.perfil = :perfil and u.curso = :curso and u.banido = false " +
-                "order by u.pontuacao desc";
+                "order by u.pontuacao desc, u.posicao";
         TypedQuery<Usuario> query = em.createQuery(JPQL, Usuario.class);
 
         List<Usuario> resposta = null;

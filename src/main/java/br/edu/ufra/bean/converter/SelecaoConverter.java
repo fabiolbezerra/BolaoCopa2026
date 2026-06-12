@@ -28,7 +28,7 @@ public class SelecaoConverter implements Converter {
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
         if (value == null
-                || ! (value instanceof Selecao)) {
+                || !(value instanceof Selecao)) {
             return null;
         }
         Selecao selecao = (Selecao) value;

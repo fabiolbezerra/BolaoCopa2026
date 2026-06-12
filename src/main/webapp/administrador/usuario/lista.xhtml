@@ -137,19 +137,19 @@
                                 Palpites nas Partidas
                             </f:facet>
 
-                            <p:column headerText="Data" width="20%">
+                            <p:column headerText="Data" width="15%">
                                 <h:outputText value="#{palpite.dataDoPalpite}">
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Atualização" width="20%">
+                            <p:column headerText="Atualização" width="15%">
                                 <h:outputText value="#{palpite.ultimaAlteracao}">
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
                                 </h:outputText>
                             </p:column>
 
-                            <p:column headerText="Partida" sortBy="#{palpite.partida.inicioDaPartida}" width="20%">
+                            <p:column headerText="Partida" sortBy="#{palpite.partida.inicioDaPartida}" width="15%">
                                 <h:outputText value="#{palpite.partida.inicioDaPartida}">
                                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
                                 </h:outputText>
@@ -169,6 +169,10 @@
                                                     width="24px"/>
                                 </p:outputPanel>
 
+                            </p:column>
+
+                            <p:column headerText="Pontuação" width="15%">
+                                <h:outputText value=" #{palpite.pontuacao} "/>
                             </p:column>
                         </p:dataTable>
                     </p:outputPanel>

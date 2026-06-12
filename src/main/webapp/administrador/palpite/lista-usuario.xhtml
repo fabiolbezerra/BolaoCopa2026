@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        Lista de Palpites
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h1>Palpites do #{palpiteBean.usuario.nome} #{palpiteBean.usuario.sobrenome} </h1>
+
+        <br/>
+
+        <h:form>
+            <p:dataTable value="#{palpiteBean.palpitesDoUsuario}"
+                         var="palpite"
+                         emptyMessage="Você ainda não fez nenhum palpite.">
+
+                <p:column headerText="Palpite">
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                        <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoA.simbolo}"
+                                        width="24"/>
+
+                        <h:outputText value=" #{palpite.partida.selecaoA.nome} "/>
+
+                        <h:outputText value="[ #{palpite.golsA} x #{palpite.golsB} ]"/>
+
+                        <h:outputText value=" #{palpite.partida.selecaoB.nome} "/>
+
+                        <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoB.simbolo}"
+                                        width="24"/>
+                    </p:outputPanel>
+                </p:column>
+
+                <p:column headerText="Resultado">
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                        <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoA.simbolo}"
+                                        width="24"/>
+
+                        <h:outputText value=" #{palpite.partida.selecaoA.nome} "/>
+
+                        <h:outputText value="[ #{palpite.partida.golsA} x #{palpite.partida.golsB} ]"/>
+
+                        <h:outputText value=" #{palpite.partida.selecaoB.nome} "/>
+
+                        <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoB.simbolo}"
+                                        width="24"/>
+                    </p:outputPanel>
+                </p:column>
+
+                <p:column headerText="Data da Partida" width="12%">
+                    <h:outputText value="#{palpite.partida.inicioDaPartida}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Data do Palpite" width="12%">
+                    <h:outputText value="#{palpite.ultimaAlteracao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+                                           timeZone="GMT-3"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Pontuação" width="12%">
+                    <h:outputText value="#{palpite.pontuacao}"/>
+                </p:column>
+            </p:dataTable>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -6,8 +6,7 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core">
+        xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 
     <ui:define name="title">Ranking Geral</ui:define>
 
@@ -20,31 +19,43 @@
             <p:dataTable value="#{rankingBean.rankingGeral}"
                          var="u"
                          emptyMessage="Nenhum palpiteiro encontrado."
-                         sortBy="#{u.posicao}"
-                         sortOder="ascending"
                          rows="25"
                          paginatorAlwaysVisible="false"
                          paginator="true"
                          rowsPerPageTemplate="25, 50">
 
-                <p:column headerText="Posição" width="10%">
+                <p:column headerText="Posição" width="9%">
                     <h:outputText value="#{u.posicao}"/>
                 </p:column>
 
-                <p:column headerText="Pontuação" width="10%">
+                <p:column headerText="Pontuação" width="9%">
                     <h:outputText value="#{u.pontuacao}"/>
                 </p:column>
 
-                <p:column headerText="Palpiteiro">
+                <p:column headerText="Palpiteiro" filterBy="#{u.nome} #{u.sobrenome}" filterMatchMode="contains">
                     <h:outputText value="#{u.nome} #{u.sobrenome}"/>
                 </p:column>
 
-                <p:column headerText="Campus" filterBy="#{u.campus.nome}" filterMatchMode="contains">
+                <p:column headerText="Campus"
+                          width="10%"
+                          filterBy="#{u.campus.nome}" filterMatchMode="contains">
                     <h:outputText value="#{u.campus.nome}"/>
                 </p:column>
 
-                <p:column headerText="Curso" filterBy="#{u.curso.nome}" filterMatchMode="contains">
+                <p:column headerText="Curso"
+                          width="10%"
+                          filterBy="#{u.curso.nome}" filterMatchMode="contains">
                     <h:outputText value="#{u.curso.nome}"/>
+                </p:column>
+
+                <p:column headerText="Operações" width="10%"
+                          rendered="#{usuarioBean.administrador}">
+                    <p:button value="Palpites"
+                              icon="fa fa-table"
+                              rendered="#{usuarioBean.administrador}"
+                              outcome="/administrador/palpite/lista-usuario.xhtml">
+                        <f:param name="usuarioID" value="#{u.id}"/>
+                    </p:button>
                 </p:column>
             </p:dataTable>
         </h:form>

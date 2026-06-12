@@ -94,13 +94,14 @@
 
                     <h:outputText value="Seleção Vencedora nos pênaltis:"/>
                     <p:selectOneRadio id="line"
-                                      value="#{palpiteBean.selecaoVencedoraId}"
+                                      value="#{palpiteBean.palpite.selecaoVencedora}"
+                                      converter="selecaoConverter"
                                       layout="lineDirection"
                                       disabled="#{palpiteBean.palpite.tipoDeVitoria == null || palpiteBean.palpite.tipoDeVitoria.tempoNormal || palpiteBean.palpite.tipoDeVitoria.prorrogacao}">
                         <f:selectItem itemLabel="#{palpiteBean.partida.selecaoA.nome}"
-                                      itemValue="#{palpiteBean.partida.selecaoA.id}"/>
+                                      itemValue="#{palpiteBean.partida.selecaoA}"/>
                         <f:selectItem itemLabel="#{palpiteBean.partida.selecaoB.nome}"
-                                      itemValue="#{palpiteBean.partida.selecaoB.id}"/>
+                                      itemValue="#{palpiteBean.partida.selecaoB}"/>
                     </p:selectOneRadio>
                 </h:panelGrid>
             </p:panel>
