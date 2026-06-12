@@ -9,6 +9,7 @@ import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.util.UtilEmail;
 import br.edu.ufra.util.UtilTexto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -175,6 +176,40 @@ public class UsuarioRN {
         }
     }
 
+    public List<String> notificarRanking() {
+        List<String> respostaDaNotificacao = new ArrayList<>();
+
+        List<Usuario> usuarios = obterOrdenadoPorPontuacao(10);
+        //Notificar usuários do ranking geral
+        respostaDaNotificacao.add(enviarEmailTop10Geral(usuarios));
+
+        final CampusRN CAMPUS_RN = new CampusRN();
+        List<Campus> campi = CAMPUS_RN.listarTodos();
+        List<Curso> cursos = null;
+        for (Campus campus : campi) {
+            usuarios = obterOrdenadoPorPontuacao(campus);
+            if (usuarios != null && !usuarios.isEmpty()) {
+                if (usuarios.size() > 10) {
+                    usuarios = usuarios.subList(0, 10);
+                }
+                //Notificar usuários do campus
+                respostaDaNotificacao.add(enviarEmailTop10Campus(usuarios, campus));
+            }
+            for (Curso curso : campus.getCursos()) {
+                usuarios = obterOrdenadoPorPontuacao(curso);
+                if (usuarios != null && !usuarios.isEmpty()) {
+                    if (usuarios.size() > 10) {
+                        usuarios = usuarios.subList(0, 10);
+                    }
+                    //Notificar usuários do curso
+                    respostaDaNotificacao.add(enviarEmailTop10Curso(usuarios, curso));
+                }
+            }
+        }
+
+        return respostaDaNotificacao;
+    }
+
     public String enviarEmailDeValidacao(String email) {
         final String CODIGO_GERADO = UtilTexto.gerarNumeros(6);
 
@@ -285,4 +320,106 @@ public class UsuarioRN {
         }
     }
 
+    public String enviarEmailTop10Geral(List<Usuario> usuarios) {
+        StringBuilder rankingTop10Geral = new StringBuilder();
+
+        rankingTop10Geral
+                .append("Parabéns!\n\n")
+                .append("Você aparece nas melhores posições do RANKING GERAL!\n\n");
+
+        List<String> destinatarios = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            destinatarios.add(usuarios.get(i - 1).getEmail());
+            rankingTop10Geral
+                    .append(i)
+                    .append(". ")
+                    .append(usuarios.get(i - 1).getNome())
+                    .append(" ")
+                    .append(usuarios.get(i - 1).getSobrenome())
+                    .append("\n");
+        }
+
+        rankingTop10Geral
+                .append("Evite fazer os seus palpites de última hora.\n\n")
+                .append("Abraços\n\n")
+                .append("Equipe do Bolão da Copa do Mundo 2026")
+                .append("\n\n");
+
+        String assunto = "Ranking Geral - Top 10";
+        UtilEmail.enviarEmail(destinatarios,
+                assunto,
+                rankingTop10Geral.toString());
+
+        return assunto;
+    }
+
+    public String enviarEmailTop10Campus(List<Usuario> usuarios, Campus campus) {
+        StringBuilder rankingTop10Geral = new StringBuilder();
+
+        rankingTop10Geral
+                .append("Parabéns!\n\n")
+                .append("Você aparece nas melhores posições do RANKING do Campus ")
+                .append(campus.getNome())
+                .append("!\n\n");
+
+        List<String> destinatarios = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            destinatarios.add(usuarios.get(i - 1).getEmail());
+            rankingTop10Geral
+                    .append(i)
+                    .append(". ")
+                    .append(usuarios.get(i - 1).getNome())
+                    .append(" ")
+                    .append(usuarios.get(i - 1).getSobrenome())
+                    .append("\n");
+        }
+
+        rankingTop10Geral
+                .append("Evite fazer os seus palpites de última hora.\n\n")
+                .append("Abraços\n\n")
+                .append("Equipe do Bolão da Copa do Mundo 2026")
+                .append("\n\n");
+
+        String assunto = "Ranking Campus " + campus.getNome() + " - Top 10";
+        UtilEmail.enviarEmail(destinatarios,
+                assunto,
+                rankingTop10Geral.toString());
+
+        return assunto;
+    }
+
+    public String enviarEmailTop10Curso(List<Usuario> usuarios, Curso curso) {
+        StringBuilder rankingTop10Geral = new StringBuilder();
+
+        rankingTop10Geral
+                .append("Parabéns!\n\n")
+                .append("Você aparece nas melhores posições do RANKING do Curso ")
+                .append(curso.getNome())
+                .append("!\n\n");
+
+        List<String> destinatarios = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            destinatarios.add(usuarios.get(i - 1).getEmail());
+            rankingTop10Geral
+                    .append(i)
+                    .append(". ")
+                    .append(usuarios.get(i - 1).getNome())
+                    .append(" ")
+                    .append(usuarios.get(i - 1).getSobrenome())
+                    .append("\n");
+        }
+
+        rankingTop10Geral
+                .append("Evite fazer os seus palpites de última hora.\n\n")
+                .append("Abraços\n\n")
+                .append("Equipe do Bolão da Copa do Mundo 2026")
+                .append("\n\n");
+
+        String assunto = "Ranking Curso " + curso.getNome() + " - Top 10";
+        UtilEmail.enviarEmail(destinatarios,
+                assunto,
+                rankingTop10Geral.toString());
+
+        return assunto;
+    }
 }

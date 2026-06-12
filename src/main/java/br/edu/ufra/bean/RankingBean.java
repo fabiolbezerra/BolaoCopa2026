@@ -25,7 +25,6 @@ public class RankingBean {
     private Curso curso;
 
     private final UsuarioRN USUARIO_RN = new UsuarioRN();
-    private final CursoRN CURSO_RN = new CursoRN();
 
     public RankingBean() {
     }
@@ -88,6 +87,14 @@ public class RankingBean {
             UtilBean.criarMensagemDeInformacao("Ranking curso atualizado com sucesso!");
         } else {
             UtilBean.criarMensagemDeAviso("Nenhuma lista foi encontrada!");
+        }
+    }
+
+    public void notificarRanking() {
+        //Notificação do ranking aos melhores posicionados
+        List<String> notificacoes = USUARIO_RN.notificarRanking();
+        for (String notificacao : notificacoes) {
+            UtilBean.criarMensagemDeInformacao("Notificação", notificacao);
         }
     }
 
