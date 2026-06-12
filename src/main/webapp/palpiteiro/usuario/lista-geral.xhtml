@@ -20,6 +20,8 @@
             <p:dataTable value="#{rankingBean.rankingGeral}"
                          var="u"
                          emptyMessage="Nenhum palpiteiro encontrado."
+                         sortBy="#{u.posicao}"
+                         sortOder="ascending"
                          rows="25"
                          paginatorAlwaysVisible="false"
                          paginator="true"

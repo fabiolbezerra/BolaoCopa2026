@@ -32,8 +32,13 @@
             <p:tabView>
 
                 <p:tab title="Próximas">
-                    <p:dataTable value="#{partidaBean.proximasPartidas}" var="p"
-                                 emptyMessage="Nenhuma partida">
+                    <p:dataTable value="#{partidaBean.proximasPartidas}"
+                                 var="p"
+                                 emptyMessage="Nenhuma partida"
+                                 rows="10"
+                                 paginatorAlwaysVisible="false"
+                                 paginator="true"
+                                 rowsPerPageTemplate="10, 15">
 
                         <p:column headerText="Fase" width="10%">
                             <h:outputText value="#{p.fase.nome}"/>
@@ -115,8 +120,13 @@
                 </p:tab>
 
                 <p:tab title="Anteriores">
-                    <p:dataTable value="#{partidaBean.partidasAnteriores}" var="p"
-                                 emptyMessage="Nenhuma partida">
+                    <p:dataTable value="#{partidaBean.partidasAnteriores}"
+                                 var="p"
+                                 emptyMessage="Nenhuma partida"
+                                 rows="10"
+                                 paginatorAlwaysVisible="false"
+                                 paginator="true"
+                                 rowsPerPageTemplate="10, 20">
 
                         <p:column headerText="Fase">
                             <h:outputText value="#{p.fase.nome}"/>
