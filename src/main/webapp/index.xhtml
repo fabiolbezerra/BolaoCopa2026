@@ -70,7 +70,9 @@
                     <h:outputText value="#{jogo.inicioDaPartida}">
                         <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
                     </h:outputText>
+
                     <br/>
+
                     <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
                         <p:graphicImage value="/resources/imagens/#{jogo.selecaoA.simbolo}" width="24px"
                                         style="padding: 5px"/>
@@ -80,7 +82,12 @@
                         <p:graphicImage value="/resources/imagens/#{jogo.selecaoB.simbolo}" width="24px"
                                         style="padding: 5px"/>
                     </p:outputPanel>
+
                     <br/>
+
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                        <h:outputText value=" #{jogo.fase.nome} "/>
+                    </p:outputPanel>
                 </p:panel>
             </p:dataGrid>
         </p:panel>
