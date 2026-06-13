@@ -141,7 +141,6 @@ public class UsuarioRN {
         if (limite <= 0) {
             return USUARIO_DAO.obterOrdenadosPorPontuacao(0);
         }
-        ;
         return USUARIO_DAO.obterOrdenadosPorPontuacao(limite);
     }
 

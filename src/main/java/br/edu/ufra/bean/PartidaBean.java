@@ -91,7 +91,7 @@ public class PartidaBean implements Serializable {
     public void processar() {
         if (PARTIDA_RN.processarPontuacao(partida)) {
             UtilBean.criarMensagemDeInformacao("Pontuação dos palpiteiros atualizada!");
-            if (PARTIDA_RN.processarOrdenacao(partida)) {
+            if (PARTIDA_RN.processarOrdenacao()) {
                 UtilBean.criarMensagemDeInformacao("Posição dos palpiteiros atualizada!");
             }
             proximasEAnteriores();

@@ -8,6 +8,11 @@ public class ComparadorUsuarioPontuacao implements Comparator<Usuario> {
 
     @Override
     public int compare(Usuario joao, Usuario maria) {
+        if (joao == null || maria == null) {
+            return 0;
+        } else if (joao.getPontuacao() == null || maria.getPontuacao() == null) {
+            return 0;
+        }
         //Ordem inversa da pontuação, por isso multiplica por -1
         return -1 * joao.getPontuacao().compareTo(maria.getPontuacao());
     }

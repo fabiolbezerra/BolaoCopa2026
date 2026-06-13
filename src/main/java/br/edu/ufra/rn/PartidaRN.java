@@ -106,27 +106,18 @@ public class PartidaRN {
         return palpitesAtualizados;
     }
 
-    public boolean processarOrdenacao(Partida partida) {
-        if (partida == null
-                || partida.getId() == null
-                || partida.getGolsA() == null
-                || partida.getGolsB() == null) {
-            return false;
-        }
+    public boolean processarOrdenacao() {
         final UsuarioRN USUARIO_RN = new UsuarioRN();
 
-        List<Usuario> palpiteiros = USUARIO_RN.obter(partida);
+        List<Usuario> palpiteiros = USUARIO_RN.obterOrdenadoPorPontuacao(0);//todos
 
         Integer pontuacao = 0;
+        Integer posicao = 1;
         for (Usuario palpiteiro : palpiteiros) {
+            //Atualizando a pontuação
             pontuacao = USUARIO_RN.obterPontuacao(palpiteiro);
             palpiteiro.setPontuacao(pontuacao);
-        }
-
-        //Ordenação inversa da pontuação
-        Collections.sort(palpiteiros, new ComparadorUsuarioPontuacao());
-        int posicao = 1;
-        for (Usuario palpiteiro : palpiteiros) {
+            //Atualizando a posição
             palpiteiro.setPosicao(posicao);
             posicao++;
         }
