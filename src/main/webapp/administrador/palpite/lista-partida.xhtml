@@ -37,11 +37,20 @@
                 <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
                     <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoA.simbolo}" width="24px"
                                     style="padding: 5px"/>
-                    <h:outputText value=" #{palpiteBean.partida.selecaoA.sigla} "/>
+                    <h:outputText value=" #{palpiteBean.partida.selecaoA.nome} "/>
                     x
-                    <h:outputText value=" #{palpiteBean.partida.selecaoB.sigla} "/>
+                    <h:outputText value=" #{palpiteBean.partida.selecaoB.nome} "/>
                     <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoB.simbolo}" width="24px"
                                     style="padding: 5px"/>
+                </p:outputPanel>
+
+                <p:outputLabel value="Resultado"/>
+                <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                        <h:outputText value="#{palpiteBean.partida.selecaoA.sigla} "/>
+                        <h:outputText value="#{palpiteBean.partida.golsA} x #{palpiteBean.partida.golsB}"/>
+                        <h:outputText value=" #{palpiteBean.partida.selecaoB.sigla}"/>
+                    </p:outputPanel>
                 </p:outputPanel>
             </p:panelGrid>
 
@@ -56,6 +65,12 @@
                          rowsPerPageTemplate="25, 50">
 
                 <p:column headerText="Palpiteiro"
+                          filterBy="#{palpite.usuario.nome} #{palpite.usuario.sobrenome}"
+                          filterMatchMode="contains">
+                    <h:outputText value="#{palpite.usuario.nome} #{palpite.usuario.sobrenome}"/>
+                </p:column>
+
+                <p:column headerText="E-mail"
                           filterBy="#{palpite.usuario.email}"
                           filterMatchMode="contains">
                     <h:outputText value="#{palpite.usuario.email} "/>
@@ -66,16 +81,6 @@
                         <h:outputText value="#{palpite.partida.selecaoA.sigla} "/>
                         <h:outputText value="#{palpite.golsA} x #{palpite.golsB}"/>
                         <h:outputText value=" #{palpite.partida.selecaoB.sigla}"/>
-                    </p:outputPanel>
-                </p:column>
-
-                <p:column headerText="Resultado">
-                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                        <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                            <h:outputText value="#{palpite.partida.selecaoA.sigla} "/>
-                            <h:outputText value="#{palpite.partida.golsA} x #{palpite.partida.golsB}"/>
-                            <h:outputText value=" #{palpite.partida.selecaoB.sigla}"/>
-                        </p:outputPanel>
                     </p:outputPanel>
                 </p:column>
 
