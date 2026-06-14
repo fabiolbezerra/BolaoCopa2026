@@ -35,21 +35,21 @@
 
                 <p:outputLabel value="Seleções"/>
                 <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                    <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoA.simbolo}" width="24px"
-                                    style="padding: 5px"/>
                     <h:outputText value=" #{palpiteBean.partida.selecaoA.nome} "/>
                     x
                     <h:outputText value=" #{palpiteBean.partida.selecaoB.nome} "/>
-                    <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoB.simbolo}" width="24px"
-                                    style="padding: 5px"/>
                 </p:outputPanel>
 
                 <p:outputLabel value="Resultado"/>
                 <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
                     <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                        <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoA.simbolo}" width="24px"
+                                        style="padding: 5px"/>
                         <h:outputText value="#{palpiteBean.partida.selecaoA.sigla} "/>
                         <h:outputText value="#{palpiteBean.partida.golsA} x #{palpiteBean.partida.golsB}"/>
                         <h:outputText value=" #{palpiteBean.partida.selecaoB.sigla}"/>
+                        <p:graphicImage value="/resources/imagens/#{palpiteBean.partida.selecaoB.simbolo}" width="24px"
+                                        style="padding: 5px"/>
                     </p:outputPanel>
                 </p:outputPanel>
             </p:panelGrid>
