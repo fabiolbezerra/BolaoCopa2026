@@ -6,7 +6,8 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         Página Principal - Palpiteiro
     </ui:define>
@@ -16,7 +17,7 @@
 
         <h2>Partidas</h2>
         <ul>
-            <li><p:link value="Partidas" outcome="/palpiteiro/partida/lista.xhtml"/></li>
+            <li><p:link value="Listar partidas" outcome="/palpiteiro/partida/lista.xhtml"/></li>
         </ul>
 
         <h2>Meus Dados</h2>
@@ -24,6 +25,7 @@
             <li><p:link value="Meus bolões" outcome="/palpiteiro/bolao/lista.xhtml"/></li>
             <li><p:link value="Meus palpites" outcome="/palpiteiro/palpite/lista.xhtml"/></li>
         </ul>
+
         <h2>Rankings</h2>
         <ul>
             <li><p:link value="Geral" outcome="/palpiteiro/usuario/lista-geral.xhtml"/></li>
@@ -32,5 +34,45 @@
                 <li><p:link value="Curso" outcome="/palpiteiro/usuario/lista-curso.xhtml"/></li>
             </p:outputPanel>
         </ul>
+
+        <h2>Próximos Jogos</h2>
+        <p:dataGrid value="#{landpageBean.proximosJogos}"
+                    var="jogo"
+                    layout="grid"
+                    columns="4"
+                    paginator="false">
+            <p:panel header="#{jogo.local}">
+                <h:outputText value="#{jogo.inicioDaPartida}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                </h:outputText>
+
+                <br/>
+
+                <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                    <p:graphicImage value="/resources/imagens/#{jogo.selecaoA.simbolo}" width="24px"
+                                    style="padding: 5px"/>
+                    <h:outputText value=" #{jogo.selecaoA.sigla} "/>
+                    x
+                    <h:outputText value=" #{jogo.selecaoB.sigla} "/>
+                    <p:graphicImage value="/resources/imagens/#{jogo.selecaoB.simbolo}" width="24px"
+                                    style="padding: 5px"/>
+                </p:outputPanel>
+
+                <br/>
+
+                <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                    <h:outputText value=" #{jogo.fase.nome} "/>
+                </p:outputPanel>
+
+                <f:facet name="footer">
+                    <p:button value="Palpitar"
+                              icon="fa fa-futbol-o"
+                              disabled="#{partidaBean.isExpirada(jogo)}"
+                              outcome="/palpiteiro/palpite/formulario.xhtml">
+                        <f:param name="partidaID" value="#{jogo.id}"/>
+                    </p:button>
+                </f:facet>
+            </p:panel>
+        </p:dataGrid>
     </ui:define>
 </ui:composition>

@@ -27,7 +27,8 @@
         <p:dataTable value="#{bolaoBean.participantes}"
                      var="participante"
                      sortOrder="descending"
-                     rowIndexVar="i">
+                     rowIndexVar="i"
+                     reflow="true">
             <p:column headerText="Posição">
                 #{i+1}
             </p:column>
@@ -46,7 +47,8 @@
 
             <p:column headerText="Campus / Curso">
                 <h:outputText value="#{participante.usuario.campus.nome}"/>
-                <h:outputText value=" / #{participante.usuario.curso.nome}" rendered="#{not empty participante.usuario.curso}"/>
+                <h:outputText value=" / #{participante.usuario.curso.nome}"
+                              rendered="#{not empty participante.usuario.curso}"/>
             </p:column>
 
         </p:dataTable>

@@ -14,84 +14,94 @@
     </ui:define>
 
     <ui:define name="top">
-        <h:outputText value="Bolão da Copa do Mundo 2026"
-                      style="font-size: x-large; font-weight: bold;"/>
+        <div class="ui-g" style="align-items: center; padding: 10px 0;">
+            <div class="ui-g-12 ui-md-6" style="text-align: left;">
+                <h:outputText value="Bolão da Copa do Mundo 2026"
+                              style="font-size: x-large; font-weight: bold; display: block;"/>
+                <h:outputText value="Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026"/>
+            </div>
 
-        <p:outputPanel style="float: right;">
-            <p:link value="Cadastrar" outcome="formulario-nova-conta.xhtml"/>
-            <h:outputText value=" | "/>
-            <p:link value="Entrar" outcome="login.xhtml"/>
-        </p:outputPanel>
-        <br/>
-        <h:outputText value="Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026"/>
+            <div class="ui-g-12 ui-md-6" style="text-align: right; margin-top: 10px;">
+                <p:link value="Cadastrar" outcome="formulario-nova-conta.xhtml"
+                        style="font-weight: bold; margin-right: 10px;"/>
+                <h:outputText value=" | " style="color: #ccc;"/>
+                <p:link value="Entrar" outcome="login.xhtml" style="font-weight: bold; margin-left: 10px;"/>
+            </div>
+        </div>
     </ui:define>
 
     <!-- ======================= CONTEÚDO PRINCIPAL ======================= -->
     <ui:define name="content">
 
-        <h1>Rankings</h1>
+        <div class="ui-fluid">
+            <h1>Rankings</h1>
 
-        <br/>
+            <br/>
 
-        <p:panel header="Top 10 Palpiteiros" style="margin-bottom: 30px;">
-            <p:dataTable value="#{landpageBean.dezPrimeiros}"
-                         var="usuario"
-                         emptyMessage="Ainda não há rankings disponíveis."
-                         rows="10"
-                         paginator="false">
+            <p:panel header="Top 10 Palpiteiros" style="margin-bottom: 30px;">
+                <p:dataTable value="#{landpageBean.dezPrimeiros}"
+                             var="usuario"
+                             emptyMessage="Ainda não há rankings disponíveis."
+                             rows="10"
+                             paginator="false"
+                             reflow="true">
 
-                <p:column headerText="Posição" width="10%">
-                    <h:outputText value="#{usuario.posicao}"/>
-                </p:column>
+                    <p:column headerText="Posição" width="10%">
+                        <h:outputText value="#{usuario.posicao}"/>
+                    </p:column>
 
-                <p:column headerText="Pontos" width="10%">
-                    <h:outputText value="#{usuario.pontuacao}"/>
-                </p:column>
+                    <p:column headerText="Pontos" width="10%">
+                        <h:outputText value="#{usuario.pontuacao}"/>
+                    </p:column>
 
-                <p:column headerText="Participante">
-                    <h:outputText value="#{usuario.nome} #{usuario.sobrenome}"/> (<h:outputText
-                        value="#{usuario.tipo.descricao}"/>)
-                </p:column>
+                    <p:column headerText="Participante">
+                        <h:outputText value="#{usuario.nome} #{usuario.sobrenome}"/> (<h:outputText
+                            value="#{usuario.tipo.descricao}"/>)
+                    </p:column>
 
-                <p:column headerText="Campus / Curso">
-                    <h:outputText value="#{usuario.campus.nome}"/>
-                    <h:outputText value=" / #{usuario.curso.nome}" rendered="#{not empty usuario.curso}"/>
-                </p:column>
-            </p:dataTable>
-        </p:panel>
+                    <p:column headerText="Campus / Curso">
+                        <h:outputText value="#{usuario.campus.nome}"/>
+                        <h:outputText value=" / #{usuario.curso.nome}" rendered="#{not empty usuario.curso}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
 
-        <h1>Próximas Partidas</h1>
+            <h1>Próximas Partidas</h1>
 
-        <br/>
+            <br/>
 
-        <p:panel header="Próximos Jogos">
-            <p:dataGrid value="#{landpageBean.proximosJogos}" var="jogo" columns="4">
-                <p:panel header="#{jogo.local}">
-                    <h:outputText value="#{jogo.inicioDaPartida}">
-                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
-                    </h:outputText>
+            <p:panel header="Próximos Jogos">
+                <p:dataGrid value="#{landpageBean.proximosJogos}"
+                            var="jogo"
+                            layout="grid"
+                            columns="4"
+                            paginator="false">
+                    <p:panel header="#{jogo.local}">
+                        <h:outputText value="#{jogo.inicioDaPartida}">
+                            <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                        </h:outputText>
 
-                    <br/>
+                        <br/>
 
-                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                        <p:graphicImage value="/resources/imagens/#{jogo.selecaoA.simbolo}" width="24px"
-                                        style="padding: 5px"/>
-                        <h:outputText value=" #{jogo.selecaoA.sigla} "/>
-                        x
-                        <h:outputText value=" #{jogo.selecaoB.sigla} "/>
-                        <p:graphicImage value="/resources/imagens/#{jogo.selecaoB.simbolo}" width="24px"
-                                        style="padding: 5px"/>
-                    </p:outputPanel>
+                        <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                            <p:graphicImage value="/resources/imagens/#{jogo.selecaoA.simbolo}" width="24px"
+                                            style="padding: 5px"/>
+                            <h:outputText value=" #{jogo.selecaoA.sigla} "/>
+                            x
+                            <h:outputText value=" #{jogo.selecaoB.sigla} "/>
+                            <p:graphicImage value="/resources/imagens/#{jogo.selecaoB.simbolo}" width="24px"
+                                            style="padding: 5px"/>
+                        </p:outputPanel>
 
-                    <br/>
+                        <br/>
 
-                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
-                        <h:outputText value=" #{jogo.fase.nome} "/>
-                    </p:outputPanel>
-                </p:panel>
-            </p:dataGrid>
-        </p:panel>
-
+                        <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
+                            <h:outputText value=" #{jogo.fase.nome} "/>
+                        </p:outputPanel>
+                    </p:panel>
+                </p:dataGrid>
+            </p:panel>
+        </div>
     </ui:define>
 
 </ui:composition>

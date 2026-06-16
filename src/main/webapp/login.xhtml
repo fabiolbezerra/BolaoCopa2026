@@ -12,13 +12,14 @@
     </ui:define>
 
     <ui:define name="top">
-        <h:outputText value="Bolão da Copa do Mundo 2026" style="font-size: x-large"/>
-        <br/>
-        Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026
+        <div style="text-align: center; padding: 10px;">
+            <h:outputText value="Bolão da Copa do Mundo 2026" style="font-size: x-large; font-weight: bold;"/>
+            <br/>
+            <h:outputText value="Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026"/>
+        </div>
     </ui:define>
 
     <ui:define name="content">
-        <!-- Script com a função solicitada -->
         <h:outputScript>
             function submeter() {
             var form = document.getElementById('formLogin');
@@ -29,48 +30,55 @@
         </h:outputScript>
 
         <h:form id="formLogin" prependId="false">
-            <div align="center">
-                <h2>Login</h2>
 
-                <hr width="15%"/>
+            <div class="ui-fluid"
+                 style="max-width: 380px; margin: 30px auto; padding: 20px; box-shadow: 0px 2px 10px rgba(0,0,0,0.1); border-radius: 8px; background: #fff;">
 
-                <h:outputText value="#{session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"
-                              rendered="#{session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
-                              style="color: red; font-size: 1.2em; "/>
-
-                <div class="ui-g-12">
-                    <p:inputText id="j_username"
-                                 name="j_username"
-                                 placeholder="E-mail"
-                                 required="true"/>
+                <div style="text-align: center;">
+                    <h2 style="margin-bottom: 5px;">Login</h2>
+                    <hr style="width: 30%; border: 0; border-top: 1px solid #ccc; margin-bottom: 20px;"/>
                 </div>
 
-                <br/>
-
-                <div class="ui-g-12">
-                    <p:password id="j_password"
-                                name="j_password"
-                                placeholder="Senha"
-                                required="true"
-                                feedback="false"/>
+                <div style="text-align: center; margin-bottom: 15px;">
+                    <h:outputText value="#{session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION').message}"
+                                  rendered="#{session.getAttribute('SPRING_SECURITY_LAST_EXCEPTION') != null}"
+                                  style="color: red; font-size: 1em; font-weight: bold;"/>
                 </div>
 
-                <hr width="15%"/>
+                <div class="ui-g">
 
-                <!-- Botão chamando a função submeter() no onclick -->
-                <div class="ui-g-12 button-container">
-                    <p:commandButton type="button"
-                                     onclick="submeter();"
-                                     icon="fa fa-sign-in"
-                                     value="Acessar"
-                    />
-                    <br/><br/>
-                    <p:link value="Esqueci minha senha" outcome="formulario-redefinir-senha.xhtml"/>
+                    <div class="ui-g-12" style="padding: 5px 0;">
+                        <p:inputText id="j_username"
+                                     name="j_username"
+                                     placeholder="E-mail"
+                                     required="true"/>
+                    </div>
+
+                    <div class="ui-g-12" style="padding: 5px 0; margin-top: 5px;">
+                        <p:password id="j_password"
+                                    name="j_password"
+                                    placeholder="Senha"
+                                    required="true"
+                                    feedback="false"/>
+                    </div>
+
+                    <div class="ui-g-12" style="padding: 0;">
+                        <hr style="width: 100%; border: 0; border-top: 1px solid #eee; margin: 20px 0 10px 0;"/>
+                    </div>
+
+                    <div class="ui-g-12" style="padding: 5px 0;">
+                        <p:commandButton type="button"
+                                         onclick="submeter();"
+                                         icon="fa fa-sign-in"
+                                         value="Acessar"
+                                         styleClass="ui-priority-primary"
+                                         style="padding: 8px 0; font-size: 1.1em;"/></div>
+
+                    <div class="ui-g-12" style="text-align: center; margin-top: 15px;">
+                        <p:link value="Esqueci minha senha"
+                                outcome="formulario-redefinir-senha.xhtml"/>
+                    </div>
                 </div>
-
-                <br/>
-                <br/>
-                <br/>
             </div>
         </h:form>
     </ui:define>
