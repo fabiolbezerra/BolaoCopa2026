@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+    <ui:define name="title">
+        Grupos
+    </ui:define>
+
+    <ui:define name="content">
+        <h1>Lista de Grupos</h1>
+
+        <h:form>
+            <p:dataGrid value="#{grupoBean.grupos}"
+                        var="grupo"
+                        layout="grid"
+                        columns="4"
+                        paginator="false">
+
+                <p:panel header="#{grupo.nome}" style="margin-bottom: 10px;">
+                    <div class="ui-g ui-fluid">
+                        <ui:repeat value="#{grupo.selecoes}" var="selecao">
+                            <div class="ui-g-6"
+                                 style="display: flex; align-items: center; padding: 5px; ">
+                                <p:graphicImage value="/resources/imagens/#{selecao.simbolo}"
+                                                width="24px"
+                                                style="flex-shrink: 0; padding: 2px"/>
+
+                                <h:outputText value="#{selecao.nome} " />
+                                <h:outputText value="(#{selecao.sigla})" />
+                            </div>
+                        </ui:repeat>
+                    </div>
+                </p:panel>
+            </p:dataGrid>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

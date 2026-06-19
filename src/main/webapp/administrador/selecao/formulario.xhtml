@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition
+        template="/template.xhtml"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:define name="title">
+        Cadastro do Seleção
+    </ui:define>
+
+    <ui:define name="content">
+
+        <h1>Cadastrar Seleção</h1>
+
+        <br/>
+
+        <h:form>
+
+            <p:growl showSummary="true" showDetail="true"/>
+
+            <h:inputHidden value="#{bolaoBean.bolao.id}"/>
+
+            <p:panelGrid columns="2" styleClass="ui-noborder">
+                <f:facet name="header">
+                    Dados da Seleção
+                </f:facet>
+
+                <p:outputLabel for="nome" value="Nome da Seleção:"/>
+                <p:inputText id="nome"
+                             value="#{selecaoBean.selecao.nome}"
+                             required="true"
+                             requiredMessage="Informe o nome da seleção"/>
+
+                <p:outputLabel for="sigla" value="Sigla da Seleção:"/>
+                <p:inputText id="sigla"
+                             value="#{selecaoBean.selecao.sigla}"
+                             size="3"
+                             required="true"
+                             requiredMessage="Informe a sigla da seleção"/>
+
+                <p:outputLabel for="grupo" value="Grupo:"/>
+                <p:selectOneRadio id="grupo"
+                                  value="#{selecaoBean.selecao.grupo}"
+                                  columns="4" layout="grid"
+                                  required="true"
+                                  requiredMessage="Selecione o grupo da seleção">
+                    <f:selectItems value="#{grupoBean.grupos}" var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
+                </p:selectOneRadio>
+
+                <p:outputLabel for="simbolo" value="Símbolo:"/>
+                <p:inputText id="simbolo"
+                             value="#{selecaoBean.selecao.simbolo}"
+                             title="Nome do arquivo"
+                             required="true"
+                             requiredMessage="Arquivo da imagem da seleção"/>
+            </p:panelGrid>
+
+            <br/>
+
+            <p:commandButton value="Salvar Bolão"
+                             action="#{bolaoBean.salvar}"
+                             ajax="false"
+                             icon="fa fa-floppy-o"/>
+
+            <p:button value="Cancelar"
+                      icon="fa fa-ban"
+                      outcome="/administrador/selecao/lista.xhtml"/>
+
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

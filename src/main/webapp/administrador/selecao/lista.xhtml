@@ -6,39 +6,43 @@
         xmlns="http://www.w3.org/1999/xhtml"
         xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
         xmlns:p="http://primefaces.org/ui"
-        xmlns:h="http://java.sun.com/jsf/html">
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core">
     <ui:define name="title">
         Seleções
     </ui:define>
 
     <ui:define name="content">
-        <h1>Lista de seleções</h1>
+        <h1>Lista de Seleções</h1>
 
         <h:form>
-            <div class="ui-g">
-                <div class="ui-g-6">
-                    <p:dataTable value="#{selecaoBean.selecoes}" var="s">
-                        <p:column headerText="Nome" sortBy="#{s.nome}">
-                            <h:outputText value="#{s.nome}"/>
-                        </p:column>
+            <p:dataTable value="#{selecaoBean.selecoes}"
+                         var="s"
+                         reflow="true">
+                <p:column headerText="Nome" sortBy="#{s.nome}">
+                    <h:outputText value="#{s.nome}"/>
+                </p:column>
 
-                        <p:column headerText="Símbolo" width="20%">
-                            <p:graphicImage value="/resources/imagens/#{s.simbolo}" width="24px"/>
-                        </p:column>
+                <p:column headerText="Símbolo" width="20%">
+                    <p:graphicImage value="/resources/imagens/#{s.simbolo}" width="24px"/>
+                </p:column>
 
-                        <p:column headerText="Sigla" width="20%">
-                            <h:outputText value="#{s.sigla}"/>
-                        </p:column>
+                <p:column headerText="Sigla" width="20%">
+                    <h:outputText value="#{s.sigla}"/>
+                </p:column>
 
-                        <p:column headerText="Grupo" width="20%" sortBy="#{s.grupo.nome}">
-                            <h:outputText value="#{s.grupo.nome}"/>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-                <div class="ui-g-6">
+                <p:column headerText="Grupo" width="20%" sortBy="#{s.grupo.nome}">
+                    <h:outputText value="#{s.grupo.nome}"/>
+                </p:column>
 
-                </div>
-            </div>
+                <p:column headerText="Operações">
+                    <p:commandButton value="Editar"
+                                     icon="fa fa-pencil-square-o"
+                                     action="formulario.xhtml">
+                        <f:setPropertyActionListener value="#{s}" target="#{selecaoBean.selecao}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
         </h:form>
 
     </ui:define>

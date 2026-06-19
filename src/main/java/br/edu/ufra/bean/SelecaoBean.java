@@ -1,6 +1,8 @@
 package br.edu.ufra.bean;
 
+import br.edu.ufra.entidade.Grupo;
 import br.edu.ufra.entidade.Selecao;
+import br.edu.ufra.rn.GrupoRN;
 import br.edu.ufra.rn.SelecaoRN;
 import br.edu.ufra.util.UtilBean;
 
@@ -14,8 +16,12 @@ import java.util.List;
 public class SelecaoBean {
 
     private List<Selecao> selecoes;
+    private List<Grupo> grupos;
+
     private Selecao selecao = new Selecao();
+
     private final SelecaoRN SELECAO_RN = new SelecaoRN();
+    private final GrupoRN GRUPO_RN = new GrupoRN();
 
     public SelecaoBean() {
     }
@@ -23,6 +29,7 @@ public class SelecaoBean {
     @PostConstruct
     public void init() {
         selecoes = SELECAO_RN.listarTodos();
+        grupos = GRUPO_RN.listarTodos();
     }
 
     public List<Selecao> getSelecoes() {
@@ -31,6 +38,14 @@ public class SelecaoBean {
 
     public void setSelecoes(List<Selecao> selecoes) {
         this.selecoes = selecoes;
+    }
+
+    public List<Grupo> getGrupos() {
+        return grupos;
+    }
+
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
     }
 
     public Selecao getSelecao() {

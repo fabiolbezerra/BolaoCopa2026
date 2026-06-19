@@ -18,34 +18,30 @@
         <h1>Fases da Copa do Mundo</h1>
 
         <h:form>
-            <div class="ui-g">
-                <div class="ui-g-6">
-                    <p:dataTable value="#{faseBean.fases}" var="f">
-                        <p:column headerText="Nome">
-                            <h:outputText value="#{f.nome}"/>
-                        </p:column>
+            <p:dataTable value="#{faseBean.fases}"
+                         var="f"
+                         reflow="true">
+                <p:column headerText="Nome">
+                    <h:outputText value="#{f.nome}"/>
+                </p:column>
 
-                        <p:column headerText="Eliminatória?">
-                            <h:outputText value="Sim" rendered="#{f.eliminatoria}" />
-                            <h:outputText value="Não" rendered="#{not f.eliminatoria}" />
-                        </p:column>
+                <p:column headerText="Eliminatória?">
+                    <h:outputText value="Sim" rendered="#{f.eliminatoria}"/>
+                    <h:outputText value="Não" rendered="#{not f.eliminatoria}"/>
+                </p:column>
 
-                        <p:column headerText="Início">
-                            <h:outputText value="#{f.inicio}">
-                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </p:column>
+                <p:column headerText="Início">
+                    <h:outputText value="#{f.inicio}">
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
 
-                        <p:column headerText="fim">
-                            <h:outputText value="#{f.fim}">
-                                <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
-                            </h:outputText>
-                        </p:column>
-                    </p:dataTable>
-                </div>
-                <div class="ui-g-6">
-                </div>
-            </div>
+                <p:column headerText="fim">
+                    <h:outputText value="#{f.fim}">
+                        <f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
         </h:form>
 
     </ui:define>
