@@ -36,9 +36,9 @@ public class PartidaDAO extends GenericDAO<Partida> {
         EntityManager em = getEntityManager();
         String JPQL = null;
         if (administrador) {
-            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida < :data ORDER BY p.inicioDaPartida ASC";
+            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida < :data ORDER BY p.inicioDaPartida DESC";
         } else {
-            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida < :data and p.publicada = true ORDER BY p.inicioDaPartida ASC";
+            JPQL = "SELECT p FROM Partida p WHERE p.inicioDaPartida < :data and p.publicada = true ORDER BY p.inicioDaPartida DESC";
         }
         TypedQuery<Partida> query = em.createQuery(JPQL, Partida.class);
 
