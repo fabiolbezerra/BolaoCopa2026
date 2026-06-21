@@ -15,6 +15,8 @@
     <ui:define name="content">
         <h1>Página principal</h1>
 
+        <br/>
+
         <h2>Partidas</h2>
         <ul>
             <li><p:link value="Listar partidas" outcome="/palpiteiro/partida/lista.xhtml"/></li>
@@ -36,6 +38,7 @@
         </ul>
 
         <h2>Próximos Jogos</h2>
+        <br/>
         <p:dataGrid value="#{landpageBean.proximosJogos}"
                     var="jogo"
                     layout="grid"

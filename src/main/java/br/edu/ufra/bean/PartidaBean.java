@@ -67,9 +67,13 @@ public class PartidaBean implements Serializable {
     }
 
     public boolean isExpirada(Partida partida) {
-        Date agora = new Date();
-        Date agoraMais30 = UtilData.adicionarMinutos(agora, 30);
-        return agoraMais30.after(partida.getInicioDaPartida());
+        if (partida != null) {
+            Date agora = new Date();
+            Date agoraMais30 = UtilData.adicionarMinutos(agora, 30);
+            return agoraMais30.after(partida.getInicioDaPartida());
+        } else {
+            return false;
+        }
     }
 
     public List<Partida> getProximasPartidas() {

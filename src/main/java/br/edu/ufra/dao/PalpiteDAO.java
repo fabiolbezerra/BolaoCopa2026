@@ -9,7 +9,9 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PalpiteDAO extends GenericDAO<Palpite> {
 
@@ -42,7 +44,7 @@ public class PalpiteDAO extends GenericDAO<Palpite> {
 
     public List<Palpite> obter(Partida partida) {
         EntityManager em = getEntityManager();
-        final String JPQL = "SELECT p FROM Palpite p WHERE p.partida = :partida";
+        final String JPQL = "SELECT p FROM Palpite p WHERE p.partida = :partida ORDER BY p.pontuacao DESC";
         TypedQuery<Palpite> query = em.createQuery(JPQL, Palpite.class);
         List<Palpite> resposta = null;
         try {
@@ -148,6 +150,39 @@ public class PalpiteDAO extends GenericDAO<Palpite> {
                     .setParameter("dataFim", dataFim)
                     .getSingleResult();
             resposta = ((Number) respostaConsulta).longValue();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        } finally {
+            em.close();
+        }
+        return resposta;
+    }
+
+    public Map<Integer, Integer> obterPalpitesPorPontuacao(Partida partida) {
+        final String JPQL = "select p.pontuacao, count(p.pontuacao) from Palpite p " +
+                "where p.partida  = :partida " +
+                "group by p.pontuacao order by p.pontuacao desc";
+        EntityManager em = getEntityManager();
+        final Query query = em.createQuery(JPQL);
+        Map<Integer, Integer> resposta = null;
+        List<Object[]> respostaConsulta = null;
+        try {
+            respostaConsulta = query
+                    .setParameter("partida", partida)
+                    .getResultList();
+            if (respostaConsulta != null && !respostaConsulta.isEmpty()) {
+                resposta = new HashMap<>();
+                Integer chave = null;
+                Integer valor = null;
+                for (Object[] registro : respostaConsulta) {
+                    if (registro[0] == null || registro[1] == null) {
+                        continue;
+                    }
+                    chave = ((Number) registro[0]).intValue();
+                    valor = ((Number) registro[1]).intValue();
+                    resposta.put(chave, valor);
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
         } finally {

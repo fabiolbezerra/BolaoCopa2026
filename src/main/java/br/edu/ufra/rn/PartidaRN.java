@@ -142,6 +142,15 @@ public class PartidaRN {
         return partidas;
     }
 
+    public List<Partida> obterOitoPartidasAnteriores() {
+        Date hoje = new Date();
+        List<Partida> partidas = PARTIDA_DAO.obterPartidasAnteriores(hoje, false);
+        if (partidas == null || partidas.size() <= 8) {
+            return partidas;
+        }
+        return partidas.subList(0, 8);
+    }
+
     public List<Partida> obterPartidasAnteriores(boolean administrador) {
         Date hoje = new Date();
         List<Partida> partidas = PARTIDA_DAO.obterPartidasAnteriores(hoje, administrador);

@@ -105,7 +105,19 @@
                         </p:panel>
                     </p:tab>
                 </p:tabView>
+            </div>
 
+            <div class="ui-g-12 ui-md-12 ui-lg-12">
+                <p:dataGrid value="#{graficosBean.partidas}"
+                            var="partida"
+                            layout="grid"
+                            columns="4"
+                            paginator="false">
+                    <p:panel header="#{partida.selecaoA.sigla} x #{partida.selecaoB.sigla}">
+                        <p:chart type="bar" model="#{graficosBean.criarGraficoPalpiteirosPorPortuacao(partida)}"
+                                 responsive="true"/>
+                    </p:panel>
+                </p:dataGrid>
             </div>
         </div>
     </ui:define>

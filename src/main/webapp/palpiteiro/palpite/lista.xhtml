@@ -33,7 +33,9 @@
                          var="pal"
                          emptyMessage="Você ainda não fez nenhum palpite.">
 
-                <p:column headerText="Palpite">
+                <p:column headerText="Palpite"
+                          filterBy="#{pal.partida.selecaoA.nome} #{pal.partida.selecaoB.nome}"
+                          filterMatchMode="contains">
                     <p:outputPanel style="display: flex; justify-content: center; align-items: center;">
                         <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoA.simbolo}"
                                         width="24"/>
@@ -78,7 +80,7 @@
                     </h:outputText>
                 </p:column>
 
-                <p:column headerText="Pontuação" width="12%">
+                <p:column headerText="Pontuação" sortBy="#{pal.pontuacao}" width="12%">
                     <h:outputText value="#{pal.pontuacao}"/>
                 </p:column>
 
