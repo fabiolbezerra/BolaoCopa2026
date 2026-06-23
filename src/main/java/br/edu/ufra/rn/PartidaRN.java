@@ -4,10 +4,8 @@ import br.edu.ufra.dao.PartidaDAO;
 import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
-import br.edu.ufra.entidade.comparador.ComparadorUsuarioPontuacao;
 import br.edu.ufra.rn.processamento.*;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -104,27 +102,6 @@ public class PartidaRN {
         boolean palpitesAtualizados = PALPITE_RN.salvar(palpites);
 
         return palpitesAtualizados;
-    }
-
-    public boolean processarOrdenacao() {
-        final UsuarioRN USUARIO_RN = new UsuarioRN();
-
-        List<Usuario> palpiteiros = USUARIO_RN.obterOrdenadoPorPontuacao(0);//todos
-
-        Integer pontuacao = 0;
-        Integer posicao = 1;
-        for (Usuario palpiteiro : palpiteiros) {
-            //Atualizando a pontuação
-            pontuacao = USUARIO_RN.obterPontuacao(palpiteiro);
-            palpiteiro.setPontuacao(pontuacao);
-            //Atualizando a posição
-            palpiteiro.setPosicao(posicao);
-            posicao++;
-        }
-
-        //Pontuação dos palpites processada, então salvar os palpites
-        boolean usuariosAtualizados = USUARIO_RN.salvar(palpiteiros);
-        return usuariosAtualizados;
     }
 
     public List<Partida> obterProximasOitoPartidas() {
