@@ -7,7 +7,6 @@ import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.email.MensagemDeEmailRN;
-import br.edu.ufra.util.UtilEmail;
 import br.edu.ufra.util.UtilTexto;
 
 import java.util.ArrayList;
@@ -204,7 +203,6 @@ public class UsuarioRN {
 
         final CampusRN CAMPUS_RN = new CampusRN();
         List<Campus> campi = CAMPUS_RN.listarTodos();
-        List<Curso> cursos = null;
         for (Campus campus : campi) {
             usuarios = obterOrdenadosPorPontuacao(campus);
             if (usuarios != null && !usuarios.isEmpty()) {

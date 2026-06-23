@@ -1,7 +1,6 @@
 package br.edu.ufra.bean;
 
 import br.edu.ufra.entidade.Usuario;
-import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.rn.email.MensagemDeEmailRN;
 import br.edu.ufra.util.UtilBean;
