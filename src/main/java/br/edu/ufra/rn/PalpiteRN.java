@@ -62,7 +62,7 @@ public class PalpiteRN {
     }
 
     public List<Palpite> obter(Usuario palpiteiro) {
-        if (palpiteiro == null) {
+        if (palpiteiro == null || palpiteiro.getId() == null || palpiteiro.getId() == 0) {
             return null;
         }
         return PALPITE_DAO.obter(palpiteiro);

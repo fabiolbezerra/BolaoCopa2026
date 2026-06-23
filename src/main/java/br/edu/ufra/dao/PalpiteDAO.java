@@ -62,7 +62,9 @@ public class PalpiteDAO extends GenericDAO<Palpite> {
 
     public List<Palpite> obter(Usuario usuario) {
         EntityManager em = getEntityManager();
-        final String JPQL = "SELECT p FROM Palpite p WHERE p.usuario = :usuario";
+        final String JPQL = "SELECT p FROM Palpite p " +
+                "WHERE p.usuario = :usuario " +
+                "ORDER BY p.partida.inicioDaPartida DESC";
         TypedQuery<Palpite> query = em.createQuery(JPQL, Palpite.class);
         List<Palpite> resposta = null;
         try {
