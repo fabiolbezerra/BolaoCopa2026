@@ -24,10 +24,12 @@ public class SelecaoBean {
     private final GrupoRN GRUPO_RN = new GrupoRN();
 
     public SelecaoBean() {
+        System.out.println("Criando SelecaoBean");
     }
 
     @PostConstruct
     public void init() {
+        System.out.println("Inicializando SelecaoBean");
         selecoes = SELECAO_RN.listarTodos();
         grupos = GRUPO_RN.listarTodos();
     }
@@ -38,14 +40,6 @@ public class SelecaoBean {
 
     public void setSelecoes(List<Selecao> selecoes) {
         this.selecoes = selecoes;
-    }
-
-    public List<Grupo> getGrupos() {
-        return grupos;
-    }
-
-    public void setGrupos(List<Grupo> grupos) {
-        this.grupos = grupos;
     }
 
     public Selecao getSelecao() {
@@ -59,8 +53,6 @@ public class SelecaoBean {
     public void salvar() {
         if (SELECAO_RN.salvar(selecao)) {
             UtilBean.criarMensagemDeInformacao("Seleção salva");
-            selecao = new Selecao();
-            selecoes = SELECAO_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível salvar a seleção");
         }
@@ -69,7 +61,6 @@ public class SelecaoBean {
     public void excluir() {
         if (SELECAO_RN.excluir(selecao)) {
             UtilBean.criarMensagemDeInformacao("Seleção excluída");
-            selecoes = SELECAO_RN.listarTodos();
         } else {
             UtilBean.criarMensagemDeErro("Não foi possível excluir a seleção");
         }

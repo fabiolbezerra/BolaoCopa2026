@@ -24,7 +24,7 @@
 
             <p:growl showSummary="true" showDetail="true"/>
 
-            <h:inputHidden value="#{bolaoBean.bolao.id}"/>
+            <h:inputHidden value="#{selecaoBean.selecao.id}"/>
 
             <p:panelGrid columns="2" styleClass="ui-noborder">
                 <f:facet name="header">
@@ -47,7 +47,9 @@
                 <p:outputLabel for="grupo" value="Grupo:"/>
                 <p:selectOneRadio id="grupo"
                                   value="#{selecaoBean.selecao.grupo}"
-                                  columns="4" layout="grid"
+                                  converter="grupoConverter"
+                                  columns="6"
+                                  layout="grid"
                                   required="true"
                                   requiredMessage="Selecione o grupo da seleção">
                     <f:selectItems value="#{grupoBean.grupos}" var="g" itemLabel="#{g.nome}" itemValue="#{g}"/>
@@ -64,7 +66,7 @@
             <br/>
 
             <p:commandButton value="Salvar Bolão"
-                             action="#{bolaoBean.salvar}"
+                             action="#{selecaoBean.salvar()}"
                              ajax="false"
                              icon="fa fa-floppy-o"/>
 
