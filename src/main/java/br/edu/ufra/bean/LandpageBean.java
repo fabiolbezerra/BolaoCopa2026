@@ -23,7 +23,7 @@ public class LandpageBean {
 
     @PostConstruct
     public void init() {
-        dezPrimeiros = USUARIO_RN.obterOrdenadoPorPontuacao(10);
+        dezPrimeiros = USUARIO_RN.obterOrdenadosPorPontuacao(10);
         proximosJogos = PARTIDA_RN.obterProximasOitoPartidas();
     }
 

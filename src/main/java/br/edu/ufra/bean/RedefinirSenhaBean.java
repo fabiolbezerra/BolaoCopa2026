@@ -3,6 +3,7 @@ package br.edu.ufra.bean;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.UsuarioRN;
+import br.edu.ufra.rn.email.MensagemDeEmailRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
@@ -15,7 +16,8 @@ import java.time.Instant;
 @ViewScoped
 public class RedefinirSenhaBean implements Serializable {
 
-    private final static UsuarioRN USUARIO_RN = new UsuarioRN();
+    private final UsuarioRN USUARIO_RN = new UsuarioRN();
+    private final MensagemDeEmailRN EMAIL_RN = new MensagemDeEmailRN();
 
     private String email;
     private String senha;
@@ -96,7 +98,7 @@ public class RedefinirSenhaBean implements Serializable {
             UtilBean.criarMensagemDeErro("Palpiteiro não cadastrado.");
             UtilBean.criarMensagemDeAviso("Informar e-mail de palpiteiro existente.");
         } else {
-            codigoGerado = USUARIO_RN.enviarEmailDeValidacao(usuario);
+            codigoGerado = EMAIL_RN.enviarEmailDeValidacao(usuario);
             panelEmail = false;
             panelCodigo = true;
             panelFormulario = false;
@@ -111,7 +113,7 @@ public class RedefinirSenhaBean implements Serializable {
             UtilBean.criarMensagemDeErro("O código informado está incorreto ou expirou.");
             UtilBean.criarMensagemDeErro("Um novo código foi gerado.");
             horarioDoCodigo = Instant.now();
-            codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
+            codigoGerado = EMAIL_RN.enviarEmailDeValidacao(email);
             this.codigoInformado = null;
         } else {
             UtilBean.criarMensagemDeInformacao("Validação", "Código informado foi validado");
@@ -124,7 +126,7 @@ public class RedefinirSenhaBean implements Serializable {
     public String redefinirSenha() {
         boolean sucesso = USUARIO_RN.alterarSenha(usuario, senha);
         if (sucesso) {
-            USUARIO_RN.enviarEmailDeRedefinicaoDaSenha(usuario);
+            EMAIL_RN.enviarEmailDeRedefinicaoDaSenha(usuario);
             UtilBean.criarMensagemDeAviso("Sucesso", "Conta gerada com sucesso!");
             UtilBean.criarMensagemDeAviso("E-mail", "Verifique sua caixa de entrada no e-mail.");
             return "login.xhtml?faces-redirect=true";

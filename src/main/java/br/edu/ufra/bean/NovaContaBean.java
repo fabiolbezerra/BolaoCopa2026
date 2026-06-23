@@ -3,6 +3,7 @@ package br.edu.ufra.bean;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.UsuarioRN;
+import br.edu.ufra.rn.email.MensagemDeEmailRN;
 import br.edu.ufra.util.UtilBean;
 
 import javax.annotation.PostConstruct;
@@ -19,7 +20,8 @@ public class NovaContaBean implements Serializable {
     @Serial
     private static final long serialVersionUID = 4108360191111001470L;
 
-    private final static UsuarioRN USUARIO_RN = new UsuarioRN();
+    private final UsuarioRN USUARIO_RN = new UsuarioRN();
+    private final MensagemDeEmailRN EMAIL_RN = new MensagemDeEmailRN();
 
     private String email;
     private String senha;
@@ -99,7 +101,7 @@ public class NovaContaBean implements Serializable {
             UtilBean.criarMensagemDeErro("E-mail já está cadastrado.");
             UtilBean.criarMensagemDeAviso("Usar e-mail diferente.");
         } else {
-            codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
+            codigoGerado = EMAIL_RN.enviarEmailDeValidacao(email);
             panelEmail = false;
             panelCodigo = true;
             panelFormulario = false;
@@ -114,7 +116,7 @@ public class NovaContaBean implements Serializable {
             UtilBean.criarMensagemDeErro("O código informado está incorreto ou expirou.");
             UtilBean.criarMensagemDeErro("Um novo código foi gerado.");
             horarioDoCodigo = Instant.now();
-            codigoGerado = USUARIO_RN.enviarEmailDeValidacao(email);
+            codigoGerado = EMAIL_RN.enviarEmailDeValidacao(email);
             this.codigoInformado = null;
         } else {
             UtilBean.criarMensagemDeInformacao("Validação", "Código informado foi validado");
@@ -132,7 +134,7 @@ public class NovaContaBean implements Serializable {
 
         boolean sucesso = USUARIO_RN.salvar(usuario);
         if (sucesso) {
-            USUARIO_RN.enviarEmailDeSaudacao(usuario);
+            EMAIL_RN.enviarEmailDeSaudacao(usuario);
             UtilBean.criarMensagemDeAviso("Sucesso", "Conta gerada com sucesso!");
             UtilBean.criarMensagemDeAviso("E-mail", "Verifique sua caixa de entrada no e-mail.");
             return "login.xhtml?faces-redirect=true";
