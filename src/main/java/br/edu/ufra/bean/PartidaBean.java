@@ -1,12 +1,11 @@
 package br.edu.ufra.bean;
 
-import br.edu.ufra.entidade.Palpite;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
 import br.edu.ufra.entidade.tipo.EnumTipoVitoria;
-import br.edu.ufra.rn.PalpiteRN;
 import br.edu.ufra.rn.PartidaRN;
 import br.edu.ufra.rn.SelecaoRN;
+import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.util.UtilBean;
 import br.edu.ufra.util.UtilData;
 
@@ -26,14 +25,14 @@ public class PartidaBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final PartidaRN PARTIDA_RN = new PartidaRN();
-    private final PalpiteRN PALPITE_RN = new PalpiteRN();
+    private final SelecaoRN SELECAO_RN = new SelecaoRN();
+    private final UsuarioRN USUARIO_RN = new UsuarioRN();
 
     private List<Partida> proximasPartidas;
     private List<Partida> partidasAnteriores;
 
     private Partida partida = new Partida();
     private Integer selecaoVencedoraId;
-    private final SelecaoRN SELECAO_RN = new SelecaoRN();
 
     public PartidaBean() {
         System.out.println("Criando PartidaBean");
@@ -95,7 +94,7 @@ public class PartidaBean implements Serializable {
     public void processar() {
         if (PARTIDA_RN.processarPontuacao(partida)) {
             UtilBean.criarMensagemDeInformacao("Pontuação dos palpiteiros atualizada!");
-            if (PARTIDA_RN.processarOrdenacao()) {
+            if (USUARIO_RN.processarOrdenacao()) {
                 UtilBean.criarMensagemDeInformacao("Posição dos palpiteiros atualizada!");
             }
             proximasEAnteriores();

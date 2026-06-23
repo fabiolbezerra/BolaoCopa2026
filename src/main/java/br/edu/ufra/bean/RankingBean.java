@@ -3,8 +3,6 @@ package br.edu.ufra.bean;
 import br.edu.ufra.entidade.Campus;
 import br.edu.ufra.entidade.Curso;
 import br.edu.ufra.entidade.Usuario;
-import br.edu.ufra.rn.CampusRN;
-import br.edu.ufra.rn.CursoRN;
 import br.edu.ufra.rn.UsuarioRN;
 import br.edu.ufra.util.UtilBean;
 
@@ -33,14 +31,14 @@ public class RankingBean {
     public void init() {
         Usuario usuarioLogado = UtilBean.obterUsuarioLogado();
 
-        rankingGeral = USUARIO_RN.obterOrdenadoPorPontuacao(0); //todos
+        rankingGeral = USUARIO_RN.obterOrdenadosPorPontuacao(0); //todos
 
         if (usuarioLogado != null && usuarioLogado.getCampus() != null) {
-            rankingCampus = USUARIO_RN.obterOrdenadoPorPontuacao(usuarioLogado.getCampus());
+            rankingCampus = USUARIO_RN.obterOrdenadosPorPontuacao(usuarioLogado.getCampus());
         }
 
         if (usuarioLogado != null && usuarioLogado.getCurso() != null) {
-            rankingCurso = USUARIO_RN.obterOrdenadoPorPontuacao(usuarioLogado.getCurso());
+            rankingCurso = USUARIO_RN.obterOrdenadosPorPontuacao(usuarioLogado.getCurso());
         }
     }
 
@@ -73,7 +71,7 @@ public class RankingBean {
     }
 
     public void atualizarRankingCampus() {
-        rankingCampus = USUARIO_RN.obterOrdenadoPorPontuacao(campus);
+        rankingCampus = USUARIO_RN.obterOrdenadosPorPontuacao(campus);
         if (rankingCampus != null) {
             UtilBean.criarMensagemDeInformacao("Ranking campus atualizado com sucesso!");
         } else {
@@ -82,7 +80,7 @@ public class RankingBean {
     }
 
     public void atualizarRankingCurso() {
-        rankingCurso = USUARIO_RN.obterOrdenadoPorPontuacao(curso);
+        rankingCurso = USUARIO_RN.obterOrdenadosPorPontuacao(curso);
         if (rankingCurso != null) {
             UtilBean.criarMensagemDeInformacao("Ranking curso atualizado com sucesso!");
         } else {

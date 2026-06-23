@@ -70,8 +70,7 @@ public class UsuarioRN {
     }
 
     public List<Usuario> obterPalpiteiros(String query) {
-
-        List<Usuario> resposta = USUARIO_DAO.obter(EnumPerfilUsuario.PALPITEIRO);
+        List<Usuario> resposta = obterPalpiteiros();
 
         if (query == null || query.trim().equals("")) {
             return resposta;
@@ -99,6 +98,25 @@ public class UsuarioRN {
 
     public Usuario obter(Integer id) {
         return USUARIO_DAO.obter(Usuario.class, id);
+    }
+
+    public boolean processarOrdenacao() {
+        List<Usuario> palpiteiros = obterOrdenadosPorPontuacao(0);//todos
+
+        Integer pontuacao = 0;
+        Integer posicao = 1;
+        for (Usuario palpiteiro : palpiteiros) {
+            //Atualizando a pontuação
+            pontuacao = obterPontuacao(palpiteiro);
+            palpiteiro.setPontuacao(pontuacao);
+            //Atualizando a posição
+            palpiteiro.setPosicao(posicao);
+            posicao++;
+        }
+
+        //Pontuação dos palpites processada, então salvar pontuação e posição dos palpiteiros
+        boolean usuariosAtualizados = salvar(palpiteiros);
+        return usuariosAtualizados;
     }
 
     public boolean excluir(Usuario usuario) {
@@ -137,21 +155,21 @@ public class UsuarioRN {
         }
     }
 
-    public List<Usuario> obterOrdenadoPorPontuacao(int limite) {
+    public List<Usuario> obterOrdenadosPorPontuacao(int limite) {
         if (limite <= 0) {
             return USUARIO_DAO.obterOrdenadosPorPontuacao(0);
         }
         return USUARIO_DAO.obterOrdenadosPorPontuacao(limite);
     }
 
-    public List<Usuario> obterOrdenadoPorPontuacao(Campus campus) {
+    public List<Usuario> obterOrdenadosPorPontuacao(Campus campus) {
         if (campus == null || campus.getId() == null) {
             return null;
         }
         return USUARIO_DAO.obterOrdenadosPorPontuacao(campus);
     }
 
-    public List<Usuario> obterOrdenadoPorPontuacao(Curso curso) {
+    public List<Usuario> obterOrdenadosPorPontuacao(Curso curso) {
         if (curso == null || curso.getId() == null) {
             return null;
         }
@@ -178,7 +196,7 @@ public class UsuarioRN {
     public List<String> notificarRanking() {
         List<String> respostaDaNotificacao = new ArrayList<>();
 
-        List<Usuario> usuarios = obterOrdenadoPorPontuacao(10);
+        List<Usuario> usuarios = obterOrdenadosPorPontuacao(10);
         //Notificar usuários do ranking geral
         respostaDaNotificacao.add(enviarEmailTop10Geral(usuarios));
 
@@ -186,7 +204,7 @@ public class UsuarioRN {
         List<Campus> campi = CAMPUS_RN.listarTodos();
         List<Curso> cursos = null;
         for (Campus campus : campi) {
-            usuarios = obterOrdenadoPorPontuacao(campus);
+            usuarios = obterOrdenadosPorPontuacao(campus);
             if (usuarios != null && !usuarios.isEmpty()) {
                 if (usuarios.size() > 10) {
                     usuarios = usuarios.subList(0, 10);
@@ -195,7 +213,7 @@ public class UsuarioRN {
                 respostaDaNotificacao.add(enviarEmailTop10Campus(usuarios, campus));
             }
             for (Curso curso : campus.getCursos()) {
-                usuarios = obterOrdenadoPorPontuacao(curso);
+                usuarios = obterOrdenadosPorPontuacao(curso);
                 if (usuarios != null && !usuarios.isEmpty()) {
                     if (usuarios.size() > 10) {
                         usuarios = usuarios.subList(0, 10);
