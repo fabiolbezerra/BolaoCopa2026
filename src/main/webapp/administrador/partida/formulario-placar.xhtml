@@ -18,99 +18,105 @@
         <h:form>
 
             <br>
-        <h:inputHidden value="#{partidaBean.partida.id}"/>
-        <p:panel header="Dados da partida">
-            <p:panelGrid styleClass="ui-noborder" columns ="2" columnClass="label-col, value,col" style="width: 100%">
-                <h:outputText value="Fase:"/>
-                <h:outputText value="#{partidaBean.partida.fase != null ? partidaBean.partida.fase.nome : 'Não informada'}"/>
+                <h:inputHidden value="#{partidaBean.partida.id}"/>
+                <p:panelGrid styleClass="ui-noborder"
+                             columns="2">
+                    <f:facet name="header">
+                        Dados da partida
+                    </f:facet>
 
-                <h:outputText value="Data e Hora:"/>
-                <h:outputText value="#{partidaBean.partida.inicioDaPartida}">
-                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
-                </h:outputText>
+                    <h:outputText value="Fase:"/>
+                    <h:outputText
+                            value="#{partidaBean.partida.fase != null ? partidaBean.partida.fase.nome : 'Não informada'}"/>
 
-                <h:outputText value="Local:"/>
-                <h:outputText value="#{partidaBean.partida.local != null ? partidaBean.partida.local : 'Sem local determinado'}"/>
-            </p:panelGrid>
-        </p:panel>
+                    <h:outputText value="Data e Hora:"/>
+                    <h:outputText value="#{partidaBean.partida.inicioDaPartida}">
+                        <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
+                    </h:outputText>
 
-        </br>
+                    <h:outputText value="Local:"/>
+                    <h:outputText
+                            value="#{partidaBean.partida.local != null ? partidaBean.partida.local : 'Sem local determinado'}"/>
+                </p:panelGrid>
 
-        <p:panel header="Placar da partida">
-            <p:messages autoUpdate="true" showDetail="true" closable="true"/>
+            </br>
 
-            <h:outputText value="Defina o resultado da partida"/>
-            <h:panelGrid columns="3" style="width: 50%; margin: 0 auto; text-align: center;"
-                         columnClasses="selecao-col, placar-col, selecao-col">
+            <p:panel header="Placar da partida">
+                <p:messages autoUpdate="true" showDetail="true" closable="true"/>
 
-                <h:outputText
-                        value="#{partidaBean.partida.selecaoA != null ? partidaBean.partida.selecaoA.nome : ''}"
-                        style="font-weight: bold; display: block;"/>
-                <h:outputText value=""/>
-                <h:outputText
-                        value="#{partidaBean.partida.selecaoB != null ? partidaBean.partida.selecaoB.nome : ''}"
-                        style="font-weight: bold; display: block;"/>
+                <h:outputText value="Defina o resultado da partida"/>
+                <h:panelGrid columns="3" style="width: 50%; margin: 0 auto; text-align: center;"
+                             columnClasses="selecao-col, placar-col, selecao-col">
 
-                <p:graphicImage value="/resources/imagens/#{partidaBean.partida.selecaoA.simbolo}" width="32px"/>
-                <h:outputText value="x"
-                              style="font-weight: bold; font-size: 1.5em; display: block; text-align: center;"/>
-                <p:graphicImage value="/resources/imagens/#{partidaBean.partida.selecaoB.simbolo}" width="32px"/>
+                    <h:outputText
+                            value="#{partidaBean.partida.selecaoA != null ? partidaBean.partida.selecaoA.nome : ''}"
+                            style="font-weight: bold; display: block;"/>
+                    <h:outputText value=""/>
+                    <h:outputText
+                            value="#{partidaBean.partida.selecaoB != null ? partidaBean.partida.selecaoB.nome : ''}"
+                            style="font-weight: bold; display: block;"/>
 
-                <p:spinner value="#{partidaBean.partida.golsA}"
-                           stepFactor="1"
-                           min="0"
-                           style="width: 60px; text-align: center;"
-                           required="true"
-                           requiredMessage="Informe os gols"/>
-                <h:outputText value=""/>
-                <p:spinner value="#{partidaBean.partida.golsB}"
-                           stepFactor="1"
-                           min="0"
-                           style="width: 60px; text-align: center;"
-                           required="true"
-                           requiredMessage="Informe os gols"/>
+                    <p:graphicImage value="/resources/imagens/#{partidaBean.partida.selecaoA.simbolo}" width="32px"/>
+                    <h:outputText value="x"
+                                  style="font-weight: bold; font-size: 1.5em; display: block; text-align: center;"/>
+                    <p:graphicImage value="/resources/imagens/#{partidaBean.partida.selecaoB.simbolo}" width="32px"/>
 
-            </h:panelGrid>
+                    <p:spinner value="#{partidaBean.partida.golsA}"
+                               stepFactor="1"
+                               min="0"
+                               style="width: 60px; text-align: center;"
+                               required="true"
+                               requiredMessage="Informe os gols"/>
+                    <h:outputText value=""/>
+                    <p:spinner value="#{partidaBean.partida.golsB}"
+                               stepFactor="1"
+                               min="0"
+                               style="width: 60px; text-align: center;"
+                               required="true"
+                               requiredMessage="Informe os gols"/>
 
-            <br/>
+                </h:panelGrid>
 
-            <h:panelGrid columns="2" cellpadding="5"
-                         rendered="#{partidaBean.partida.fase.eliminatoria}">
+                <br/>
 
-                <h:outputText value="Tipo de Vitória:"/>
-                <p:selectOneMenu value="#{partidaBean.partida.tipoDeVitoria}">
-                    <p:ajax update="selecaoVencedoraAdmin"/>
-                    <f:selectItem itemLabel="Selecione..." itemValue="#{null}"/>
-                    <f:selectItems value="#{partidaBean.tiposDeVitoria}"
-                                   var="tipo"
-                                   itemLabel="#{tipo.descricao}"
-                                   itemValue="#{tipo}"/>
-                </p:selectOneMenu>
+                <h:panelGrid columns="2"
+                             cellpadding="5"
+                             rendered="#{partidaBean.partida.fase.eliminatoria}">
 
-                <h:outputText value="Seleção Vencedora:"/>
-                <p:selectOneRadio id="selecaoVencedoraAdmin"
-                                  value="#{partidaBean.selecaoVencedoraId}"
-                                  layout="lineDirection"
-                                  disabled="#{partidaBean.partida.tipoDeVitoria == null or !partidaBean.partida.tipoDeVitoria.penaltis}">
-                    <f:selectItem itemLabel="#{partidaBean.partida.selecaoA.nome}"
-                                  itemValue="#{partidaBean.partida.selecaoA.id}"/>
-                    <f:selectItem itemLabel="#{partidaBean.partida.selecaoB.nome}"
-                                  itemValue="#{partidaBean.partida.selecaoB.id}"/>
-                </p:selectOneRadio>
+                    <h:outputText value="Tipo de Vitória:"/>
+                    <p:selectOneMenu value="#{partidaBean.partida.tipoDeVitoria}">
+                        <p:ajax update="selecaoVencedoraAdmin"/>
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}"/>
+                        <f:selectItems value="#{partidaBean.tiposDeVitoria}"
+                                       var="tipo"
+                                       itemLabel="#{tipo.descricao}"
+                                       itemValue="#{tipo}"/>
+                    </p:selectOneMenu>
 
-            </h:panelGrid>
+                    <h:outputText value="Seleção Vencedora:"/>
+                    <p:selectOneRadio id="selecaoVencedoraAdmin"
+                                      value="#{partidaBean.partida.vencedor}"
+                                      layout="lineDirection"
+                                      converter="selecaoConverter"
+                                      disabled="#{partidaBean.partida.tipoDeVitoria == null or !partidaBean.partida.tipoDeVitoria.penaltis}">
+                        <f:selectItem itemLabel="#{partidaBean.partida.selecaoA.nome}"
+                                      itemValue="#{partidaBean.partida.selecaoA}"/>
+                        <f:selectItem itemLabel="#{partidaBean.partida.selecaoB.nome}"
+                                      itemValue="#{partidaBean.partida.selecaoB}"/>
+                    </p:selectOneRadio>
+
+                </h:panelGrid>
 
 
+                <p:commandButton value="Salvar"
+                                 icon="fa fa-floppy-o"
+                                 action="#{partidaBean.atualizarPlacar()}"
+                                 update="@form"/>
 
-            <p:commandButton value="Salvar"
-                             icon="fa fa-floppy-o"
-                             action="#{partidaBean.atualizarPlacar}"
-                             update="@form"/>
-
-            <p:button value="Cancelar"
-                      icon="fa fa-ban"
-                      outcome="/palpiteiro/partida/lista.xhtml"/>
-        </p:panel>
+                <p:button value="Cancelar"
+                          icon="fa fa-ban"
+                          outcome="/palpiteiro/partida/lista.xhtml"/>
+            </p:panel>
         </h:form>
 
     </ui:define>

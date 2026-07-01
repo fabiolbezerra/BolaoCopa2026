@@ -39,6 +39,12 @@
                         <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoB.simbolo}"
                                         width="24"/>
                     </p:outputPanel>
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;"
+                                   rendered="#{palpite.partida.fase.eliminatoria}">
+                        <h:outputText value=" #{palpite.tipoDeVitoria.descricao} "/>
+                        <h:outputText value=" / #{palpite.selecaoVencedora.sigla}"
+                                      rendered="#{palpite.tipoDeVitoria.penaltis}"/>
+                    </p:outputPanel>
                 </p:column>
 
                 <p:column headerText="Resultado">
@@ -54,6 +60,12 @@
 
                         <p:graphicImage value="/resources/imagens/#{palpite.partida.selecaoB.simbolo}"
                                         width="24"/>
+                    </p:outputPanel>
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;"
+                                   rendered="#{palpite.partida.fase.eliminatoria}">
+                        <h:outputText value=" #{palpite.partida.tipoDeVitoria.descricao} "/>
+                        <h:outputText value=" / #{palpite.partida.vencedor.sigla}"
+                                      rendered="#{palpite.partida.tipoDeVitoria.penaltis}"/>
                     </p:outputPanel>
                 </p:column>
 

@@ -82,6 +82,12 @@
                         <h:outputText value="#{palpite.golsA} x #{palpite.golsB}"/>
                         <h:outputText value=" #{palpite.partida.selecaoB.sigla}"/>
                     </p:outputPanel>
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;"
+                                   rendered="#{palpite.partida.fase.eliminatoria}">
+                        <h:outputText value=" #{palpite.tipoDeVitoria.descricao} "/>
+                        <h:outputText value=" / #{palpite.selecaoVencedora.sigla}"
+                                      rendered="#{palpite.tipoDeVitoria.penaltis}"/>
+                    </p:outputPanel>
                 </p:column>
 
                 <p:column headerText="Data do Palpite" width="12%">

@@ -64,7 +64,9 @@
 
                 <p:outputLabel value="Seleção A"/>
                 <p:selectOneMenu value="#{partidaBean.partida.selecaoA}"
-                                 converter="selecaoConverter">
+                                 converter="selecaoConverter"
+                                 filter="true"
+                                 filterMatchMode="contains">
                     <f:selectItem itemLabel="Selecione..."
                                   itemValue=""
                                   noSelectionOption="true"/>
@@ -76,7 +78,9 @@
 
                 <p:outputLabel value="Seleção B"/>
                 <p:selectOneMenu value="#{partidaBean.partida.selecaoB}"
-                                 converter="selecaoConverter">
+                                 converter="selecaoConverter"
+                                 filter="true"
+                                 filterMatchMode="contains">
                     <f:selectItem itemLabel="Selecione..."
                                   itemValue=""
                                   noSelectionOption="true"/>

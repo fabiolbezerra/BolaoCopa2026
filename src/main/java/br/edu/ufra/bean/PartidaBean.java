@@ -25,14 +25,12 @@ public class PartidaBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private final PartidaRN PARTIDA_RN = new PartidaRN();
-    private final SelecaoRN SELECAO_RN = new SelecaoRN();
     private final UsuarioRN USUARIO_RN = new UsuarioRN();
 
     private List<Partida> proximasPartidas;
     private List<Partida> partidasAnteriores;
 
     private Partida partida = new Partida();
-    private Integer selecaoVencedoraId;
 
     public PartidaBean() {
         System.out.println("Criando PartidaBean");
@@ -40,7 +38,7 @@ public class PartidaBean implements Serializable {
 
     @PostConstruct
     public void init() {
-        System.out.println("PartidaBean.init()");
+        System.out.println("Inicializando PartidaBean");
         proximasEAnteriores();
 
         String partidaID = UtilBean.obterValor("partidaID");
@@ -133,19 +131,6 @@ public class PartidaBean implements Serializable {
     }
 
     public void atualizarPlacar() {
-        if (partida.getGolsA() > partida.getGolsB()) {
-            partida.setVencedor(partida.getSelecaoA());
-        } else if (partida.getGolsA() < partida.getGolsB()) {
-            partida.setVencedor(partida.getSelecaoB());
-        } else {
-            if (partida.getFase().isEliminatoria() && selecaoVencedoraId != null) {
-                partida.setVencedor(SELECAO_RN.obter(selecaoVencedoraId));
-            }
-        }
-        if (!partida.getFase().isEliminatoria()) {
-            partida.setTipoDeVitoria(EnumTipoVitoria.TEMPO_NORMAL);
-        }
-        partida.setPublicada(true);
         partida.setAtualizacaoDoResultado(new Date());
         if (this.PARTIDA_RN.salvar(partida)) {
             UtilBean.criarMensagemDeInformacao("Partida salva com sucesso!");
@@ -158,14 +143,5 @@ public class PartidaBean implements Serializable {
     public EnumTipoVitoria[] getTiposDeVitoria() {
         return EnumTipoVitoria.values();
     }
-
-    public Integer getSelecaoVencedoraId() {
-        return selecaoVencedoraId;
-    }
-
-    public void setSelecaoVencedoraId(Integer selecaoVencedoraId) {
-        this.selecaoVencedoraId = selecaoVencedoraId;
-    }
-
 
 }

@@ -46,8 +46,13 @@
 
                         <h:outputText value=" #{pal.partida.selecaoB.nome} "/>
 
-                        <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoB.simbolo}"
-                                        width="24"/>
+                        <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoB.simbolo}" width="24"/>
+                    </p:outputPanel>
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;"
+                                   rendered="#{pal.partida.fase.eliminatoria}">
+                        <h:outputText value=" #{pal.tipoDeVitoria.descricao} "/>
+                        <h:outputText value=" / #{pal.selecaoVencedora.sigla}"
+                                      rendered="#{pal.tipoDeVitoria.penaltis}"/>
                     </p:outputPanel>
                 </p:column>
 
@@ -64,6 +69,12 @@
 
                         <p:graphicImage value="/resources/imagens/#{pal.partida.selecaoB.simbolo}"
                                         width="24"/>
+                    </p:outputPanel>
+                    <p:outputPanel style="display: flex; justify-content: center; align-items: center;"
+                                   rendered="#{pal.partida.fase.eliminatoria}">
+                        <h:outputText value=" #{pal.partida.tipoDeVitoria.descricao} "/>
+                        <h:outputText value=" / #{pal.partida.vencedor.sigla}"
+                                      rendered="#{pal.partida.tipoDeVitoria.penaltis}"/>
                     </p:outputPanel>
                 </p:column>
 
