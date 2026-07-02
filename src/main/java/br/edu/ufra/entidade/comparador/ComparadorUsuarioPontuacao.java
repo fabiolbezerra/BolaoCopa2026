@@ -13,6 +13,7 @@ public class ComparadorUsuarioPontuacao implements Comparator<Usuario> {
         } else if (joao.getPontuacao() == null || maria.getPontuacao() == null) {
             return 0;
         }
+        //Ordem decrescente - Maior primeiro
         //Ordem inversa da pontuação, por isso multiplica por -1
         return -1 * joao.getPontuacao().compareTo(maria.getPontuacao());
     }

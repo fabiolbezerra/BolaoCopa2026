@@ -5,13 +5,12 @@ import br.edu.ufra.entidade.Campus;
 import br.edu.ufra.entidade.Curso;
 import br.edu.ufra.entidade.Partida;
 import br.edu.ufra.entidade.Usuario;
+import br.edu.ufra.entidade.comparador.ComparadorUsuarioPontuacao;
 import br.edu.ufra.entidade.tipo.EnumPerfilUsuario;
 import br.edu.ufra.rn.email.MensagemDeEmailRN;
 import br.edu.ufra.util.UtilTexto;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class UsuarioRN {
 
@@ -102,21 +101,29 @@ public class UsuarioRN {
     }
 
     public boolean processarOrdenacao() {
-        List<Usuario> palpiteiros = obterOrdenadosPorPontuacao(0);//todos
+        List<Usuario> palpiteiros = listarTodos();
 
+        //Atualizando a pontuação de cada palpiteiro
         Integer pontuacao = 0;
-        Integer posicao = 1;
         for (Usuario palpiteiro : palpiteiros) {
             //Atualizando a pontuação
             pontuacao = obterPontuacao(palpiteiro);
             palpiteiro.setPontuacao(pontuacao);
-            //Atualizando a posição
-            palpiteiro.setPosicao(posicao);
+        }
+
+        //Ordenando pela pontuação
+        Collections.sort(palpiteiros, new ComparadorUsuarioPontuacao());
+
+        Integer posicao = 1;
+        //Atualizando a posição de cada palpiteiro
+        for (Usuario palpiteiro : palpiteiros) {
+            palpiteiro.setPosicao(posicao); //Atualizando posição
             posicao++;
         }
 
         //Pontuação dos palpites processada, então salvar pontuação e posição dos palpiteiros
         boolean usuariosAtualizados = salvar(palpiteiros);
+
         return usuariosAtualizados;
     }
 

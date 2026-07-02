@@ -73,7 +73,6 @@ public class PartidaRN {
             return false;
         }
         final PalpiteRN PALPITE_RN = new PalpiteRN();
-        final UsuarioRN USUARIO_RN = new UsuarioRN();
 
         List<Palpite> palpites = PALPITE_RN.obter(partida);
 
@@ -98,8 +97,6 @@ public class PartidaRN {
                 pontuacao = 0; //não pontua
             }
             palpite.setPontuacao(pontuacao);
-            palpite.getUsuario().setPontuacao(pontuacao);
-            USUARIO_RN.salvar(palpite.getUsuario());
         }
         //Pontuação dos palpites processada, então salvar os palpites
         boolean palpitesAtualizados = PALPITE_RN.salvar(palpites);
