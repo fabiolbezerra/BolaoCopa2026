@@ -134,7 +134,6 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
         List<Usuario> resposta = null;
 
         try {
-
             resposta = query
                     .setParameter("perfil", perfil)
                     .getResultList();

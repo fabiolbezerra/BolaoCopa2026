@@ -101,7 +101,7 @@ public class UsuarioRN {
     }
 
     public boolean processarOrdenacao() {
-        List<Usuario> palpiteiros = listarTodos();
+        List<Usuario> palpiteiros = obterPalpiteiros();
 
         //Atualizando a pontuação de cada palpiteiro
         Integer pontuacao = 0;
