@@ -13,7 +13,25 @@ public class ParticipanteRN {
         if (bolao == null || bolao.getId() == null || bolao.getId() == 0) {
             return null;
         } else {
-            return PARTICIPANTE_DAO.obter(bolao);
+
+            List<Participante> participantes = PARTICIPANTE_DAO.obter(bolao);
+
+            if (participantes != null && !participantes.isEmpty()) {
+                Integer posicao = 1;
+                Integer pontuacaoAnterior = null;
+
+                for (Participante p : participantes) {
+                    Integer pontuacaoAtual = p.getUsuario().getPontuacao();
+
+                    if (pontuacaoAnterior != null && !pontuacaoAtual.equals(pontuacaoAnterior)) {
+                        posicao++;
+                    }
+
+                    p.setPosicaoRankingLocal(posicao);
+                    pontuacaoAnterior = pontuacaoAtual;
+                }
+            }
+            return participantes;
         }
     }
 }

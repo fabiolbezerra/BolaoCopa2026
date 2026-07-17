@@ -115,10 +115,14 @@ public class UsuarioRN {
         Collections.sort(palpiteiros, new ComparadorUsuarioPontuacao());
 
         Integer posicao = 1;
+        Integer pontuacaoAnterior = null;
         //Atualizando a posição de cada palpiteiro
         for (Usuario palpiteiro : palpiteiros) {
+            if(pontuacaoAnterior != null && !palpiteiro.getPontuacao().equals(pontuacaoAnterior)) {
+                posicao++;
+            }
             palpiteiro.setPosicao(posicao); //Atualizando posição
-            posicao++;
+            pontuacaoAnterior = palpiteiro.getPontuacao();
         }
 
         //Pontuação dos palpites processada, então salvar pontuação e posição dos palpiteiros
@@ -174,14 +178,48 @@ public class UsuarioRN {
         if (campus == null || campus.getId() == null) {
             return null;
         }
-        return USUARIO_DAO.obterOrdenadosPorPontuacao(campus);
+
+        List<Usuario> lista = USUARIO_DAO.obterOrdenadosPorPontuacao(campus);
+
+        if (lista == null || lista.isEmpty()) {
+            return lista;
+        }
+
+        Integer posicao = 1;
+        Integer pontuacaoAnterior = null;
+
+        for (Usuario palpiteiro : lista) {
+            if (pontuacaoAnterior != null && !palpiteiro.getPontuacao().equals(pontuacaoAnterior)) {
+                posicao++;
+            }
+            palpiteiro.setPosicao(posicao);
+            pontuacaoAnterior = palpiteiro.getPontuacao();
+            }
+
+        return lista;
     }
 
     public List<Usuario> obterOrdenadosPorPontuacao(Curso curso) {
         if (curso == null || curso.getId() == null) {
             return null;
         }
-        return USUARIO_DAO.obterOrdenadosPorPontuacao(curso);
+        List<Usuario> lista = USUARIO_DAO.obterOrdenadosPorPontuacao(curso);
+
+        if (lista == null || lista.isEmpty()) {
+            return lista;
+        }
+
+        Integer posicao = 1;
+        Integer pontuacaoAnterior = null;
+
+        for (Usuario palpiteiro : lista) {
+            if (pontuacaoAnterior != null && !palpiteiro.getPontuacao().equals(pontuacaoAnterior)) {
+                posicao++;
+            }
+            palpiteiro.setPosicao(posicao);
+            pontuacaoAnterior = palpiteiro.getPontuacao();
+        }
+        return lista;
     }
 
     public List<Usuario> obterBanidos() {
