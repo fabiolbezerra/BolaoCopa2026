@@ -29,8 +29,8 @@
                      sortOrder="descending"
                      rowIndexVar="i"
                      reflow="true">
-            <p:column headerText="Posição">
-                #{i+1}
+            <p:column headerText="Posição" groupRow="true">
+                #{participante.posicaoRankingLocal}
             </p:column>
 
             <p:column headerText="Nome" width="25%">
@@ -41,7 +41,7 @@
                 #{participante.usuario.pontuacao}
             </p:column>
 
-            <p:column headerText="Posição Geral">
+            <p:column headerText="Posição Geral" groupRow="true">
                 #{participante.usuario.posicao}
             </p:column>
 

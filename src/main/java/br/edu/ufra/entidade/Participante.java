@@ -22,6 +22,9 @@ public class Participante {
     @JoinColumn(name = "usuario", nullable = false)
     private Usuario usuario;
 
+    @Transient
+    private Integer posicaoRankingLocal;
+
     public Integer getId() {
         return id;
     }
@@ -44,6 +47,14 @@ public class Participante {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Integer getPosicaoRankingLocal() {
+        return posicaoRankingLocal;
+    }
+
+    public void setPosicaoRankingLocal(Integer posicaoRankingLocal) {
+        this.posicaoRankingLocal = posicaoRankingLocal;
     }
 
     @Override
