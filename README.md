@@ -1,17 +1,197 @@
-# Projeto Bolão da Copa do Mundo 2026
+# Bolão Copa 2026 (Java)
 
-## Entretendo Palpiteiros da UFRA na Copa do Mundo de 2026
+Aplicação para gerenciamento de Bolão da Copa do Mundo de 2026 baseada em uma aplicação web. Desenvolvido como projeto para a comunidade da Universidade Federal Rural da Amazônia (UFRA), com o objetivo de proporcionar uma competição saudável entre os palpiteiros durante a Copa do Mundo de 2026.
 
-A Copa do Mundo da FIFA historicamente causa uma grande comoção mundial devido ao espírito ufanista evocado nos jogos onde cada país (representado por sua seleção) se enfrentam em busca do primeiro lugar. No Brasil esse sentimento é potencializado pelo grande apreço da população pelo futebol, fazendo do esporte uma das marcas registradas do brasileiro e um verdadeiro fenômeno em todos os setores da sociedade, até nas pessoas que não acompanham a modalidade. 
+## ⚡ Tecnologias Utilizadas
 
-Para os membros da comunidade da Universidade Federal Rural da Amazônia (UFRA) esse sentimento e apelo afetivo pela Copa do Mundo não seria diferente. Diante disso, a ansiedade e a competitividade dos integrantes da UFRA perante o resultado dos jogos é inegável, o que proporciona um cenário onde todos querem prever o resultado e todos querem estar certos, o que fomenta a proliferação de palpites concorrentes e um convite a uma competição sadia entre os palpiteiros.
+* **Java 17** - Linguagem principal do projeto.
+* **JSF 2.3.9** - Framework utilizado para construção da interface web.
+* **PrimeFaces 8.0** - Biblioteca para construção dos componentes da interface gráfica.
+* **Spring Security 3.0.5** - Framework utilizado para autenticação e controle de acesso.
+* **EclipseLink 2.7.12 / JPA** - Framework utilizado para persistência e mapeamento objeto-relacional.
+* **MySQL 8.0.33** - Banco de dados relacional utilizado para persistência dos dados.
+* **JDBC** - Java Database Connectivity para comunicação com o banco de dados.
+* **Maven** - Gerenciador de dependências e ferramentas de compilação.
 
-Portanto, em meio a ansiedade e competitividade aflorados pelo campeonato há uma proliferação de palpites sobre os jogos, onde as pessoas tentam adivinhar o resultado e competem entre si para ver quem acerta mais, portanto, quem sabe mais sobre o campeonato e estratégias de jogo das seleções. Nesse contexto, as pessoas recorrem a métodos analógicos (papel e caneta) facilmente manipuláveis, a métodos digitais como grupos de mensagens e planilhas compartilhadas, ou mesmo métodos digitais não virtuosos, como bets esportivas. Nenhuma dessas opções comumente adotadas são escaláveis para grupos muito grandes de palpiteiros, além de não possuírem recursos de auditagem.
+## 🚀 Funcionalidades da Aplicação
 
-### Autores
+O sistema atende de forma integral aos principais requisitos solicitados:
 
-- Antonio Henrique Cavalléro Pontes Costa
-- Gabriel da Silva Chaves
-- Luis Paulo da Silva Glória Neto
-- Murillo Freire Espírito Santo
-- Fábio de Lima Bezerra (orientador)
+* **Cadastro de Usuários**: Formulário para criação e gerenciamento de usuários.
+* **Gerenciamento de Bolões**: Criação, listagem e gerenciamento de bolões.
+* **Cadastro de Partidas**: Cadastro e gerenciamento das partidas da Copa do Mundo.
+* **Cadastro de Seleções**: Cadastro e gerenciamento das seleções participantes.
+* **Cadastro de Grupos**: Organização das seleções nos grupos da competição.
+* **Cadastro de Fases**: Gerenciamento das fases da Copa do Mundo.
+* **Registro de Palpites**: Permite aos usuários registrar seus palpites para as partidas.
+* **Ranking**: Exibição da classificação dos participantes de acordo com a pontuação obtida.
+* **Estatísticas**: Exibição de estatísticas relacionadas aos usuários e aos palpites.
+* **Persistência de Dados**: Persistência das informações utilizando banco de dados MySQL.
+
+## 📁 Estrutura do Projeto
+
+```text
+BolaoCopa2026/
+├── .mvn/                           # Arquivos do Maven Wrapper.
+│   └── wrapper/
+├── src/
+│   ├── docs/                       # Scripts e documentação do banco de dados.
+│   │   ├── criacao.sql
+│   │   ├── inserts.sql
+│   │   ├── usuarios.sql
+│   │   ├── palpiteiros.sql
+│   │   └── bolao-copa-ER.mwb
+│   │
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── br/
+│   │   │       └── edu/
+│   │   │           └── ufra/
+│   │   │               ├── bean/                 # Beans da aplicação.
+│   │   │               │   ├── converter/
+│   │   │               │   ├── validator/
+│   │   │               │   └── *.java
+│   │   │               │
+│   │   │               ├── dao/                  # Acesso aos dados.
+│   │   │               │   ├── GenericDAO.java
+│   │   │               │   ├── InterfaceDAO.java
+│   │   │               │   └── *.java
+│   │   │               │
+│   │   │               ├── entidade/             # Entidades do domínio.
+│   │   │               │   ├── tipo/
+│   │   │               │   ├── comparador/
+│   │   │               │   └── *.java
+│   │   │               │
+│   │   │               ├── processamento/        # Processamento dos resultados.
+│   │   │               │   ├── ManipuladorBuilder.java
+│   │   │               │   ├── ManipuladorResultadoAbstrato.java
+│   │   │               │   └── *.java
+│   │   │               │
+│   │   │               ├── rn/                    # Regras de negócio.
+│   │   │               │   ├── estatistica/
+│   │   │               │   ├── email/
+│   │   │               │   └── *.java
+│   │   │               │
+│   │   │               ├── seguranca/             # Autenticação e segurança.
+│   │   │               │   ├── AuthenticationHandler.java
+│   │   │               │   └── LoginHandler.java
+│   │   │               │
+│   │   │               └── util/                  # Classes auxiliares.
+│   │   │
+│   │   ├── resources/
+│   │   │   └── META-INF/
+│   │   │       └── persistence.xml                # Configuração da persistência.
+│   │   │
+│   │   └── webapp/                                # Interface web da aplicação.
+│   │       ├── administrador/
+│   │       ├── palpiteiro/
+│   │       ├── resources/
+│   │       ├── WEB-INF/
+│   │       ├── index.xhtml
+│   │       └── login.xhtml
+│   │
+│   └── test/                                      # Testes da aplicação.
+│
+├── mvnw                                            # Maven Wrapper.
+├── pom.xml                                         # Dependências e configuração do Maven.
+└── README.md                                       # Documentação do projeto.
+```
+
+## 🛠️ Como Executar
+
+Existem algumas maneiras de executar este projeto. Escolha a que for mais conveniente para você.
+
+### 1. Executando localmente (própria máquina)
+
+Se preferir rodar o projeto em sua própria máquina, siga estes passos:
+
+#### Pré-requisitos
+
+* `Git`: Para clonar o repositório
+* `Java JDK 17 ou superior`: Para compilar e executar o código.
+* `MySQL 8.0`: Para persistência dos dados.
+* `Apache Tomcat`: Para executar a aplicação web.
+
+#### Passos
+
+1. Faça um Fork do Repositório: Clique no botão **"Fork"** no canto superior direito da página para criar uma cópia do projeto em sua conta do GitHub.
+
+2. Clone o seu Fork: Copie a **URL** do seu fork e execute o seguinte comando no seu terminal local:
+
+```bash
+git clone https://github.com/fabiolbezerra/BolaoCopa2026.git
+cd BolaoCopa2026
+```
+
+3. Execute a Aplicação: O projeto inclui um **Maven Wrapper**, então você não precisa instalá-lo. Para compilar a aplicação, use o comando:
+
+```bash
+./mvnw clean package
+```
+
+Após a compilação, o arquivo `.war` será gerado na pasta `target/`.
+
+O arquivo gerado será:
+
+```text
+bolao-copa-2026-1.0.war
+```
+
+Esse arquivo deverá ser implantado no servidor Apache Tomcat.
+
+## 🤝 Colaboradores
+
+Um agradecimento a todas as pessoas que contribuíram com este projeto:
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/murillofes" title="Github de Murillo Freire Espirito Santo">
+        <img src="https://avatars.githubusercontent.com/u/139729137?v=4" width="100px; height=100px" alt="Foto de Murillo Freire Espirito Santo no GitHub"/><br>
+        <sub>
+          <b> MurilloFreireEspiritoSanto
+        </sub>
+      </a>
+    </td>      
+    <td align="center">
+      <a href="https://github.com/HenriqueCavallero" title="Github de Antonio Henrique Cavalléro Pontes Costa">
+        <img src="https://avatars.githubusercontent.com/u/213304769?v=4" width="100px; height=100px" alt="Foto de Antonio Henrique Cavalléro Pontes Costa no GitHub"/><br>
+        <sub>
+          <b>AntonioHenriqueCavalléroPontesCosta</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Gab9082" title="Github de Gabriel da Silva Chaves">
+        <img src="https://avatars.githubusercontent.com/u/230392743?v=4" width="100px; height=100px" alt="Foto de Gabriel da Silva Chaves no GitHub"/><br>
+        <sub>
+          <b>GabrielDaSilvaChaves</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/pauloglorianeto-cmyk" title="Github de Luis Paulo da Silva Glória Neto">
+        <img src="https://avatars.githubusercontent.com/u/230487034?v=4" width="100px; height=100px" alt="Foto de Luis Paulo da Silva Glória Neto no GitHub"/><br>
+      <sub>
+        <b>LuisPauloDaSilvaGlóriaNeto</b>
+      </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/fabiolbezerra" title="Github de Fábio de Lima Bezerra">
+        <img src="https://avatars.githubusercontent.com/u/107626312?v=4" width="100px; height=100px" alt="Foto de Fábio de Lima Bezerra no GitHub"/><br>
+        <sub>
+          <b>FábioDeLimaBezerra</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+---
+
+<div align="center">
+
+**Obrigado pela visita!**
+
+</div>
