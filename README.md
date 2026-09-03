@@ -149,7 +149,7 @@ Um agradecimento a todas as pessoas que contribuíram com este projeto:
       <a href="https://github.com/murillofes" title="Github de Murillo Freire Espirito Santo">
         <img src="https://avatars.githubusercontent.com/u/139729137?v=4" width="100px; height=100px" alt="Foto de Murillo Freire Espirito Santo no GitHub"/><br>
         <sub>
-          <b> MurilloFreireEspiritoSanto
+          <b>Murillo Santo</b>
         </sub>
       </a>
     </td>      
@@ -157,7 +157,7 @@ Um agradecimento a todas as pessoas que contribuíram com este projeto:
       <a href="https://github.com/HenriqueCavallero" title="Github de Antonio Henrique Cavalléro Pontes Costa">
         <img src="https://avatars.githubusercontent.com/u/213304769?v=4" width="100px; height=100px" alt="Foto de Antonio Henrique Cavalléro Pontes Costa no GitHub"/><br>
         <sub>
-          <b>AntonioHenriqueCavalléroPontesCosta</b>
+          <b>Antonio Henrique Costa</b>
         </sub>
       </a>
     </td>
@@ -165,7 +165,7 @@ Um agradecimento a todas as pessoas que contribuíram com este projeto:
       <a href="https://github.com/Gab9082" title="Github de Gabriel da Silva Chaves">
         <img src="https://avatars.githubusercontent.com/u/230392743?v=4" width="100px; height=100px" alt="Foto de Gabriel da Silva Chaves no GitHub"/><br>
         <sub>
-          <b>GabrielDaSilvaChaves</b>
+          <b>Gabriel Chaves</b>
         </sub>
       </a>
     </td>
@@ -173,7 +173,7 @@ Um agradecimento a todas as pessoas que contribuíram com este projeto:
       <a href="https://github.com/pauloglorianeto-cmyk" title="Github de Luis Paulo da Silva Glória Neto">
         <img src="https://avatars.githubusercontent.com/u/230487034?v=4" width="100px; height=100px" alt="Foto de Luis Paulo da Silva Glória Neto no GitHub"/><br>
       <sub>
-        <b>LuisPauloDaSilvaGlóriaNeto</b>
+        <b>Luis Paulo Neto</b>
       </sub>
       </a>
     </td>
@@ -181,7 +181,7 @@ Um agradecimento a todas as pessoas que contribuíram com este projeto:
       <a href="https://github.com/fabiolbezerra" title="Github de Fábio de Lima Bezerra">
         <img src="https://avatars.githubusercontent.com/u/107626312?v=4" width="100px; height=100px" alt="Foto de Fábio de Lima Bezerra no GitHub"/><br>
         <sub>
-          <b>FábioDeLimaBezerra</b>
+          <b>Fábio Bezerra</b>
         </sub>
       </a>
     </td>
