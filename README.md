@@ -123,11 +123,29 @@ git clone https://github.com/fabiolbezerra/BolaoCopa2026.git
 cd BolaoCopa2026
 ```
 
-3. Execute a Aplicação: O projeto inclui um **Maven Wrapper**, então você não precisa instalá-lo. Para compilar a aplicação, use o comando:
+3. Antes de iniciar a aplicação, prepare a base de dados executando os scripts SQL que estão dentro dos arquivos .sql localizados no diretório src/docs/.
+A execução pode ser feita pelo terminal, MySQL Workbench ou ferramenta de banco da sua IDE, obrigatoriamente nesta ordem:
+
+   1. `criação.sql`
+
+   2. `inserts.sql` 
+
+   3. `palpiteiros.sql` 
+
+   4. `usuarios.sql`
+
+4. Execute a Aplicação: O projeto inclui um **Maven Wrapper**, então você não precisa instalá-lo. Para compilar a aplicação, use o comando:
 
 ```bash
 ./mvnw clean package
 ```
+> [!NOTE]
+> **Para usuários Linux / macOS:**  
+> Caso o terminal retorne o erro `Permissão negada`, conceda permissão de execução ao script antes de compilar:
+> ```bash
+> chmod +x mvnw
+> ./mvnw clean package
+> ```
 
 Após a compilação, o arquivo `.war` será gerado na pasta `target/`.
 
