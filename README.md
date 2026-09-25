@@ -1,6 +1,30 @@
-# Bolão Copa 2026 (Java)
+# Bolão dos Palpiteiros da UFRA
 
-Aplicação para gerenciamento de Bolão da Copa do Mundo de 2026 baseada em uma aplicação web. Desenvolvido como projeto para a comunidade da Universidade Federal Rural da Amazônia (UFRA), com o objetivo de proporcionar uma competição saudável entre os palpiteiros durante a Copa do Mundo de 2026.
+Aplicação para gerenciamento de Bolão da Copa do Mundo de 2026, baseada em uma aplicação web. 
+Desenvolvido como projeto para a comunidade da Universidade Federal Rural da Amazônia (UFRA), 
+com o objetivo de proporcionar uma competição saudável entre os palpiteiros durante a Copa do 
+Mundo de 2026.
+
+## Apresentação
+
+A Copa do Mundo da FIFA mobiliza comunidades em um movimento espontâneo de 
+integração e entretenimento, comumente desdobrado em "bolões" informais geridos 
+por papéis ou planilhas. Na universidade, contudo, essas abordagens analógicas 
+carecem de escalabilidade, segurança e integridade de dados para conectar centenas 
+de estudantes, docentes e técnicos. Nesse contexto, o evento esportivo surge como 
+um catalisador para integrar a comunidade acadêmica por meio de uma plataforma web 
+gratuita e segura.
+
+A concepção do projeto emergiu na disciplina de Programação Orientada a Objetos (POO), 
+ao observar-se o elevado engajamento da turma no cumprimento dos desafios práticos. A 
+convergência entre alunos motivados e a proximidade da Copa do Mundo de 2026 viabilizou 
+um convite aberto para a criação voluntária da aplicação "Bolão dos Palpiteiros da UFRA". 
+O desafio aliou o engajamento esportivo ao aprendizado prático de Engenharia de Software, 
+oferecendo motivação tripla aos discentes: domínio de uma _stack web_, enriquecimento do 
+repertório intelectual e satisfação de conceber um produto real para uso da comunidade . 
+Assim, o projeto funcionou como um laboratório prático para impulsionar o crescimento 
+profissional de alunos matriculados na primeira metade do curso de Bacharelado em Sistemas 
+de Informação.
 
 ## ⚡ Tecnologias Utilizadas
 
@@ -112,29 +136,24 @@ Se preferir rodar o projeto em sua própria máquina, siga estes passos:
 * `MySQL 8.0`: Para persistência dos dados.
 * `Apache Tomcat`: Para executar a aplicação web.
 
-#### Passos
+#### Passos para Execução Local
 
-1. Faça um Fork do Repositório: Clique no botão **"Fork"** no canto superior direito da página para criar uma cópia do projeto em sua conta do GitHub.
-
-2. Clone o seu Fork: Copie a **URL** do seu fork e execute o seguinte comando no seu terminal local:
+1. **Clonar o Repositório:** Abra o terminal na sua máquina e execute o comando abaixo para clonar o projeto:
 
 ```bash
 git clone https://github.com/fabiolbezerra/BolaoCopa2026.git
 cd BolaoCopa2026
 ```
 
-3. Antes de iniciar a aplicação, prepare a base de dados executando os scripts SQL que estão dentro dos arquivos .sql localizados no diretório src/docs/.
-A execução pode ser feita pelo terminal, MySQL Workbench ou ferramenta de banco da sua IDE, obrigatoriamente nesta ordem:
+2. Antes de iniciar a aplicação, prepare a base de dados executando os scripts SQL que estão dentro dos arquivos .sql localizados no diretório `./src/docs/`.
+A execução pode ser feita pelo terminal, pelo MySQL Workbench ou pela ferramenta de banco da sua IDE, obrigatoriamente nesta ordem:
 
-   1. `criação.sql`
+   1. [`criação.sql`](./src/docs/criacao.sql)
+   2. [`inserts.sql`](./src/docs/inserts.sql) 
+   3. [`palpiteiros.sql`](./src/docs/palpiteiros.sql) 
+   4. [`usuarios.sql`](./src/docs/usuarios.sql)
 
-   2. `inserts.sql` 
-
-   3. `palpiteiros.sql` 
-
-   4. `usuarios.sql`
-
-4. Execute a Aplicação: O projeto inclui um **Maven Wrapper**, então você não precisa instalá-lo. Para compilar a aplicação, use o comando:
+3. Execute a Aplicação: O projeto inclui um **Maven Wrapper**, então você não precisa instalá-lo. Para compilar a aplicação, use o comando:
 
 ```bash
 ./mvnw clean package
@@ -147,7 +166,7 @@ A execução pode ser feita pelo terminal, MySQL Workbench ou ferramenta de banc
 > ./mvnw clean package
 > ```
 
-Após a compilação, o arquivo `.war` será gerado na pasta `target/`.
+Após a compilação, o arquivo `.war` será gerado na pasta `./target/`.
 
 O arquivo gerado será:
 
