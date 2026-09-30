@@ -5,7 +5,7 @@ Desenvolvido como projeto para a comunidade da Universidade Federal Rural da Ama
 com o objetivo de proporcionar uma competição saudável entre os palpiteiros durante a Copa do 
 Mundo de 2026.
 
-## Apresentação
+## 📣 Apresentação
 
 A Copa do Mundo da FIFA mobiliza comunidades em um movimento espontâneo de 
 integração e entretenimento, comumente desdobrado em "bolões" informais geridos 
@@ -51,6 +51,30 @@ O sistema atende de forma integral aos principais requisitos solicitados:
 * **Ranking**: Exibição da classificação dos participantes de acordo com a pontuação obtida.
 * **Estatísticas**: Exibição de estatísticas relacionadas aos usuários e aos palpites.
 * **Persistência de Dados**: Persistência das informações utilizando banco de dados MySQL.
+
+
+## 📄 Artigo Científico
+
+Como resultado do processo de concepção, engenharia e avaliação deste projeto, a equipe 
+produziu um [artigo científico](ERIN_2026_Bolao.pdf). O trabalho relata a 
+experiência vivenciada no desenvolvimento da plataforma e foi aceito e publicado 
+nos anais da **Escola Regional de Informática Norte (ERIN 2026)**, integrando a 
+lista oficial de [artigos aceitos do evento](https://erin2.sbc.org.br/2026/artigos-aceitos).
+
+### Apresentando um Motor Pedagógico de Desenvolvimento Intelectual em Engenharia de Software
+
+No ensino de Sistemas de Informação, a transição da teoria para a prática é um 
+desafio recorrente. Para mitigar essa lacuna, adotou-se o desenvolvimento 
+voluntário da aplicação web "Bolão dos Palpiteiros da UFRA" para a Copa do Mundo 
+de 2026. Este relato de experiência descreve a vivência de quatro discentes do 
+terceiro semestre em uma universidade pública. A imersão durou 45 dias de 
+desenvolvimento e 30 de operação, abordando o ciclo de vida completo do software 
+com mentoria docente e apoio de IA Generativa. Os resultados evidenciam entregas 
+tangíveis (28 histórias de usuário, 66 issues, 14 entidades e 201 commits), 
+avanço no domínio da stack tecnológica (Java, JSF, JPA, MySQL, Git) e consolidação 
+do pensamento orientado a objetos, ou seja, um desenvolvimento de competências em 
+engenharia de software.
+
 
 ## 📁 Estrutura do Projeto
 
