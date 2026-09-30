@@ -200,20 +200,22 @@ bolao-copa-2026-1.0.war
 
 Esse arquivo deverá ser implantado no servidor Apache Tomcat.
 
+
+## ⚖️ Licença e Proprietários
+
+Copyright © 2026 Antônio Henrique Costa, Fábio Bezerra, Gabriel Chaves, Luis Paulo Neto e Murillo Santo. 
+
+Registrado no Instituto Nacional da Propriedade Industrial (INPI) sob o nº `[Inserir o número do processo do INPI após o protocolo]`.
+
+Este projeto é um software livre e está licenciado sob a Licença MIT - consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+
 ## 🤝 Colaboradores
 
 Um agradecimento a todas as pessoas que contribuíram com este projeto:
 
 <table>
   <tr>
-    <td align="center">
-      <a href="https://github.com/murillofes" title="Github de Murillo Freire Espirito Santo">
-        <img src="https://avatars.githubusercontent.com/u/139729137?v=4" width="100px; height=100px" alt="Foto de Murillo Freire Espirito Santo no GitHub"/><br>
-        <sub>
-          <b>Murillo Santo</b>
-        </sub>
-      </a>
-    </td>      
     <td align="center">
       <a href="https://github.com/HenriqueCavallero" title="Github de Antonio Henrique Cavalléro Pontes Costa">
         <img src="https://avatars.githubusercontent.com/u/213304769?v=4" width="100px; height=100px" alt="Foto de Antonio Henrique Cavalléro Pontes Costa no GitHub"/><br>
@@ -222,6 +224,14 @@ Um agradecimento a todas as pessoas que contribuíram com este projeto:
         </sub>
       </a>
     </td>
+    <td align="center">
+      <a href="https://github.com/fabiolbezerra" title="Github de Fábio de Lima Bezerra">
+        <img src="https://avatars.githubusercontent.com/u/107626312?v=4" width="100px; height=100px" alt="Foto de Fábio de Lima Bezerra no GitHub"/><br>
+        <sub>
+          <b>Fábio Bezerra</b>
+        </sub>
+      </a>
+    </td>     
     <td align="center">
       <a href="https://github.com/Gab9082" title="Github de Gabriel da Silva Chaves">
         <img src="https://avatars.githubusercontent.com/u/230392743?v=4" width="100px; height=100px" alt="Foto de Gabriel da Silva Chaves no GitHub"/><br>
@@ -238,11 +248,11 @@ Um agradecimento a todas as pessoas que contribuíram com este projeto:
       </sub>
       </a>
     </td>
-    <td align="center">
-      <a href="https://github.com/fabiolbezerra" title="Github de Fábio de Lima Bezerra">
-        <img src="https://avatars.githubusercontent.com/u/107626312?v=4" width="100px; height=100px" alt="Foto de Fábio de Lima Bezerra no GitHub"/><br>
+      <td align="center">
+      <a href="https://github.com/murillofes" title="Github de Murillo Freire Espirito Santo">
+        <img src="https://avatars.githubusercontent.com/u/139729137?v=4" width="100px; height=100px" alt="Foto de Murillo Freire Espirito Santo no GitHub"/><br>
         <sub>
-          <b>Fábio Bezerra</b>
+          <b>Murillo Santo</b>
         </sub>
       </a>
     </td>
