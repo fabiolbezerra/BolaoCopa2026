@@ -43,7 +43,8 @@
                     var="jogo"
                     layout="grid"
                     columns="4"
-                    paginator="false">
+                    paginator="false"
+                    emptyMessage="Nenhuma partida agendada">
             <p:panel header="#{jogo.local}">
                 <h:outputText value="#{jogo.inicioDaPartida}">
                     <f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="GMT-3"/>
