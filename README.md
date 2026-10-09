@@ -207,7 +207,7 @@ Esse arquivo deverá ser implantado no servidor Apache Tomcat.
 Copyright © 2026 Antônio Henrique Costa, Fábio Bezerra, Gabriel Chaves, Luis Paulo Neto e Murillo Santo.
 
 Registrado no Instituto Nacional da Propriedade Industrial (INPI) sob o nº
-`[Inserir o número do processo do INPI após o protocolo]`.
+`29409192365320382`.
 
 Este projeto é um software livre e está licenciado sob a Licença Apache 2.0 - consulte o arquivo [LICENSE](LICENSE) para mais
 detalhes.
